@@ -1,6 +1,7 @@
+Dump /git/credo/dump
 ls|mc
-osd git add man
-osd git commit -a -m 'move credo and dodep man pages from inferno install'
+osd git add dump
+osd git commit -a -m 'add dump'
 osd git log --graph --oneline --all
 osd git push origin master
 osd git status

@@ -1,0 +1,444 @@
+/
+/fonts/vera/Vera/9x15.14.font
+/fonts/lucidasans/unicode.6.font
+          0          32          65
+f          0           9         301         301           1 
+          9          32         301           0           0 /git/Aide Del Snarf Undo | Look 
+f          0          15           0          20          43 
+         15          38         164           0           0 /git/credo/Aide Del Snarf Undo | Look 
+f          0          16         346         346          62 
+         16          40         346           0           0 /git/credo/README Del Snarf Undo | Look 
+F          2           0       16748       16748           1       16748 
+         11          36       16748           0           0 /git/credo/+Errors Del Snarf | Look 
+Initialized empty Git repository in /usr/inferno/git/credo/.git/
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	Aide
+#	README
+nothing added to commit but untracked files present (use "git add" to track)
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   Aide
+#	new file:   README
+#
+[master (root-commit) 42c8192] add description in README
+ 2 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 Aide
+ create mode 100644 README
+# On branch master
+nothing to commit (working directory clean)
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   Aide
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   Aide
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+[master 09cc79b] move remote add to ../Aide
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+# On branch master
+nothing to commit (working directory clean)
+* 09cc79b move remote add to ../Aide
+* 42c8192 add description in README
+.git		Aide		README
+mkdir sh-inferno
+ls /dis/dodep
+mv /dis/dodep sh-inferno
+/dis/credeper
+/dis/credo
+/dis/credoer
+/dis/crepare
+/dis/cresum
+/dis/crext
+/dis/dodep
+/dis/dossrv.dis
+/dis/dodep
+mkdir lib
+rm -rf /lib/do
+# On branch master
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	lib/
+#	sh-inferno/
+nothing added to commit but untracked files present (use "git add" to track)
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   lib/do/Aide
+#	new file:   lib/do/bsdbuild/cc.c.o.dep.do
+#	new file:   lib/do/bsdbuild/cc.c.o.do
+#	new file:   lib/do/bsdbuild/cc.o.exe.dep.do
+#	new file:   lib/do/bsdbuild/cc.o.exe.do
+#	new file:   lib/do/bsdbuild/coneed
+#	new file:   lib/do/bsdbuild/guide
+#	new file:   lib/do/bsdbuild/mkdep
+#	new file:   lib/do/c++/c++c.c.o.dep
+#	new file:   lib/do/c++/c++c.c.o.do
+#	new file:   lib/do/c/ar.o.a.dep
+#	new file:   lib/do/c/ar.o.a.do
+#	new file:   lib/do/c/cc.allc.exe.dep
+#	new file:   lib/do/c/cc.allc.exe.do
+#	new file:   lib/do/c/cc.c.i.dep
+#	new file:   lib/do/c/cc.c.i.do
+#	new file:   lib/do/c/cc.c.o.dep.do
+#	new file:   lib/do/c/cc.c.o.do
+#	new file:   lib/do/c/cc.c.s.dep
+#	new file:   lib/do/c/cc.c.s.do
+#	new file:   lib/do/c/cc.o.dll.dep
+#	new file:   lib/do/c/cc.o.dll.do
+#	new file:   lib/do/c/cc.o.exe.dep.do
+#	new file:   lib/do/c/cc.o.exe.do
+#	new file:   lib/do/c/cc.o.so.dep
+#	new file:   lib/do/c/cc.o.so.do
+#	new file:   lib/do/c/cc.pic.o.dep
+#	new file:   lib/do/c/cc.pic.o.do
+#	new file:   lib/do/c/coneed
+#	new file:   lib/do/c/deduce
+#	new file:   lib/do/c/dodep.allc.a.do
+#	new file:   lib/do/c/dodep.allc.dll.do
+#	new file:   lib/do/c/dodep.allc.exe.do
+#	new file:   lib/do/c/dodep.allc.so.do
+#	new file:   lib/do/c/findh
+#	new file:   lib/do/c/gcc3.c.exe.dep
+#	new file:   lib/do/c/gcc3.c.exe.do
+#	new file:   lib/do/c/gcc3.c.o.dep
+#	new file:   lib/do/c/gcc3.c.o.do
+#	new file:   lib/do/c/gcc3.o.exe.dep
+#	new file:   lib/do/c/gcc3.o.exe.do
+#	new file:   lib/do/c/lex.l.c.dep
+#	new file:   lib/do/c/lex.l.c.do
+#	new file:   lib/do/c/md5sum.c.dep.dep
+#	new file:   lib/do/c/md5sum.c.dep.do
+#	new file:   lib/do/c/rm-f.ios..do
+#	new file:   lib/do/c/unitest.c.c.dep
+#	new file:   lib/do/c/unitest.c.c.do
+#	new file:   lib/do/credo/Aide
+#	new file:   lib/do/credo/rm-f.dodep..do
+#	new file:   lib/do/credo/rm-f.state..do
+#	new file:   lib/do/credo/rm-f.std..do
+#	new file:   lib/do/credo/rm-f.target..do
+#	new file:   lib/do/cs/csc.allcs.dll.dep
+#	new file:   lib/do/cs/csc.allcs.dll.do
+#	new file:   lib/do/cs/csc.allcs.exe.dep
+#	new file:   lib/do/cs/csc.allcs.exe.do
+#	new file:   lib/do/cs/csc.cs.exe.dep
+#	new file:   lib/do/cs/csc.cs.exe.do
+#	new file:   lib/do/ecloud/ec-perl.ecpl.stdout.dep
+#	new file:   lib/do/ecloud/ec-perl.ecpl.stdout.do
+#	new file:   lib/do/ecloud/ecvar.ecmd.sed.dep
+#	new file:   lib/do/ecloud/ecvar.ecmd.sed.do
+#	new file:   lib/do/ecloud/sed.ecmd.ecpl.dep
+#	new file:   lib/do/ecloud/sed.ecmd.ecpl.do
+#	new file:   lib/do/ecloud/storeCommands.projectName.command.do
+#	new file:   lib/do/ectool/getCommand...do
+#	new file:   lib/do/ectool/getStep.step.step.dep
+#	new file:   lib/do/ectool/getStep.step.step.do
+#	new file:   lib/do/ectool/login.server.sessionId.dep
+#	new file:   lib/do/ectool/login.server.sessionId.do
+#	new file:   lib/do/ectool/modifyStep.ecmd.step.dep
+#	new file:   lib/do/ectool/modifyStep.ecmd.step.do
+#	new file:   lib/do/ectool/setCommand...do
+#	new file:   lib/do/gmake/cc.c..dep
+#	new file:   lib/do/gmake/cc.c..do
+#	new file:   lib/do/gmake/cc.c.o.dep
+#	new file:   lib/do/gmake/cc.c.o.do
+#	new file:   lib/do/gmake/cc.o..dep
+#	new file:   lib/do/gmake/cc.o..do
+#	new file:   lib/do/gmake/guide
+#	new file:   lib/do/gmake/lex.l.c.dep
+#	new file:   lib/do/gmake/lex.l.c.do
+#	new file:   lib/do/go/8g.go.8.dep
+#	new file:   lib/do/go/8g.go.8.do
+#	new file:   lib/do/go/8l.8.exe.dep
+#	new file:   lib/do/go/8l.8.exe.do
+#	new file:   lib/do/go/sed.ugo.go.dep
+#	new file:   lib/do/go/sed.ugo.go.do
+#	new file:   lib/do/go/toascii.sed
+#	new file:   lib/do/inferno/cp.dis.dis.do
+#	new file:   lib/do/inferno/limbo.b.dis.dep
+#	new file:   lib/do/inferno/limbo.b.dis.do
+#	new file:   lib/do/inferno/rm-f.dis..do
+#	new file:   lib/do/java/dodep.allclass.jar.do
+#	new file:   lib/do/java/dodep.alljava.class.do
+#	new file:   lib/do/java/dodep.dir.jar.do
+#	new file:   lib/do/java/jar.allclass.jar.dep
+#	new file:   lib/do/java/jar.allclass.jar.do
+#	new file:   lib/do/java/jar.class.jar.dep
+#	new file:   lib/do/java/jar.class.jar.do
+#	new file:   lib/do/java/jar.dir.jar.dep
+#	new file:   lib/do/java/jar.dir.jar.do
+#	new file:   lib/do/java/javac.java.class.dep
+#	new file:   lib/do/java/javac.java.class.do
+#	new file:   lib/do/java/javac.pathjava.class.dep
+#	new file:   lib/do/java/javac.pathjava.class.do
+#	new file:   lib/do/java/rm-f.class..do
+#	new file:   lib/do/jcas/greek.in.out.dep
+#	new file:   lib/do/jcas/greek.in.out.do
+#	new file:   lib/do/jcas/greek.in.test.dep
+#	new file:   lib/do/jcas/greek.in.test.do
+#	new file:   lib/do/jcas/sed.in.out.dep
+#	new file:   lib/do/jcas/sed.in.out.do
+#	new file:   lib/do/jcas/sed.in.test.dep
+#	new file:   lib/do/jcas/sed.in.test.do
+#	new file:   lib/do/miktex/pdflatex.tex.pdf.dep
+#	new file:   lib/do/miktex/pdflatex.tex.pdf.do
+#	new file:   lib/do/perl/perl.pl.stdout.dep
+#	new file:   lib/do/perl/perl.pl.stdout.do
+#	new file:   lib/do/posix/cc.c..dep
+#	new file:   lib/do/posix/cc.c..do
+#	new file:   lib/do/posix/cc.c.o.dep
+#	new file:   lib/do/posix/cc.c.o.do
+#	new file:   lib/do/posix/ccar.c.a.dep
+#	new file:   lib/do/posix/ccar.c.a.do
+#	new file:   lib/do/posix/cp.dep..do
+#	new file:   lib/do/posix/cp.sh..dep
+#	new file:   lib/do/posix/cp.sh..do
+#	new file:   lib/do/posix/defaultrules
+#	new file:   lib/do/posix/guide
+#	new file:   lib/do/posix/lex.l.c.dep
+#	new file:   lib/do/posix/lex.l.c.do
+#	new file:   lib/do/posix/lexcc.l.o.dep
+#	new file:   lib/do/posix/lexcc.l.o.do
+#	new file:   lib/do/posix/rm.dep..do
+#	new file:   lib/do/tetex/pdflatex.tex.pdf.dep
+#	new file:   lib/do/tetex/pdflatex.tex.pdf.do
+#	new file:   lib/do/text/pdftotext.pdf.txt.dep
+#	new file:   lib/do/text/pdftotext.pdf.txt.do
+#	new file:   sh-inferno/adddep
+#	new file:   sh-inferno/catdep
+#	new file:   sh-inferno/catdo
+#	new file:   sh-inferno/credeper
+#	new file:   sh-inferno/credo
+#	new file:   sh-inferno/credoer
+#	new file:   sh-inferno/crepare
+#	new file:   sh-inferno/cresum
+#	new file:   sh-inferno/crext
+#	new file:   sh-inferno/dodep
+#	new file:   sh-inferno/lscatdo
+#	new file:   sh-inferno/lsdo
+#	new file:   sh-inferno/redirect
+#	new file:   sh-inferno/redont
+#	new file:   sh-inferno/rmdep
+#
+[master 7829d84] move existing files from inferno install
+ 155 files changed, 1602 insertions(+), 0 deletions(-)
+ create mode 100644 lib/do/Aide
+ create mode 100644 lib/do/bsdbuild/cc.c.o.dep.do
+ create mode 100644 lib/do/bsdbuild/cc.c.o.do
+ create mode 100644 lib/do/bsdbuild/cc.o.exe.dep.do
+ create mode 100644 lib/do/bsdbuild/cc.o.exe.do
+ create mode 100644 lib/do/bsdbuild/coneed
+ create mode 100644 lib/do/bsdbuild/guide
+ create mode 100644 lib/do/bsdbuild/mkdep
+ create mode 100644 lib/do/c++/c++c.c.o.dep
+ create mode 100644 lib/do/c++/c++c.c.o.do
+ create mode 100644 lib/do/c/ar.o.a.dep
+ create mode 100644 lib/do/c/ar.o.a.do
+ create mode 100644 lib/do/c/cc.allc.exe.dep
+ create mode 100644 lib/do/c/cc.allc.exe.do
+ create mode 100644 lib/do/c/cc.c.i.dep
+ create mode 100644 lib/do/c/cc.c.i.do
+ create mode 100644 lib/do/c/cc.c.o.dep.do
+ create mode 100644 lib/do/c/cc.c.o.do
+ create mode 100644 lib/do/c/cc.c.s.dep
+ create mode 100644 lib/do/c/cc.c.s.do
+ create mode 100644 lib/do/c/cc.o.dll.dep
+ create mode 100644 lib/do/c/cc.o.dll.do
+ create mode 100644 lib/do/c/cc.o.exe.dep.do
+ create mode 100644 lib/do/c/cc.o.exe.do
+ create mode 100644 lib/do/c/cc.o.so.dep
+ create mode 100644 lib/do/c/cc.o.so.do
+ create mode 100644 lib/do/c/cc.pic.o.dep
+ create mode 100644 lib/do/c/cc.pic.o.do
+ create mode 100644 lib/do/c/coneed
+ create mode 100644 lib/do/c/deduce
+ create mode 100644 lib/do/c/dodep.allc.a.do
+ create mode 100644 lib/do/c/dodep.allc.dll.do
+ create mode 100644 lib/do/c/dodep.allc.exe.do
+ create mode 100644 lib/do/c/dodep.allc.so.do
+ create mode 100644 lib/do/c/findh
+ create mode 100644 lib/do/c/gcc3.c.exe.dep
+ create mode 100644 lib/do/c/gcc3.c.exe.do
+ create mode 100644 lib/do/c/gcc3.c.o.dep
+ create mode 100644 lib/do/c/gcc3.c.o.do
+ create mode 100644 lib/do/c/gcc3.o.exe.dep
+ create mode 100644 lib/do/c/gcc3.o.exe.do
+ create mode 100644 lib/do/c/lex.l.c.dep
+ create mode 100644 lib/do/c/lex.l.c.do
+ create mode 100644 lib/do/c/md5sum.c.dep.dep
+ create mode 100644 lib/do/c/md5sum.c.dep.do
+ create mode 100644 lib/do/c/rm-f.ios..do
+ create mode 100644 lib/do/c/unitest.c.c.dep
+ create mode 100644 lib/do/c/unitest.c.c.do
+ create mode 100644 lib/do/credo/Aide
+ create mode 100644 lib/do/credo/rm-f.dodep..do
+ create mode 100644 lib/do/credo/rm-f.state..do
+ create mode 100644 lib/do/credo/rm-f.std..do
+ create mode 100644 lib/do/credo/rm-f.target..do
+ create mode 100644 lib/do/cs/csc.allcs.dll.dep
+ create mode 100644 lib/do/cs/csc.allcs.dll.do
+ create mode 100644 lib/do/cs/csc.allcs.exe.dep
+ create mode 100644 lib/do/cs/csc.allcs.exe.do
+ create mode 100644 lib/do/cs/csc.cs.exe.dep
+ create mode 100644 lib/do/cs/csc.cs.exe.do
+ create mode 100644 lib/do/ecloud/ec-perl.ecpl.stdout.dep
+ create mode 100644 lib/do/ecloud/ec-perl.ecpl.stdout.do
+ create mode 100644 lib/do/ecloud/ecvar.ecmd.sed.dep
+ create mode 100644 lib/do/ecloud/ecvar.ecmd.sed.do
+ create mode 100644 lib/do/ecloud/sed.ecmd.ecpl.dep
+ create mode 100644 lib/do/ecloud/sed.ecmd.ecpl.do
+ create mode 100644 lib/do/ecloud/storeCommands.projectName.command.do
+ create mode 100644 lib/do/ectool/getCommand...do
+ create mode 100644 lib/do/ectool/getStep.step.step.dep
+ create mode 100644 lib/do/ectool/getStep.step.step.do
+ create mode 100644 lib/do/ectool/login.server.sessionId.dep
+ create mode 100644 lib/do/ectool/login.server.sessionId.do
+ create mode 100644 lib/do/ectool/modifyStep.ecmd.step.dep
+ create mode 100644 lib/do/ectool/modifyStep.ecmd.step.do
+ create mode 100644 lib/do/ectool/setCommand...do
+ create mode 100644 lib/do/gmake/cc.c..dep
+ create mode 100644 lib/do/gmake/cc.c..do
+ create mode 100644 lib/do/gmake/cc.c.o.dep
+ create mode 100644 lib/do/gmake/cc.c.o.do
+ create mode 100644 lib/do/gmake/cc.o..dep
+ create mode 100644 lib/do/gmake/cc.o..do
+ create mode 100644 lib/do/gmake/guide
+ create mode 100644 lib/do/gmake/lex.l.c.dep
+ create mode 100644 lib/do/gmake/lex.l.c.do
+ create mode 100644 lib/do/go/8g.go.8.dep
+ create mode 100644 lib/do/go/8g.go.8.do
+ create mode 100644 lib/do/go/8l.8.exe.dep
+ create mode 100644 lib/do/go/8l.8.exe.do
+ create mode 100644 lib/do/go/sed.ugo.go.dep
+ create mode 100644 lib/do/go/sed.ugo.go.do
+ create mode 100644 lib/do/go/toascii.sed
+ create mode 100644 lib/do/inferno/cp.dis.dis.do
+ create mode 100644 lib/do/inferno/limbo.b.dis.dep
+ create mode 100644 lib/do/inferno/limbo.b.dis.do
+ create mode 100644 lib/do/inferno/rm-f.dis..do
+ create mode 100644 lib/do/java/dodep.allclass.jar.do
+ create mode 100644 lib/do/java/dodep.alljava.class.do
+ create mode 100644 lib/do/java/dodep.dir.jar.do
+ create mode 100644 lib/do/java/jar.allclass.jar.dep
+ create mode 100644 lib/do/java/jar.allclass.jar.do
+ create mode 100644 lib/do/java/jar.class.jar.dep
+ create mode 100644 lib/do/java/jar.class.jar.do
+ create mode 100644 lib/do/java/jar.dir.jar.dep
+ create mode 100644 lib/do/java/jar.dir.jar.do
+ create mode 100644 lib/do/java/javac.java.class.dep
+ create mode 100644 lib/do/java/javac.java.class.do
+ create mode 100644 lib/do/java/javac.pathjava.class.dep
+ create mode 100644 lib/do/java/javac.pathjava.class.do
+ create mode 100644 lib/do/java/rm-f.class..do
+ create mode 100644 lib/do/jcas/greek.in.out.dep
+ create mode 100644 lib/do/jcas/greek.in.out.do
+ create mode 100644 lib/do/jcas/greek.in.test.dep
+ create mode 100644 lib/do/jcas/greek.in.test.do
+ create mode 100644 lib/do/jcas/sed.in.out.dep
+ create mode 100644 lib/do/jcas/sed.in.out.do
+ create mode 100644 lib/do/jcas/sed.in.test.dep
+ create mode 100644 lib/do/jcas/sed.in.test.do
+ create mode 100644 lib/do/miktex/pdflatex.tex.pdf.dep
+ create mode 100644 lib/do/miktex/pdflatex.tex.pdf.do
+ create mode 100644 lib/do/perl/perl.pl.stdout.dep
+ create mode 100644 lib/do/perl/perl.pl.stdout.do
+ create mode 100644 lib/do/posix/cc.c..dep
+ create mode 100644 lib/do/posix/cc.c..do
+ create mode 100644 lib/do/posix/cc.c.o.dep
+ create mode 100644 lib/do/posix/cc.c.o.do
+ create mode 100644 lib/do/posix/ccar.c.a.dep
+ create mode 100644 lib/do/posix/ccar.c.a.do
+ create mode 100644 lib/do/posix/cp.dep..do
+ create mode 100644 lib/do/posix/cp.sh..dep
+ create mode 100644 lib/do/posix/cp.sh..do
+ create mode 100644 lib/do/posix/defaultrules
+ create mode 100644 lib/do/posix/guide
+ create mode 100644 lib/do/posix/lex.l.c.dep
+ create mode 100644 lib/do/posix/lex.l.c.do
+ create mode 100644 lib/do/posix/lexcc.l.o.dep
+ create mode 100644 lib/do/posix/lexcc.l.o.do
+ create mode 100644 lib/do/posix/rm.dep..do
+ create mode 100644 lib/do/tetex/pdflatex.tex.pdf.dep
+ create mode 100644 lib/do/tetex/pdflatex.tex.pdf.do
+ create mode 100644 lib/do/text/pdftotext.pdf.txt.dep
+ create mode 100644 lib/do/text/pdftotext.pdf.txt.do
+ create mode 100755 sh-inferno/adddep
+ create mode 100755 sh-inferno/catdep
+ create mode 100755 sh-inferno/catdo
+ create mode 100755 sh-inferno/credeper
+ create mode 100755 sh-inferno/credo
+ create mode 100755 sh-inferno/credoer
+ create mode 100755 sh-inferno/crepare
+ create mode 100755 sh-inferno/cresum
+ create mode 100755 sh-inferno/crext
+ create mode 100755 sh-inferno/dodep
+ create mode 100755 sh-inferno/lscatdo
+ create mode 100755 sh-inferno/lsdo
+ create mode 100755 sh-inferno/redirect
+ create mode 100755 sh-inferno/redont
+ create mode 100755 sh-inferno/rmdep
+# On branch master
+nothing to commit (working directory clean)
+* 7829d84 move existing files from inferno install
+* 09cc79b move remote add to ../Aide
+* 42c8192 add description in README
+.git			Aide			README		lib			sh-inferno
+mkdir man/1
+mv # On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   Aide
+#	modified:   README
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	man/
+no changes added to commit (use "git add" and/or "git commit -a")
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   man/1/credo
+#	new file:   man/1/dodep
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   Aide
+#	modified:   README
+#
+[master b442dde] move credo and dodep man pages from inferno install
+ 4 files changed, 248 insertions(+), 3 deletions(-)
+ create mode 100644 man/1/credo
+ create mode 100644 man/1/dodep
+# On branch master
+nothing to commit (working directory clean)
+* b442dde move credo and dodep man pages from inferno install
+* 7829d84 move existing files from inferno install
+* 09cc79b move remote add to ../Aide
+* 42c8192 add description in README
