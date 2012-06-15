@@ -1,0 +1,6 @@
+Credo calls scripts to create files, after doing the same for files on
+which they depend.  Dodep instantiates, from a library, parts of such
+a system of file-creating scripts and dependencies.
+
+Credo is an implementation of the build tool redo, by djb.
+Another implementation in python is redo, by Avery Pennarun.
