@@ -1,0 +1,9 @@
+#!/dis/sh
+if {no $*} {
+	lscatdo
+	exit
+}
+
+(env cmd in out) = $*
+dofile = /lib/do/^$env^/^$cmd^.^$in^.^$out^.do
+if {ftest -x $dofile} {cat $dofile}

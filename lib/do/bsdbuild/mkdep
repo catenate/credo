@@ -1,0 +1,33 @@
+#!/dis/sh
+c = $1
+locals = `{sed -n -f /lib/sed/findhlocal $c}
+systems = `{sed -n -f /lib/sed/findhsystem $c}
+if {no $cpp} {
+	if {ftest -r $c.cpp.env} {
+		cpp = `{cat $c.cpp.env}
+	} {
+		if {ftest -r default.cpp.env} {
+			cpp = `{cat default.cpp.env}
+		}
+	}
+}
+
+gccstdinlocal = . `{echo $srcdir | sed 's,/$,,'} `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include "..." search starts here:$/,/^End of search list.$/p' | sed '1d;$d;/^#include <...> search starts here:$/d;s,^ *,,'}
+apply {
+	local = $1
+	apply {
+		file = $1/$local
+		if {ftest -r $file} {echo $file}
+	} $gccstdinlocal
+} $locals
+
+gccstdincsystem = `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include <...> search starts here:$/,/^End of search list.$/p' | sed '1d;$d;s,^ *,,'}
+apply {
+	system = $1
+	apply {
+		file = /n/C/cygwin$1/$system
+		if {ftest -r $file} {echo $file}
+	} $gccstdincsystem
+} $systems
+
+exit

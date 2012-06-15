@@ -1,0 +1,7 @@
+#!/dis/sh
+(next files) = $*
+apply {
+	file = $1
+	(stem ext) = `{echo $file | sed 's,\.([^.]*)$, \1,'}
+	echo $stem $ext $stem^.^$next
+} $files

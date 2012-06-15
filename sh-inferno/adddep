@@ -1,0 +1,5 @@
+#!/dis/sh
+(dep files) = $*
+apply {
+	echo '0	'^$1 >> $dep^.dep
+} $files

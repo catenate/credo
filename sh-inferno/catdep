@@ -1,0 +1,9 @@
+#!/dis/sh
+if {no $*} {
+	lscatdo
+	exit
+}
+
+(env cmd in out) = $*
+depfile = /lib/do/^$env^/^$cmd^.^$in^.^$out^.dep
+if {ftest -x $depfile} {cat $depfile}

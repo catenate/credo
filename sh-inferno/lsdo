@@ -1,0 +1,16 @@
+#!/dis/sh
+dos = `{apply {
+	do = $1
+	target = `{echo $do | sed 's,\.do$,,'}
+
+	if {~ $target 'default.*'} {
+		ext = `{echo $target | sed 's,^default.,,'}
+		apply { echo $1 } `{ls *.$ext >[2]/dev/null}
+	} {
+		echo $target
+	}
+} `{ls *.do}}
+
+deps = `{ls *.dep >[2]/dev/null | sed 's,\.dep,,'}
+
+echo $dos $deps | fmt -w 1 | sort | uniq | sed 's,^,credo ,'

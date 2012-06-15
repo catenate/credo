@@ -1,0 +1,36 @@
+#!/dis/sh
+uos = $*
+tos = $*
+#coneed = d
+
+while {! no $uos} {
+	uo = ${hd $uos}
+	uos = ${tl $uos}
+	if {~ $coneed '*d*'} {echo coneed uos: '('^$uo^')' $uos}
+	if {! ftest -r $uo} {
+		dodep (c cc c o) $uo >/dev/null
+		credo $uo >/dev/null
+	}
+	deps = `{os -T nm $uo | grep U | grep -v __ | sed 's,[ 	]*U[ 	]+_,,'}
+	apply {
+		dep = $1
+		if {~ $coneed '*d*'} {echo coneed dep: $dep}
+		tcs = `{grep -l '^[^	 ]+.*'^$dep^'\(' $srcdir^*.c}
+		apply {
+			tc = $1
+			to = `{echo $tc | sed 's,^.*/,,;s,\.c$,.o,'}
+			if {! ftest -r $to} {
+				dodep (c cc c o) $to >/dev/null
+				credo $to >/dev/null
+			}
+			if {and {os -T nm $to | grep T | grep $dep >/dev/null} {! ~ $tos '*'^$to^'*'}} {
+				uos = $uos $to
+				echo $to
+				if {~ $coneed '*d*'} {echo coneed tos: $tos '('^$to^')'}
+				tos = $tos $to
+			}
+		} $tcs
+	} $deps
+}
+
+exit

@@ -1,0 +1,29 @@
+#!/dis/sh
+if {no $*} {
+	lsdo
+	exit
+}
+
+cretop = `{pwd}
+
+apply {
+	cd $cretop
+	cretarget = $1
+	if {~ $cretarget '*/*'} {
+		dirsed = 's,(.*/)[^/]+$,\1,'
+		filesed = 's,.*/([^/]+)$,\1,'
+		
+		dir = `{echo $cretarget | sed $dirsed}
+		if {no $credir} {credir = ''}
+		if {~ $dir '/*'} {credir = $dir} {credir = $credir^$dir}
+		cd $dir
+		
+		if {or {~ `{pwd}^'/' '*/'^$dir} {~ `{pwd}^'/' '*'^$dir}} {
+			cretarget = `{echo $cretarget | sed $filesed}
+		} {
+			exit
+		}
+	}
+	
+	credoer $cretarget
+} $*

@@ -1,0 +1,2 @@
+#!/dis/sh
+md5sum $1 >[2]/dev/null

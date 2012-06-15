@@ -1,0 +1,17 @@
+#!/dis/sh
+if {~ $#* '[0123]'} {
+	lscatdo
+	exit
+}
+
+(env cmd in out targets) = $*
+if {no $targets} {targets = $cmd^.^$in^.^$out}
+
+apply {
+	target = $1
+	if {ftest -r /lib/do/$env/$cmd.$in.$out.do} {catdo $env $cmd $in $out > $target^.do}
+	if {ftest -r /lib/do/$env/$cmd.$in.$out.dep} {catdep $env $cmd $in $out | target $target > $target^.dep}
+	if {ftest -r /lib/do/$env/$cmd.$in.$out.dep.do} {cp /lib/do/$env/$cmd.$in.$out.dep.do $target^.dep.do}
+	echo credo $target
+} $targets
+

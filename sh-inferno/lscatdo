@@ -1,0 +1,9 @@
+#!/dis/sh
+load std
+cd /lib/do
+apply {
+	dofile = $1
+	(env cmd in out) = `{echo $dofile | sed 's,\.do$,,;s,[.\/], ,g'}
+	if {no $out} {out = ''''''}
+	echo catdo '('$env $cmd $in $out')'
+} `{ls */*.do}

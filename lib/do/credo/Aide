@@ -1,0 +1,7 @@
+/lib/do/credo/rm-f.dodep..do
+/lib/do/credo/rm-f.state..do
+/lib/do/credo/rm-f.std..do
+/lib/do/credo/rm-f.target..do
+credo
+dodep (smith tool inext outext) target
+|sort|uniq

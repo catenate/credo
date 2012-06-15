@@ -1,0 +1,48 @@
+#!/dis/sh
+top = `{pwd}
+
+apply {
+	cd $top
+	target = $1
+
+	if {~ $target '*/*'} {
+		relay = $relay $target
+		dir = `{echo $target | sed 's,(.*/)[^/]+$,\1,'}
+		cd $dir
+		target = `{echo $target | sed 's,.*/([^/]+)$,\1,'}
+	}
+
+	rm $target
+	/lib/do/credo/rm-f.std..do
+
+	if {and {no $cc} {! ftest -r default.cc.env}} {
+		if {os -T cc -v >[2]/dev/null} {echo cc > default.cc.env}
+		if {os -T gcc -v >[2]/dev/null} {echo gcc > default.cc.env}
+		if {os -T gcc-3 -v >[2]/dev/null} {echo gcc-3 > default.cc.env}
+	}
+
+	if {~ $target '*.a'} {
+		(stem ext c) = `{crext c $target}
+		if {ftest -r $c} {
+			dodep (c cc c o) $stem^.o
+			dodep (c cc o exe) $target
+			adddep $target $stem^.o
+		} {
+			dodep (c dodep allc a) $stem^.dodep
+			credo $stem^.dodep
+		}
+	}
+
+	if {~ $target '*.exe'} {
+		dodep (c cc o exe) $target
+		(stem ext c) = `{crext c $target}
+		if {ftest -r $c} {
+			(stem ext o) = `{crext o $target}
+			adddep $target $o
+			adddep $target `{/lib/do/c/coneed $o}
+		}
+		if {! no $relay} {adddep $target $relay}	
+	}
+
+	credo $target
+} $*

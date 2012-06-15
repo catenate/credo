@@ -1,0 +1,103 @@
+#!/dis/sh
+if {no $crindent} {
+	crindent = ''
+}
+
+field1sed = 's,[ 	].+$,,'
+
+cretarget = $1
+if {no $credir} {credir = ''}
+
+if {ftest -f $cretarget^.redoing} {
+	while {ftest -f $cretarget^.redoing} {
+		sleep 1
+		$cretarget^.redoing >[2]/dev/null
+	}
+}
+
+touch $cretarget^.redoing
+echo '#!/dis/sh' >> $cretarget^.redoing
+echo 'if {! ftest -d /prog/'^${pid}^'} {rm -f '^$cretarget^'.redoing}' >> $cretarget^.redoing
+
+# exit before we update dependencies, so we don't forget we need to rebuild
+oldtargsum = `{cat $cretarget^.sum >[2]/dev/null | sed $field1sed}
+(newtargsum newtargfile) = `{cresum $cretarget}
+if {and {! ~ $#oldtargsum 0} {! ~ $#newtargsum 0}} {
+	if {! ~ $oldtargsum $newtargsum} {
+		echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
+		rm -f $cretarget^.redoing
+		exit
+	}
+}
+
+# Don't go full recursive, but it's often useful to generate the
+# dependency file.
+if {ftest -x $cretarget^.dep.do} {
+	thiscrindent = $crindent
+	crindent = '  '^$crindent
+	credo $cretarget^.dep
+	crindent = $thiscrindent
+}
+
+if {ftest -s $cretarget^.dep} {
+	run /dis/credeper
+} {
+	olddepsum = 0
+	newdepsum = 0
+}
+
+# delay exit to here, to redo dependencies of a target with no do script
+if {ftest -e $cretarget^.redont} {
+	rm -f $cretarget^.redoing
+	exit
+}
+
+echo credo $crindent^$credir^$cretarget
+
+if {ftest -x $cretarget^.do} {
+	olddosum = `{cat $cretarget^.do.sum >[2]/dev/null | sed $field1sed}
+	(newdosum newdofile) = `{cresum $cretarget^.do}
+	do = ./^$cretarget^.do $cretarget
+} {
+	filesed = 's,(.*)\.[^.]+$,\1,'
+	extsed = 's,.*\.([^.]+)$,\1,'
+
+	filext = $cretarget
+	file = `{echo $filext | sed $filesed}
+	ext = `{echo $filext | sed $extsed}
+
+	if {ftest -x default.^$ext^.do} {
+		olddosum = `{cat $cretarget^.do.sum >[2]/dev/null | sed $field1sed}
+		(newdosum newdofile) = `{cresum default.^$ext^.do}
+		do = ./default.^$ext^.do $filext
+	} {
+		touch $cretarget^.redont
+		rm -f $cretarget^.redoing
+		exit
+	}
+}
+
+if {and {! ~ $#newdosum 0} {! ~ $olddosum $newdosum}} {
+	echo $newdosum^'	'^$newdofile > $cretarget^.do.sum
+}
+
+if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretarget} {~ $nulltargetforce 1}} {
+	if {ftest -f $cretarget} {cp $cretarget $cretarget^.reold; reold=1} {reold=0}
+	
+	$do
+	dostatus = $status
+
+	if {and {~ $dostatus 'revert'} {~ $reold 1}} {
+		if {ftest -f $cretarget} {cp $cretarget $cretarget^.renew}
+		if {ftest -f $cretarget^.reold} {cp $cretarget^.reold $cretarget}
+	}
+	
+	if {and {ftest -e $cretarget} {! ~ $cretarget '*.dep'} {! ~ $cretarget '*.do'}} {cresum $cretarget > $cretarget^.sum}
+
+	if {! ~ $dostatus ''} {
+		echo credo $crindent^$credir^$cretarget error: $dostatus
+	}
+}
+
+rm -f $cretarget^.redoing
+exit

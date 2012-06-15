@@ -1,0 +1,7 @@
+/test/1/credo/srcobj/obj/guide
+cp ../c/cc.c.o.* .
+cp ../c/cc.o.exe.* .
+cp /lib/do/c/findh mkdep
+cp /lib/do/c/coneed .
+http://dev.hypertriton.com:8080/bsdbuild/trunk/build.prog.mk
+|sort|uniq

@@ -1,0 +1,10 @@
+#!/dis/sh
+#echo pare $1$2
+crindent = $1
+credo $2
+
+# doesn't print output of redoing dependent targets
+#log = /tmp/$2.log.${pid}
+#redo $2 >> $log >[2=1]
+#cat $log
+#rm -f $log

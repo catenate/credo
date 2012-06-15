@@ -1,0 +1,5 @@
+#!/dis/sh
+name = $0
+name = `{echo $name | sed 's,^.*/,,'}
+pathname = `{du -n /git | grep sh-inferno/^$name | sed 1q}
+sh $pathname $*

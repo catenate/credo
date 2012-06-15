@@ -1,0 +1,9 @@
+/dis/credoer
+/lib/do/posix/
+/test/1/credo/hello/guide
+/test/1/credo/lex/guide
+/test/1/credo/psmith4/mymath/guide
+/test/1/credo/psmith6/guide
+apply {cp ../posix/lex.l.c.^$1 .} dep do
+os -T make -p
+|sort|uniq

@@ -1,0 +1,44 @@
+#!/dis/sh
+field2sed = 's,^.*[ 	],,'
+
+olddepsum = `{cat $cretarget^.dep.sum >[2]/dev/null | sed $field1sed}
+
+noselfenv = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+env = `{sed $field2sed $cretarget^.dep | sed -n 's,^\/env\/,,p'}
+apply {
+	crevar = $1
+	if {ftest -r $cretarget.$crevar.env} {
+		$crevar = `{cat $cretarget.$crevar.env}
+		# Use these in ports where no /env,
+		# or if we care why /env/$crevar changed.
+		#rmdep $cretarget $crevar.env
+		#adddep $cretarget $cretarget.$crevar.env
+	} {
+		if {ftest -r default.$crevar.env} {
+			$crevar = `{cat default.$crevar.env}
+			#rmdep $cretarget $crevar.env
+			#adddep $cretarget default.$crevar.env
+		}
+	}
+} $env
+
+if {! no $noselfenv} {
+	map 'crepare ''  '^$crindent^''''  $noselfenv
+}
+
+deps = `{sed $field2sed $cretarget^.dep}
+apply {
+	dep = $1
+	relay = $dep^.relay
+	if {ftest -e $relay} {run $relay $dep}
+} $deps
+apply {
+	if {! md5sum $1 >[2]/dev/null} {
+		echo '0	'^$1
+		if {! ~ $1 '/env/*'} {nulltargetforce = 1}
+	}
+} $deps > $cretarget^.dep.new
+
+mv $cretarget^.dep.new $cretarget^.dep
+(newdepsum newdepfile) = `{cresum $cretarget^.dep}
+if {! ~ $#newdepsum 0} {echo $newdepsum^'	'^$newdepfile > $cretarget^.dep.sum}
