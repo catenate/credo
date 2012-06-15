@@ -1,0 +1,167 @@
+.TH CREDO 1
+.SH NAME
+credo \- maintain files believed related
+.SH SYNOPSIS
+.B credo
+[
+.I target ...
+]
+.SH DESCRIPTION
+.I Credo
+uses a dependency list to control the update
+(usually by compilation) of
+.I targets
+(usually files)
+from the source files upon which they depend.
+Each line of the file
+.IR target .dep
+contains a checksum and name that identifies the files
+and other targets upon which the target depends.
+.I Credo
+calls itself on these dependencies in parallel before the target.
+The file
+.IR target .do
+contains a script to update the target, and is called with one
+parameter, the name of the target.
+.IR Target .do
+is run if its checksum has changed;
+if the checksum of 
+.IR target .dep
+has changed or
+.IR target .dep
+contains an out-of-date checksum;
+if the target does not exist;
+or if any file on which it depends does not exist.
+To preserve manual changes to targets,
+.IR target .do
+is not run if the checksum of
+.I target
+itself changes.
+.PP
+Credo internally maintains the environment variable
+.B $indent
+to print its recursion level; and
+.B $credir
+to store the relative path of the current target's directory, from the
+directory in which the user invoked
+.IR credo .
+.PP
+.I Credo
+takes no options. With no parameters,
+.I credo
+runs lsdo (see SOURCE) to list targets in the current directory.
+.PD
+.SH EXAMPLE
+A simple set of files to compile and install limbo programs.
+The file prog.do:
+.IP
+.EX
+#!/dis/sh
+O=dis
+cp a.$O b.$O c.$O /dis
+.EE
+.PP
+The file prog.dep, before the command
+.B credo prog
+fills in actual checksums:
+.IP
+.EX
+0	a.dis
+0	b.dis
+0	c.dis
+.EE
+.PP
+The file default.dis.do describes generally how to make a .dis file
+from a .b file:
+.IP
+.EX
+#!/dis/sh
+dis = $1
+b = `{echo $dis | sed 's,\\.dis,.b,'}
+limbo $b
+.EE
+.PP
+/test/1/credo/man1/ contains this example in full.
+.SH FILES
+.B redont
+lists targets without do scripts found in the directory.
+.PP
+.IR target .dep
+lists checksums for files on which
+.I target
+depends.
+.IR target .dep.sum
+contains the checksum of
+.IR target .dep.
+.IR target .do
+is a shebang script or program to build
+.IR target ,
+which it takes as its first parameter.
+.IR target .do.sum
+contains the checksum of
+.IR target .do.
+.IR target .sum
+contains the checksum of
+.IR target ,
+except for generated
+.I do
+and
+.I dep
+files.
+.PP
+.IR target .redoing
+is a script which checks whether it can yet delete itself, and so
+unlock target.
+.PP
+.IR target .reold
+stores the previously-built content of
+.IR target .
+If
+.IR target .do
+returns the status
+.B revert
+then
+.I credo
+copies
+.I target
+to
+.IR target .renew
+and restores
+.IR target .reold
+to
+.IR target .
+.SH SOURCE
+.B /dis/credo
+changes to other directories to build targets with credoer.
+.PP
+.B /dis/credoer
+locks itself by creating
+.IR target .redoing,
+parses dependencies and runs crepare on them in parallel, and rebuilds
+the target.
+.PP
+.B /dis/crepare
+runs credo on dependent targets in parallel with map(1).
+.PP
+.B /dis/cresum
+calculates the checksum (default md5sum(1)) of a file, printing the
+checksum first and the filename second.
+.PP
+.B /dis/lsdo
+lists targets specified by
+.IR target .do
+files and implied by
+default.ext.do
+files, where ext is the final extension of a file in the current
+directory.
+.SH SEE ALSO
+.IR dodep (1),
+.IR map (1)
+.SH BUGS
+The profusion of small files helps avoid race conditions,
+but since the lock mechanism is not an atomic test-and-set,
+it is possible that two well-timed calls to the same target
+may both execute at once.
+.PP
+Parallel writes to redont often conflict, and sometimes leave partial
+file names (eg .h).  This file likely needs brief locking.

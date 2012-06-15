@@ -1,0 +1,77 @@
+.TH DODEP 1
+.SH NAME
+dodep \- create credo files from templates
+.SH SYNOPSIS
+.B dodep
+.I smith
+.I tool
+.I extin
+.I extout
+.I target ...
+.SH DESCRIPTION
+.I Dodep
+customizes .do and .dep template files to set up a target for
+credo(1).
+.PP
+.I Dodep
+takes no options.  If given no parameters,
+.IR dodep ,
+.I catdo
+and
+.I catdep
+call
+.I lscatdo
+(see SOURCE) to list available templates.
+.PD
+.SH EXAMPLES
+Customize a test harness for a Greek-transliteration sed script.
+Create
+.B greek.out.do
+and customize
+.BR greek.out.dep :
+.IP
+.EX
+dodep jcas greek in out greek.out
+.EE
+.PP
+Create
+.BR rmme.do ,
+which may be directly run to remove all *.do and *.dep files.
+.IP
+.EX
+dodep credo rm-f dodep '' rmme
+.EE
+.PP
+/test/1/sed/greek/ contains this example in full.
+.SH FILES
+.B /lib/do/
+contains
+.I smith
+subdirectories which contain templates named
+.IR tool.extin.extout .do
+and
+.IR tool.extin.extout .dep
+.SH SOURCE
+.B /dis/dodep
+creates do and dep files for
+.IR target ,
+and targets the dep file.
+.PP
+.B /dis/catdo
+prints the build script for the given tool, input file extension,
+and output file extension.
+.PP
+.B /dis/catdep
+prints the untargeted dependency list for the given tool, input
+file extension, and output file extension.
+.PP
+.B /dis/target
+replaces $target in standard input by the given target, $targ by the
+target without its final period-separated extension, and $ta by the
+target without any extensions.
+.PP
+.B /dis/lscatdo
+lists templates in
+.BR /lib/do/ .
+.SH SEE ALSO
+.IR credo (1)

@@ -1,6 +1,6 @@
 ls|mc
-osd git add catenate/20120604 catenate/20120606 catenate/en
-osd git commit -a -m 'move remote add to ../Aide'
+osd git add man
+osd git commit -a -m 'move credo and dodep man pages from inferno install'
 osd git log --graph --oneline --all
 osd git push origin master
 osd git status
