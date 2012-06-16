@@ -1,7 +1,8 @@
 Dump /git/credo/dump
 ls|mc
 osd git add dump
-osd git commit -a -m 'Fix Avery''s github account name.'
+osd git commit -a -m 'Add diff command example to Aide.'
+osd git diff 575e621 6497979
 osd git log --graph --oneline --all
 osd git push origin master
 osd git status
