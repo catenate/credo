@@ -1,7 +1,7 @@
 Dump /git/credo/dump
 ls|mc
 osd git add dump
-osd git commit -a -m 'Add diff command example to Aide.'
+osd git commit -a -m 'expand djb and refer to his notes'
 osd git diff 575e621 6497979
 osd git log --graph --oneline --all
 osd git push origin master
