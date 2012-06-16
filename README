@@ -4,4 +4,4 @@ a system of file-creating scripts and dependencies.
 
 Credo is an implementation of the build tool redo, by djb.
 Another implementation in python is redo by Avery Pennarun.
-http://github.com/apennarun/redo
+https://github.com/apenwarr/redo
