@@ -1,0 +1,9 @@
+grep -n '^' dcr.c.* /dev/null
+grep -n '^' dcr.c.dep  /dev/null dcr.c.dep.sum dcr.c.do.sum dcr.c.sum dcr.l.redont
+
+
+/lib/do/credo/rm-f.std..do
+rm *.env
+echo flex > dcr.c.lex.env
+dodep (c lex l c) dcr.c
+credo dcr.c

@@ -1,0 +1,65 @@
+/dis/credoer
+/lib/do/c/cc.c.o.do
+/lib/do/c/cc.o.out.dep
+/lib/do/c/cc.o.out.do
+/lib/do/credo/dodep.allc.exe.do
+grep -n . *.dep
+|sort|uniq
+
+
+nb mkdodep credo example clean state target
+dodep credo rm-f state ''
+dodep credo rm-f target ''
+dodep credo rm-f dodep ''
+rm-f.state..do
+rm-f.target..do
+rm-f.dodep..do
+
+
+nb mkdodep credo example generate build system clang object exe cc cflag
+dodep credo dodep allc exe calculator.dodep
+
+cflags = -g
+cc = gcc-3
+credo binstall
+
+cflags = -g
+cc = gcc-3
+credo calculator.exe
+
+
+nb makefile framework source file list execute program name local header file
+/nb/pub/builds/0321717287:/5    include framework.mk/
+Lines 1–3 provide the most basic information: which source files
+should be compiled,¹ the name of the executable program,² and the list
+of header files.³ This is all the information required to compile a
+simple program and, therefore, all that a software developer typically
+cares about.
+ ¹ Allc lists all *.c files in directory.
+ ² Given as last parameter *.dodep.
+ ³ Allc finds local (double-quoted) header files, and adds them
+to dependency list of object file.
+
+Credo moves the tricky bits of makefiles—the knowledge of what to
+compile, constructing the dependency graph, and generally how files
+relate to each other—to code generation, in meta-do-scripts.
+This means idioms and templates are stored, by language and by
+application structure, in the same library that, at a lower level,
+transforms source to derived objects.
+
+
+nb mkdodep credo example generate build system clang object exe cygwin gcc3
+apply {
+	mkdodep cygwin gcc3 c o $1^.o
+	echo '0	numbers.h' >> $1^.o.dep
+} calc add mult sub
+mv calc.o.do default.o.do
+apply {rm $1^.o.do} add mult sub
+mkdodep cygwin gcc3 o exe calculator.exe
+apply {
+	echo '0	'^$1^'.o' >> calculator.exe.dep
+} calc add mult sub
+credo calculator.exe
+
+cflags = -g
+credo calculator.exe

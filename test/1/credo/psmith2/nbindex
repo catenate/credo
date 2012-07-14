@@ -1,0 +1,4 @@
+guide:9: mkdodep credo example clean state target
+guide:18: mkdodep credo example generate build system clang object exe cc cflag
+guide:30: makefile framework source file list execute program name local header file
+guide:43: mkdodep credo example generate build system clang object exe cygwin gcc3

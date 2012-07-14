@@ -1,0 +1,10 @@
+nb c++ compiler flag clang file dodep credo nm
+dodep c++ c++c c o hello.o
+
+c++flags = -g
+c++c = g++-3
+credo hello.o
+os -T nm hello.o
+
+
+nb doc

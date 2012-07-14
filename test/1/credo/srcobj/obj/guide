@@ -1,0 +1,24 @@
+/lib/do/c/guide
+/lib/do/bsdbuild/guide
+
+
+srcdir = ../src/
+dodep (c cc c o) main.o
+
+
+rm *.env
+srcdir = ../src/
+echo gcc-3 > default.cc.env
+echo -I$srcdir > default.cppflags.env
+
+
+/lib/do/credo/rm-f.std..do
+srcdir = ../src/
+dodep (c cc o exe) main.exe
+credo main.exe
+
+
+/lib/do/credo/rm-f.std..do
+srcdir = ../src/
+dodep (bsdbuild cc o exe) main.exe
+credo main.exe

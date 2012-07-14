@@ -1,0 +1,6 @@
+#ldd ./mathmain.exe
+export LD_LIBRARY_PATH=/cygdrive/e/jasoncatena-acmesac/test/1/credo/psmith4/mymath:${LD_LIBRARY_PATH}
+echo $LD_LIBRARY_PATH
+export LD_RUN_PATH=/cygdrive/e/jasoncatena-acmesac/test/1/credo/psmith4/mymath
+echo $LD_RUN_PATH
+./mathmain.exe

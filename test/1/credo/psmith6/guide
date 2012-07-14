@@ -1,0 +1,4 @@
+/lib/do/gmake/
+/lib/do/posix/
+os -T make -p
+|sort|uniq

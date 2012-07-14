@@ -1,0 +1,20 @@
+credo
+|sort|uniq
+
+
+/lib/do/credo/rm-f.std..do
+dodep (posix cp dep '') copy
+dodep (posix rm dep '') clean
+apply {
+	adddep clean $1
+	adddep copy $1
+} /env/var /env/today
+
+echo = echo
+#var = this
+var = that
+today = monday
+credo copy
+
+echo = echo
+credo clean

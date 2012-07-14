@@ -1,0 +1,36 @@
+nb rm state target dodep csharp adddep credo gmcs exe monodis ildasm dumpbin pedump library
+/lib/do/credo/rm-f.std..do 
+
+os -T bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs' -target:exe -out:prog.exe main.cs hello.cs goodbye.cs
+os -T prog.exe
+
+dodep (cs csc allcs exe) prog.exe
+adddep prog.exe *.cs
+csc = bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs'
+credo prog.exe
+
+# VSC# calls these ildasm and dumpbin
+os -T 'C:\Program Files (x86)\Mono-2.10.2\bin\monodis' prog.exe
+os -T 'C:\Program Files (x86)\Mono-2.10.2\bin\pedump' prog.exe
+
+
+nb dodep csharp adddep credo gmcs library monodis ildasm reference dll
+
+dodep (cs csc allcs dll) greeters.dll
+adddep greeters.dll hello.cs goodbye.cs
+csc = bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs'
+credo greeters.dll
+
+os -T 'C:\Program Files (x86)\Mono-2.10.2\bin\monodis' greeters.dll
+
+os -T bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs' -target:exe -out:prog.exe main.cs /reference:greeters.dll
+
+dodep (cs csc allcs dll) greeters.dll
+adddep greeters.dll hello.cs goodbye.cs
+dodep (cs csc allcs exe) prog.exe
+adddep prog.exe main.cs greeters.dll
+csc = bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs'
+credo prog.exe
+
+
+nb doc

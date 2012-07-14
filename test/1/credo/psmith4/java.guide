@@ -1,0 +1,34 @@
+/lib/do/credo/rm-f.std..do
+|sort|uniq
+
+
+nb java compiler javac javap interface byte code dodep credo
+dodep java javac java class Main.class
+
+os -T javap Hello
+os -T javap -c Hello
+
+
+nb all java compiler javac dodep credo
+dodep java dodep alljava class Main.dodep
+
+dodep java jar class jar Main.jar
+
+dodep java rm-f class ''
+dodep credo rm-f dodep ''
+rm-f.class..do
+rm-f.dodep..do
+
+
+nb all class jar dodep
+dodep java dodep alljava class Main.dodep
+dodep java dodep allclass jar example.dodep
+
+
+nb path javac jar
+dodep java dodep dir jar examples.dodep
+
+os -T java -cp examples.jar com.arapiki.examples.Main
+
+
+nb doc

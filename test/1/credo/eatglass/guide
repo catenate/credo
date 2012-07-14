@@ -1,0 +1,15 @@
+dodep |grep 'c dodep'
+http://www.columbia.edu/kermit/utf8.html
+|sort|uniq
+
+
+/lib/do/credo/rm-f.std..do 
+dodep (c dodep allc exe) eatglass.dodep
+
+lang=classicalgreek
+rmdep eatglass.exe '\.o$'
+adddep eatglass.exe eatglass.o
+adddep eatglass.exe $lang^.o
+
+cc = gcc-3
+credo eatglass.exe

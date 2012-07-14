@@ -1,0 +1,27 @@
+/lib/do/c++/
+/lib/do/c/
+/lib/do/credo/
+/lib/do/java/
+Edit ,s,^ +[0-9 ][0-9]    ,,g
+Edit ,s,^ +[0-9 ][0-9]   ,,g
+Edit ,s,^ +[0-9 ][0-9]$,,g
+credo
+dodep | grep credo
+grep -n . *
+http://www.emmestech.com/moron_guides/moron2.html
+nb 'c\+\+' compiler
+os -T bash 'C:\Program Files (x86)\Mono-2.10.2\bin\gmcs' --help
+os -T java -cp ./example.java Main
+os -T ldd mathmain.exe
+os -T ls 'C:\Program Files (x86)\Mono-2.10.2\bin'
+os -T ls -l /n/C/cygwin/bin/*++*
+os -T which javac
+|sort|uniq
+
+
+nb remove generated files
+/lib/do/credo/rm-f.ios..do 
+/lib/do/credo/rm-f.std..do 
+
+
+nb doc

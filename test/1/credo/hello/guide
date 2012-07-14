@@ -1,0 +1,41 @@
+/lib/do/gmake/
+/lib/do/posix/
+catdo | grep 'c cc '
+catdo | grep gmake
+gccver = 3; echo gcc-$gccver > default.cc.env
+os -T env
+os -T which gcc-3
+|sort|uniq
+
+
+/lib/do/credo/rm-f.std..do
+dodep (posix cp sh '') hello
+
+
+/lib/do/credo/rm-f.std..do
+rm hello.exe
+echo gcc3 > hello.cc.env
+echo gcc-3 > hello.cc.env
+#dodep (posix cc c '') hello
+dodep (gmake cc c '') hello
+
+
+/lib/do/credo/rm-f.std..do
+rm hello.exe
+dodep (gmake cc c o) hello.o
+dodep (gmake cc o '') hello
+credo hello
+
+
+/lib/do/credo/rm-f.std..do
+dodep (c cc c o) hello.o
+dodep (c cc o exe) hello.exe
+adddep hello.exe hello.o
+echo gcc3 > hello.exe.cc.env # remove exe to force rebuild fail
+echo gcc-3 > hello.exe.cc.env
+rm hello.exe.cc.env
+
+
+/lib/do/credo/rm-f.std..do
+rm *.env
+deduce c hello.exe

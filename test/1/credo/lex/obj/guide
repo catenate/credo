@@ -1,0 +1,14 @@
+grep -n '^' dcr.exe*.do
+grep -n '^' dcr.exe.dep /dev/null
+grep -n '^' *.relay
+
+
+/lib/do/credo/rm-f.std..do
+rm *.env
+dodep (c cc o exe) dcr.exe
+srcdir = ../src/
+echo cpp-3 > default.cpp.env
+echo -I../src/ > default.cppflags.env
+echo gcc-3 > default.cc.env
+credo dcr.exe
+cat ../lorem | os -T ./dcr.exe

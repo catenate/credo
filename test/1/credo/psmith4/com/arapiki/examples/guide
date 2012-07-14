@@ -1,0 +1,8 @@
+dodep credo rm-f state ''
+dodep credo rm-f target ''
+dodep java rm-f class ''
+dodep credo rm-f dodep ''
+rm-f.state..do
+rm-f.target..do
+rm-f.class..do
+rm-f.dodep..do

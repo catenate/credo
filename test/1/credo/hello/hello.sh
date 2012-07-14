@@ -1,0 +1,2 @@
+#!/dis/sh
+echo hi

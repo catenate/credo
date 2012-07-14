@@ -1,0 +1,65 @@
+nb clean std env
+/lib/do/credo/rm-f.std..do
+rm *.env
+cd mymath
+/lib/do/credo/rm-f.std..do
+rm *.env
+
+
+nb dodep example generate files compile clang exe
+deduce c main.exe
+
+
+nb dodep example preprocess clang expand include define
+dodep c cc c i hello.i
+dodep c cc c i main.i
+cc = gcc-3
+credo hello.i main.i
+
+
+nb dodep example translate clang assembly
+dodep c cc c s hello.s
+dodep c cc c s main.s
+cc = gcc-3
+credo hello.s main.s
+
+
+nb examine object file detail nm hex dump
+os -T file hello
+os -T file hello.o
+os -T nm hello.o
+os -T objdump -x hello.o
+os -T hexdump hello.o
+
+
+nb dodep example link dll clang library subdirectory
+echo 'gcc-3' > default.cc.env
+
+dodep c cc c o mathmain.o
+dodep c cc o exe mathmain.exe
+adddep mathmain.exe mathmain.o
+
+adddep mathmain.exe mymath/libmymath.dll
+
+rm mymath/mymath.a mymath/libmymath.dll
+cc = gcc-3
+credo mathmain.exe
+
+cp mymath/libmymath.dll .
+os -T ./mathmain.exe
+
+rm libmymath.dll
+os -T bash ./runmathmain
+
+
+nb deduce dodep example link archive clang library subdirectory
+deduce c mymath/mymath.a mathmain.exe
+
+
+nb coneed exe
+/lib/do/credo/rm-f.std..do
+echo gcc-3 > default.cc.env
+dodep c cc o exe main.exe
+
+
+nb doc

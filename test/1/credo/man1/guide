@@ -1,0 +1,13 @@
+credo prog
+rm *.dis *.sum /dis/a.dis /dis/b.dis /dis/c.dis
+
+/man/1/credo
+/man/1/dodep
+credo(1)
+dodep(1)
+man credo > credo.1
+man dodep > dodep.1
+man map > map.1
+mk(1)
+sed '/^[	 ]*$/d;/^[	 ]*#.*$/d;/^[	 {}]*$/d' /dis/cre* /dis/map | wc -l
+|sort|uniq

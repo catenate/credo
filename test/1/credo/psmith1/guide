@@ -1,0 +1,5 @@
+credo release.pkg
+grep -n . *
+mkdodep credo rm-f state ''
+mkdodep credo rm-f target ''
+|sort|uniq

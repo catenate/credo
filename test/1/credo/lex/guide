@@ -1,0 +1,47 @@
+http://flex.sourceforge.net/manual/
+grep -n '^' lorem src/dcr.l src/header.c src/lex.h
+|sort|uniq
+
+
+/lib/do/credo/rm-f.std..do
+dodep (c lex l c) dcr.c
+lex=flex
+credo dcr.c
+dodep (c dodep allc exe) dcr.dodep
+
+lex=flex
+cc=gcc-3
+credo dcr.exe
+cat lorem | os -T ./dcr.exe
+
+
+/lib/do/credo/rm-f.std..do
+dodep (posix lex l c) dcr.c
+lex=flex
+credo dcr.c
+dodep (c dodep allc exe) dcr.dodep
+
+lex=flex
+cc=gcc-3
+credo dcr.exe
+cat lorem | os -T ./dcr.exe
+
+
+/lib/do/credo/rm-f.std..do
+dodep (posix lexcc l o) dcr.o
+dodep (c cc o exe) dcr.exe
+adddep dcr.exe dcr.o
+lex=flex
+cc=gcc-3
+credo dcr.exe
+cat lorem | os -T ./dcr.exe
+
+
+/lib/do/credo/rm-f.std..do
+rm dcr.exe
+dodep (gmake lex l c) dcr.c
+dodep (gmake cc c '') dcr
+lex=flex
+cc = gcc-3
+credo dcr
+cat lorem | os -T ./dcr.exe

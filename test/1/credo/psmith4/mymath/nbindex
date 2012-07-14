@@ -1,0 +1,3 @@
+guide:10: dodep example generate files compile clang archive static library
+guide:20: dodep example generate files compile clang shared object dynamic library
+guide:30: posix compile clang archive static library

@@ -1,0 +1,42 @@
+catdo | grep exe
+credo
+grep -n . allc*
+grep -n . compiled.exe.*
+grep -n . sorter*
+os -T gcc-3 -MM main.c | sed 's,(.*)\.o: .*([^\\]+\.c),\1.o \1.d: \2,'
+os -T gcc-3 -v
+|sort|uniq
+
+
+nb generate depend file list test change rebuild
+/lib/do/credo/rm-f.state..do
+/lib/do/credo/rm-f.target..do
+credo allc
+credo allc.out
+credo allc.test
+
+
+nb generate build system c exe example mkdodep credo
+rm rm-f.state..* rm-f.target..*
+mkdodep credo rm-f state ''
+rm-f.state..do
+mkdodep credo rm-f target ''
+rm-f.target..do
+rm compiled.exe*
+
+mkdodep credo md5sum c dep compiled.exe.dep
+mkdodep cygwin gcc3 c exe compiled.exe
+credo compiled.exe
+os -T compiled.exe
+
+
+nb generate unit test main call first one function
+unitest.do files 5 >/dev/null
+echo $status
+unitest.do files 6 >/dev/null
+echo $status
+unitest.do tree 5 >/dev/null
+echo $status
+unitest.do tree 6 >/dev/null
+echo $status
+rm *.ut.* redont

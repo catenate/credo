@@ -1,0 +1,25 @@
+dodep (credo rm-f state '')
+dodep (credo rm-f target '')
+dodep (credo rm-f dodep '')
+rm-f.state..do
+rm-f.target..do
+rm-f.dodep..do
+
+apply {
+	echo '#!/dis/sh' > $1^.do
+	echo 'echo $1 > $1' >> $1^.do
+	echo 'echo $1' >> $1^.do
+} A B C AB BC done #asub bsub csub
+
+#adddep A asub
+#adddep B bsub
+#adddep C csub
+adddep AB A B
+adddep BC B C
+adddep done AB BC
+
+grep -n .* *.dep
+
+credo done
+
+apply {$1} *.redoing

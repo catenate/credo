@@ -1,0 +1,104 @@
+CREDO(1)                                                                                        CREDO(1)
+
+NAME
+          credo - maintain files believed related
+
+SYNOPSIS
+          credo [ target ... ]
+
+DESCRIPTION
+          Credo uses a dependency list to control the update (usually by
+          compilation) of targets (usually files) from the source files upon
+          which they depend. Each line of the file target.dep contains a
+          checksum and name that identifies the files and other targets
+          upon which the target depends. Credo calls itself on these
+          dependencies in parallel before the target. The file target.do
+          contains a script to update the target, and is called with one
+          parameter, the name of the target. Target.do is run if its
+          checksum has changed; if the checksum of target.dep has
+          changed or target.dep contains an out-of-date checksum; if the
+          target does not exist; or if any file on which it depends does
+          not exist. To preserve manual changes to targets, target.do is
+          not run if the checksum of target itself changes.
+
+          Credo internally maintains the environment variable $indent to
+          print its recursion level; and $credir to store the relative path of
+          the current target's directory, from the directory in which the
+          user invoked credo.
+
+          Credo takes no options. With no parameters, credo runs lsdo
+          (see SOURCE) to list targets in the current directory.
+
+EXAMPLE
+          A simple set of files to compile and install limbo programs.
+          The file prog.do:
+
+                    #!/dis/sh
+                    O=dis
+                    cp a.$O b.$O c.$O /dis
+
+          The file prog.dep, before the command credo prog fills in
+          actual checksums:
+
+                    0	a.dis
+                    0	b.dis
+                    0	c.dis
+
+          The file default.dis.do describes generally how to make a .dis
+          file from a .b file:
+
+                    #!/dis/sh
+                    dis = $1
+                    b = `{echo $dis | sed 's,\.dis,.b,'}
+                    limbo $b
+
+          /test/1/credo/man1/ contains this example in full.
+
+FILES
+          redont lists targets without do scripts found in the directory.
+
+          target.dep lists checksums for files on which target depends.
+          target.dep.sum contains the checksum of target.dep. target.do
+          is a shebang script or program to build target, which it takes as
+          its first parameter. target.do.sum contains the checksum of
+          target.do. target.sum contains the checksum of target, except
+          for generated do and dep files.
+
+          target.redoing is a script which checks whether it can yet
+          delete itself, and so unlock target.
+
+          target.reold stores the previously-built content of target. If
+          target.do returns the status revert then credo copies target to
+          target.renew and restores target.reold to target.
+
+SOURCE
+          /dis/credo changes to other directories to build targets with
+          credoer.
+
+          /dis/credoer locks itself by creating target.redoing, parses
+          dependencies and runs crepare on them in parallel, and
+          rebuilds the target.
+
+          /dis/crepare runs credo on dependent targets in parallel with
+          map(1).
+
+          /dis/cresum calculates the checksum (default md5sum(1)) of a
+          file, printing the checksum first and the filename second.
+
+          /dis/lsdo lists targets specified by target.do files and implied
+          by default.ext.do files, where ext is the final extension of a file
+          in the current directory.
+
+SEE ALSO
+          dodep(1), map(1)
+
+BUGS
+          The profusion of small files helps avoid race conditions, but
+          since the lock mechanism is not an atomic test-and-set, it is
+          possible that two well-timed calls to the same target may both
+          execute at once.
+
+          Parallel writes to redont often conflict, and sometimes leave
+          partial file names (eg .h).  This file likely needs brief locking.
+
+                                                Inferno Manual

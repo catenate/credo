@@ -1,0 +1,34 @@
+/lib/do/c/
+grep -n . *.dep
+os -T ar -t mymath.a
+os -T file libmymath.so
+os -T file mymath.a
+|sort|uniq
+
+
+nb dodep example generate files compile clang archive static library
+/lib/do/credo/rm-f.std..do
+dodep (c dodep allc a) mymath.dodep
+
+cc = gcc-3
+credo installib
+
+cc = gcc-3
+credo mymath.a
+
+
+nb dodep example generate files compile clang shared object dynamic library
+dodep (c dodep allc dll) libmymath.dodep
+
+cc = gcc-3
+credo installib
+
+cc = gcc-3
+credo libmymath.so
+
+
+nb posix compile clang archive static library
+dodep (posix ccar c a) tan.a
+cc = gcc-3
+credo tan.a
+os -T ar -t tan.a

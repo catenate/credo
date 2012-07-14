@@ -1,7 +1,8 @@
 Dump /git/credo/dump
-ls|mc
-osd git add dump
-osd git commit -a -m 'expand djb and refer to his notes'
+ls -F|mc
+osd git add lib/do/go/6g.go.amd64.dep lib/do/go/6g.go.amd64.do sh-inferno/target test
+osd git commit -a -m 'Move tests from /test/1credo.  Add do and dep for 6g on amd64. Fix a few scripts to call others via run or sh, and take out #!.  Move target to sh-inferno.'
+osd git diff
 osd git diff 575e621 6497979
 osd git log --graph --oneline --all
 osd git push origin master

@@ -1,0 +1,53 @@
+DODEP(1)                                                                                        DODEP(1)
+
+NAME
+          dodep - create credo files from templates
+
+SYNOPSIS
+          dodep smith tool extin extout target ...
+
+DESCRIPTION
+          Dodep customizes .do and .dep template files to set up a
+          target for credo(1).
+
+          Dodep takes no options.  If given no parameters, dodep, catdo
+          and catdep call lscatdo (see SOURCE) to list available
+          templates.
+
+EXAMPLES
+          Customize a test harness for a Greek-transliteration sed script.
+          Create greek.out.do and customize greek.out.dep:
+
+                    dodep jcas greek in out greek.out
+
+          Create rmme.do, which may be directly run to remove all *.do
+          and *.dep files.
+
+                    dodep credo rm-f dodep '' rmme
+
+          /test/1/sed/greek/ contains this example in full.
+
+FILES
+          /lib/do/ contains smith subdirectories which contain templates
+          named tool.extin.extout.do and tool.extin.extout.dep
+
+SOURCE
+          /dis/dodep creates do and dep files for target, and targets the
+          dep file.
+
+          /dis/catdo prints the build script for the given tool, input file
+          extension, and output file extension.
+
+          /dis/catdep prints the untargeted dependency list for the given
+          tool, input file extension, and output file extension.
+
+          /dis/target replaces $target in standard input by the given
+          target, $targ by the target without its final period-separated
+          extension, and $ta by the target without any extensions.
+
+          /dis/lscatdo lists templates in /lib/do/.
+
+SEE ALSO
+          credo(1)
+
+                                                Inferno Manual

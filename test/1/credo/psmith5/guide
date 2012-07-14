@@ -1,0 +1,39 @@
+chrome translate.google.com
+dodep|grep dodep
+http://www.loc.gov/standards/iso639-2/php/code_list.php
+|sort|uniq
+
+
+/lib/do/credo/rm-f.state..do
+/lib/do/credo/rm-f.target..do
+rm varyline.o.env
+
+
+nb vary source code line clang preprocessor macro cppflags
+dodep (c cc c o) varyline.o
+dodep (c cc o exe) varyline.exe
+adddep varyline.exe varyline.o
+apply {
+	adddep $1 /env/edition
+	adddep $1 /env/lang
+} varyline.o varyline.exe
+
+cppflags = -DDEBUG
+cflags = -g
+
+edition = home
+#edition = prof
+#lang = english
+lang = latin
+
+cc = gcc-3
+credo varyline.exe
+
+
+nb rename file
+apply {
+	varyme = $1
+	varyline = `{echo $varyme | sed 's,me,line,'}
+	mv $varyme $varyline
+} varyme.*
+grep -n varyme *

@@ -1,0 +1,21 @@
+c++.guide:1: c++ compiler flag clang file dodep credo nm
+c++.guide:10: doc
+c.guide:1: dodep example generate files compile clang exe
+c.guide:8: dodep example preprocess clang expand include define
+c.guide:15: dodep example translate clang assembly
+c.guide:22: examine object file detail nm hex dump
+c.guide:30: dodep example quick minimal compile all clang exe
+c.guide:36: dodep example link archive clang library subdirectory
+c.guide:56: dodep example link dll clang library subdirectory
+c.guide:76: doc
+cs.guide:1: rm state target dodep csharp adddep credo gmcs exe monodis ildasm dumpbin pedump library
+cs.guide:17: dodep csharp adddep credo gmcs library monodis ildasm reference dll
+cs.guide:36: doc
+guide:12: 'c\+\+' compiler
+guide:22: remove generated files
+guide:27: doc
+java.guide:5: java compiler javac javap interface byte code dodep credo
+java.guide:12: all java compiler javac dodep credo
+java.guide:23: all class jar dodep
+java.guide:28: path javac jar
+java.guide:34: doc
