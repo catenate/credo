@@ -32,7 +32,7 @@ if {and {! ~ $#oldtargsum 0} {! ~ $#newtargsum 0}} {
 
 # Don't go full recursive, but it's often useful to generate the
 # dependency file.
-if {ftest -x $cretarget^.dep.do} {
+if {ftest -r $cretarget^.dep.do} {
 	thiscrindent = $crindent
 	crindent = '  '^$crindent
 	credo $cretarget^.dep
@@ -46,7 +46,10 @@ if {ftest -s $cretarget^.dep} {
 	newdepsum = 0
 }
 
-# delay exit to here, to redo dependencies of a target with no do script
+if {ftest -r $cretarget^.env} {run $cretarget^.env}
+
+# delay exit to here, to redo dependencies and set environment of a
+# target with no do script
 if {ftest -e $cretarget^.redont} {
 	rm -f $cretarget^.redoing
 	exit
