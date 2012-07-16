@@ -1,7 +1,7 @@
 Dump /git/credo/dump
 ls -F|mc
-osd git add sh-inferno/addenv sh-inferno/rmenv
-osd git commit -a -m 'Add addenv and rmenv to maintain shell variables for a target''s do script in an env script.  Update credoer to run this env script.'
+osd git add sh-inferno/scratch test/1/credo/go-env
+osd git commit -a -m 'Refer to other posts in README, and describe differences from Avery''s redo.  Adddep sorts (since order doesn''t matter) and uniqs dependency file to avoid duplicates.  Addenv/rmenv manage dependency on /env/$var and the file $target.$var.env.  Add test case for go and addenv/rmenv.'
 osd git diff
 osd git diff 575e621 6497979
 osd git log --graph --oneline --all

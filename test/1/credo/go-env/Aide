@@ -1,0 +1,39 @@
+ls -F|mc
+|sort|uniq
+
+
+sh /lib/do/credo/rm-f.std..do
+dodep (go 6g go amd64) cat
+6g = osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6g
+6l = osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6l
+test = osd /usr/inferno^`{pwd}^/
+testopt = /usr/inferno/lib/keyboard
+credo cat
+
+
+sh /lib/do/credo/rm-f.std..do
+rm cat.*.env
+dodep (go 6g go amd64) cat
+echo osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6g > cat.6g.env
+echo osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6l > cat.6l.env
+echo osd /usr/inferno^`{pwd}^/ > cat.test.env
+echo osd /usr/inferno/lib/keyboard > cat.testopt.env
+credo cat
+echo osd /usr/inferno/lib/keyboard /lib/sed/edit > cat.testopt.env
+credo cat
+
+
+sh /lib/do/credo/rm-f.std..do
+rm cat.*.env
+dodep (go 6g go amd64) cat
+addenv cat 6g osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6g
+addenv cat 6l osd /usr/inferno/hg/go/pkg/tool/linux_amd64/6l
+addenv cat test osd /usr/inferno^`{pwd}^/
+addenv cat testopt /usr/inferno/lib/keyboard
+credo cat
+addenv cat testopt /usr/inferno/lib/keyboard /lib/sed/edit
+credo cat
+rmenv cat 6g
+rmenv cat 6l
+rmenv cat test
+rmenv cat testopt

@@ -1,7 +1,4 @@
 #!/dis/sh
 (target var value) = $*
-env = $target^.env
-tmp = $env.${pid}
-echo $var^' = '^$"value >> $target^.env
-uniq $env > $tmp
-mv $tmp $env
+echo $value > $target^.^$var^.env
+adddep $target /env/^$var

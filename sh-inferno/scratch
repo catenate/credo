@@ -1,0 +1,13 @@
+addenv
+	env = $target^.env
+	tmp = $env.${pid}
+	echo $var^' = '^$"value >> $target^.env
+	uniq $env > $tmp
+	mv $tmp $env
+	adddep $target $target^.env
+
+rmenv
+	env = $target^.env
+	tmp = $env.${pid}
+	grep -v '^'^$var^' ' $env > $tmp
+	mv $tmp $env

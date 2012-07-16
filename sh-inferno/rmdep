@@ -4,6 +4,6 @@ dep = $dep^.dep
 tmp = $dep.${pid}
 apply {
 	file = $1
-	grep -v $file $dep > $tmp
+	grep -v '	'^$file^'$' $dep > $tmp
 	mv $tmp $dep
 } $files

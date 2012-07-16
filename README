@@ -1,9 +1,55 @@
+DESCRIPTION
+
 Credo calls scripts to create files, after doing the same for files on
-which they depend.  Dodep instantiates, from a library, parts of such
-a system of file-creating scripts and dependencies.
+which they depend.  Dodep copies templates of those scripts, and lists
+of default dependencies, from a library, and customizes them for a
+given target.
+
+Credo is a set of small shell scripts, which stores its data (such as
+a checksum for each file on which a target depends) in flat files in
+the current directory.  This creates clutter, but also an interface
+for higher-level tools.
+
+Credo is currently only implemented in Inferno’s sh: I really like its
+shell language (especially apply, <{}, and quoting rules); and Inferno
+exposes all the shell variables of a process as files in /env, which
+makes writing dependencies on them much simpler.  I expect that it
+will need a port to Linux for wider adoption, either as shell scripts
+or a program.
+
+
+ARTICLES
+
+A new credo: no more complex makefiles.
+http://groups.google.com/group/redo-list/browse_thread/thread/643db9316b09c47a
+
+How credo handles manual changes to generated files; default do scripts.
+http://groups.google.com/group/redo-list/browse_thread/thread/e048dd2a3f473822/
+
+Credo example: from lex and c source to cygwin executable, across directories.
+http://swtools.wordpress.com/2011/07/03/credo-example-from-lex-and-c-source-to-cygwin-executable-across-directories/
+
+One change since the example is new addenv/rmenv commands, to
+manage target dependencies on environment variables.  For example,
+these commands can replace the echo commands in the example:
+
+	addenv default srcdir ../src/
+	addenv default cpp cpp-3
+	addenv default cppflags -I../src/
+	addenv default cc gcc-3
+
+
+RELATED WORK
 
 Credo is an adaptation of the build tool redo, by D.J. Bernstein.
 http://cr.yp.to/redo.html
 
 Another implementation in python is redo, by Avery Pennarun.
 https://github.com/apenwarr/redo
+
+The most significant differences from Avery's redo is that there are
+no redo-* commands in the do scripts; credo has a new set of shell
+commands to create, examine, and maintain the build system
+(for higher-level tools to automatically generate a build system);
+and credo exposes all of its record-keeping in flat files in the
+current directory.

@@ -1,6 +1,4 @@
 #!/dis/sh
 (target var) = $*
-env = $target^.env
-tmp = $env.${pid}
-grep -v '^'^$var^' ' $env > $tmp
-mv $tmp $env
+rm $target^.^$var^.env
+rmdep $target /env/^$var
