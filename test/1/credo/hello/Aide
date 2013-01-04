@@ -1,0 +1,11 @@
+/lib/do/c/
+Dump /github/credo/test/1/credo/hello/dump
+Edit ,|sort|uniq
+Load /github/credo/test/1/credo/hello/dump
+credo hello
+credo hello.o
+dodep (c cc c '') hello
+dodep (c cc c o) hello.o
+dodep (c cc o '') hello
+du -n
+sh /lib/do/credo/rm-f.std..do

@@ -12,7 +12,7 @@ if {no $cpp} {
 	}
 }
 
-gccstdinlocal = . `{echo $srcdir | sed 's,/$,,'} `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include "..." search starts here:$/,/^End of search list.$/p' | sed '1d;$d;/^#include <...> search starts here:$/d;s,^ *,,'}
+gccstdinlocal = . `{echo $credir | sed 's,/$,,'} `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include "..." search starts here:$/,/^End of search list.$/p' | sed '1d;$d;/^#include <...> search starts here:$/d;s,^ *,,'}
 apply {
 	local = $1
 	apply {
