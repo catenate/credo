@@ -2,10 +2,8 @@
 Dump /github/credo/test/1/credo/hello/dump
 Edit ,|sort|uniq
 Load /github/credo/test/1/credo/hello/dump
-credo hello
-credo hello.o
-dodep (c cc c '') hello
-dodep (c cc c o) hello.o
-dodep (c cc o '') hello
+New test_c_o_bin
+apply {sh $1 > $1.out >[2=1]; plumb $1.out} `{ls test_* | grep -v out}
 du -n
+rm *.out
 sh /lib/do/credo/rm-f.std..do

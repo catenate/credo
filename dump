@@ -1,20 +1,8 @@
-/git
+/
 /fonts/vera/Vera/9x15.14.font
-/fonts/lucidasans/unicode.6.font
-          0          31          63
-f          0           2           0          20           1 
-          2          38         409           0           0 /git/credo/Aide Del Snarf Undo | Look 
-f          1           3         346         346           1 
-          3          35         381           0           0 /git/credo/README Del Snarf | Look 
-f          2           4         378         378           1 
-          4          28         545           0           0 /dis/acmel Del Snarf | Look 
-f          2           6           0           0           3 
-          6          44         120           1           0 /git/credo/sh-inferno/ Del Snarf Get | Look 
-f          2           7           0           0           5 
-          7          40           7           1           0 /git/credo/test/1/ Del Snarf Get | Look 
-f          2           8           0           0           7 
-          8          46         122           1           0 /git/credo/test/1/credo/ Del Snarf Get | Look 
-f          2           9          11          11           9 
-          9          30          31           1           0 /test/1/ Del Snarf Get | Look 
-f          2          10           0           0          11 
-         10          36         122           1           0 /test/1/credo/ Del Snarf Get | Look 
+/fonts/10646/9x15/9x15.font
+          0          26          63
+f          0          25           0          23           1 
+         25          41         601           0           0 /github/credo/Aide Del Snarf Undo | Look 
+f          0          26         201         201          31 
+         26          60         247           0           0 /github/credo/test/1/credo/hello/Aide Del Snarf Undo | Look 
