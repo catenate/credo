@@ -1,8 +1,10 @@
-To add credo to an installation of Inferno, clone this repository,
-then run these bind commands.
+INFERNO
 
-	bind -a $credorepo/lib /lib
-	bind -a $credorepo/man /man
+To add credo to an installation of Inferno, clone this repository,
+then run these bind commands.  You may need to create /lib/do.
+
+	bind -a $credorepo/lib/do/sh-inferno /lib/do
+	bind -a $credorepo/man/1 /man/1
 	bind -a $credorepo/sh-inferno /dis
 	bind -a $credorepo/test/1 /test/1
 

@@ -1,4 +1,6 @@
-man 1 credo | sed -n '/^BUGS/,$p'
+Fix reported¹ and recognized² bugs.
+ ¹ web https://github.com/catenate/credo/issues
+ ² man 1 credo | sed -n '/^BUGS/,$p'
 man 1 dodep | sed -n '/^BUGS/,$p'
 
 Add version files in each /lib/do directory, to version these scripts.
@@ -10,3 +12,18 @@ build tool for C and C++ build systems.
 Notes on enhancements and changes to credo while reading Software
 Build Systems (Smith 2011).ⁱ
  ⁱ web https://kindle.amazon.com/your_highlights
+
+/lib/do should really be /lib/do/sh-inferno, bound into Inferno as
+/lib/do, and there should be a new directory /lib/do/bash for the
+bash port.
+
+Port to bash so it's not limited to Inferno users.  In addition to the
+credo tool scripts, all the library do scripts are also written for
+Inferno's sh.  How to keep these two versions coherent?
+If we automatically translate or add an abstraction layer, then we
+lose the advantage that as scripts, they are completely changeable by
+the user, who is likely to want to add things I don't know about.
+The bash version is likely to be much more popular, and get forks
+and changes, so I could just cherry-pick which changes I really like
+and back-port them to the Inferno files.
+
