@@ -1,0 +1,34 @@
+Provide tools to programmatically create and maintain a build system,
+and a library of small scripts to create a single file from its dependencies.
+Get rid of hand-written build descriptions (e.g. make files).
+
+Expose information the build tool uses to make decisions, so it is not
+hidden by or specific only to credo.
+
+Print executable commands as output.  For example, do scripts print
+the primary commands they use to compile a target.  As another
+example, credo with no targets runs lsdo, to list targets available in
+the current directory, in the form of credo commands which may be
+highlighted and executed in Acme.  Similarly, dodep with no specifier
+runs catdo with no specifier, to lists all available specifiers for
+dodep and catdo, in the form of catdo commands, each of which print
+out the do script for a specifier.
+
+Do scripts can be any executable file.  Credo provides only one
+parameter to the do script, the name of the target to create.
+Credo expects each do file $target.do to create a file $target,
+
+Credo leaves it up to the do script to create its target file, assuming
+nothing about its file descriptors.  Credo relays standard output and
+standard error to the controlling terminal, and presents nothing on
+standard input to the do script.
+
+Dodep assumes as much dependency information, for each type of file
+production, as it can without being annoyingly wrong.  It expects
+higher-level scripts to use other tools in the suite¹ to program
+remaining dependencies, and set values of shell variables specific to
+the environment.²
+ ¹ For example, adddep, rmdep, addenv, and rmenv.
+ ² For example, $cc stores the path to the C compiler on a particular
+build machine.  $cflags records the compiler flags used while
+producing object files from a specific set of source code files.

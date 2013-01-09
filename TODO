@@ -22,4 +22,3 @@ the user, who is likely to want to add things I don't know about.
 The bash version is likely to be much more popular, and get forks
 and changes, so I could just cherry-pick which changes I really like
 and back-port them to the Inferno files.
-
