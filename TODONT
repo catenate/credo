@@ -4,14 +4,25 @@ an interface to the information the build tool uses to make decisions,
 so this information is not hidden by or specific only to credo.
 To get source code from another directory, use the shell variable credir.
 
-Don't add redo-* commands to the do scripts.  This is the primary
-difference between credo and redo.  They are a source of complexity,
-and they hide the internal mechanisms and information the build tool
-uses to decide what to do.  I think they're also complex enough to not
-be automatically written.  One of the primary design purpose of credo
-is to get rid of hand-written build descriptions.  Credo instead uses
-*.dep files, which list each file on which a target depends, after its
-checksum (e.g. the output of md5sum).
+Don't add redo-* commands to the do scripts.¹  They are a source of
+complexity,² and they hide the internal mechanisms and information the
+build tool uses to decide what to do.³  Credo instead uses *.dep files
+to record file-level dependencies.  In addition, dodep assumes as much
+dependency information, for each type of file production, as it can
+without being annoyingly wrong.  It expects higher-level scripts to
+use other tools in the suite⁴ to program remaining dependencies, and
+set values of shell variables specific to the environment.⁵
+ ¹ This is the primary difference between credo and redo.
+ ² I think that as a whole, their level of abstraction and usage is
+complex enough to prevent automatically generating the build system.
+It doesn’t help much to have a system just as complex and hand-
+written, only divided into smaller files.
+ ³ A primary design purpose of credo is to get rid of hand-written
+build descriptions (e.g. make files).
+ ⁴ For example, adddep, rmdep, addenv, and rmenv.
+ ⁵ For example, $cc stores the path to the C compiler on a particular
+build machine.  $cflags records the compiler flags used while
+producing object files from a specific set of source code files.
 
 Don’t capture the standard output of a do script as the content of
 the new file.  This is another difference between credo and redo.
