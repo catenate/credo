@@ -4,6 +4,9 @@ Edit ,|sort|uniq
 Load /github/credo/test/1/credo/hello/dump
 New test_c_o_bin
 apply {sh $1 > $1.out >[2=1]; plumb $1.out} `{ls test_* | grep -v out}
+apply {plumb $1} `{ls test_* | grep -v out}
+catdo
 du -n
+lsdo
 rm *.out
 sh /lib/do/credo/rm-f.std..do

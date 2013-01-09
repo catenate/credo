@@ -1,0 +1,18 @@
+To add credo to an installation of Inferno, clone this repository,
+then run these bind commands.
+
+	bind -a $credohome/lib /lib
+	bind -a $credohome/man /man
+	bind -a $credohome/sh-inferno /dis
+	bind -a $credohome/test /test
+
+credohomeⁱ should contain the path to the credo repository, as written
+in Inferno.  For example, from the host’s point of view, if the credo
+repository is cloned under $emuroot in ⁲, then credohome is ⁳ within
+Inferno.  If instead it is cloned in ⁴, and the host filesystem is
+bound to /n/local, then credohome is ⁵.
+ ⁱ $credohome is here a convenience; credo itself doesn’t use it.  
+ ⁲ /usr/inferno/github/credo
+ ⁳ /github/credo
+ ⁴ /opt/src/github/credo
+ ⁵ /n/local/opt/src/github/credo

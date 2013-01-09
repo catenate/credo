@@ -1,0 +1,4 @@
+Don't add redo-* commands to the do scripts.  That’s not the model
+credo uses, and is the primary difference between credo and redo.
+credo instead uses *.dep files, which list each file on which a target
+depends, after its checksum (e.g. the output of md5sum).

@@ -1,0 +1,12 @@
+man 1 credo | sed -n '/^BUGS/,$p'
+man 1 dodep | sed -n '/^BUGS/,$p'
+
+Add version files in each /lib/do directory, to version these scripts.
+For productions copied from other tools, store the version of the tool.
+
+Add productions from GNU make in /lib/do/gmake, since it is a standard
+build tool for C and C++ build systems.
+
+Notes on enhancements and changes to credo while reading Software
+Build Systems (Smith 2011).ⁱ
+ ⁱ web https://kindle.amazon.com/your_highlights
