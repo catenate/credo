@@ -1,4 +1,24 @@
-Don't add redo-* commands to the do scripts.  That’s not the model
-credo uses, and is the primary difference between credo and redo.
-credo instead uses *.dep files, which list each file on which a target
-depends, after its checksum (e.g. the output of md5sum).
+Don't move output and intermediate do files to a (hidden) subdirectory
+for credo.  One design purpose of credo is to provide to other tools
+an interface to the information the build tool uses to make decisions,
+so this information is not hidden by or specific only to credo.
+To get source code from another directory, use the shell variable credir.
+
+Don't add redo-* commands to the do scripts.  This is the primary
+difference between credo and redo.  They are a source of complexity,
+and they hide the internal mechanisms and information the build tool
+uses to decide what to do.  I think they're also complex enough to not
+be automatically written.  One of the primary design purpose of credo
+is to get rid of hand-written build descriptions.  Credo instead uses
+*.dep files, which list each file on which a target depends, after its
+checksum (e.g. the output of md5sum).
+
+Don’t capture the standard output of a do script as the content of
+the new file.  This is another difference between credo and redo.
+Credo expects each do file $target.do to create a file $target,
+but leaves it up to the do script to create it, and assumes nothing
+about its file descriptors.  Credo relays standard output and standard
+error to the controlling terminal, and presents nothing on standard
+input to the do script.  Credo does provide one parameter to the do
+script, the name of the target to create.  Do scripts can be shell
+scripts or programs, credo doesn’t care.

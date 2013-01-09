@@ -13,10 +13,6 @@ Notes on enhancements and changes to credo while reading Software
 Build Systems (Smith 2011).ⁱ
  ⁱ web https://kindle.amazon.com/your_highlights
 
-/lib/do should really be /lib/do/sh-inferno, bound into Inferno as
-/lib/do, and there should be a new directory /lib/do/bash for the
-bash port.
-
 Port to bash so it's not limited to Inferno users.  In addition to the
 credo tool scripts, all the library do scripts are also written for
 Inferno's sh.  How to keep these two versions coherent?
