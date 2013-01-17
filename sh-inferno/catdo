@@ -4,6 +4,6 @@ if {no $*} {
 	exit
 }
 
-(env cmd in out) = $*
-dofile = /lib/do/^$env^/^$cmd^.^$in^.^$out^.do
+(smith cmd in out) = $*
+dofile = /lib/do/^$smith^/^$cmd^.^$in^.^$out^.do
 if {ftest -r $dofile} {cat $dofile}

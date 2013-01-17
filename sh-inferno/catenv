@@ -1,0 +1,10 @@
+#!/dis/sh
+if {no $*} {
+	sh /dis/lscatenv
+	exit
+}
+
+(smith var qual) = $*
+qual = `{echo $qual | sed 's, ,.,g'}
+envfile = /lib/env/^$smith^/^$var^.^$qual^.env
+if {ftest -r $envfile} {cat $envfile}

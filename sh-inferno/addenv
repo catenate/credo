@@ -1,4 +1,4 @@
 #!/dis/sh
 (target var value) = $*
-echo $value > $target^.^$var^.env
+echo $var '=' $value >> $target^.^$var^.env
 adddep $target /env/^$var

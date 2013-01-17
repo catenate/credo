@@ -9,8 +9,10 @@ dos = `{apply {
 	} {
 		echo $target
 	}
-} `{ls *.do}}
+} `{ls *.do >[2]/dev/null}}
 
 deps = `{ls *.dep >[2]/dev/null | sed 's,\.dep,,'}
 
-echo $dos $deps | fmt -w 1 | sort | uniq | sed 's,^,credo ,'
+if {or {! no $dos} {! no $deps}} {
+	echo $dos $deps | fmt -w 1 | sort | uniq | sed 's,^,credo ,'
+}

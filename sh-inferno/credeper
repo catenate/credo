@@ -3,27 +3,29 @@ field2sed = 's,^.*[ 	],,'
 
 olddepsum = `{cat $cretarget^.dep.sum >[2]/dev/null | sed $field1sed}
 
-noselfenv = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
-env = `{sed $field2sed $cretarget^.dep | sed -n 's,^\/env\/,,p'}
+noselfvars = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+crevars = `{sed $field2sed $cretarget^.dep | sed -n 's,^\/env\/,,p'}
 apply {
 	crevar = $1
 	if {ftest -r $cretarget.$crevar.env} {
-		$crevar = `{cat $cretarget.$crevar.env}
+		run $cretarget.$crevar.env
+		echo $cretarget $crevar '=' $$crevar
 		# Use these in ports where no /env,
 		# or if we care why /env/$crevar changed.
 		#rmdep $cretarget $crevar.env
 		#adddep $cretarget $cretarget.$crevar.env
 	} {
 		if {ftest -r default.$crevar.env} {
-			$crevar = `{cat default.$crevar.env}
+			run default.$crevar.env
+			echo default $crevar '=' $$crevar
 			#rmdep $cretarget $crevar.env
 			#adddep $cretarget default.$crevar.env
 		}
 	}
-} $env
+} $crevars
 
-if {! no $noselfenv} {
-	map 'crepare ''  '^$crindent^''''  $noselfenv
+if {! no $noselfvars} {
+	map 'crepare ''  '^$crindent^''''  $noselfvars
 }
 
 deps = `{sed $field2sed $cretarget^.dep}

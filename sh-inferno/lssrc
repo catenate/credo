@@ -1,0 +1,8 @@
+#!/dis/sh
+deps = `{ls *.dep >[2]/dev/null}
+if {no $deps} {exit 0}
+apply {
+	f = $1
+	if {! ftest -e $f.do} {echo $f}
+} `{cat $deps | sed 's,^.*[ 	],,' | grep -v '^/env/' | sort | uniq}
+exit 0
