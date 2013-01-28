@@ -1,0 +1,8 @@
+rm -f *.csv report.txt
+
+dos curl -s http://www.ferc.gov/docs-filing/eqr/soft-tools/sample-csv/contract.txt > contracts.csv
+grep Evergreen contracts.csv > evergreens.csv
+echo File evergreens.csv has `{wc -l evergreens.csv | dos awk '{print $1}'} lines. > report.txt
+
+ls *.csv report.txt
+cat report.txt

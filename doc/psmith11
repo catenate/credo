@@ -1,0 +1,5160 @@
+Software Build Systems: Principles and Experience by Peter Smith, PhD
+You have 742 highlighted passages
+You have 362 notes
+Last annotated on January 22, 2013
+
+
+A common practice in most build systems is to create a framework.
+That is, all parts of the build system that a software developer
+doesn’t care about are kept in a separate set of files.  In contrast,
+the interesting parts of the build system, such as the list of source
+files and compiler options, are more visible to the developer.
+Most software developers don’t need to read the complex framework and,
+therefore, don’t bother doing so.
+
+Note: Don't maintain an explicit list of source files unless it's more
+work to trim `{ls *.^$inext} (list of source files with the dodep
+input extension).
+
+Note: Set $cflags in calling script, depend on /env/cflags.
+
+
+needs to understand.  Lines 1–3 provide the most basic information: which
+
+Note: `{ls *.^$inext}
+
+
+most basic information: which source files should be compiled, the name
+
+Note: $target
+
+
+be compiled, the name of the executable program, and the list
+
+Note: c/findh.c.dep.do or gcc -MM | sed
+
+
+include the framework file, essentially appending framework.mk to the end
+of Makefile.  This file encapsulates the GNU Make rules and other advanced
+
+
+source filenames or executable programs.  These are kept out of the
+framework and appear only in the user-facing makefile.
+
+
+the DEBUG symbol.  This can be set (or not) by the makefile that
+includes the framework, or even by the user on the UNIX command line.
+
+
+a separate framework file centralizes much of this complexity in a
+single place.  The build system can contain a large number of Makefile
+files, each including the same common framework.
+
+Note: and depending on
+
+
+graph is expressed in a text-based form known as a makefile.
+
+Note: Shake got rid of the dep graph, and replaced clean makefile
+syntax with a slightly higher-level haskell dsl based on production
+rules.  Credo gets rid of the makefile, and stores each node's deps in
+separate md5sum lists.
+
+
+different way.  In the first case, you simply build a portion
+
+Note: credo subtarget
+
+
+the second case, you build the entire product but selectively include
+
+Note: adddep
+
+
+case, you build the entire product but selectively include or exclude
+
+Note: rmdep
+
+
+the final case, you build the entire software product but vary
+
+Note: dodep, $cc
+
+
+In languages that allow it, conditionally compiling specific lines of code
+
+
+separate the source code into per-variant files.
+
+
+each variant has its own subdirectory of classes that are compiled
+into the program.  All subdirectories contain the same list of Java
+source files, with each implemented differently.
+
+
+Separating the build description into multiple files makes it easy to
+add support for new variants and reduces the complexity of the main
+build description file.  These files can become messy when they’re
+littered with if/else statements for all the possible variants.
+
+
+To package a specific edition of the software, you selectively choose
+which files need to be copied into the final release package.
+
+
+The release package contains all files required to support all
+variants, but only the files for the chosen variant are installed.
+
+
+when the program starts executing, it determines which variation is
+required and modifies its own behavior accordingly.
+
+
+the following code returns the name of the currently logged-in user,
+regardless of whether you use Linux or the Windows platform.
+
+
+In practice, unless you rely solely on standard libraries that are the
+same on all target machines (such as the POSIX standard), you need to
+do a fair amount of conditional compilation.
+
+
+multiple CPU types and operating systems can lead to multiple object
+
+Note: ignore source directory, compile object here: o = `{echo $c |
+sed 's,^.*/,,;s,\.c$,.o,'}
+
+
+CPU types and operating systems can lead to multiple object trees.
+
+Note: Credo will go to dir of each dep, so will probably need multiple
+source trees, synced to master with a do script that copies or checks
+out its deps into this variant dir (dodep to set up this target given
+a master source dir, and decision on which files).  Since credo uses
+md5sum, file mod time not an issue.
+
+
+input file with the suffix .math and generates either a C
+
+Note: /lib/do/psmith/mathcomp.math.c.do
+
+
+suffix .math and generates either a C file or a Java
+
+Note: /lib/do/psmith/mathcomp.math.java.do
+
+
+them as a list of values.  This language uses the functional
+
+Note: Port functional programming primitives in funsh.pdf to /dis/sh.
+
+
+starts with the same sequence of characters (known as the stem).
+
+Note: stem, not stub.  Might be worth credoer computing stem and ext
+(separated by last .).  But I intended a minimal interface between
+credo and $cretarget^.do--exec from shell with one argument--to
+simplify composition and allow the do program any language.
+
+
+contain punctuation symbols such as @, <, and ^.  • $@:
+
+Note: $1 and $cretarget
+
+
+only one source file is mentioned in the rule.) • $^:
+
+Note: Keep around $credeps in case do script wants to use it.
+
+
+of prerequisites in the rule, with spaces between them.  • $(@D):
+
+Note: $pwd.  $credir, relative to dir where credo command first called
+and $creindent set to ''.
+
+
+mkdir that needs to manipulate the target file’s directory.  • $(@F):
+
+Note: $1 or $creindent
+
+
+to add their own values for CC, CFLAGS, CPPFLAGS, and TARGET_ARCH
+
+Note: Add to (c cc c o)?
+
+
+earlier because COMPILE.c used deferred evaluation.  Line 5 uses some clever
+
+Note: o = $1 o == this.o (stem ext c) = crext c $o stem == this ext ==
+o c == this.c
+
+
+enables you to write your own GNU Make functions, effectively extending
+
+Note: write do scripts in any language able to read command-line
+arguments and write files.  Extend do shell scripts in any language
+able to read command-line arguments and output text.
+
+
+be executed in GNU Make rule, you call upon that canned
+
+Note: just write a shell script
+
+
+important to feel comfortable with the operation of these two phases.
+
+Note: problem with having a complex dsl
+
+
+File inclusion: Similar to how C and C++ use the #include
+
+Note: run in /dis/sh, . in ksh.
+
+
+approach can be used to include a framework file containing reusable
+
+Note: /lib/do
+
+
+(instead of using shell commands).
+
+
+file.  What would happen if a newly added source file didn’t
+
+Note: rmdep
+
+
+newly added source file didn’t actually include numbers.h?  What if additional
+
+Note: adddep
+
+
+numbers.h?  What if additional header files were added, but you forgot
+
+Note: findh
+
+
+line 12, a new rule informs GNU Make how to generate
+
+Note: $target^.dep.do:
+dep = $1
+(stem ext target) = `{crext '' $dep}
+apply {rmdep $target $1; adddep $target $1} `{findh $target}
+# findh generates list of header files with full paths from preprocessor include directives.
+
+$target^.dep.do should be automatically executed since credoer uses
+$target^.dep.sum for $target, not to see whether there are non-credo
+changes to $target^.dep.
+
+
+missing or if the corresponding .c or .h files have changed.
+
+Note: adddep this.o.dep this.c
+
+
+makedepend command.  This tool is similar in nature to gcc -MM,
+although it provides its own scanner for analyzing C source files
+instead of relying on the compiler itself.
+
+
+GNU Make provides a number of command-line options: • gmake –n:
+
+Note: $crecho os -T ...
+
+
+for C/C++ development.  • Very fast tool: Being written in C,
+
+Note: port to go
+
+
+portable syntax and is available on a wide range of platforms,
+
+Note: port!
+
+
+GNU Make’s features.  • Fully featured programming language: As a general-purpose
+
+Note: as is credo
+
+
+source).  It’s worth noting that GNU Make’s language is Turing complete.
+
+Note: so is sh
+
+
+consistent with the syntax of other features.  This makes the language
+
+Note: shell used by core programs, shells used by library do scripts,
+plus user's own programs called by shell
+
+
+makefile rule, the shell commands must be indented by a tab
+
+Note: no
+
+
+automatically converts tabs to spaces.  • All makefile variables are global,
+
+Note: not
+
+
+same name.  • Some parts of the makefile syntax ignore whitespace;
+
+Note: no issue
+
+
+determine which parts of a makefile enable you to write shell
+
+Note: all shell and programs shell calls.  no privileged function set.
+
+
+a Make rule, you need to be familiar with the syntax
+
+Note: lib/do/$namespace/$tool.$inext.$outext.do for the command and
+relaying output, and .dep for standard dependencies.
+
+
+code.  In particular, it’s difficult to fit together the necessary shell
+
+Note: just use the shell rather than reinvent it poorly
+
+
+such as Automake and CMake (see Chapter 9, “CMake”) automatically generate
+
+Note: dodep, adddep, rmdep; deduce
+
+
+hand: • Automatic dependency analysis for common languages such as C/C++.
+
+Note: file.o.dep.do calls findh to list absolute paths of header files
+(indirectly) included by file.c.  file.exe.dep.do calls coneed to find
+object files main needs to link, as well as object files those files
+need to link, and so on, as long as they're all in same dir.
+
+
+the chance of introducing build failures is much higher.  • Multidirectory
+
+Note: $credir
+
+
+is much higher.  • Multidirectory support with a single dependency graph
+
+Note: *.dep and *.relay
+
+
+• C compiler flags that can be set on a per-directory
+
+Note: default.cflags.env
+
+
+compiler flags that can be set on a per-directory or per-file
+
+Note: file.o.cflags.env
+
+
+A mechanism for rebuilding object files if the C compiler flags
+
+Note: adddep file.o /env/cflags
+
+
+as SRCS, SUBDIRS, and CFLAGS, as was done with the Files.mk
+
+Note: lame
+
+
+it’s free to implement whichever optional tool features it desires. Even
+
+Note: especially
+
+
+easier, follow a couple good practices: • Use the standard GNU
+
+Note: stored where?  set up on path?  assumes cygwin for windows:
+what about mks agents?  prefer acmesac/inferno emu ls
+
+
+own version.  This at least guarantees that command options are consistent.
+
+Note: ly overblown.  just use a common posixy subset
+
+
+at least guarantees that command options are consistent.  • Use makefile
+
+Note: PATH
+
+
+to access the tool instead of hard-coding the name.  For example,
+
+Note: ridiculous
+
+
+debugger (a recent creation), developers were left to interpret
+confusing errors
+
+Note: from complex language
+
+
+happen.  As you’ve seen already, constructing a complete GNU Make framework
+
+Note: /lib/do
+
+
+large amount of time (months, not weeks).  You need to support
+
+Note: higher layers of abstraction and auto-generation move the ball
+closer to the developer's court
+
+
+Performance: Excellent.  GNU Make is written in optimized C code and
+has an efficient algorithm for dependency analysis.  Compared to other
+build tools discussed in later chapters, GNU Make is extremely fast.
+
+
+Scalability: Excellent.  As with the performance criteria, GNU Make is
+highly scalable.  The assumption is that you’ve already created a
+makefile framework that adequately supports multiple directories.
+
+
+When using SparkBuild, you start by explicitly asking the tool to
+generate a database of dependency information.  This knowledge remains
+even after the build completes.
+
+
+it records which commands were executed, which makefile each command
+was listed in, and how long it took to execute each of the steps.
+
+
+services.  For example, in UNIX-like systems, the shell command for copying
+
+Note: $platform/cp.dep..do copies dependencies to current directory,
+for each different file, for platforms posix dos cygwin acmesac
+
+
+Given that Ant build descriptions are written in a platform-neutral
+way (using XML syntax), each operating system’s implementation of the
+Ant tool knows how to map the high-level task into an underlying shell
+command (such as cp or copy) or the relevant system calls.
+
+
+Java tool vendors.  Most vendors supply additional Ant tasks to
+interact with their tool.  Not only do these tasks manage the
+low-level interaction with the operating system, but they also perform
+the necessary dependency
+
+Note: $smith/$tool.$inext.$outext.do and .dep.do
+
+
+the overall project that’s stored inside the build.xml file.  The name
+
+Note: top-level dir
+
+
+is displayed by any of Ant’s graphical front-end tools.  The default
+
+Note: list targets in current dir
+
+
+which is where execution actually starts.  Line 15 defines the name
+
+Note: name.do
+
+
+15 defines the name of the target and lists the prerequisite
+
+Note: in name.dep
+
+
+immediately starts executing the task on line 7.  The first <echo>
+
+Note: echo
+
+
+to a couple of property names, each identified by the ${...}
+
+Note: $shvariable and /env/shvariable
+
+
+on lines 3 and 4, you see these Ant properties defined.
+
+Note: country = New Zealand city = Christchurch
+
+
+values after they’ve been assigned.  As you’ll see later, property definitions
+
+Note: use a file
+
+
+new; the print-math target simply echoes a constant string.  Finally, after
+
+Note: Content of name.do done after files (targets) in name.dep (done
+and) checked for different md5sums.
+
+
+hard to determine which target from the build.xml file is responsible
+
+Note: "credo target" printed before any output from commands in target.do.
+
+
+each line of the output, or to figure out which task
+
+Note: flag x +
+
+
+that a makefile written in GNU Make syntax would look similar
+
+Note: simpler
+
+
+Defining and Using Targets In an Ant-based build system, a target
+
+Note: do script or program
+
+
+build system, a target is a convenient way to group tasks
+
+Note: scripted commands or a program
+
+
+sequentially.
+
+Note: in order specifed by script interpreter, or execution of program.
+This is the lower limit of ant/credo-managed parallelism.
+
+
+for ease of use and readability, and must describe the operation
+
+Note: `{dodep (toolset operation extin extout) target} creates
+target.do.  `{credo target} does target, without having to know or
+name operations during run.  This allows a level of abstraction over
+the tasks performed, rather than abstracting over the files created.
+Users can still `{credo compile jar package} with corresponding .do
+files if that works better for them than naming files.  Naming files
+may have the advantage of specifying variation otherwise captured in
+shell variables or more complex abstract-target names.
+
+
+full software release package, complete with a version number ant clean:
+
+Note: `{rundo (credo rm-f std '')} directly runs it, passing in all
+additional parameters, without dependency checking, and without having
+to know its path.
+
+
+the same as the package target In contrast to a Make-based
+
+Note: and credo-based
+
+
+files.  An Ant target is similar to a GNU Make .PHONY
+
+Note: or a credo target which doesn't create a file, and so is always
+executed regardless of whether its dependencies are out-of-date.
+
+
+a GNU Make .PHONY target, where the target’s filename isn’t considered
+
+Note: credo considers it: targets that rely on it are build since its
+0 size forces.
+
+
+target that defines a number of Ant properties and a make-directories
+
+Note: ant does not automatically create the directories of file
+targets which do not exist
+
+
+tasks in the append-to-log target are executed only if the log-enabled
+
+Note: log-enabled = 1 # or
+echo 1 > /env/log-enabled # or
+echo 1 > default.log-enabled.env # or
+echo 1 > append-to-log.log-enabled.env
+append-to-log.do: if {! no $log-enabled} {echo Appending...}
+
+
+upon another target to do the rest of the work.
+
+Note: adddep java init make-directories java.do: credo check-rules
+
+
+<antcall> (which is limited to calling targets in the same build.xml file).
+
+
+is limited to calling targets in the same build.xml file).
+
+Note: adddep java init make-directories java.do: credo
+../utilities/perform-checksum # checksum files in directory $cretop
+
+
+from C/C++.  That is, importing an external build file effectively inserts
+
+Note: run
+
+
+into the current file.  This technique can be used to inherit
+
+Note: ooh, ooh, can you multiply inherit?  >;})
+
+
+current file.  This technique can be used to inherit a set
+
+Note: dodep (...  dodep ...  ...) deduce
+
+
+be used to inherit a set of default targets and override
+
+Note: dodep, adddep, sed
+
+
+The key assumption here is that Ant targets should always produce the
+same output, regardless of how many times they’re executed.
+
+Note: Credo checks deps each time it encounters a target, and will
+re-execute if deps change or is forced.
+
+
+definition in other programming languages because the value can’t be modified
+
+Note: Credo won't let dependencies modify variables in the namespace of
+other dependencies, since each dependency gets run in parallel separately.
+
+
+a different “current” directory.  <property name="obj-dir"
+location="obj/i386/debug"/> In this example, ${obj-dir}
+
+Note: obj-dir = $pwd/obj/i386/debug
+
+
+the Windows system used to test this example.  To support cross-platform
+
+Note: Credo needs a different library anyway for windows vs
+linux/darwin, so don't put too much effort into switching them back
+and forth.
+
+
+of your local operating system.  3.  Automatically set by the runtime
+
+Note: credir, cretop
+
+
+4.  As the result of a <condition> task: This evaluates nontrivial
+
+Note: a little shell script
+
+
+$ ant -Dname=Jones print-name 
+6.  Loaded from an external properties file:
+
+Note: default.$var.env
+
+
+In Ant’s case, the dynamic order of the program’s execution is
+important when defining properties.
+
+
+of the property, but only during the execution of that target.
+
+Note: $target.$var.env
+
+
+support the following features: • Basic file operations such as mkdir,
+
+Note: (posix mkdir dir '')
+
+
+the following features: • Basic file operations such as mkdir, copy,
+
+Note: cmd copy dep ''
+
+
+file archives using an array of different formats (such as .tar,
+
+Note: (posix tar dep tar)
+
+
+archives using an array of different formats (such as .tar, .gz,
+
+Note: gnu zip dep gz
+
+
+an array of different formats (such as .tar, .gz, .zip, .jar,
+
+Note: (java jar dep jar)
+
+
+of different formats (such as .tar, .gz, .zip, .jar, and .rpm)
+
+Note: rpm build dep rpm
+
+
+Direct access to version-control tools such as CVS, Perforce, and ClearCase
+
+Note: (cleartool co dep '')
+
+
+The <javac> task uses a familiar algorithm for determining whether any
+work needs to be done.  It searches the source tree to find files that
+don’t yet have a corresponding class file, but it also finds cases
+where the source file is newer than the class file, indicating that a
+recompile is required.  After the underlying Java compiler is invoked,
+some further dependency work takes place.  In the Java language,
+classes are free to import or extend other classes, meaning that the
+other classes contribute important type information, such as method
+signatures.  Before it can finish compiling the current Java source
+file, the compiler must examine the other class files to obtain those
+type definitions.  As a result, the compilation of one source file
+automatically triggers the compilation of other source files.
+
+Note: /lib/do/java/findjava
+
+Note: credo outofdate.class
+
+Note: /lib/do/java/jcneed
+
+
+The <depend> task has a more extensive knowledge of which classes
+import or extend other classes and is better at determining when a
+class needs to be recompiled because of an external interface change.
+The <depend> task also understands Java’s inner class feature (a
+single .java file can generate multiple .class files) and can handle
+long chains of import or extends directives.
+
+
+Note the distinction between the first and second uses of <chmod>,
+
+Note: posix chmod dep 750 posix chmod dep ugo-w
+
+
+at one time, either within a directory hierarchy or by selecting
+
+Note: posix/chmod.dep.ugo-w.dep.do: adddep $1-dep force
+
+
+crossing the boundary between directories.  That is, the regular
+expression a/*/b
+
+Note: adddep copy $srcdir/a/*/b
+
+
+or more path components.  In the example, the regular expression **/*.jpg
+
+Note: adddep copy `{find '.jpg$'}
+
+
+directive to extract the files you don’t want.  The following example
+
+Note: adddep copy `{find '^src/.*\.jpg$' | grep -v flag} `{find '^src/.*\.png$' | grep -v flag} `{find '^lib/.*\.gif$' | grep -v
+'flag[^/]+'}
+
+
+One class of feature that’s noticeably missing from the basic Ant
+language is control-flow statements, such as if and while.
+
+
+in the following ways: Testing whether a specific disk file exists
+
+Note: if {ftest -e $file} ...
+
+
+target web server Testing whether a string contains a specific substring
+
+Note: if {~ $string '*sub*'} ...
+
+
+test conditions, but the syntax to do so is rather cumbersome.
+
+
+tasks.  The following example shows how to execute the Windows dir
+
+Note: dir = `{os -d`{hp `{pwd}} cmd /c dir}
+
+
+the build process compiles a Java-based program (using <javac>) and
+the resulting program then acts as a compilation tool in the second
+phase of the build process.
+
+
+to pass in parameter values.  The following example defines the <greet>
+
+Note: echo '#!/dis/sh
+echo Hello $1 $2, how are you?' > greet
+
+
+languages (such as JavaScript, Python, and Ruby) to be directly embedded
+
+Note: call ruby in a do shell script
+
+
+The script can access and manipulate the Ant program’s properties,
+
+Note: do-script's shell variables
+
+
+Average developers don’t need to worry about the underlying
+compilation tool or its dependency-analysis requirements.  On the
+other hand, anyone who needs to add more functionality still can have
+the full power of general-purpose languages.
+
+
+After all, writing a build.xml file is somewhat similar to writing a
+shell script, with Ant targets acting like shell function definitions
+and tasks like individual shell commands.
+
+Note: shell do scripts
+
+Note: actual shell commands
+
+
+a single JAR file, called scenario-1.jar.  Here’s the complete code:
+
+Note: translate to credo
+
+
+(the current directory), ${obj}
+
+
+tree, and the JAR files.  In this case, you explicitly name
+
+Note: jars/math.jar.do jars/print.jar.do jars/calc.jar.do
+
+
+Separating out this path definition and giving it a name (library-classpath)
+
+Note: jars/calc.jar.library-classpath.env
+
+
+the path in other parts of the build system.  The package
+
+Note: objdir = ../classes adddep package math.jar print.jar calc.jar
+
+
+Limiting the scope of these properties makes the build description
+more modular.
+
+Note: Then why isn't it the default?
+
+
+reference
+
+Note: as opposed to a property
+
+
+java command-line tool, but this time with all .jar files listed.
+
+Note: why list them if they're already in the xml?
+
+
+lower-level build.xml files, Ant won’t know how to rebuild the dependent
+
+Note: capture all dependencies for each file, so enter at any point in
+the graph.
+
+
+source code for the Mathcomp class: This class is quite complex,
+
+Note: especially compared to adding new do and dep files, or even a
+new .dep.do file.
+
+
+–d
+
+
+check whether the target file already exists; if not, a compilation is
+definitely required.
+
+
+comparison of each of the source files to see whether any are newer
+than the target file.  If so, a recompilation is forced.
+
+
+the –j option to generate a .java file instead of returning the list
+of dependencies.
+
+
+Make is proficient at pattern matching and deriving the name of the
+target files from the corresponding source file.  Also, the dependency
+list produced by mathcomp –d was tailored for Make.  Finally, the time
+stamp comparison is a fundamental part of GNU Make’s language, whereas
+you needed to hand-code the algorithm in Java.
+
+
+With Ant’s limited capability to test conditions, it’s important to
+express these properties as true/false values instead of keeping them
+as strings.
+
+
+should be executed, unless the ${edition-ok} property was set.  This effectively
+
+Note: clumsily
+
+
+target only if the user elected to build the professional version.
+
+Note: and there isn't a third option.
+
+
+Then you add the stubbed-out version of those class files, which exist
+solely so you don’t get a runtime error when the program executes.
+As an optimization, the list of excluded classes could have been
+determined by scanning
+
+
+the user.  To make this all work correctly, the <copy> task
+
+Note: start-calc.bat.do: out = $1
+in = `{lsdep $out '\.bat$'}
+sed 's,@EDITION@,'^$edition^',g' $in > $out
+also depend on /env/edition
+lsdep $target $pattern... # greps for patterns in $target^.dep
+
+
+been replaced by the stub versions, so it’s important to pass
+
+Note: why pass in the only valid value?
+
+
+As an alternative, instead of defining this property on the command
+line, you could have defined a method in one of the stub classes that
+records the edition’s name.  By querying this method at runtime, you
+could determine which edition is being used.
+
+
+In summary, you can see that Ant’s capability to support decision
+making is somewhat limited, resulting in substantially longer code
+than you might expect.  If you compare the length of code to the
+similar program in GNU Make syntax, you might find the makefile much
+easier to read.
+
+
+Ant’s flexible set of tasks, including a wide range of third-party
+plug-ins, comes to the rescue by making the code much more readable
+than in the first attempt.
+
+
+defining an additional clean target to explicitly remove files or directories:
+
+
+It’s usually possible to delete the entire object directory in a single
+command and be confident that all generated files have been removed.
+
+
+If you use multiple build.xml files, you need to define a suitable
+clean target in each lower-level file.  The top-level clean target
+invokes each of the lower-level targets in turn.
+
+
+Although Ant hides all the detail of constructing a dependency graph,
+
+Note: for java
+
+
+If a task fails because it can’t locate one of the required input
+files, it’s usually because you’ve invoked the targets or tasks in the
+incorrect order.
+
+
+GNU Make, which attempts to generate a missing file, assuming that
+there’s a suitable rule defined.
+
+
+Files not building when they should: Either you’re not invoking the
+targets or tasks in the correct order, or your <fileset> directives
+aren’t accurate enough.
+
+
+Too many files rebuilt: Again, check your <fileset> directives to make
+sure they’re specific enough.
+
+
+It’s also possible (although unlikely) that your Ant tasks aren’t
+doing a good job of dependency analysis.
+
+
+If a task fails to generate a valid output file even though the input files
+are correct, you likely haven’t provided the correct task attributes.
+
+
+The behavior of a Java program (such as Ant) is highly dependent on
+your CLASSPATH variable settings.
+
+
+files are installed and the correct <taskdef> directives are provided.
+
+Note: note to jason blair that i developed the missing bit of wabe, 4
+years too late ;) invite eric melski and peter smith to build circle
+
+
+Often the bug is on the line being reported, but sometimes it’s
+necessary to scan backward through the file to make sure that all your
+properties are defined correctly.
+
+
+a number of the bugs you encounter don’t cause the build to fail.
+Instead, they generate invalid output files, or things just don’t
+rebuild when they should.  In this case, you need to spend more time
+tracing the flow of the program.
+
+
+The log shows you every time a new build.xml is parsed, a property is
+defined, or a task is executed.
+
+
+Ant doesn’t show you the underlying shell commands that each task
+performs, so it isn’t possible to cut and paste a command from the
+build log and run it in isolation.
+
+
+In an Ant-based build system, you need to have a lot more faith that
+the tasks will invoke the correct underlying commands (or system calls).
+
+
+If you use an IDE such as Eclipse, you can use the Ant debugger mode.
+This enables you to view the build.xml files, set breakpoints on
+specific lines, display the value of properties, and then single-step
+through the targets and tasks.
+
+
+use the ant -v command to understand Ant’s decision to rebuild one or
+more files.
+
+
+each task handle its own dependency analysis
+
+Note: $target^.dep.do
+
+
+Because Ant doesn’t use a shell-centric language, it has fewer
+cross-platform issues.  By instead using the task abstraction, Ant
+developers no longer need to worry about each build machine’s specific
+commands and behavior.
+
+
+each build machine’s specific commands and behavior.  • Hidden
+dependency analysis:
+
+Note: findh in c/cc.c.o.dep.do coneed in c/cc.o.exe.dep.do
+
+
+Dependency analysis isn’t a key part of the language; instead, it’s
+handled within the implementation of each task.
+
+
+The end user doesn’t need to think about the dependency graph or debug
+problems related to missing dependencies.
+
+
+Ant has the widest range of Java compilation tool and plug-in support.
+
+
+features are standard: Build system features such as automatic
+dependency analysis
+
+Note: for java
+
+
+Variables, looping, and conditionals are limited in support and often
+need to be emulated using confusing control structures.
+
+
+more concise syntax of GNU Make.
+
+
+Not a dependency-based language: Many developers prefer to add new
+pattern-based dependencies to trigger a compilation instead of wading
+through the Ant documentation to find a suitable task.  If no task is
+available, they might waste a full day trying to piece together
+existing features to achieve the same result.  In the end, the job
+could’ve been done in five minutes using GNU Make.
+
+
+Ant doesn’t show which shell commands the tool is executing, so you
+don’t know exactly what’s happening.
+
+
+Nontrivial process of adding new tasks: Adding a new compilation tool
+is much harder than with GNU Make.  As you saw earlier, you need to
+write a Java-based plug-in instead of just matching the file
+extension.  This can be a significant amount of work if you’re using a
+nonstandard compilation tool.
+
+
+Ant is Java-centric, with minimal support for other programming languages.
+
+
+The scoping rules for Ant properties are quite different from rules in
+other programming languages
+
+
+When accessing an Ant property that hasn’t yet been assigned a value,
+the name of the property is used instead of reporting an error.
+
+
+Ant doesn’t cache any of the dependency information between builds,
+so all dependency analysis must be repeated each time the ant tool
+is invoked.
+
+
+Each Ant task contains implicit knowledge of how to compute interfile
+dependency relationships, removing this from the developer’s list of
+things to worry about.
+
+
+The fact that each task is responsible for checking its own set of
+dependencies makes the invocation of tasks slower than GNU Make.
+
+
+The NAnt tool [53] is extremely similar to Ant but focuses on the .NET
+range of languages instead of Java.
+
+
+The basic language features are mostly the same, and Ant developers
+won’t have trouble reading or writing a NAnt script.  Unfortunately,
+the NAnt tool is not as well documented or supported as the original
+Ant tool.
+
+
+The official Microsoft documentation for MSBuild [54] provides a fair
+amount of technical information, although, for a gentler introduction,
+you should refer to [55].
+
+
+@(...) to refer to the group of source files, and the $(...) syntax to
+refer to a property’s value.
+
+
+Inputs and Output attributes are explicitly listed here because
+MSBuild doesn’t require that each task implement its own dependency
+checking.  The MSBuild tool contains a full dependency engine,
+
+
+MSBuild completely skips targets with up-to-date files.
+
+
+MSBuild will clearly continue to be the most popular build tool in the
+.NET development environment, largely because of its integration with
+Visual Studio and support for Microsoft compilers.
+
+
+Ant build description files are organized around the concept of
+targets, each containing a sequential list of tasks.
+
+
+Ant provides a wide range of built-in and optional tasks to support
+common build system activities, specifically for the Java development
+environment.  These include moving and copying files, changing file
+permissions, creating archives, and compiling source code into object code.
+
+
+write your own plug-in to support additional tools.  Writing plug-ins
+is best done in Java,
+
+
+tasks are required to perform their own dependency analysis and to
+decide whether they need to do any real work.  This alleviates the
+need for Ant developers to think about the program’s dependency graph.
+
+
+Ant’s lack of variables and loops, and its unusual way of implement
+conditions, can make constructing nontrivial programs difficult.
+
+
+Not only is dependency analysis fully automated, but also any change
+to compiler flags, include paths, or library paths cause the impacted
+object files to be recompiled.  In addition, the usual time stamp
+method of detecting file changes is replaced by a more accurate MD5
+digest comparison.
+
+Note: relevant
+
+
+The main focus is clearly C/C++–based development environments, for a
+wide range of UNIX-like systems, and Microsoft Windows.  It offers
+some support for Java compilation, although that’s not yet as powerful
+as Ant’s support.
+
+
+SCons has been under active development since the year 2000.  Not only
+are bugs and weaknesses fixed on a regular basis, but also a number of
+new features are currently planned.
+
+
+two different arguments.  The first provides the name of the executable
+
+Note: dodep (c cc o '') calculator adddep calculator calc.o add.o mult.o sub.o
+
+
+compiled on a Microsoft Windows system using the Visual Studio tools.
+
+Note: dodep (c link c obj) calculator.exe adddep calculator.exe calc.o
+
+
+same SConstruct file as before, we see the following output: SCons
+
+Note: deduce
+
+
+in the end.  C Compilation with Libraries Keeping with our calculator
+
+Note: dodep (c cc o '') calculator adddep calculator calc.o libcalc.a
+
+
+the StaticLibrary builder method to construct a static library, named libcalc.a
+
+Note: dodep (c ar o a) libcalc.a adddep libcalc.a add.o mult.o sub.o
+
+
+how to compile the source files and then uses the ar
+
+Note: and ranlib
+
+
+Observe that the SharedLibrary builder is actually generating object
+files with the .os extension to distinguish them from nonshared object
+files.  This is not the case for calc.o file, which the Program
+builder generates.  Note also that the gcc compiler uses the –fPIC
+option to generate position-independent code.
+
+
+The Environment object stores the detail of which compiler should be
+used, which command-line options should be passed to that compiler,
+and which filename extensions should be used on the build machine
+
+
+The first block on lines 4–6 sets the CFLAGS and CPPDEFINES
+
+Note: adddep $o /env/cflags /env/cppflags /env/cppdefines
+
+
+gcc on a Linux system or cl on a Windows system that uses Visual Studio.
+
+
+empty on UNIX systems and is set to .exe on Windows systems.
+
+
+CCFLAGS: Options that are passed to both C and C++ compilers.
+
+
+CFLAGS: Options that are used only when compiling C code, not for C++ code.
+
+
+CPPDEFINES: A list of C preprocessor symbols to be passed to the C
+compiler.  These are prefixed with –D or /D, depending on which
+compiler is used.
+
+
+CPPPATH: The list of directories to search when an #include directive
+is used in a C program.
+
+
+LIBPATH: Likewise, the list of directories to search when a library is
+linked against a program.
+
+
+SCons detects which operating system is running on the build machine
+and then searches all the standard file system locations to find out
+which tools are installed.
+
+
+SCons won’t use the developer’s $PATH or %PATH% environment variables
+when searching for local tools.
+
+
+When a builder is invoked, it does nothing more than compute the
+dependency information for that build step.  In the second phase,
+SCons traverses the entire dependency graph and invokes the
+compilation tools necessary to bring files up-to-date.
+
+
+Unlike Ant, the compilation tools are invoked in whatever order SCons
+decides, and this can be quite different from the order in which the
+builders were listed in the source file.
+
+
+the builders that are invoked from within the subdir/SConscript file
+contribute to the same global dependency graph.
+
+
+Any filenames mentioned in the SConscript file are interpreted as
+being relative to the subdir directory, making it unnecessary to list
+a long pathname to each file.
+
+
+a few functions for directly manipulating the dependency graph: • Depends:
+
+Note: adddep
+
+
+often, but it’s nice to know that it’s available.  • Ignore:
+
+Note: rmdep
+
+
+Note that calc.o would still be linked into the executable program, but
+only if some other file changed, causing the link step to be triggered.
+
+
+to be triggered.  • Default: By default, SCons always builds all
+
+Note: none, list credo targets with 'credo ' prepended to
+highlight-and-execute, or cut-and-paste to command line
+
+
+behavior and have a specific file (or files) built by default,
+
+Note: name target(s) in default.dep?
+
+
+a SCons target is normally the name of a disk file that you’re going
+to build.
+
+
+phony targets that don’t relate to a real disk file.  Alias('all',
+
+Note: all.dep:1: 0 calculator
+
+
+the calculator program.  You can also have a list of files
+
+Note: in the dep file
+
+
+Instead of using the traditional method of comparing time stamps,
+SCons can use MD5 checksums to determine whether a file has changed.
+It also looks for changes in compilation tool flags and search paths,
+to predict whether a generated file might end up with different content.
+
+Note: should credo use sha1 like git?
+
+Note: /env
+
+
+up with different content.  A SCons program can use the Decider
+
+Note: $target^.dep.do
+
+
+SCons keep a persistent database of MD5 signatures, which is stored in
+the .sconsign file.
+
+
+a chance that the file was written to, but the content didn’t actually change.
+
+
+SCons remembers the source file’s time stamps between consecutive builds.
+
+
+tests each file’s time stamp before computing the MD5 checksum.
+
+
+find libraries or header files.  Now consider the cases: • CFLAGS:
+
+Note: /env/cflags
+
+
+better optimization, SCons must regenerate all the object files.  • CPPPATH:
+
+Note: /env/cpppath
+
+
+this case, the object file needs to be regenerated.  • LIBPATH:
+
+Note: /env/libpath
+
+
+performing a fast time stamp comparison and performing a slower MD5
+computation only if the time stamp indicates that the file might have changed.
+
+
+For example, if you modify a comment in the source code, the source
+file’s content changes and the corresponding object file is regenerated.
+However, because the object file content isn’t affected (you changed
+only a comment), the build process can stop at that point.  There’s no
+need to relink the executable program because SCons has already
+determined that none of the object files have changed.
+
+
+implicit_cache option.  This stops SCons from rescanning each of the
+source files when it tries to determine which headers or libraries to use.
+The information is instead cached between consecutive builds,
+thus increasing the overall build performance.
+
+
+the MD5-timestamp and implicit_cache options makes the SCons build
+tool almost as fast as a GNU Make build system.
+
+
+When extending the SCons language by adding a new compilation tool,
+perhaps the easiest way is to defer most of the work to a shell command.
+
+Note: then why not just use the shell?
+
+
+a new builder method.  In this case, you use a fictitious
+
+Note: lex would make a real example
+
+
+will have a .c extension.  Line 4 adds this new builder
+
+Note: /lib/do/psmith/rpctool.rpc.c.do
+
+
+variable environment.  By adding the RPC builder name, you can invoke
+
+Note: dodep (psmith rpctool rpc c) fast_messages.c
+
+
+Matching filename patterns is certainly a convenient way to add new
+build tools.
+
+
+cases, you might appreciate having the full power of the Python
+
+Note: shell
+
+
+use the Command method to invoke a one-time shell command on a
+particular pair of files:
+
+
+The shell command isn’t executed immediately but is added to the
+dependency graph in case it’s needed later.  On the other hand, if you
+really did want the shell command to be executed in the first phase of
+parsing the SConstruct files, you should instead use the standard
+Python os.system function.
+
+Note: in a do script
+
+Note: to build a target requested by credo, or one of its recursive dependencies
+
+Note: call it before credo, possibly before dodep
+
+
+include a number of header files by using the #include directive.
+
+Note: findh recursively finds paths of included header files
+
+
+lists of compilation tool options.  This includes the capability to append
+
+Note: cflags = $cflags -g
+
+
+compilation tool options.  This includes the capability to append and prepend
+
+Note: cflags = -g $cflags
+
+
+capability to append and prepend flags to an existing list, overwrite
+
+Note: cflags = -g
+
+
+existing flags with a new value, ensure that there’s no repetition
+
+Note: cflags = `{echo $cflags | fmt -w 1 | sort | uniq} reorders parameters, which may differ function.
+uniqflags:2: apply { if {! ~ $uniqflags $1} {uniqflags = $uniqflags $1} } $*
+cflags = `{uniqflags $cflags}
+does -I/usr/include match -/usr/include/sys?
+
+
+that there’s no repetition of flags in a list, and parse
+
+Note: by convention, like -I goes to cpp
+
+
+Caching prebuilt object files: By utilizing MD5 checksums, SCons can
+determine a fingerprint for each object file it compiles.  If another
+developer has already compiled the exact same source code file using
+the same header files and compilation flags, SCons obtains the object
+file from a shared repository instead of recompiling it again.
+
+
+Probing the build machine: SCons includes a number of functions for
+analyzing the build machine to ensure that it supports the required
+build environment.  A SConstruct program can detect the presence of
+specific library and header files and can compile a small test program
+to validate which features exist in the build environment.
+
+
+analysis for you and rebuilds the object files if the numbers.h
+
+Note: findh
+
+
+file is modified.  Object files also are recompiled if the CFLAGS
+
+Note: $target^.dep: 0 /env/cflags
+
+
+To avoid having all source files listed in the same SConstruct file,
+you can divide the build description into multiple files.  This
+approach limits the size of each file, reduces the contention when
+making changes, and keeps the build description in the same directory
+as the source files.
+
+
+the top-level SConstruct file: Lines 1–3 create a build environment (env)
+
+Note: /env
+
+
+the entire system.  In this case, you’re changing only the CFLAGS
+
+Note: /env/cflags
+
+
+The content of these files is parsed, and the dependencies are all
+added to the same global dependency graph.
+
+Note: Credo dep files form one dependency graph with duplicates.  The
+system relies on the 'lock' file $target^.redoing to prevent
+multiple-entry conflict, and checksums to prevent redundant creation.
+During a build it is possible for a dependency to change (eg, depend
+on a forced header which contains the date and time), which will build
+a target twice.
+
+
+dependency graph.  On line 7, the variables containing the values return
+
+Note: $target^.relay
+
+
+This file imports the env variable, containing the environment object,
+and uses it when creating the libmath library.  This ensures that all
+compiler options are used consistently throughout the build system.
+
+Note: which the shell manages in subshells for you, and even lets you
+pass values back up to the calling shell (sh -e or run) without
+per-variable syntax, or even a general return.
+
+
+Line 6 returns the resulting Node object that stores the name
+
+Note: $ar in lib*.(a|so).relay
+
+
+SCons has a complete copy of the dependency graph and proceeds to
+build the other subdirectories first, but only if they’re necessary to
+compile the files in the current directory.
+
+Note: Credo expects dep files to list all dependencies so each target
+can be built independently.  Or have two targets: one to build library
+(libname.a.do) and one to build standalone exec (name.do).
+
+
+track which sources files still need to be scanned.  Given that
+.mathinc files can include other .mathinc files, you could end up
+searching a long chain of import statements.
+
+Note: findh and coneed both do this.
+
+
+When the import_nodes list is empty, you can be sure that you’ve done
+a complete traversal of all the import statements in the .math and
+.mathinc source files.  This solution doesn’t handle the case in which
+files can’t be found or the case in which the import statements create
+an infinite cycle, but those are straightforward to add.
+
+Note: check findh and coneed
+
+
+directory validates the command-line arguments and sets up the
+required environment.
+
+Note: Store credo library smiths (/lib/do dirs), and scripts for bash,
+in commander procedures in a credo-bash project.  Deploy with
+subprocedure calls, to target specific smiths, and put them and the
+main cre* scripts in the workspace.  It comes in handy here that credo
+generally expects to run in derived-object/workspace directories
+(which makes more sense for variants, so long as assembling the build
+system is mostly automated and customized for supported variations),
+and can refer to either a version-controlled directory of source
+somewhere else, or use an artifact delivered into the workspace and
+expanded by a dodep-customized ectool-smith script.  Derived objects
+worth keeping end up in the 4.0+ artifact repository by another script
+from the ectool smith.
+
+
+SConstruct file: Luckily, SCons contains built-in functions for
+evaluating command-line options,
+
+Note: sh getopts
+
+
+functions for evaluating command-line options, as well as for
+compiling into
+
+Note: Object-directory paths are often known better by the user,
+and contain some of the platform-specific names for examination.
+Since the source directory is usually more consistent (including in
+this example), makes code simpler to assume what it is, or substitute
+in a simpler (eg ../**/src) path given by the user ($srcdir), than the
+probably longer and more intricate object path (eg: from the simple
+platform name in this example, to compiling into an RPM tree).
+Credo assumes you're aready in the variant-specific directory,
+and lets you specify a souce directory.  This encourages automatic
+creation of build scripts as well as the object directories, since the
+build process across platforms varies structurally at the build-script
+level in only a few cases (most notably, between unices and Windows),
+and usually more by language (interpreted vs compiled vs vm-compiled),
+but usually in some common and predictable way we can code in a
+higher level (eg /lib/do/c/deduce).
+
+
+variable.  You also provide some help text ('CPU Type'), the default
+value if no platform type is provided ('i386'), and the list of legal values.
+
+
+Given that a builder methods know exactly which files it’s supposed to
+compile, SCons uses that same information to delete all the generated files.
+
+Note: /lib/do/credo/rm-f.std..do
+
+
+SCons provides a number of built-in features for viewing the
+dependency graph, analyzing the content of environment objects,
+and tracing the sequence of decisions that cause SCons to rebuild a
+generated file.
+
+Note: lsdep -r
+
+Note: if {~ $crebug '*e*'} {env}
+
+Note: if {~ $crebug '*y*'} {echo why yes-decision was made to take some action}
+
+
+The first thing to check is whether the file has really changed or
+whether the same content has been written back without modification.
+
+
+If you’re confident that your files really have changed, the next step
+is to validate the dependency graph.
+
+
+the calc program has a dependency on all the necessary object
+
+Note: and linker exec
+
+
+necessary object files, which, in turn, depend on the relevant source
+
+Note: and compiler exec
+
+
+itself contains a bug.  If it’s absolutely necessary, use the Depend
+
+Note: adddep
+
+
+For scanner problems, you need to either fix the scanner (if you have
+the source code) or perhaps modify your source files slightly so that
+the scanner can locate the include or import directives.
+
+
+You need to revisit your builder’s arguments or check the builder or
+scanner source code to understand where the problem could be.
+
+
+understand where the problem could be.  If necessary, use the Ignore
+
+Note: rmdep
+
+
+The first step is always to double-check the output from the SCons
+build log and rerun the command line (such as gcc –c) to make sure
+it’s doing what you need.
+
+
+One unfortunate limitation of SCons is that it doesn’t appear possible
+to trace a builder output back to the line of source code where the
+builder method was invoked.
+
+
+The default construction environment is automatically configured to
+use the build machine’s local toolsets,
+
+Note: /lib/do/c/
+
+
+to hide a complex piece of code logic inside a function,
+
+Note: script or function
+
+
+MD5 checksums to detect file changes, uses scanner functions to
+determine file dependencies, and rebuilds object files if the
+compilation flags have changed.
+
+
+Sometimes providing an explicit list of shell commands is the easiest
+way to get the job done.
+
+
+When compared to approaches such as recursive GNU Make, an equivalent
+SCons-based build uses considerably more memory on the build machine.
+However, this is not necessary true when compared to inclusive Make,
+which stores the entire dependency graph in memory.
+
+
+Some users have replaced their SCons-based build system with a GNU
+Make solution to improve performance and scalability.
+
+
+SCons is not suitable for compiling Java and C# code; Ant and MSBuild
+are the best choices in that situation.
+
+
+Rake is quite different from SCons and Cons because it doesn’t provide
+any automatic dependency analysis.  It instead relies more on the
+model GNU Make uses, in which the developer provides the source and
+target dependencies, as well as the list of commands to be executed.
+
+
+The commands can be written in pure Ruby code or can use the sh method
+to invoke a shell command.
+
+
+clean or clobber
+
+Note: /lib/do/credo/rm-f.sum..do
+
+Note: /lib/do/credo/rm-f.target..do, or nuke
+/lib/do/credo/rm-f.dodep..do
+
+
+Rake supports both file-based target names (as in GNU Make) and
+symbolic target names (as with Ant).
+
+
+as easily.  Here’s the output from running the rake tool:
+
+Note: rake does the default action when run with no parameters.
+rake -T lists targets and help.  credo with no arguments lists targets.
+credo has no default mechanism to describe targets, but could print
+the text in $target^.doh after each target listed by lsdo.
+
+
+Rake is definitely a tool to consider using.  Summary The SCons
+
+Note: credo
+
+
+consider using.  Summary The SCons build tool uses a standard Python
+
+Note: shell
+
+
+approach of creating a domain-specific language.  A number of Python functions,
+
+Note: shell, shebang-interpreted, or executable files
+
+
+domain-specific language.  A number of Python functions, known as
+builder methods,
+
+Note: do-scripts
+
+
+libraries, and link together executable programs.  Each of these
+builder methods
+
+Note: do-scripts
+
+
+together executable programs.  Each of these builder methods accepts a list
+
+Note: single
+
+
+programs.  Each of these builder methods accepts a list of input
+
+Note: output
+
+
+Each of these builder methods accepts a list of input files
+
+Note: credo processes any number of targets in a dep file in parallel,
+and any number of targets on the command line in series.  credo uses
+default.^$outext^.do if no specific $target^.do . You don't have to
+write or generate every do-script, even though dodep generates them
+for you.  Still usually use dodep to start dependency lists.
+
+
+list of input files and any number of compilation tool flags.
+
+Note: in dependency-list $target^.dep file, to express dependency.  To
+set them, set the content of the corresponding file, or set the
+variable in a script or at the command line.  Subshells inherit shell variables.
+
+
+variables used to configure the build process, SCons uses environment objects
+
+Note: inheritance
+
+
+the build process, SCons uses environment objects to encapsulate the detail.
+
+Note: set or env
+
+
+objects to encapsulate the detail.  You create a single environment object
+
+Note: shell script
+
+
+single environment object and reuse it for each different builder method
+
+Note: do script
+
+
+SCons creates a default environment that references the build
+machine’s locally
+
+Note: eg /lib/do/c/cc.c.o.do could also have /lib/do/local/cc.c.o.do,
+or native instead of local
+
+
+calculates an MD5 checksum for each file in the build tree and uses
+that information to determine whether a file has changed from one
+build to the next.
+
+
+developers can create their own builder methods, as well as source
+code scanners that automatically determine a source file’s dependencies.
+
+
+similar to GNU Make’s concept of phony targets.  The following example
+
+Note: srcdir = $PROJECT_SOURCE_DIR dodep (psmith make-data-file dat c)
+data.c credo data.c
+
+
+targets.  The following example shows how the /tools/bin/make-data-file
+UNIX command translates
+
+Note: cat /lib/do/psmith/make-data-file.dat.c.do
+#!/dis/sh
+c = $1
+(stem dat) = `{ext dat $c}
+if {make-data-file < $dat > $c} {echo 'cs = $cs '^$c > $c^.relay}
+
+
+in which targets are invoked.  An interesting part of this code
+
+Note: cat print-city.do echo Vancouver ...  echo Even ...  cat
+print-city.dep 0 print-time 0 print-day cat print-time.do echo It ...
+cat print-day.do echo Today ...
+
+
+the test is performed at the time the native build system is created;
+it isn’t performed by the native build tool itself.
+
+
+it’s possible to match a variable’s value against a regular expression.
+
+Note: if {~ $symbol_name '[a-z][a-z0-9]*'} {...} matches a1- but MATCHES doesn't.
+
+
+foreach loop iterates through a list of values: This last example
+
+Note: cat /lib/do/posix/cksum.file.sum.do
+#!/dis/sh
+cksum $1
+apply {
+	dodep (posix cksum file sum) $1^.sum
+	echo `{credo $1^.sum | grep -v credo}
+} $cs
+
+
+CMake provides a number of commands to search for files and tools in
+all the standard paths.
+
+
+Each type of build machine might give different results, so the build
+description must reference these variables to access the tool instead
+of using a hard-coded pathname.
+
+
+CMake provides the try_compile and try_run commands, enabling you to
+determine whether a snippet of C/C++ code compiles correctly.  If it
+does compile, you can try to execute the program to see if it provides
+the correct output.
+
+
+No file in the source directory is ever modified, making it possible
+to generate more than one object directory from the same source tree.
+
+Note: Also possible by checking out code from version control into a
+new workspace per compilation.  What's in version control is an
+effective line between source files and derived objects.
+
+
+the type of native build system to be generated.  By passing the -G
+option to the cmake command, you can override the default selection.
+
+
+The variables in this list are collectively known as the cache and are
+stored in the object directory’s CMakeCache.txt file.  Each variable has a
+default value but can easily be modified to customize the build process.
+
+
+• Debug: The generated object files and executable program will
+contain debugging information.  • Release: The resulting executable
+program will be fully optimized and won’t contain debug information.
+• RelWithDebInfo: The executable program will be optimized but will
+also contain debug information.  • MinSizeRel: The executable program
+will be optimized to require as little memory space as possible
+
+
+only the commands that impact the dependency graph are directly
+translated to the native build system.
+
+
+the underlying makefile framework stores object files in calc.dir or
+calculator.dir instead of a directory that all programs share.
+
+
+to deal with the difficulties of using shell commands that vary
+
+Note: credo abstracts actual commands behind the dodep interface.
+Need to port /dis/cre* and /lib/do to broadly-usable shells (eg: rc
+for plan9port; sh, ksh93, or bash for unices; cmd or ps1 for windows).
+
+
+Code in a Single Directory The first scenario is extremely simple
+
+Note: dodep (c cc c exe) calculator rmdep calculator calculator.c
+apply {adddep calculator $1^.c} add sub mult calc credo calculator
+# analyzes dependencies and compiles .o files from .c files
+
+
+calc directory, both the Print and Math libraries are also considered
+
+Note: adddep calc ../math/libmath.a ../print/libprint.a
+
+
+encapsulates the complexity of this solution.  Line 20 invokes this macro
+
+Note: dodep (psmith mathcomp math c) equations.c credo equations.c
+
+
+executes from within the object directory, so you use the PROJECT_SOURCE_DIR
+
+Note: srcdir
+
+
+6–9 invoke the mathcomp compiler with the -d option, to determine
+
+Note: equations.c.dep.do searches equations.math for dependencies of
+equations.c to add to equations.c.dep
+
+
+determines the source file dependencies.  This command is used only
+when the cmake tool is initially invoked, which is before the native
+build tool
+
+
+when source files are modified, the native build system won’t notice
+if any dependencies have changed.  Before long, the build system
+starts using outdated information.  CMake solves this problem for C
+and C++ files by requiring the IMPLICIT_DEPENDS keyword for the
+add_custom_command directive.  To support this same feature for the
+mathcomp tool, the standard CMake system must be modified.
+
+
+creation of a new cache variable named PLATFORM.  This command is
+similar to a standard set command, except that you use the CACHE
+keyword to indicate that the user can configure the value when
+generating a new native build system.
+
+
+of the build description is easy to understand.  Lines 5–10 validate
+
+Note: #!/dis/sh
+# usage: if {!  oneof input valid...} {exit}
+(input valid) = $*
+! ~ 0 `{reduce 'add 0' `{map '~ '^$input $valid}}
+
+
+the native build system created by CMake already supports a “clean”
+
+Note: /lib/do/credo/rm-f.std..do deletes state files (including
+checksums), target files (files listed in the output of lsdo or credo
+with no targets), and do and dep files (assumed generated by dodep).
+
+
+aren’t automatically detected, the name can be listed in the
+ADDITIONAL_MAKE_CLEAN_FILES
+
+Note: run rm-f.std..do in clean.do and rm any other generated files.
+dodep (c rm-f yacc '') clean
+
+
+--system-information
+
+
+includes the location of compilation tools, the choice of command-line
+options to pass to each tool, and various other system-dependent parameters.
+
+
+--trace
+
+
+Every variable assignment, condition, loop, macro, and command is
+displayed in the order in which it’s executed.
+
+
+Invoking gmake with the VERBOSE=1 flag provides a nicely formatted
+output to show each of the compilation commands.
+
+
+fix the CMake tool itself.  Some people might find it tempting to fix
+the bug directly in the native build system, but the CMake generator
+would soon overwrite any changes.
+
+
+CMake can use the same description file to generate a build system for
+a range of different platforms.  This is particularly important for
+Microsoft Windows systems, which haven’t typically received much
+support in the open-source world.
+
+
+The integration of CPack for packaging and installation and CTest for
+testing purposes allows for a complete end-to-end build system.
+
+
+The special-purpose build description language is built into the cmake
+tool.  Therefore, there’s no need to install an additional language
+interpreter (such as Python) on the build machine.
+
+Note: Cmake still has a build description language, which invites
+additional complexity as people add options to how it behaves, and
+want it to act more like a language.  Cf. credo uses shell, which is a
+language already on build machines, with only a few major variants.
+If cygwin assumed for Windows, then bash is a lingua franca.
+
+
+If you’re creating a complex build system, you might feel inclined to
+develop directly with the native build tool.  This is also true if the
+autogenerated build system is buggy.
+
+
+yet another language instead of building upon the power of an existing language.
+
+
+The learning curve for CMake is quite high, especially with all the
+advanced features that use an unfamiliar syntax.
+
+
+You might find that some of the examples aren’t explicit enough to
+provide the help you need; in some cases, the documentation doesn’t
+match the tool’s behavior.
+
+
+in many places it’s still necessary to write different build
+description code for a Linux environment versus a Windows environment.
+
+
+CMake wins points for supporting a high-level abstraction of the build
+system, making it easy for developers to describe their build process.
+However, CMake doesn’t provide a general-purpose programming language,
+making it hard to express complex requirements.  Additionally, the
+capability to debug build problems largely depends on the native build
+tool (such as GNU Make), as well as an understanding of CMake’s
+autogenerated framework.
+
+Note: dodep and credo
+
+Note: shell
+
+Note: flags x +
+
+
+multidirectory support is enabled, along with automatically detecting dependencies.
+
+
+supporting native build tools, enabling the use of platform or
+vendor-specific optimizations for those tools,
+
+
+running the automake tool on this build description creates a makefile
+that provides all the default targets (including all, clean, and
+install).  It also hides the complexities of creating a makefile
+framework, such as automatic dependency analysis.
+
+
+Qmake can generate either a makefile framework or a Visual Studio
+project.  Because Qmake is targeted at Qt developers, the build system
+automatically includes the necessary C/C++ header file directories and
+libraries to support a Qt-based application.
+
+
+A CMake program can query the build machine to locate tools, header
+files, and libraries and can test the C/C++ compilers to discover
+which language features are supported.
+
+
+Eclipse can suggest what you might want to type next; it can collapse
+parts of the code you’re not interested in seeing; it enables you to
+browse the classes defined within your program; and it can highlight
+compilation errors a few seconds after you type the bad code.
+
+
+build system easy but also limits the set of available features.
+
+Note: such as running a build independently of the several instances
+of Eclipse separately customized by each developer on differently
+configured machines.
+
+
+Eclipse provides a number of preferences to configure the tool.  This
+covers much of the same functionality that a text-based tool provides;
+although, everything is configured by clicking on GUI widgets instead
+of setting variables or writing commands.
+
+
+In the Eclipse environment, it’s important to notice icons because
+they often provide important detail.
+
+
+An Eclipse project can contain any number of third-party JAR files.
+
+
+Eclipse provides a wide array of project types, and you can extend
+this list by adding third-party plug-ins.
+
+
+the project explorer you saw earlier.  This is used for navigating
+
+Note: #!/dis/sh
+# usage: grift $text $filename
+# grift 'define MACRO' *.h
+(text filename extra) = $*
+grep -n -i $"text `{du -an | grep -n -i $"filename}
+
+
+need to configure the build system, it’s done via a user-friendly
+
+Note: stop assuming that making something graphical makes it simpler
+and clearer to use.  fixing the abstraction level in a complex tree of
+one-at-a-time edits is worse than being able to write a script that
+subsumes a given amount of the complexity and lets the user
+concentrate on what changes.
+
+
+types are supported: Many languages and programming frameworks have
+Eclipse plug-in
+
+Note: have to to sell people on eclipse.  but if it doesn't, you're in
+the same camp as emacs users, having to write your own support.  would
+rather just call the tools directly, with minimal info to set it up
+for reuse (smith, tool, inext, outext, options and option variables,
+relay variables, other dependent files, dependency finders for compile
+and link, location of tool if not on path).
+
+
+too many buttons and menus to learn, and too many dialog boxes to configure.
+
+
+team uses the Eclipse IDE, it’s not possible to rely solely
+
+Note: bad practice anyway, since configs diverge easily and are hard
+to compare
+
+
+Eclipse scans the entire source code base to build up the symbol
+cross-referencing database.
+
+
+the Java build tool is limited in capability and can’t do much more
+than create class files for each of the Java source files.
+
+
+Eclipse JDT uses an incremental build system in which files are recompiled
+whenever they’re saved.  This ties the build process to the developer’s
+workflow instead of providing a clean end-to-end build process.
+
+
+to see every compilation command being executed, Eclipse is not an
+appropriate build tool.
+
+
+forcing the use of external build tools (such as Ant) for nontrivial builds.
+
+
+Eclipse JDT is intimately familiar with the structure of your Java
+code and knows exactly which parts of the code have changed.  Eclipse
+is unlikely to miss a file dependency or recompile a file that wasn’t
+impacted by a change.
+
+
+a Java file (and dependent files) is recompiled whenever the file is
+saved.  In this respect, the program is immediately available for
+execution, providing a fast build system.
+
+
+Eclipse JDT wasn’t designed to support large build systems, especially
+those with complex requirements.  It’s standard practice to delegate
+to other build tools to support larger build systems.
+
+
+environment for a wide range of code-development tasks.  The build
+tool within Eclipse JDT is suitable for interactive development
+
+
+the CDT compiler in a Linux/x86 environment defaults to using the GNU
+C Compiler (GCC) for an Intel x86 CPU.  In addition, CDT defaults to
+using GNU Make to implement the build system.
+
+
+a choice of several different variants.  You can choose the Executable
+
+Note: (gcc gcc o elf)
+
+
+linking all the object files.  Alternatively, you can choose the Static
+
+Note: (gcc gcc o a)
+
+
+object files.  Alternatively, you can choose the Static Library or Shared
+
+Note: (gcc gcc o so)
+
+
+As with JDT, for large and complex projects, you’ll almost certainly
+resort to creating your own build system instead of using whatever
+Eclipse generates for you.
+
+
+the external compiler to identify errors.  By using a special-purpose parser
+
+Note: postp
+
+
+anything more than basic syntax problems can only be caught be
+
+Note: by
+
+
+they’re presented with a list of possible variable and function names
+
+Note: ctags
+
+
+code editing, compilation, version control, unit testing, and tracking of tasks.
+
+Note: /dis/kanban
+
+
+appear in the source code.  Each project has an associated type.
+
+Note: mixed?
+
+
+of smaller projects, each compiling independently.  One project can make use
+
+Note: dep files
+
+
+The Eclipse JDT system contains a fully featured Java compiler and
+maintains an internal model of each project.  It has the capability to
+report compilation errors within a few seconds of the user typing the
+invalid code.  It can also provide content assistance, symbol
+cross-referencing, and refactoring support.
+
+
+1.  Determine all the interfile dependency relationships.  The tool
+creates a dependency graph of the entire program to show which files
+depend on which other files.  2.  Using the dependency graph,
+determine the set of files that have been modified since the last time
+the tree was built, and therefore determine which files need to be recompiled.
+3.  Rebuild the tree by performing the individual compilation steps in
+a logical order, possibly using parallel processing.
+
+Note: findh and coneed help create dep files
+
+Note: cresum returns value different than cresum stored for this
+target.  each target has its own view of dependencies, and reverted
+files cause rebuilds in the same way as fixed or advanced files.
+
+Note: at each level, credo calls credep to call credo on dependencies,
+so the tree builds leaf-to-root.
+
+
+object file (with .o or .obj suffix) can have a dependency
+
+Note: an.o.dep:$a_c_sum a.c
+
+
+(with .c suffix).  Likewise, a Java .class file has a dependency
+
+Note: a.class.dep:$a_java_sum a.java
+
+
+The first time the developer builds the tree (known as a fresh or
+virgin tree), all the compilation commands must be executed to bring
+the tree up-to-date.
+
+
+changes to one or more source files, and the object files are no
+longer consistent.  A subset of the object files needs to be rebuilt
+to make them consistent again.
+
+Note: files with dep files with at least one sum out-of-date
+
+
+build only a portion of the tree.
+
+Note: credo any file
+
+
+dynamically linked libraries can be recompiled and upgraded without
+changing the final executable program,
+
+Note: the problem with them is that they are, so the program demands
+the os have the whole library to provide the few functions it was too
+lazy or cheap to pack along.
+
+
+final executable program, this is a common way to save compilation
+
+Note: which happens how often, compared to how often the program is
+installed and run?  but most programs aren't successful, so fail fast
+and move on.
+
+
+Selectively limiting the dependency graph
+
+
+these problems are attributed to a poorly constructed dependency graph.
+
+Note: Since a dependency graph is a feature of a language allowing
+information to be spread across different files, and the type of
+dependency depends on the language, some (partially) language-aware
+dependency-(graph|file) generator would reduce the likelihood of
+encountering these errors.  the simpler the dependency graph file
+implemenation (eg credo's list of files and their checksums, per file)
+the better for this use.
+
+
+a file that should have been recompiled is left unchanged instead of
+being updated to match the most recent source code.
+
+
+Not only is the structure of a different size, but the memory location
+that cat.obj uses for the preference field is the same location that
+dog.obj uses for the quantity field.
+
+
+The issue will be resolved only when dog.c is changed (and, hence,
+dog.obj is recompiled) or when the build tree is cleaned.
+
+
+Developers might add a new symbol definition to their program, but
+when the software is compiled, they receive a number of undefined
+symbol errors.
+
+
+Given that food.list is a plain text file, it must first be translated
+into an equivalent header file (food_gen.h) before the C file can use
+the definition.
+
+
+In a real-world development project, you’ll likely find a number of
+developers who hesitate to update their source tree from the
+version-control system, just in case it takes a day or two to resolve
+this type of problem.
+
+
+a file might be recompiled even when it doesn’t depend on anything
+that was changed.  This doesn’t cause any compile-time or runtime
+problems, but it does force the developer to wait longer for their
+compilation to complete.
+
+
+If the penguin.c file had not been deleted, the build system could
+still rebuild penguin.obj from source code.  In this case, though, it
+searched for all the possible ways to regenerate penguin.obj but
+didn’t find a way of doing so.
+
+
+dependency information still refers to the old location.
+
+Note: why does it refer to absolute paths?  use relative paths as
+often as possible.
+
+
+The only remedy is to remove all the stale dependency information and
+start again.
+
+
+developer wants to compress a large data file but then reuses
+
+Note: why would you do that?
+
+
+rule that generates its own input files, causing a cycle.
+
+Note: generate (or start from) a library of pre-written command lines
+(like dodep's /lib/do/$smith/$production), to reduce the likelihood of
+miscreating them from scratch.  production = $tool^.^$inext^.^$outext
+
+
+data (the input to the dependency) ends up being modified, and data.gz
+(the target of the dependency) is never actually created.
+
+
+The end result is wasted compilation steps and a completely meaningless
+
+Note: unless you uncompress it the right number of times
+
+
+phony, informing Make that the target name is for human use only
+instead of having a real disk file with that name.
+
+Note: since the object of a build system is usually to produce or
+change files, or cause other observable side effects, this should be
+actively minimized in a disciplined approach.  why else run a build
+system, other than to change some observable facet of the system?  if
+it's not a file, cat the information to a file, and use that file as
+the step in the dependency chain.
+
+
+It’s often much safer to follow an explicit sequence of commands than
+risk the chance of obscure compilation or runtime errors caused by
+invalid dependencies.
+
+
+too much compilation takes place.  Also, the more complex the build
+system, the more careful the developer must be to get the sequence of
+commands correct.  Another downside is that parallel build systems
+rarely work correctly if they don’t have access to a correct
+dependency graph.
+
+Note: this is one reason it took two years to convert wuce to use
+accelerator: pervasive use of implicit ordering at every level of the
+build system.  another was mixing shell scripts and make rules at
+different levels, so there was no one complete dependency graph, which
+divided up the whole build into blocks only within which could targets
+be parallelized and rescheduled to available time slots.
+
+
+a full build of their tree, but that could be faster than trying to
+diagnose and fix the broken dependencies.
+
+
+dependencies.  The first step is to execute the build system’s “clean”
+
+Note: std removes all state (sum), target (files with a $target^.do
+file), and do and dep files generated and modified by the meta build
+system.  This resets the directory to need dodep to
+(rewrite|regenerate) the build system.  A set of modifications to a
+production may become complicated enough to warrant its own library do
+file, rather than be created by a do script calling adddep and rmdep.
+
+
+remove all object files, autogenerated files, and stored dependency
+information, leaving only the developer’s source files.
+
+
+backup of their local changes and then completely “blow away” their
+whole build tree, including source code.  This ensures that no stale
+information can possibly remain.
+
+
+learn how each compilation tool accesses files and find some way to
+predict which files the tool will access in the future.
+
+
+a compilation tool (such as compiler or linker) that somehow uses
+
+Note: dodep stores each of these relationships (smith tool inext
+outext) in its library of do scripts.
+
+
+read or write a file by explicitly mentioning the file on the tool’s
+command line.
+
+Note: target
+
+
+parse the source code to determine which other files it depends on.
+
+Note: findh
+
+
+input or output files they use by default.
+
+Note: renamed to target (lex.yy.c) or left alone (y.tab.h)
+
+
+predict which files a compilation tool will read and/or write.  This
+is done before the compilation tool is actually executed, instead of
+learning the dependencies as the compilation progresses.
+
+Note: emake history file records efs accesses for each compilation command
+
+
+can end up with compilation commands executing in the wrong order.
+
+Note: not after the first time, with the history file
+
+
+In this scenario, you must somehow determine the dependency in advance,
+
+Note: or use build tool's position of control over the build process
+to learn from output about the dependency, take some steps depending
+on the language and what else you know about the project, dev env, and
+system; and rerun command until no errors or give up
+
+
+which rebuilding files in the wrong order can cause problems.
+
+Note: dodep (c cc c o) cat.o dodep (psmith list2h list h) food.h
+adddep cat.o `{findh cat.c} # cat.o.dep: food.h
+
+
+dependencies that an object file has on source files: cat.obj: cat.c
+
+Note: dodep (c cc c o) cat.o
+
+
+that an object file has on source files: cat.obj: cat.c animals.h
+
+Note: adddep cat.o animals.h
+
+
+This is the simplest way to specify dependencies, but it doesn’t work
+well for large programs.  The constant maintenance and the chance of
+introducing errors makes this impractical.
+
+
+line, the build tool already has some amount of advance knowledge.
+
+Note: eg, /lib/do/c/cc.c.o.dep:0 $targ.c
+
+
+SCons directives are used to build the pet store example: lib
+
+Note: dodep (c cc c o) dog.o dodep (c cc c o) cat.o dodep (c ld-so ''
+so) libanimals.so adddep libanimals.so dog.o cat.o
+
+
+build the pet store example: lib = SharedLibrary("animals", ["dog.c",
+"cat.c"]) Program("petstore",
+
+Note: dodep (c cc c elf64) petstore adddep petstore libanimals.so
+
+
+builder methods used to state which files should be compiled, but they
+also participate in the construction of the dependency graph.
+
+
+By searching for the #include or import directives in a source file,
+the scanner infers which other files are required.
+
+
+the header files included within a source file.  For example:
+
+Note: dodep (c cc c o) cat.o adddep cat.o `{findh cat.c}
+
+
+C source file, it must be aware of preprocessor semantics.
+
+Note: adddep food.o `{findh -D_USE_GOOD_FOOD_ food.c} Use cpp -D...
+to partly resolve food.c to food.c.findh, without resoving includes,
+unless resolving includes will produce full paths to headers.  Or just
+use makedepend.
+
+
+both store_food/berries.h and wild_food/berries.h are dependencies,
+whereas only one of them will ever be included at one time.  This
+isn’t a fatal error, but it can result in unnecessary recompilation.
+
+
+GNU C Compiler.  By providing the –M option, the compiler scans the
+source files and determines the dependencies, but doesn’t actually
+compile the code.
+
+
+but doesn’t actually compile the code.  C:\work> gcc –M dog.c dog.obj:
+
+Note: part of what `{dodep (gnu gcc c o) dog.o} does is `{gcc -M
+dog.c} and then`{adddep dog.o ...} dependencies of dog.o.  dog.o.do
+uses gcc without -M.
+
+
+observing any interaction the compilation tool has with the computer’s
+file system,
+
+
+and outputs.  The advantage of these systems is that they’re guaranteed
+
+Note: as long as a virus protection program isn't scanning in the same
+context being monitored.
+
+
+Assuming that the compilation tool accesses the same set of files in
+the future that it has in the past, you’ll never suffer from missing
+or excessive dependency information.
+
+
+large number of dependencies that could be hard to predict, such as a
+release packaging script.
+
+
+an additional file system plug-in must be added to the computer’s
+operating system,
+
+
+monitoring software will record absolutely every file access
+(unless you tell it otherwise), and many files don’t make sense to
+have as dependencies.
+
+
+store what you’ve learned in a cache so that you don’t need to
+recompute the full graph each time the build tool is invoked.
+
+
+a typical Make-based system uses a separate file (with a .d suffix) to
+store dependency information for each of the object files.
+
+
+SCons uses a single database file to cache dependencies for all files
+in the build tree.
+
+
+The next time the build tool is started, it still would need to reread
+that same description file anyway,
+
+
+save a significant amount of time by not recomputing dependencies that
+were found by running a compilation tool or a scanner.
+
+
+Failure to delete old dependency information either causes the build
+system to do too much work or causes it to fail if the old source
+files no longer exist.
+
+Note: Be lazy about catching these, wait till developer regens build system.
+
+Note: If a do script fails, try regenerating its corresponding dep
+file and run the do command again.  how do we know what
+dodep|adddep|rmdep commands went into creating a dep file?  *dep
+commands should log them in $target.dep.do, adding -x option to run
+them without updating the do file in which they run:
+dodep -x (c cc c o) food.o
+adddep -x food.o dog.h cat.h animals.h petstore.h
+rmdep -x petstore.h
+
+This log information should be the last stuff to get deleted,
+by /lib/do/credo/rm-f.stdl..do, since it can be used to quickly regen
+build system, just by running the log as a script with sh.  not sure
+how this will help fix broken dependencies, since it's scanning a
+changed file that fixes it, but *dep lines don't change.  better to
+script (adddep $o `{findh $c}) than its expansion.  that said, a class
+of errors with code under change can be avoided by not expanding.
+user could substitute expression for output where desired.
+
+
+developers modifying their source code to add new #include or import directives,
+
+Note: adddep $o `{findh $c}
+
+
+source code to add new #include or import directives, thereby adding
+
+Note: deheader to rmdep them
+
+
+compilation tool’s include path flags are modified by editing the
+build description file.
+
+Note: adddep file.o /env/include
+
+
+description file.  Regardless of the change, the build system must compute
+
+Note: language-specific level above dodep (implemented as dodep
+files?) would definitely call findh and coneed to fully construct the
+dependency graph and generate dep.do files.  dodep (dodep findh c
+dep.do) file.o.dep.do
+
+
+For command-line options that change the name of the input or output
+files (for example, -o prog), the dependency graph must be modified to
+include the new name of that file, and the old name must be discarded.
+
+Note: credo forces names to be consistently related by type of
+transformation.  can use cp to give additional name (mv would force
+rebuild).  given $file.c, to get the binary $newname: dodep (c cc c
+bin) $file dodep (credo cp dep target) $newname adddep $newname $file
+credo $newname
+
+
+if the developer added the –g option to request that debugging
+information be generated, all previous object files would need to be
+discarded and recompiled.
+
+Note: dodep (c cc-g c o) $file.o or dodep (c cc c o) $file.o adddep
+$file.o /env/ccopt # in dep template
+
+
+if the compilation tool was upgraded to a newer version and could
+generate different code than the older tool.
+
+Note: c/cc.c.o.dep: 0 /env/ccopt c/cc.c.o.dep: 0 /env/ccinc
+c/cc.c.o.dep: 0 $targ.c os cc -v > ccver dodep (c cc c o) $file.o
+adddep $file.o ccver credo $file.o
+
+
+add a dependency from each object file to the set of flags it was
+compiled with
+
+
+if the command-line flags are modified, this file must be “touched”
+
+Note: not if we use checksums.  Ack that checksums make everything
+slower, and so depend a fast alg.  with no collisions.
+
+
+An object file that depends on its own compilation flags.
+
+Note: dodep (c cc c o) bear.o adddep bear.o bear.flags presumes
+bear.o.flags runs to set a shell var used by, or is directly
+referenced by, bear.o.do.  when would this happen?  if it exists, run
+it just before running the target's do script, in a subshell to avoid
+cluttering the env of other targets?  flags would allow detailed
+customization on a file basis of the general rules in the library, to
+avoid many nearly-identical scripts.  if variable not defined before
+do script, define a default in the do script.  don't want to take this
+to extreme that do script not usable without a flags file to set it
+up.  make flags a standard file in .dep file, copied into target dir
+only if not already there (to make customizations last past
+state/target/(dodep?) deletes), put defaults there, and just use the
+vars in do script?  there are alternatives, such as defining vars in
+the script that calls credo, but flags for a recursed-to target may be
+different than the top level.  do file could be edited (automatically)
+to insert vars at start, but this customization would have to be
+reapplied (addenv $target $var (value with spaces); rmenv $target
+$var) each time dodep regenerated.  I like the controlled editing with
+addenv and rmenv, and its parallels with adddep and rmdep.
+
+
+If you modify a command-line argument that changes the tool’s search
+path, you need to recompute each object file’s dependencies.
+
+
+each object file’s dependencies.  For example, if you change the include
+
+Note: findh
+
+
+example, if you change the include search path (-I) or library
+
+Note: needco
+
+
+"berries.h" then the following two command lines result in different dependencies:
+
+Note: If these are set in $target^.env, then when they change $target
+will be rebuilt, because one of its dependencies changed.
+
+
+then the following two command lines result in different dependencies:
+
+Note: $cc $includes -c $c $cc at top level if constant for build.
+$include in $target^.env pulls together header paths defined by
+dependent targets (eg libraries).  $c composed in $target^.do.
+
+
+If a source code file changes, it’s possible for the set of other
+files it depends on (via #include or import) to now be different.
+
+
+Assuming that you precached the file’s dependency information (using a compiler
+
+Note: gcc -M
+
+
+precached the file’s dependency information (using a compiler or a scanner),
+
+Note: findh
+
+
+if the included header file is itself an autogenerated file.  Somehow
+the build system must determine whether that newly included header
+file is up-to-date.
+
+
+autogenerated header file must be recompiled before the source file.
+
+Note: dodep (c cc c o) bear.o
+adddep bear.o `{findh bear.c}
+dodep (psmith list2h list h) food_gen.h credo food_gen.h
+adddep food_gen.h `{findh food_gen.h}
+dodep (psmith list2h list h) meats_gen.h
+credo bear.o
+
+
+if food_gen.h included yet another header file (say, meats_gen.h) that
+was also autogenerated?  You might not detect this new dependency
+until food_gen.h is regenerated.  Therefore, you must regenerate
+meats_gen.h before compiling bear.obj, but only after food_gen.h.
+
+Note: creating a target may reveal or modify its dependencies, in
+which case credo the target again.  since the dependencies changed the
+dependencies and the target will be rebuilt.  since this second
+rebuild changed no sums, the do script won't be called again.
+
+
+when a shell script is used as a tool and has recently been modified.
+In this case, the developer also needs to modify the build description
+file so that it hard-codes the new dependency relationship.
+
+Note: /lib/do/$smith/$tool.$inext.$outext.dep:0 $changedfile
+
+
+For build tools that use file system monitoring, the tool automatically
+detects the change in dependencies, with no human intervention.
+
+
+the first step was to create a complete dependency graph, possibly
+with some of it being cached since the last time you invoked the build
+tool.  The second step is to figure out exactly which files were
+modified since the last build took place.  Files that haven’t changed
+and that don’t depend on other files that have changed don’t need to
+be recompiled.
+
+
+to creating a dependency graph, significantly fewer opportunities
+exist for errors
+
+Note: eg, regression due to restoring from backup or tar file or
+earlier clearcase version
+
+
+All modern operating systems keep track of when a file was last
+written to, and the build tool can easily query the file system for
+this information.
+
+Note: Why not expand the filesystem to recalculate and store
+checksum/md5sum/hash when a file is (fully) closed?  if updated at
+each close, query hash again to detect coherent changes.  if at each
+write, detect partial changes.
+
+
+In traditional Make-based systems, a file is considered to have been
+modified if it has a more recent time stamp than any of its derived files.
+
+
+a file can be “touched” to modify its time stamp, without actually making
+any real changes to the file.  This is useful when forcing a file to be
+recompiled for some reason (such as recovering from bad dependencies).
+
+
+delete the output file if the compilation fails for any reason.
+Failure to do this causes the half-created output file to appear as if
+it’s newer than the source file.
+
+Note: or save the previous version to restore (reold feature of credo)
+
+
+if a source file has been restored from a filesystem backup, the time
+stamp of that file probably reflects the last point in time the file
+was modified, which was sometime before the backup was taken.
+This may be a much older time stamp than when the object file was
+last compiled.
+
+
+the final step of the build is to create a .stamp file that
+specifically marks the point in time when the last successful build
+completed.  When a developer requests a new build, the tool examines
+all the time stamps on all the files in the build tree, without even
+considering the dependency graph.  If any newer files exist, the
+entire tree is cleaned and then rebuilt.
+
+
+the build tool spends a lot of time querying the file system to
+determine each file’s current time stamp.
+
+
+the build tool and the file system to have synchronized clocks;
+otherwise, their ability to compare time stamps will fail.  This isn’t
+usually a problem on a standalone machine where all files are stored
+on the same disk, but problems can occur in a network file system
+environment.
+
+
+Using checksum (or hashing) techniques such as MD5 or SHA, it’s
+possible to obtain a numeric fingerprint (such as a 128-bit number)
+that summarizes the content of the entire file.  These checksum
+methods are not guaranteed to uniquely summarize the content of a
+file, but if two files have the same checksum value, it’s extremely
+likely that the files have the same content.
+
+
+In large projects with thousands of source files, the time required to
+compute all the checksums might be unacceptable.
+
+
+simply touching the file won’t make it appear to have changed.  If the
+content is the same, the checksum will be the same, and no
+recompilation takes place.
+
+
+a change in a code comment won’t cause the output of the C compiler to
+be any different than last time (assuming that no time or date stamps
+are embedded in the output file).  Therefore, the build tool deduces
+that the linking phase can be skipped
+
+
+Build systems that use a large number of autogenerated files might end
+up touching too many files, causing the entire tree to rebuild.  With
+the checksum method, only files that actually ended up being different
+will trigger recompilation of other files.
+
+
+perform the checksum operation only if the time stamp on the file has
+actually changed.
+
+
+This optimization works well because reading a file’s time stamp is
+much faster than computing the checksum.
+
+
+GNU move-if-change script, it’s possible to update the target file’s
+time stamp only if the file content is different from the last build
+invocation.  The trick is to generate the new content into a temporary
+file, but copy that temporary file into the target location only if
+the content has changed.  If not, the file isn’t copied and the time
+stamp isn’t updated.
+
+
+an object file should have a dependency on the tool’s command-line options.
+
+
+A build tool that supports this feature must have some mechanism for
+storing each object files command-line options.
+
+Note: depend on /env/* files (current values) or
+($target|default).*.env files (persistent values) specific to source
+files and the operation in the do script (usually stored in the
+corresponding dep script).
+
+
+the version-control tool (such as CVS or Subversion).  When these
+tools update the files in your source tree, they can provide the build
+tool with a list of files that have changed.
+
+
+The clearmake build tool is tightly integrated with the
+version-control tool and knows exactly which version of each input
+file was used to generate an object file.  It then queries the
+version-control system to determine whether any of those input files
+have been modified.
+
+Note: config rec By asking the IDE for a list of files that have
+changed (since the time of the last build), the build tool avoids
+querying each file to see if it’s different.  Clearly, this solution
+assumes that the developer doesn’t change source files using any other
+tool or directly from the operating system’s command line.
+
+Note: also, that all copies of the ide talk to each other and share
+the list of changed files a log-based tracking system, you can ask the
+file system for the list of files that have changed since the last build.
+
+
+most file systems don’t support this functionality.  In any case, it
+might not work well in a networked environment where files can be
+modified from many different computers.
+
+
+the first step was to construct the dependency graph, and the second
+was to identify which files have changed since the build tool was last
+invoked.  This section discusses the third step, in which the
+compilation tools are actually put into action.  For
+
+Note: dep files (target dir), defaults per do files (instantiated and
+customized by target from library), tools (adddep rmdep addenv rmenv)
+to maintain them, and tools to search headers (findh) and object files
+(coneed) for dependencies.  Note: md5sum developers perceive that the
+build system is doing nothing, until they start to see the commands
+being executed.
+
+Note: eg, emake parse step a particular file that is currently
+out-of-date must be regenerated after each of its dependencies has
+been regenerated
+
+Note: credoer Note: credeper causes the files to be recompiled from
+left to right.  Note: dodep (c ld.so o elf) petstore dodep (c cc c o)
+petstore.o adddep petstore.o animals.h adddep petstore animals.so
+dodep (c ld.so '' so) animals.so adddep animals.so dog.o cat.o dodep
+(c cc c o) dog.o adddep dog.o animals.h dodep (c cc c o) cat.o adddep
+cat.o animals.h execute multiple jobs in parallel.  These computers
+include single-CPU systems that have excess capacity, multicore
+systems, and distributed clusters of computers that share access to
+the same build tree.
+
+Note: eg, via commander workspace because all three of the .obj files
+depend only on source files instead of anything that needs to be
+regenerated, they could be compiled in any order.
+
+
+build tool will likely handle them in the order in which they’re
+specified in the build description file.
+
+
+Because dog.obj and cat.obj don’t have dependencies on each other,
+they can compile in parallel.  The same is true for animals.dll and petstore.obj.
+
+
+Because animals.dll must wait until dog.obj and cat.obj are complete,
+and because petstore.exe can’t start building until animals.dll is
+complete, you don’t see any further speed-up.
+
+
+on cat.obj was missing: In this case, animals.dll is incorrectly
+scheduled Note: see what credo does with simultaneous access to the
+same file.  best solution for this case would be for second credo
+process that builds cat.o to block until the lock on cat.o is
+released, causing animals.so to delay until after cat.o can be looked
+at again.  Most likely, animals.dll will observe cat.obj changing as
+it’s being read, resulting in a build failure.
+
+
+this missing dependency wouldn’t cause problems if only one job was
+executed at a time.  The two files would always be executed in the
+correct order, and nobody would notice anything wrong.  This is simply
+a side effect of the build tool always sequencing the jobs in the same
+order, regardless of dependencies.  When building many jobs in
+parallel, the problems start to show up.
+
+
+The key to ElectricAccelerator’s success is that it uses the file
+system monitoring technique to determine each compilation tool’s exact
+set of dependencies.
+
+
+ElectricAccelerator notices that the job has just written to a file
+that was already used by a previous job
+
+Note: instead of keeping a history, we could rerun dependency graph
+until nothing changes.  either way, there needs be some nonlocal
+informatio transfer.  in the case where we repeat until nothing built,
+we relay the targets built back through the graph.  maybe if each
+target checked targets built across all dependencies, and rebuilt (in
+series?) those with duplicate files built.  this might overdo it,
+since they could have been built in the same order.  see if there's an
+error case this technique fixes without going overboard.  case needs
+to have it matter (change checksum) of file the second time it's
+visited.  if we always rebuild till it settles, files which include
+fine timestamp will never stop.  The next step is for Electric
+Accelerator to rerun the job that was performed in the wrong order.
+
+Note: not only that job, but all the targets that depend on files
+changed by the rerun, files that depend on those, etc.  rerun the tree
+saves figuring out a specific subtree to run, if not obvious or
+localized enough.  problem with credo is that we'd rather not have
+nonlocal shared info, so we can compose subtrees without worrying
+about two parallel runs not having the same meta-information (state).
+ElectricAccelerator also takes note of this situation (known as a
+conflict) and ensures that future invocations of the build tool are
+properly aware of this dependency.
+
+
+A build tool must follow a three-step process.  First, it builds up
+the dependency graph to determine which files are derived from which
+other files.  Next, it checks the file system to determine which of
+those files have been modified since you last invoked the build tool.
+Finally, it calls upon the individual compilation tools to bring all
+the object files, libraries, and executable programs up-to-date.
+
+Note: interwoven at the file level.  credo doesn't need to know the
+dependencies of a file, whether they're up to date, or how to build
+it, until it really needs to.  this info won't fall out of date and
+need to be updated before a target starts, but also means we don't
+save that information globally to optimize the build to build each
+file only once, and ensure only one version of a file is used in a
+tree.  The goal is to predict which files a compilation tool will
+access and make sure that all prerequisite files are first brought
+up-to-date.  Although it’s possible to cache some of this information,
+you need to make sure the cache is kept up-to-date with ongoing
+changes to build description files, source files, and compilation flags.
+
+Note: accept lazy or eventual consistency, if we know when we're
+stable?  credo -r option to have credo script check relay of actually
+built targets (have credoer add these to $target^.relay, to expose
+them to further targets without adding code in $target^.do), and
+repeat rebuilt targets until list is empty?  When determining whether
+files need to be recompiled, you can query each file’s time stamps,
+compute its checksum, or use one of several more advanced methods.
+
+
+Finally, having an accurate dependency graph is important to ensure
+that compilation commands are executed in the correct order,
+especially when the workload is executed in parallel across multiple CPUs.
+
+
+in Chapter 5, “Subtargets and Build Variants,” build variants enable
+you to generate a range of release packages, such as for different CPU
+types or different software editions.
+
+
+Debugging support: Enables source-code level debugging of a running
+program, which helps a developer identify the location of bugs.
+
+
+Profiling support: Determines how a program spends its execution time,
+enabling a developer to optimize the most time-critical portions of
+the code.
+
+
+Coverage support: Determines which lines of code are being executed.
+This gives developers a better understanding of whether their code has
+been fully tested.
+
+
+Source code documentation: Provides formatted documentation of code
+APIs, in a format such as HTML.  Developers can understand the code’s
+main entry points without diving into the detailed code itself.
+
+
+Unit testing: Validates whether the individual units (modules or
+functions) of a program are performing correctly instead of testing
+the release package as a whole.
+
+
+Static analysis: Identifies common programming errors at compilation
+time, in contrast to finding bugs when the program is executing.
+
+
+Each of these build variants requires support from the build system,
+either by invoking a special-purpose compilation tool or by passing
+additional flags to the standard compiler.
+
+
+the compiler must record the following: • The memory address and data
+type of each variable in the program • The start address of each
+function within the machine code, along with its list of parameters •
+The memory address of each individual line of source code Using this
+information, a debugger can fetch the necessary values from memory
+(and the CPU registers) and display the source code relating the
+current line of code being executed.  It can also read the value of
+variables and display them in the appropriate data format, such as a
+character, number, string, or pointer.
+
+
+which is enabled by adding a command-line option (such as -g).  Note:
+dodep (gcc gcc-g c o) $stem^.o credo $stem^.o # or dodep (gcc gcc c o)
+$stem^.o CFLAGS = -g credo $stem^.o GNU debugger [67] traces the
+execution of a program.  Entering the list command shows the first ten
+lines of the program’s source code.
+
+
+a breakpoint is set at line 7 of the code (at the start of the for
+loop) by invoking the break command.
+
+
+continue on a line-by-line basis (as requested by the next command).
+
+
+Some debuggers provide a graphical display of data structures, showing
+each structure or class as a box, with references between these
+structures represented by arrows.
+
+
+Passing the –g option to GCC generates debug information, encoded in a
+format such as DWARF [69].  When an executable program is created, GCC
+inserts the metadata into a special section within the executable
+file.  GDB extracts this information to debug the program.
+
+
+For Java development, you might want to look at the jdb command-line
+tool (part of the JDK [30]), although most IDEs provide Java debugging
+as a built-in feature.  The same is true for C# and the Microsoft
+Visual Studio tools.
+
+
+profiling a program means that you can determine how long the CPU
+spends executing each part of the code, or how much memory is used to
+store each type of data.
+
+
+all C source files to be compiled with the special -pg Note: dodep
+(gcc gcc-pg c o) # or, to combine with other flags, cflags = -pg
+$cflags dodep (gcc gcc c o) where o = $1 stem c = `{crext c $o} if {no
+$cc} {cc = gcc} $cc $cflags -o $o -c $c Interestingly, only 0.03
+seconds (see the self seconds column) was spent executing these three
+functions, whereas the program itself ran for a total of 15 seconds.
+This indicates that the program is I/O bound instead of limited by the
+performance of any functions in the code.
+
+
+operating system took periodic snapshots to determine which function
+was executing at each point in time.
+
+
+compiler to add machine code to count how many times each function is called.
+
+
+When profiling each function’s use of memory (not shown in the
+example), the same method is used to count the number of times memory
+chunks are allocated or freed.
+
+
+which lines of code, or paths within the code, are actually being executed.
+
+
+running the GNU gcov tool [25] over a program that was compiled with
+the GCC -fprofile-arcs and -ftest-coverage command-line options.
+
+
+count the number of times a decision is made within the program, even
+down to the level of individual Boolean tests.
+
+
+As with profiling, additional “counting” instructions are inserted
+into each object file, assuming that the necessary command-line
+options are passed to the C compiler.  Naturally, this makes the
+object code slightly larger and slower than a program compiled without
+the coverage instrumentation.
+
+
+generate web-based API documentation.  This includes the high-level
+detail of functions, methods, classes, variables, and constant
+definitions, but without going into any of the low-level
+implementation detail.
+
+
+automated tools to extract the information directly from the source
+code and then generate the corresponding web page.
+
+Note: manual Javadoc extracts text from the code comments and applies
+special meaning to Javadoc tags such as @param and @return.
+
+
+invoking each function with a predetermined set of input parameters and
+then checking the return value to ensure that it matches what was expected.
+
+
+Studying the program’s source code, a static-analysis tool can
+pinpoint lines of source code where a bug might be lurking.  The
+developer reviews this information and decides whether there’s a true
+problem to fix.
+
+
+A static-analysis tool is good at finding commonly recurring patterns,
+identified by a brute-force approach.
+
+
+The first approach is to build the standard software release package but
+provide an extra command-line flag to request that metadata be added.
+
+
+request that metadata be added.  For example: • gmake DEBUG=1 all:
+
+Note: DEBUG = 1
+credo | sh
+
+
+standard release package, but with additional debugging information
+• ant -Dcoverage=yes:
+
+Note: JAVAFLAGS = -Dcoverage=yes
+credo $java.class
+
+
+software, with added instrumentation for collecting coverage data
+• scons profiling=on:
+
+Note: cflags = -pg
+credo $program
+
+
+either select which compilation tool is used (the GNU Make CC
+
+Note: dodep (c CC c o) $file.o
+CC = 6c
+credo $file.o
+
+
+the flags passed to the standard compiler (the GNU Make CFLAGS
+
+Note: dodep (c cc-cflags c o) $file.o
+cflags = -pg
+credo $file.o
+
+
+add a completely new section in the build description file stating which
+commands, tasks, or builder methods were used to generate the metadata.
+
+
+A program’s metadata includes debugging support, coverage support, and
+profiling support, which enable developers to view their program’s
+runtime behavior.  A document-generation tool summarizes the program’s
+main functions or methods, making it easier to visualize the program’s
+structure.  Finally, unit testing and static analysis provide details
+on a program’s actual or suspected bugs.
+
+
+adding build flags, alternate compilation tools, or new build targets.
+
+
+copy the required executable programs, dynamic libraries, and data
+files out of the object tree and place them in a release package.
+This is also the point at which a version number is added.
+
+
+layout of the files within the release package must match the desired
+layout on the target machine.
+
+
+customize some of the target machine’s system configuration, such as
+adding new user accounts or access groups, all of which could be based
+on input the user provides during the installation process.
+
+
+For software that uses interpreted byte-codes, such as Java or C#, the
+correct version of the virtual machine must also be installed.
+
+
+zip utility, which compresses each of the input files and joins them
+into a single large file.  It also takes note of whether the input
+files were inside subdirectories so that it can reproduce that same
+hierarchy on the target machine.
+
+
+tar tool to create an archive and using the gzip or bzip2 tools to
+compress the archive file.
+
+
+copy the necessary files out of the object tree and place them in a
+temporary holding directory (see Figure 13.2).  The files should be
+arranged in this directory using the same layout they’ll have on the
+target machine.
+
+
+When the temporary holding directory is fully populated, you invoke
+the archiving tool to package everything into a single file.  This
+file is delivered to the end user, who then runs the same archiving
+tool, but in the reverse mode, to extract the files onto the target
+machine.  At that point, the software is ready to be executed.
+
+
+They receive a copy of the file via the Internet or on a CD-ROM and
+install it on their personal machine.  They first create a directory
+in which to install the software, and then they execute an unarchive
+command to retrieve the individual files.  Unless the user performs
+some manual customization steps, the files will be in the exact state
+as when they were archived in the first place.
+
+
+most archive files contain an installation script as one of their
+included files.  The user extracts the archive in the usual way and
+then executes a custom-written installation script to complete
+the process.
+
+
+This installation script can perform an arbitrary set of operations,
+including moving files to a different file system location, changing
+the ownership of files, adding data to the Windows Registry, or adding
+new user accounts.  The installation script can also interact with the
+user, to customize the way the software is installed.
+
+
+ISO 9660 images [89]: This is the standard format in which CD/DVD-ROM
+images are produced.  Instead of creating a zip file, the packaging
+script creates a raw disk image, ready to burn onto a CD or DVD.  The
+disk image file is an exact replica of the CD/DVD file system that’ll
+be mounted onto the target machine.  The target machine’s operating
+system loads and executes scripts or other programs when the CD/DVD is
+inserted or when the computer first boots.
+
+
+Mac OS X .dmg images: This is similar in nature to the ISO 9660
+format, although it is used specifically for Mac OS X systems.
+
+
+Self-extracting archives: This type of archive is similar to a ZIP
+file, except that the archive is an executable program in its own
+right.  When the archive file is executed, the embedded files are
+extracted onto the target machine and the installation script is run.
+This provides a single extract/install process instead of manual
+installation.
+
+
+the lack of a suitable input value could cause a corrupt release package.
+
+
+display an informative message to let the user know what’s expected.
+
+
+If any of the commands inside the script fail, the entire script
+should terminate and return a suitable exit code.
+
+
+carefully watch the build log for subtle error messages,
+
+Note: wuce let the whole build run, to find all errors, and created
+one report with error count if you created a release package from an
+object tree that hadn’t been fully built, the packaging script
+wouldn’t be able to copy all the required object files,
+
+
+When an error does occur, always provide a meaningful error message to
+let the developer know exactly what went wrong.
+
+
+Support the capability to package files directly from the source tree
+instead of only from the object tree.
+
+
+tree instead of only from the object tree.  Adding the %SRCDIR% Note:
+srcdir plain-text files that are never customized by the build
+process, there was no need to copy them into the object tree
+
+
+With dependency analysis, the build tool copies files to the holding
+directory only if they’ve been modified since the last time the
+packaging step was performed.
+
+
+The packaging script takes very little time to set up the links; the
+archiving tool must follow the links and retrieve the true content of
+the files.
+
+
+when a file that was originally listed in the packaging script is removed
+(the copy command is removed), the stale version of that file remains
+in the holding directory instead of being overwritten or deleted.
+
+
+instead of storing each executable program, dynamic library, or data
+file in an arbitrary location within the object tree, you place them
+in the holding directory in the first place.
+
+
+the archiving method of creating a release package works well, but
+primarily for target machines that have a predictable file system layout.
+
+
+each RPM file stores the package’s name, the version number associated
+with this particular release of the package, the date it was created,
+the author’s name and email address, the URL from which the package
+can be downloaded, and details of the software’s license agreement.
+
+
+having everything in a consistent format makes it possible for
+external programs to read and act upon the various fields.
+
+
+an RPM file contains a number of embedded scripts.  An arbitrary
+sequence of shell commands can be executed on the target machine, both
+before or after the files have been installed and before or after the
+files have been uninstalled.
+
+
+If the required packages are missing or the version isn’t acceptable,
+the system won’t allow the new RPM file to be installed.
+
+
+The RPM installation mechanism also validates the type of CPU required
+to execute the software.
+
+
+RPM maintains a database to record which packages are currently
+installed on the target machine, so the RPM tool has the means for
+uninstalling the software, even if the original RPM file is no longer
+available.
+
+
+RPM gives an error if you try to remove a package that’s required by
+one or more other packages.
+
+
+the RPM tool would warn you if you made local customizations and would
+refrain from overwriting it with a new version.  It would instead
+leave both the old and new configuration files in the /etc/apache2
+directory and request that you manually resolve any conflicts or changes.
+
+
+Deb files use the dpkg and apt commands for manipulating package files.
+
+
+This bug-fixing work is done in isolation from new-feature
+development.  If this approach isn’t followed, the customers are
+forced to receive new features when all they wanted was a bug fix.
+On the other hand, the bug fix must be forward-ported to the new
+development branches to ensure that the bug is fixed in future releases.
+
+
+At any point in time, the build description must match the current set
+of source files and must be changed in unison with the source code.
+
+
+SCM focuses on managing the change of software over time, which also
+includes tracking defects and new features.
+
+
+As a general rule, all human-created source files should be stored in
+the version-control system.  In addition to source code, this includes
+the build description files that must exactly match the source code
+being compiled, even when multiple code streams (releases) are being
+maintained.  In contrast, this doesn’t include any files that are
+generated as part of the build process, such as object files or
+executable programs.
+
+
+Build description files: Describe the end-to-end process of compiling
+the source code.  • References to tools: Describe which compilation
+tools should be used.  • Large binary files: In the same way that
+small source files need to be version-controlled, large binaries files
+must be stored somewhere.  • Source tree configurations: Describe the
+way a full source tree is constructed.
+
+
+If any of the steps are left for the developer to execute manually,
+the build process becomes error prone and is gradually forgotten over time.
+
+
+you’ll see an increase in the number of broken builds when important
+steps are accidentally missed.  Also, developers become frustrated
+when they need to closely track the progress of their build and must
+be ready and waiting to enter the next command in the sequence.
+
+
+make help (or the equivalent command in another build tool) gives
+developers useful information on how to build their code:
+
+
+The all target is guaranteed to build the full product from beginning
+to end, without requiring the user to execute the steps independently.
+
+
+The build tool invokes the compilation tools and passes in the
+necessary command-line parameters, such as source or object filenames.
+
+
+if gcc is stored in a nonstandard location (such as /tools/bin), or if
+the user has nonstandard directories in their $PATH environment
+variable, the wrong version of gcc could be used.
+
+
+language concept of generics was introduced
+
+
+variable is now a reserved word in Java 1.4, whereas older Java
+programs were free to use assert as a normal variable name.
+
+
+For build systems that choose to halt if they encounter compiler
+warnings, using a newer compiler causes build failures.
+
+
+Upgrading the tool to fix the bug makes the developer’s workaround invalid,
+
+
+Instead of completely disappearing, however, the old options are
+marked as deprecated for a period of time, which means that they’re
+still accepted for now but will be removed in an upcoming release of
+the tool.
+
+
+multiple versions of a compilation tool can be installed on the same
+build machine.
+
+
+the build description file contains the full absolute pathname of the
+compilation tool.  This path must include some type of version number.
+
+
+When using absolute pathnames, the user’s search path ($PATH) isn’t
+examined, which removes the chance of using the wrong compiler.
+
+
+all build machines have an identical set of tools installed and that
+they’re available in the same file system location.
+
+
+change the tool reference in the R1 branch to /tools/bin/gcc-3.3.
+That would certainly work for any new bug fixes that you placed in the
+R1 branch, but it wouldn’t help older versions of the software that
+you might need to reproduce.
+
+
+As long as you need to reproduce older versions of software, you must
+keep the necessary compilers around.
+
+
+hard-code the value of the $PATH environment variable instead of
+relying on the user to have the correct search path already configured.
+
+
+If the developer expected to use the javac program from the
+/tools/java-1.5/bin directory, but there was also a javac program in
+/usr/bin, the incorrect compilation tool would be used.  This problem
+might take a while to resolve, but at least the incorrect behavior is
+consistent for all users (instead of only one or two developers
+suffering from the problem).
+
+
+If you had specified the full path to the tool, it would be displayed
+on the build output log: $ make all /tools/java-1.5/bin/javac ...
+This distinction is important if developers want to manually cut and
+paste one of the lines from the build log.
+
+
+version-control compilation tools in the same way the source code is versioned.
+
+
+The build description files must contain tree-relative paths for each
+tool, but you no longer need to have version numbers in the pathname:
+
+
+using a version-control tool that does a good job of storing large
+binary files.
+
+Note: Use an artifact management system to store the tool ready to run.
+An early step copies and untars the tool.  Many programs use data
+files such as graphic images, sounds files, and third-party code libraries.
+
+
+Each directory must be uniquely named to describe what the blob is
+used for and must contain a subdirectory for each version of the blob.
+
+
+version-control a large number of files in a single group instead of
+trying to manage a unique version number for each individual file.
+
+
+A developer must somehow know in advance which set of directories are
+required and must have external knowledge of how that mapping has
+changed over time.
+
+
+commit the mapping to a well-known location in the version-control
+system.
+
+
+The usual practice is to prepend autogenerated files with a code
+comment of this form: /* Warning – auto-generated file – do no edit */
+
+
+The developer must figure out whether Data.java is a true source file
+that has yet to be committed to the repository or whether it’s an
+autogenerated file that should never be committed.
+
+
+everything in a single object directory
+
+Note: clean targets should be more tightly bound to build targets, to
+control what user wants to rebuild developers who resort to a clean
+build because of dependency problems.  They could be stuck with a
+build tree in which files are not being rebuilt when they should be,
+but they also suffer from not being able to delete those files to
+start again with a fresh tree.
+
+
+distinguish one CPU’s object files from the other.
+
+Note: file.6 and file.8 instead of reusing file.o.  nothing magical
+about the names, just add productions to and from 6/8.  using same dir
+can also prevent unnecessary copies of input or output file which do
+not vary between platforms.  rename with number output files which do
+vary per platform.  If you care about keeping your source code safe
+and secure, you’ll probably store it on the most reliable backed-up
+disk you have.  In contrast, object files can easily be regenerated,
+so you’d instead use the cheaper disk.
+
+
+checking out files in read-only mode.  (Some tools require this by
+default.) When the source tree is rebuilt, the build system fails when
+it tries to write to the generated file.  The developer sees that the
+file was committed by mistake and removes it from the version control
+system before continuing the work.
+
+
+speed up the build process by pre-compiling part of the build tree
+that doesn’t change very often, such as a third-party library.  By
+precompiling the library and committing the resultant files to the
+version-control system, developers can avoid compiling the library for
+themselves.  A special build target must be used to build the library,
+so it won’t be re-created by default and, therefore, won’t be marked
+as “modified.”
+
+
+The same script is used for all code branches and doesn’t need to
+behave any differently for one branch of the source code versus
+another.  Also, the script cares only about the build environment as
+it exists now, not how it was in the past.
+
+
+Each branch in the version-control system could have a different
+configuration file;
+
+
+script must still be kept under version control, but not in the same
+place as the product’s source code.  The script has a life cycle of
+its own, and changes to that script must be version-controlled in a
+completely different version-control system.
+
+
+three-number approach
+
+Note: /lib/do/credo/version:1.2.3 /lib/do/gnumake/version:3.80.1 the
+format X.Y.Z (Build B), where • X increments when major feature
+changes are made to the software.  This often means that configuration
+and data files that were used in previous versions of the software are
+no longer compatible (and must be upgraded).  • Y increments when
+minor feature changes are made.  These changes add new capabilities to
+the software but don’t significantly change the way the software is
+used or result in a disruptive upgrade.  • Z increments for every new
+bug fix (or set of bug fixes).  No new functionality is added to the
+software, but the user can rest assured that the software now has
+better quality.  • (Build B) increments with every release build of
+the software.  The customer need not be concerned with this number: It
+simply indicates how many times the test group has received a new
+package to test.  It doesn’t say anything about the new features or
+bug fixes that may be present in the package.  This number is
+typically large and has no relation to the values of X, Y, or Z.
+
+
+If developers went back to an earlier version of the software, the
+version-control system would show the matching version number.
+
+
+version 2.3.1-rc2 (in this example) must be recompiled to create
+version 2.3.1 and then retested
+
+
+version string should always be embedded in the name of the software
+package
+
+
+Help, About menu on the GUI or enter some type of version command into
+a command-line tool, they should see the version string.
+
+
+To support multiple versions of your software on the same target
+machine, always include the version number in the product’s
+installation directory.
+
+
+store the version string in a well-known data variable (in the data
+segment) instead of as a constant string.
+
+
+ensure that whoever uses the software package can determine who built
+the software and roughly what set of functionality to expect from it.
+
+
+not all target machines have sufficient processing power to run a full
+build system.
+
+
+not have the necessary user interface (keyboard and mouse) to develop
+software.
+
+
+a set of cross-compilers that execute on the build machine but
+generate code for the target CPU.
+
+
+download the software package to the target machine, start and stop
+the program remotely, and then use an interactive debugger to query
+the state of the target CPU.
+
+
+compile their code for the target machine but still test the software
+on the build machine instead of downloading it to the real target
+hardware.
+
+
+Because a Java program can run on any machine type, regardless of the
+target architecture, much of the software can be executed and tested
+on the build machine.
+
+
+physical devices that are available only on the real target, but these
+can often be simulated on the build machine.
+
+
+When the CPU architecture differs from the build machine, the emulator
+interprets the machine instructions, giving the appearance the
+software is actually being executed.
+
+
+Any differences from one build machine to the next can cause build
+failures.
+
+
+you could manage with a single build platform if you could
+cross-compile your source code for each of the target machines.  The
+only requirement is that cross-compilers and cross-libraries be
+available for each target platform.
+
+
+If you don’t use a vendor-approved operating system, you’ll be forced
+to switch to one that is, or perhaps reject the whole idea of using
+that tool in the first place.
+
+
+To build the full software package, part of your build tree must be
+compiled with one tool (and, hence, one build machine), with another
+part of the tree compiled on a different machine.
+
+
+The build system will grow over time to take advantage of the
+operating system’s features.  Given enough time (normally 2 to 3
+years), people will notice that newer versions of that same OS are now
+available and have additional features they’d like to use.  Meanwhile,
+the version you’re currently using is no longer supported.
+
+
+Build machines tend to have a life span of 5–8 years.  Even after 3
+years, they’ll be much slower than any new hardware you can buy.
+
+
+the operating system is losing popularity in the market and that
+there’s less support among tool vendors.
+
+
+Until the build machine platform can be standardized, there’s good
+reason to be working with two different types of machine.
+
+
+Many people prefer to work with a certain operating system and
+sometimes go out of their way to make the build system work on their
+own platform.  If the system administration group doesn’t control the
+situation, you can end up with a wide array of build machines.
+
+
+If your new build machines (with their newer operating system) cannot
+compile the old source code, your only option is to maintain two or
+more distinct types of build machine.
+
+
+If you make a point of explicitly upgrading your build machines and
+modifying the build system accordingly, you’ll be less likely to face
+these urgent situations.  Being diligent about moving customers to
+newer software releases is also a good tactic to help with EOL
+releases.
+
+
+Instead of manually installing new software on each build machine, use
+some type of automation to do the job.
+
+Note: Don't forbid users from installing additional software, or the
+system will never improve.  Instead tolerate it until the build fails,
+then forbid that software version.  performing an obscure sequence of
+steps that use special file formats or one-off tools.
+
+
+compiling a small or optional part of the software.
+
+
+keep track of magic machines and ensure that any tools are made
+available on the more common build machines.
+
+
+The OS image is simply a large disk file that can be loaded into a
+virtual machine player at any point in time and that can be duplicated
+and distributed to any developer who needs access.
+
+
+maintainers of open-source projects can’t dictate exactly which
+operating system to use to compile the source code.  No single company
+owns the build machines, so the build system must work correctly on
+any reasonable platform.  New operating system versions are released
+frequently, and users expect their existing software to compile on
+each new build machine.
+
+
+Mac OS X, Linux (Debian, SUSE, Ubuntu, Red Hat, and Gentoo, among many
+others), FreeBSD, NetBSD, OpenBSD, Solaris, HP-UX, AIX, Xenix, and
+Minix.
+
+
+Most open-source projects come with detailed written instructions on
+which packages must be installed.
+
+
+validate the version of all required packages and fail with a
+meaningful error message.
+
+
+For a build system to find a required tool, it must depend on the user
+to have the $PATH set correctly or otherwise play a guessing game to
+figure out where each tool is installed.
+
+
+each operating system packages a different version of the tool,
+sometimes up to a year or two old.  In other cases, the operating
+system has its own unique implementation of the tool, which has a life
+of its own
+
+
+BSD-based UNIX systems (NetBSD, FreeBSD, and OpenBSD) use the BSD
+version of the Make tool.  This tool accepts a different style of
+makefile compared to GNU Make, which is the default on Linux systems.
+
+Note: /lib/do/make-bsd/ If you recompile the software from source
+code, there’s a good chance that the problem will go away, because it
+now depends on a library that’s available on your system.
+
+
+Software packaging systems, such as the Red Hat Package Manager (see
+Chapter 13, “Software Packaging and Installation”), enable a user to
+install a precompiled software package in a matter of seconds, while
+also ensuring that all prerequisite packages are first downloaded and
+installed.
+
+
+Perl or Python.  These languages provide a platform-independent way of
+accessing the system’s functionality.
+
+
+Cygwin [82], which provides a Linux-like environment on top of
+Microsoft Windows.
+
+
+A build system that relies on GNU tools is more likely to support
+multiple platforms.
+
+Note: 9base to support linux port of credo?  how close is rc to sh?  a
+simple way to manage the differences.
+
+Note: see Inferno's build system Autoconf inspects the build machine
+to determine which functions are available and how they’re
+implemented.  The software uses this information to customize the set
+of header files or functions used,
+
+
+configure.ac.  This is the master file that describes the various
+operating system features the software needs.  The author lists the
+compilation tools required to compile the software, the important
+C-language header files, and some of the library functions that the
+program uses.
+
+
+reads the configure.ac file and generates a corresponding UNIX shell
+script, named configure.  The purpose of this script is to detect the
+location of the required compilers and determine whether the necessary
+header files and library functions are available on the target machine.
+
+
+config.h.in is the basis for creating the config.h header file and
+lists all the system features the software intends to use.
+
+
+prepackaged the configure script and the config.h.in file that were
+both autogenerated in the first step.  Additionally, the author likely
+provided a template makefile, called Makefile.in.
+
+
+the configure script on the local build machine.  This script
+validates each of the requirements listed in the original configure.ac
+file, and an error message is provided if the machine isn’t suitable.
+
+
+configure script is capable of handling cross-compilation of software.
+
+
+After configure finishes, the end user is left with a fully functional
+Makefile and config.h
+
+
+customized based on the features the build machine does or doesn’t
+have and take into account any of the command-line options the user
+provided to the configure script.
+
+
+configure.ac: Describes the build and target machine requirements
+• Makefile.in: Acts as a template for the makefile that will build the software
+
+
+M4 macro instructions and UNIX Bourne shell commands.
+
+
+AC_INIT is a macro that takes the software package’s name and version
+number as input.  The AC_CONFIG_HEADERS macro states which header file
+should be used to record the available system features.  That is, you
+want to create a customized config.h by using config.h.in as a
+template.  Finally, the AC_CONFIG_FILES macro specifies that Makefile
+should be derived from Makefile.in, but with the template’s parameters
+replaced by their actual values.
+
+
+The AC_PROG_CC macro states that the configure script must locate a
+usable C compiler, and the variable $CC should be assigned the name of
+that compiler.
+
+Note: . /lib/do/autotools/progcc default.cc[.env] locate a suitable
+executable program (that has the name java) within the user’s shell path.
+
+Note: . /lib/do/autotools/progpath default.java[.env] java If the tool
+is found, the $JAVA variable is assigned the absolute pathname of the
+java tool.  If not, the $JAVA variable is left undefined and the
+additional Bourne shell code provides a suitable error message.
+
+
+
+
+
+if the asm.h file doesn’t exist.  Instead of aborting the configure
+script, a C preprocessor symbol (HAVE_ASM_H) indicates whether the
+file is available.
+
+
+If the functions are defined, Autoconf defines the HAVE_MEMCPY and
+HAVE_STRCPY preprocessor symbols.
+
+
+AC_REPLACE_FUNCS, this example accepts the fact that megacpy might not
+exist on the target machine and instead provides an implementation of
+that function.
+
+
+The AC_RUN_IFELSE macro uses the AC_LANG_PROGRAM macro to generate,
+compile, and execute a small C program
+
+
+Depending on whether you see the desired result, the test passes or fails
+
+
+AC_OUTPUT macro sets everything into action and generates the two
+output files, configure and config.h.in.
+
+
+
+
+
+generate the config.h.in file.  $ autoheader Given all the requirements
+specified in configure.ac, the Autoheader tool determines which features
+are present on the build machine.  For each feature, a suitably named
+C preprocessor symbol indicates whether the feature exists.
+
+
+The configure script is purposely written in a platform-neutral way.
+That is, the script should not use any nonstandard shell features, or
+there’s a good chance it won’t execute properly on the target machine.
+
+Note: try this style for credo's unixy (vs Inferno sh) scripts, or
+9base rc After users have downloaded the software, they first execute
+the configure script on their own build machine.  The script probes
+the machine to see whether it meets the requirements; then it
+autogenerates the Makefile and config.h files,
+
+
+suitable #else clause should provide an alternate way to achieve the
+same result.
+
+
+the software’s author doesn’t need to enumerate each possible
+operating system; instead, the author can focus on whether each
+specific feature is available.
+
+
+customer requirements, compilation tool requirements, and hardware
+requirements force you to upgrade your operating system.  In contrast,
+the need to support older versions of software encourages the
+continued use of older build machines.
+
+
+be more lenient and support a wider range of build machines.
+
+
+Cross-compilers:
+
+
+reads high-level interface definitions and generates the appropriate
+client stubs
+
+
+processes a domain-specific language and generates the corresponding
+Java code.
+
+
+parallel-build tool or a build-avoidance tool,
+
+
+Many tools are vendor supported, requiring payment before the tool is
+provided for installation.  Other tools are free to use and are
+available in either binary or source code form.  Of course, you can
+also design and construct your own development tools.
+
+
+If you don’t take notes, you’ll likely need to rediscover the whole
+process in the future, and next time it could be an emergency
+
+
+the URL of the web page
+
+
+exact set of commands you used to compile the software.
+
+
+which file system directory it was installed into, as well as which
+installation options you selected.
+
+
+license restrictions
+
+
+passwords, extra configuration details, and license keys.
+
+
+commands for retrieving the source code?
+
+
+If you’re managing a tool that you obtained in source code form, store
+the source code in a version-control system.
+
+
+bugs that you need to fix.
+
+
+custom features to be added.
+
+
+a newer version of the tool (downloading it from a web site), you’ll
+need to reevaluate each of your local changes and determine whether
+it’s still relevant.
+
+
+If your bug fix or new feature is applicable to other users, the tool
+maintainer is quite likely to accept your changes in the public repository.
+
+
+benefit from other people’s bug fixes and new features.
+
+
+write a shell script that automates the compilation of each tool,
+making it possible to reinstall the tools whenever you make a change.
+
+
+saves you time and frustration by fixing problems you’re hitting in
+the current tool.
+
+
+If the product doesn’t keep up with market requirements, customers may
+simply stop buying the product.
+
+
+Problems occur when the required dynamic libraries no longer exist or
+if an old tool no longer supports realistic memory or file sizes.
+
+
+support only the most recent releases and refuse to support older
+versions of the tool.
+
+
+tool’s behavior changes from one version to the next, or if the sets
+of commands or file formats are different,
+
+
+Conduct major tool upgrades at an appropriate time in your development cycle.
+
+
+fully verify that your software builds correctly and passes all
+regression tests,
+
+
+give all developers adequate warning.
+
+
+be sure that the early customer bugs have been found and fixed.
+Of course, if you’re interested in receiving the latest and greatest features,
+
+
+The build description file (such as a makefile) should contain the
+exact path of the tool, as well as the exact version number.  Adding a
+suffix to each tool’s name is one way of meeting this goal.
+
+
+When a new version is added, no changes are made to existing versions
+of the tool; instead, a totally new directory is created.  You also
+shouldn’t remove any old tools until all code branches that depend on
+them have reached the end of their life.
+
+
+the build system should access tools only via the relevant /tools/pkg
+directory; they shouldn’t depend on the nonversioned tools in /tools/bin.
+
+
+include versioned symbolic links in addition to the nonversioned
+links.
+
+
+Accessing the tools from local disk can be much faster than accessing
+them across the network, especially at peak times of the day when the
+file servers are busy.
+
+
+this approach can be time-consuming if not fully automated,
+
+Note: cd /getco/cno/ sshosts yum -y install newpkg-ver plumb
+sshosts.log in each machine dir replicate the files on a regular basis,
+or some development sites might not see the recently added tools.
+
+
+commit the tool’s source code to the same version control repository
+as the software that uses the tool.  As part of the product’s build system,
+you first compile the tool from source code into an executable program.
+
+
+tool will change regularly as developers ask for new features to be
+added to the language, so versioning the tool alongside the source code
+
+
+whenever you decide that you don’t want to pay the cost of something
+now, you often end up paying significantly higher costs in the future—
+usually with even more time pressure.
+
+
+The Lex tool reads a sequence of characters from an input stream and
+converts them into meaningful language tokens or keywords, such as if
+or then, or the numeral 176.  The Yacc tool then ensures that these
+tokens are in a logical order, according to the specific rules of the
+programming language being defined.
+
+
+When a complete input token is identified, some type of action
+(written in C code) is performed.
+
+
+the .l suffix.  This source file is translated by the lex tool into a
+C output file named lex.yy.c.  The output file contains all the
+user-specified action code, as well as the additional logic required
+to pattern-match the regular expressions against the input stream.
+
+
+call the yylex() function whenever they want to receive the next
+token.
+
+
+y.tab.c: A C source file that contains the complete parser for the
+custom-defined language.  It contains the C action code, as well as
+the necessary parsing logic
+
+
+y.tab.h: A C header file that defines the set of input tokens
+
+
+yyparse() function parses the input stream and triggers all the action code.
+
+
+Noting how a tool was compiled or installed is vital for saving time
+with future tool changes.  For tools maintained in source code form,
+be sure to keep that source code in a version-control system.  This
+helps when you need to fix bugs or reapply local changes to an
+upgraded version.  Periodically upgrade tools to take advantage of bug
+fixes and new features, as well as to avoid losing support from the
+vendor.  Finally, make sure that the tool’s executable programs are
+version-controlled, allowing different versions of the software to use
+different versions of the tool.
+
+
+If you want to create your own compilation tool, consider using Lex
+and Yacc, or the equivalent tool for your programming language of
+choice.  These tools enable you to generate scanners and parsers to
+deal with nontrivial input formats.
+
+
+For most software developers, a build system is purely a means to
+compile code.  They don’t care how the build process works, as long as
+their program is compiled in a reasonable amount of time.  To produce
+a fully compiled software package, all they want is a single button to
+push or a single command to execute.
+
+
+list the source files to be compiled and the compilation flags to be used.
+
+
+configuration variants, stale code that’s no longer used, and a number
+of corner cases for handling peculiar source files or compilation
+tools.  All this leads to a build system that’s difficult for
+developers to use.
+
+
+system is so complex that it takes a guru to comprehend, there’s a
+good chance that errors will be introduced.
+
+
+problems with missing dependencies, compilation tools that aren’t
+doing the correct job, or even code that doesn’t seem to compile for
+other people.
+
+
+a new build engineer might struggle to understand everything.  This is
+particularly true if a number of different people have modified the
+build system over the years,
+
+
+Most software developers are concerned with which source files will be
+compiled and which compilation flags will be used, but that’s the
+extent of their involvement.  They don’t mind how the build system
+gets the job done, and it can be frustrating if they’re forced to
+learn too much detail.
+
+
+lists all source files to be compiled
+
+Note: lssrc lists all files on which targets depend that do not have
+do files executable programs to be created.
+
+Note: lsdo (credo with no parameters) enable or disable optimization
+flags, debugging flags, and other compilation features.
+
+
+on top of the basic build tool.  For example, the framework could
+support automatic dependency analysis, multidirectory compilation, and
+a number of new compilation tools.
+
+
+add new source files, add new executable programs, and configure
+compiler flags, but they don’t want to learn the syntax of the
+underlying build tool.
+
+
+define the name of the executable program, the list of C source files,
+the libraries to link into the executable program, and the compilation
+flags to use.
+
+
+the SCons language is easier for novice users to understand, at least
+compared to a GNU Make solution.
+
+Note: higher-level dsl makes more assumptions about what the user want
+to do, or provides a larger or more easily used and composed library
+abstracting out the high-level detail is that users can support
+themselves.  They won’t need to consult a build engineer every time
+
+
+special-purpose source files that don’t fit cleanly into the model
+provided by the framework.
+
+
+The software developer knows that a framework is used but shouldn’t
+feel compelled to understand how it works.  Only a qualified build
+engineer should care about the framework’s build description.
+
+
+automatic dependency analysis, your own multidirectory build support,
+and custom rules for each new compilation tool.
+
+
+With Ant, any custom tasks should be encapsulated inside the framework
+and then incorporated into the main build.xml file using the taskdef
+directive.  You can also choose to create reusable helper targets, to
+be included via the import directive.
+
+
+With SCons, your framework contains builder methods and scanners for
+each new type of source file, as well as a number of helper functions
+to simplify the main build description.  The SConstruct file imports
+these new functions
+
+
+a few software developers will still poke around inside the framework
+and might even try to extend it for themselves.
+
+
+Keeping the framework as clear and concise as possible makes it less
+likely that you’ll introduce bugs.
+
+
+if your framework ends up being so complex that few people can
+understand it, perhaps you’re using the wrong build tool.  It’s a bad
+business decision to have software that only one person can
+understand, and this rule applies equally to build systems.  Make sure
+that developers cross-train each other on how the build system works.
+
+Note: raise the level of abstraction by encapsulating and naming
+common patterns, and provide mechanisms to vary them and control the
+flow through them The filename tells the build system which
+compilation tool and compiler flags to use.  Users don’t need to
+provide this information unless they want to override the defaults.
+
+Note: don't use dodep or credo explicitly unless deduce doesn't do the
+right thing.  compile, clean, package, test, and install.
+
+
+developer selects a project template, known as an archetype.  This
+provides a default layout for the project’s source and object files,
+as well as a number of standard build targets.
+
+
+automatically generated the pom.xml file containing the build description.
+
+
+the App.java file, which contains a simple main program, and the
+AppTest.java file, which contains a trivial JUnit test suite.
+
+
+Maven created this project from a template, so it already knows how to
+compile, test, and package the software,
+
+
+link multiple projects and set up dependencies among them.
+
+
+download specific versions of third-party JAR files from the Internet
+and make them available for the program to use.
+
+
+First, they must build the software for all possible targets to ensure
+that there are no compilation errors.  Next, the software must pass
+some basic sanity tests, again for all variants.  Finally, before
+handing the software package to the customer, the test group must
+perform a complete test run of each variant.
+
+
+if developers are particularly suspicious that part of their code
+might not be portable (the remaining 1%), they’ll need to double-check
+their work for all other variants.
+
+
+Use the same version of the same compiler for all target architectures.
+
+
+a number of errors or warnings are architecture specific,
+
+
+Don’t write code that depends on the byte ordering of the CPU.
+
+
+doesn’t make assumptions about the size of data types—or
+
+
+a single function can contain numerous #ifdef directives.
+
+
+unaware of what all the conditionals variables represent.
+
+
+because none of the current developers working on the project has any
+knowledge of what that directive means, the developers will be
+hesitant to remove the stale code.
+
+
+If you modify your build system to compile more than one variant by
+default, you might find your build times substantially increasing.
+
+
+Either you’ll spend more time recompiling each of the variants to
+ensure that they all still work correctly or you’ll face an increase
+in the number of broken builds or failed test cases because of a lack
+of solid testing.
+
+
+defining dependency rules, with each rule providing shell commands to
+generate targets from prerequisites.
+
+
+to reduce the amount of work required.  Features such as automatic
+dependency analysis, multidirectory support, and cross-platform compilation
+
+
+the task or builder model, in which developers specify what they want
+compiled instead of how it should be compiled.
+
+
+Each tool emphasizes making the build description less complex,
+thereby reducing the chance of errors.
+
+Note: By providing a pre-determined, unique (cf.  /lib/do/*)
+awkwardly-extended (cf.  new /lib/do is used exactly the same) subset
+of make's functionality and generality (cf.  do's scripts to make's
+subhells) in a more complex, general-purpose language yet not optimal
+(cf.  use of shell variables an calling programs syntax) for calling
+programs?  Ant, SCons, CMake, and Eclipse have many limitations, and
+newer build tools are likely to supersede them
+
+
+ask the compilation tool which files it will depend upon.
+
+
+build tool uses a special-purpose scanner to identify a source file’s dependencies.
+
+Note: findh and coneed monitor the underlying file system to see
+exactly which files are being accessed.
+
+Note: efs users could get confused and manually edit them by mistake.
+They might also submit the generated file to the version-control system,
+
+
+from the top level of the build tree, it should remove all generated files,
+leaving only the source code.  If it’s invoked from a lower-level directory,
+only the objects in that directory should be removed.
+
+
+Under no circumstances should any source code changes be lost.
+
+
+generated files aren’t being deleted and, therefore, aren’t being
+regenerated correctly.
+
+
+excessive error messages only cover up any real errors that might be reported.
+
+
+Use only compilation tools that report nonzero exit codes when an
+error is found.
+
+
+wrapping the tool in a shell script that explicitly looks for error
+messages in the tool’s output.
+
+
+configure the shell to abort if any commands return a nonzero exit code.
+
+
+grep command indicates whether it found any lines in a file that match
+a regular expression.  The command’s exit code can be used to state
+whether a match was found instead of reporting an error situation.
+In this case, the shell script shouldn’t abort execution.
+
+
+configure your compilation tools to return a nonzero exit code for warnings.
+
+
+GNU Make supports the -k option to request that it continue invoking
+compilation tools until it completely runs out of work.
+
+
+if you see a number of trouble reports in the same area of your build
+system, either fix the code so that it doesn’t fail, or provide some
+meaningful error messages to explain the problem in more detail.
+
+
+recursively remove all files on your root file system, which might not
+be too bad unless you’re logged in as root.
+
+
+validate user input.  Check that the number of arguments is correct,
+and do your best to validate each input value before using it.  If any
+of the user’s values are incorrect, display a meaningful error message
+to explain why.
+
+
+start simple but be prepared for growth over time.
+
+Note: refactor uses only well-documented features that novice build
+engineers can understand.
+
+
+hide the complexity inside the framework and make sure all the code
+you write is well commented.
+
+
+review all changes to the build system and reject them if they’re too complex.
+
+
+Provide the variables on the command line:
+
+Note: credo dir *.env files, and dependencies on /env Configure the
+build tree to store the variables:
+
+Note: credo /lib/env per-user configuration files aren’t read on start-up.
+
+Note: or, the build system notes values used for interesting
+variables, and rebuilds targets that depend on their values when they
+change In the debug case, extra information is added to the release
+package, making it possible to debug the software (either at runtime
+or via a post-mortem memory dump).
+
+
+Build the debug image, but strip the debug information:
+
+
+The executable code itself is guaranteed to be identical in both
+cases, making it possible to debug a memory dump from a production
+release, using the information from the debug release.
+
+
+enable these features in the production release without the customer
+knowing about them.  This enables developers to use the features in
+their own environment, as well as typing a secret command or editing a
+configuration file to enable them at the customer’s site.
+
+
+echo the exact compilation command being invoked.  This makes
+debugging problems easy because you can simply copy and paste a
+command from the build log and run it by hand.  You can even modify
+the command-line options if that helps you solve a problem.
+
+Note: Credo design principle: print executable commands whereever
+there's a chance, and run scripts to set env and do things, instead of
+static config files with complex formats (like ini and build
+description files).  the Ant build tool doesn’t display the underlying
+command line, and in many cases no command line is used.  Instead, Ant
+directly invokes library functions or instantiates special-purpose
+Java classes to get the job done.
+
+
+hard-coding the tool’s path in the build description file and ensuring
+that each instance of the tool is labeled with a version number.
+
+Note: /lib/env/gcc4[67]/cc.gcc.env
+cc.gcc.env
+cpp.gcc.env
+CC.g++.env
+cflags.g.env
+cflags.O2.env
+CCflags.stdcc.00.env
+CCflags.stdcc.11.env
+CCflags.boost.env
+
+libenv default.cc (gcc46 cc gcc)
+libenv default.cflags (gcc46 cflags O2)
+libenv default.CC (gcc47 g++)
+libenv default.CCflags (gcc47 stdcc 11)
+
+
+Failing to keep all the build steps in sync with the software makes it
+hard to reproduce older versions of the code.
+
+
+consider object files to be out-of-date whenever the compilation flags change.
+
+
+Failure to clean up stale files causes mismatched object files to be
+linked into the same executable program.
+
+
+use a build tool that automatically supports this feature,
+
+Note: depend on /env Build-management tools are supposed to invoke the
+version-control tool, whereas a build system isn’t.
+
+
+download new versions of the code.  Doing so creates an unstable
+environment that developers have no control over.  It may also create
+source code conflicts that developers aren’t ready to resolve.
+
+
+ties the build system closely to the underlying version-control tool.
+If you change to another tool, you can no longer build older versions
+of the software.
+
+
+Many version-control tools require direct access to a centralized server,
+making it impossible to work in a disconnected environment
+
+
+compiling the source code on a regular basis (every hour, every day,
+or whenever the code changes), you also validate that your build
+system works.
+
+
+supporting multiple target machines (such as Windows, Linux, and Mac
+OS X), and your build can be executed only on the target machine
+itself (cross-compilation isn’t always possible).  You also might
+depend on compilation tools that are supported on only one type of
+build machine, but that machine doesn’t support all your other tools.
+
+
+If developers test their code for only one platform, the code might no
+longer compile on other platforms.
+
+
+The main body of the code is the same for all variants, but the
+variant-specific code is extracted into a separate function.
+
+
+detect whether the operating system supports the threading model and
+must then define the HAS_THREADS symbol.
+
+Note: /env/has_threads.do use a version number, such as HAS_THREADS_V2.
+
+
+Nobody removes code unless they’re confident it’s no longer used.
+
+
+keep it working for each new build or target machine.  In extreme
+cases, they might even port the functionality to a new build tool.
+
+
+it’s always available in the version-control history,
+
+
+commenting out the code and adding a note to explain that it’s no
+longer used.
+
+
+all source code in the same directory as the build description file,
+which is often the case for recursive Make systems.
+
+Note: $credir gets source code from outside the current build
+directory, where used by do scripts.  change name back to srcdir,
+since credir sounds like credo's own home directory.  makes an
+entirely new copy of the source file and places it in the desired
+directory.  This creates a maintenance problem because source code
+must be updated in two locations.
+
+
+create a link from the source file’s original location into the
+directory where it’s needed.
+
+
+not all tools can handle symbolic links properly,
+
+
+use a relative pathname to access the source file from its original location.
+
+
+starts to create a spaghetti-like source tree.
+
+
+move the shared source files into a common location and create a
+library archive.
+
+
+using a common build system for all parts of your software.  This
+involves throwing away the legacy build system, but that might be
+easier than trying to support many different frameworks with their own
+benefits and limitations.
+
+Note: on the other hand, the job is to support the build function, in
+its myriad varied disguises (build 3rd party software and rpms,
+support other make systems in the company), not just a tool or even
+one system.  this is how you learn to do the job better.  When you
+take advantage of open-source software or code from a third-party
+vendor, the original build system constantly changes.  Each time you
+incorporate a new version of the software, you need to make
+corresponding changes to your new build system.
+
+
+If you’re taking care of a build system by yourself or are leading a
+group of build engineers, you must be an advocate for constantly
+monitoring and improving the build system.  Even if you have tight
+schedules to deliver product features, keep in mind that complexity in
+the build system is extremely costly.  Your leaders won’t pay
+attention to the build process (other than complaining about it from
+time to time), so you’ll end up carrying the torch in this area.
+
+
+Allocate enough time to do a good job with the work.  Cutting corners
+on your build system can be disastrous because hacking together a
+quick solution introduces complexity.
+
+
+you can’t develop software without a good build system, but many
+projects assign one of their software developers to do the work.
+
+
+preplan your build system changes.
+
+
+Waiting until there’s an immediate need for change simply delays your project.
+
+
+follow up later to ensure that the changes were reasonable.  A build
+guru should review changes before they’re committed to the
+version-control system.
+
+
+For a release engineer, the goal is to build and release fully
+versioned software packages.  On the other hand, a software developer
+expects a quick turnaround time for incremental builds.
+
+
+never leave the hacked-up solution in place for too long.  Make sure
+you complete the required changes properly, even if it takes a few
+months longer.  This is the only way to ensure that complexity doesn’t
+become a longer-term problem.
+
+
+increases the chance of random build failure and forces developers to
+work around each pitfall.  In many cases, the build system might work
+differently from one developer to the next, increasing the time taken
+to develop software.
+
+
+compilation rules, task definitions, macros, and builder methods,
+which are of interest only to build gurus.
+
+
+list of files to be compiled, the set of compilation flags to use, and
+other high-level directives must be fully visible to software developers.
+
+
+use a modern build tool, keep generated files out of the source tree,
+provide meaningful error messages, or remove stale code from the build
+description.
+
+
+be an advocate for making improvements and ensuring that all future
+build changes are monitored closely.
+
+
+the fact that change occurs slowly makes it less likely that people
+notice the ever-increasing problem.  New members joining the team are
+far more likely to notice the inefficiencies.
+
+
+obtaining a complete copy of the source tree before starting to work.
+
+
+isn’t possible to compile the software if some of the files are excluded.
+
+
+different parts of that build system can be responsible for different
+parts of the source tree, but they can’t operate in isolation.
+
+
+Any source file can make use of definitions, functions, or classes
+from any other part of the source tree.
+
+
+too large for developers to comprehend or too large for the build
+system to complete in a reasonable amount of time.
+
+
+where that change should be made.
+
+
+duplicates effort and leads to a disorganized code base.
+
+
+political boundaries within the code and might accidentally change
+source files owned by a different team.
+
+
+change a source file that could impact the compilation or functionality
+of other parts of the system.  All changes should therefore be
+validated by compiling and testing the complete software product.
+
+
+Even if they’re planning to modify only a small number of source
+files, they’re still required to compile everything before they
+execute the program.
+
+
+Build machine memory increases.  When a single build system compiles
+many source files, you end up with a large dependency graph.
+
+
+Disk usage increases.  Given that all developers are required to
+compile the entire monolithic source tree, they’ll also have a
+monolithic object tree.
+
+
+space is quickly consumed when hundreds of developers share the same
+file server.
+
+
+centralized file servers to ease their administrative overhead and to
+make file sharing between different users possible.
+
+
+large number of users compile the monolithic code base, any shared
+resources on the network will suffer.
+
+
+slower than at off-peak times or when compared to using locally
+attached disk.
+
+
+It’s simply not possible to compile a portion of the source code
+without having the whole source tree available.
+
+
+third-party or out-sourced code is added to the existing code base,
+giving an overnight increase in build time or disk usage.  Adding a
+new build variant could also double the disk usage,
+
+
+Even if build performance isn’t your main concern, your developers
+will appreciate having smaller chunks of source code to deal with.
+
+
+Developer productivity increases by allowing them to focus on the
+internals of their own components, without being forced to deal with
+the complexity in other components.
+
+
+The source code for each component is independent from others, except
+where specific functions and symbols are exported.
+
+
+From the perspective of the build process, each component has its own
+isolated build system.
+
+
+To reduce compilation time, developers use prebuilt binaries for all
+components they aren’t planning to modify.
+
+
+The output from each component’s build system is linked to form an
+executable program.
+
+Note: or, even better, each component is a separate program, and they
+all call or pass messages or leave files for each other
+
+
+in C or C++, the output is often a static or dynamic library
+
+
+function and type declarations contained within the header file
+
+
+publicly visible classes.
+
+
+importing that library.
+
+
+downstream components aren’t required to access the internal source
+code of an upstream component.  All sharing is done via the public
+API, and components are joined by linking against libraries instead of
+compiling the upstream component’s source code.
+
+
+clearly document both the purpose of each component and the API
+between components.
+
+
+the rest of the code is considered a black box, with no requirement on
+the developer to understand how it works.
+
+
+modifying a component’s public API could still cause other components
+to break, but these API-related files should be clearly identified as
+being public.
+
+
+changing an internal source file can potentially change a component’s functionality,
+so other components might experience a difference in behavior.
+
+
+The build system is less complex; it requires a smaller dependency
+graph, uses less memory, requires less disk space, and places less
+strain on the file servers and network.
+
+
+end-to-end build times are lower, particularly when prebuilt
+components are used.
+
+
+By providing prebuilt versions of all other components, the untrusted
+third-party can still produce a software release package.
+
+
+When developers make changes to a component, they compile, test, and
+release a new binary version for other developers to use.
+
+
+Each component must instead be tested and approved before being
+released to the component cache.
+
+
+components don’t always have a graphical user interface or even a
+command-line interface.  The goal is to integrate them into a larger
+program, so the interface is often targeted at software developers.
+
+
+A web-based plug-in provides an API for the downstream components to
+invoke, although the main goal of the plug-in is to render graphic images.
+
+
+the source code for other components doesn’t need to be available on
+the build machine, and the developer clearly isn’t required to compile
+that code.  On the other hand, it’s a requirement to have access to
+the public API provided by each of the upstream components.
+
+
+private source files provide most of the component’s functionality,
+hidden from the view of other components.  To build the code, a
+developer must obtain a complete copy
+
+
+To minimize the interdependency between components, the public source
+files should contain only information that truly needs to be exported.
+
+
+public source files aren’t generated by the build system.  They’re
+instead maintained directly by the component developer and presented
+as part of the component’s API.
+
+
+A change to one of these definitions could impact the compilation of
+any other component, so all definitions must be placed in the public API.
+
+
+linked into an executable program as part of a downstream component’s
+build system.
+
+
+a shared library’s file (with .so or .dll suffix) must be packaged along
+with the final software product and then installed on the target machine.
+
+
+included in the Java compiler’s class path.
+
+
+included in the virtual machine’s class path.
+
+
+the final software release package contains a number of other programs
+and libraries, all packaged together into a single release.
+
+
+the component can export a compilation tool (in the form of an
+executable program) used to build downstream components.
+
+
+a component’s build system might use a special-purpose
+interface-definition language to describe the internal functions.
+
+
+a component can autogenerate a number of source files, making them
+part of the public API.  A downstream component would use those files
+as input into its own build process.
+
+
+If you include a framework as one of your components, the application
+developer can focus on the program’s specific logic and presentation
+concerns, not on the common infrastructure.
+
+
+In conjunction with public source files, each type of public generated
+file will be published to the component cache.  From there, they’ll be
+made available to other components and integrated into the program’s
+final release package.
+
+
+A developer who modifies a component needs to create these private
+files simply as a temporary step in creating the final build output.
+A component’s private generated files are never accessed by other
+components and aren’t considered part of the public API.  These files
+aren’t published in the component cache.
+
+
+A component’s build system is like any other build system, except that
+it can’t access the private source and generated files from any other
+component.  However, it can access the public source and generate
+files from any upstream components, most likely via the component cache.
+
+
+validation of small units of software, in isolation from others.
+
+
+explicitly trigger internal APIs to make sure they behave correctly.
+
+
+tests should be fully automated, making it easy to repeat the
+validation when changes are made.  Only fully tested components should
+be added to the component cache,
+
+
+the build process is always correct, no matter which source files were
+modified.  In many cases, there’s a good chance that each downstream
+component’s build system will complete within a few seconds, without
+the need to do any work.
+
+
+Failure to follow the correct order simply leads to an invalid build.
+
+
+If you make a code change to the rightmost component (in this example,
+the GUI component), there’s no way to impact the compilation of any
+other parts of the software.
+
+
+test the full system’s behavior.  There’s a chance that your recent
+code change caused an upstream component to be invoked in a new way.
+
+
+If you locate a new bug, be sure to add a test case for the upstream
+component.  Future changes to that component shouldn’t reintroduce the
+same bug.
+
+
+private source files, you cannot impact the compilation of downstream
+components, but you might change their functionality.
+
+
+relink your component’s public generate files into the downstream
+components or repackage them into the final release package.
+
+
+unit-test your component changes and perform a full system test before
+declaring the product complete.
+
+
+modifying a component forces you to recompile the downstream
+components.  There’s always a chance they’ll make use of the API code
+you just changed and, therefore, could fail to recompile.
+
+
+trade off the benefits of separating the components with the cost of
+integrating them whenever they change.
+
+
+ensuring that API functions are always backward compatible with
+previous versions results in fewer integration problems.  Any new
+features added to the upstream component must involve adding a new API
+function that doesn’t impact the existing functions.
+
+
+software usually ends up being structured in the same way your teams
+are structured
+
+
+All other developers (in other subteams) use prebuilt and pretested
+versions of the component instead of compiling it for themselves.
+
+
+focus its expertise on the internal implementation of its own component
+
+
+still need to understand the public API of any upstream components,
+but these should be well documented and easy to understand.
+
+
+The team’s manager should be aware of all changes (at least at a high
+level), making it possible to control all new features and bug fixes.
+
+
+All developers can meet in the same room and rapidly come to consensus
+on decisions.  New features and bug fixes are small, making it possible
+to implement and test the code changes in a limited time frame.
+
+
+testing its component in isolation from the rest of the system.
+
+
+One subteam may allow changes made by another team, as long as there’s
+enough collaboration.  Developers from different subteams can share
+private source trees instead of waiting for an official component release.
+
+
+In a monolithic code base, each developer obtains a copy of the source
+code from a shared version-control system.  A developer’s code changes
+are then submitted back to the same shared repository.  In this
+respect, a monolithic code base can be viewed as a single stream of
+code changes, with all changes being visible to all developers.  To
+release a monolithic software product to the end user, the full build
+system is invoked.  The output is a software release package, ready to
+be installed on a target machine.  The release package has a version
+number (such as 2.0.1) to distinguish different releases of the software.
+
+
+Each component is stored in its own source code repository, and
+changes are shared with other developers in the component team (but
+not with other teams).  The component’s build system creates the
+public generated files, which are packaged together and placed in the
+prebuilt component cache.  A unique version number is required to
+distinguish one component release from the next.
+
+
+each component has its own release stream, with each release having a
+unique version number.  In the final step, one release from each
+component stream is integrated into the full software release package.
+
+

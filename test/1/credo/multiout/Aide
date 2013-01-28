@@ -1,0 +1,11 @@
+/dis/pastout
+/github/credo/sh-inferno/
+Dump /test/1/credo/multiout/dump
+Edit ,|sort|uniq
+Load /test/1/credo/multiout/dump
+New c.test
+du -n | grep redoing
+grep . *.dep *.do *.tr
+rm -f *.old *.reold *.sum
+rm -f *.out *.past
+rm -f *.redoing *.redont

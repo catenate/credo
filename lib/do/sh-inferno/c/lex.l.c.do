@@ -1,13 +1,12 @@
 #!/dis/sh
 c = $1
-(sum l) = `{grep '\.l$' $c^.dep}
-
+(sum ext l) = `{crext l $c}
 if {no $lex} {lex = lex}
 
 if {
 	flag x  +
-	os -T $lex $lflags $l
+	os -d^$emuroot^`{pwd} $lex $lflags $l
 	mv lex.yy.c $c
 } {
-	echo $c
+	echo 'src = $src '^$c > $c^.relay
 }

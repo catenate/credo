@@ -1,4 +1,0 @@
-*.dep.  Files list each file on which a target depends, after its checksum (e.g. the output of md5sum).
-adddep rmdep.  Tools maintain file dependencies (including /env/ files) for a target.
-addenv rmenv.  Tools set and clear environment variables per target, or as a default for all targets in the directory.
-credir.  Shell variable names another directory which contains source code.

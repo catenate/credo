@@ -1,0 +1,4 @@
+sh /lib/do/credo/rm-f.std..do
+libdo (c yacc y c) calcy.c
+credo calcy.c
+sed 10q calcy.c

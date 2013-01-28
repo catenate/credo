@@ -1,0 +1,4 @@
+Edit ,|sort|uniq
+du -n
+cp ../c/cc.o..dep.do CXX.o..dep.do
+rm cc.o..do

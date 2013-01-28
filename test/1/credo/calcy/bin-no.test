@@ -1,0 +1,29 @@
+sh /lib/do/credo/rm-f.std..do
+
+libdo (c yacc y c) calcy.c
+echo calcy.c > y.tab.h.tr
+libdo (c cc c o) calcy.o
+adddep calcy.o y.tab.h
+
+libdo (c lex l c) calcl.c
+libdo (c cc c o) calcl.o
+
+libdo (c cc no '') calc
+adddep calc calcy.o calcl.o
+credo calc
+dos file calc
+echo '2 + 2' | calc
+
+lsenv
+lssrc
+lsdo
+
+rm calcy.c
+credo calc
+echo '2 + 2' | calc
+
+rm y.tab.h
+credo calc
+echo '2 + 2' | calc
+
+grep -n . *.dep

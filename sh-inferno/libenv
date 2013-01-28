@@ -5,7 +5,7 @@ if {~ $#* '[012]'} {
 }
 
 libenvroot = /lib/env
-(localvar smith var qual) = $*
-qual = `{echo $qual | sed 's, ,.,g'}
-libvar = $libenvroot/$smith/$var.$qual.env
-cat $libvar >> $localvar.env
+(target localvar smith libvar qual) = $*
+if {no $qual} {qual = ''} {qual = `{echo $qual | sed 's, ,.,g;s,^,.,'}}
+libenvpath = $libenvroot/$smith/$libvar$qual.env
+cat $libenvpath >> $target.$localvar.env

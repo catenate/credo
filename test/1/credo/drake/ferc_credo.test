@@ -1,0 +1,22 @@
+sh /lib/do/credo/rm-f.std..do
+ls *.do *.dep *.csv *.txt
+
+libdo (ferc curl url csv) contract.txt
+
+libdo (ferc grep csv csv) Evergreen.csv
+adddep Evergreen.csv contract.txt
+
+libdo (ferc wc csv txt) report.txt
+adddep report.txt Evergreen.csv
+
+grep . *.dep *.do
+
+credo report.txt
+cat report.txt
+
+rm -f `{lsdo}
+ls *.do *.dep *.csv *.txt
+
+credo Evergreen.csv
+ls *.do *.dep *.csv *.txt
+cat Evergreen.csv

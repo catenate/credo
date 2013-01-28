@@ -1,0 +1,3 @@
+rm -f a b
+credo genab
+grep -n . a b

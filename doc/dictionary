@@ -1,0 +1,34 @@
+*.dep.  Files list each file on which a target depends, after its checksum (e.g. the output of md5sum).
+/lib/do.  Library of shell scripts or programs to produce file outputs from file inputs on which they depend.  A do script or program in given one parameter, the name of the file to create.  Each smith has its own library.
+/lib/env.  Library of shell scripts or programs to set shell-environment variables, usually building up definitions by adding to the current value.
+adddep rmdep.  Credo scripts to maintain file dependencies (including /env/ files) for a target.
+addenv rmenv.  Credo scripts to set and clear environment variables per target, or as a default for all targets in the directory.
+c.  Emulate early Unix (not necessarily Posix).
+calcy.  Test case of simple calculator to compile and link lex and yacc source.  Verify credo understands yacc generates multiple outputs.
+credeper.  Credo script to process dependencies of a credo target.
+credir.  Shell variable names another directory which contains source code.
+credo.  Credo script to queue credo targets.
+credoer.  Credo script to process a target.
+crelock.  Credo script to sleep until credo finishes redoing a file, and mark it redoing.
+crepare.  Credo script to prepare a dependency target for parallel execution.
+dictionary.  File defines terms used by credo.
+do library.  See /lib/do.
+do scripts.  See /lib/do.
+drake.  Test case of data processing from a trivial example.
+env library.  See /lib/env.
+env scripts.  See /lib/env.
+ferc.  Emulate trivial drake processing of files from the FERC data source.
+gnumake.  Emulate FSF’s GNU Make.
+install.  File guides integrating credo with an Inferno installation.
+libdo.  Credo script to copy a script from the do library into the current directory.
+libenv.  Credo script to copy a script from the env library into the current directory.
+lsenv.  Credo script to list environment variables on which targets in this directory depend.
+lssrc.  Credo script to list source code files (i.e. dependencies without do files) for this directory's targets.
+multiout.  Test case of multiple outputs in the abstract.
+principles.  File reviews what credo believes, and what it’s trying to do.
+psmith11.  File describes how credo relates to other build tools and environments, and explores specific changes to bring credo up to par.
+regress.  Script to run all credo *.test cases.  Uses pastout to list differences in output from the past run.
+smith.  A tool or document or (sub)system which defines a set of shell variables or file productions.  The level of directories under /lib/do and /lib/env.
+todo.  File lists what needs done to make credo better.
+todont.  File explains what should be left undone, to avoid making credo worse.
+*.tr.  Translate one target into another.  Use the target contained in the file to build the target named by the file.  Useful for multiple targets (e.g. y.tab.h.tr contains calcy.c).

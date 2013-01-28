@@ -1,0 +1,12 @@
+#!/dis/sh
+redoing = $1^.redoing
+if {ftest -f $redoing} {
+	while {ftest -f $redoing} {
+		sleep 1
+		$redoing >[2]/dev/null
+	}
+}
+
+touch $redoing
+echo '#!/dis/sh' >> $redoing
+echo 'if {! ftest -d /prog/'^${pid}^'} {rm -f '^$redoing^'}' >> $redoing

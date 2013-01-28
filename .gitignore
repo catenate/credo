@@ -1,0 +1,8 @@
+*.out
+*.past
+dos.log
+git.log
+manos.log
+nsh.log
+sed.log
+web.log

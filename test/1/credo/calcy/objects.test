@@ -1,0 +1,14 @@
+sh /lib/do/credo/rm-f.std..do
+
+libdo (c yacc y c) calcy.c
+libdo (c cc c o) calcy.o
+credo calcy.o
+
+libdo (c lex l c) calcl.c
+libdo (c cc c o) calcl.o
+credo calcl.o
+
+lsenv
+lssrc
+lsdo
+dos file *.o

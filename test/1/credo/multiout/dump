@@ -1,0 +1,1141 @@
+/
+/fonts/vera/Vera/9x15.14.font
+/fonts/misc/latin1.6x10.font
+          0          24          57
+f          0         312         120         120           1 
+        312          35         120           0           0 /dis/pastout Del Snarf Undo | Look 
+f          0         283         261         265           3 
+        283          36         546           0           0 /github/credo/Aide Del Snarf | Look 
+f          0         281          76         108           5 
+        281          58         215           0           0 /github/credo/test/1/credo/multiout/Aide Del Snarf | Look 
+f          0         284           0         111           6 
+        284          36         111           0           0 /test/1/credo/Aide Del Snarf | Look 
+f          0         285          26          58           8 
+        285          50         221           0           0 /test/1/credo/multiout/Aide Del Snarf Undo | Look 
+f          1         289           0           0           1 
+        289          47         182           1           0 /github/credo/sh-inferno/ Del Snarf Get | Look 
+f          1         290        1189        1189           3 
+        290          67        2823           0           0 /github/credo/sh-inferno/credoer Del Snarf Undo | Look Edit s,^,	,g
+f          1         297         244         244           5 
+        297          67         244           0           0 /github/credo/sh-inferno/crelock Del Snarf Undo | Look Edit s,^	,,g
+f          1         287           0           9           6 
+        287          55          61           0           0 /test/1/credo/multiout/a.do Del Snarf Undo Redo | Look 
+f          1         304           8           8           8 
+        304          54          61           0           0 /test/1/credo/multiout/genab.do Del Snarf Undo | Look 
+f          1         291           0           0          10 
+        291          56          36           0           0 /test/1/credo/multiout/genab.test Del Snarf Undo | Look 
+f          1         288           0           0          12 
+        288          55          31           0           0 /test/1/credo/multiout/genc.test Del Snarf Undo | Look 
+F          2           0           0         647           1         647 
+        292          39         647           0           1 /github/credo/+Errors Del Snarf | Look 
+A  .gitignore
+ M Aide
+ D INSTALL
+ D TODO
+ D TODONT
+ D dictionary
+A  doc/dictionary
+A  doc/install
+A  doc/principles
+A  doc/psmith11
+A  doc/todo
+A  doc/todont
+M  lib/do/sh-inferno/Aide
+A  lib/do/sh-inferno/gnumake/Aide
+A  lib/do/sh-inferno/gnumake/CXX.cpp.o.dep.do
+A  lib/do/sh-inferno/gnumake/CXX.cpp.o.do
+A  lib/do/sh-inferno/gnumake/LINK.o..dep.do
+A  lib/do/sh-inferno/gnumake/LINK.o..do
+A  lib/env/sh-inferno/c/cc.cc.env
+A  lib/env/sh-inferno/c/cc.ccache.env
+A  lib/env/sh-inferno/gnumake/CXX.env
+ D principles
+M  sh-inferno/adddep
+M  sh-inferno/libenv
+M  sh-inferno/lsenv
+M  sh-inferno/rmdep
+?? lib/do/sh-inferno/ferc/
+?? test/1/credo/drake/
+
+F          2           1        6694        6694           3        6869 
+        295          39        6869           0           1 /test/1/credo/+Errors Del Snarf | Look 
+cd: Aide: not a directory
+pastout
+cd: abcdep: 'abcdep' file does not exist
+pastout
+cd: cp: 'cp' file does not exist
+pastout
+cd: credir: 'credir' file does not exist
+pastout
+cd: drake: 'drake' file does not exist
+pastout
+cd: dump: 'dump' file does not exist
+pastout
+cd: eatglass: 'eatglass' file does not exist
+pastout
+cd: gcmake: 'gcmake' file does not exist
+pastout
+cd: go-env: 'go-env' file does not exist
+pastout
+cd: hello: 'hello' file does not exist
+pastout
+cd: lex: 'lex' file does not exist
+pastout
+cd: man1: 'man1' file does not exist
+pastout
+cd: psmith: 'psmith' file does not exist
+pastout
+cd: psmith1: 'psmith1' file does not exist
+pastout
+cd: psmith2: 'psmith2' file does not exist
+pastout
+cd: psmith4: 'psmith4' file does not exist
+pastout
+cd: psmith5: 'psmith5' file does not exist
+pastout
+cd: psmith6: 'psmith6' file does not exist
+pastout
+cd: srcobj: 'srcobj' file does not exist
+pastout
+abcdep
+cp
+credir/dir
+credir/sub/subsub
+credir/sub
+credir/sub0
+credir/sub2
+credir
+drake
+eatglass
+gcmake
+go-env
+hello
+lex/obj
+lex/src
+lex
+man1
+psmith
+psmith1
+psmith2
+psmith4/com/arapiki/examples
+psmith4/com/arapiki
+psmith4/com
+psmith4/mymath
+psmith4
+psmith5
+psmith6
+srcobj/obj
+srcobj/src
+srcobj
+.
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ferc_credo.test
+ferc_eg.test
+ferc_sh.test
+ferc_sh_do.test
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+ls: stat *.test: '*.test' file does not exist
+abcdep
+ls: stat *.test: '*.test' file does not exist
+cp
+ls: stat *.test: '*.test' file does not exist
+credir/dir
+ls: stat *.test: '*.test' file does not exist
+credir/sub/subsub
+ls: stat *.test: '*.test' file does not exist
+credir/sub
+ls: stat *.test: '*.test' file does not exist
+credir/sub0
+ls: stat *.test: '*.test' file does not exist
+credir/sub2
+ls: stat *.test: '*.test' file does not exist
+credir
+ls: stat *.test: '*.test' file does not exist
+drake
+mv: can't stat ferc_credo.test.out: 'ferc_credo.test.out' file does not exist
+diff ferc_credo.test.past ferc_credo.test.out
+diff: can't stat ferc_credo.test.past: 'ferc_credo.test.past' file does not exist
+mv: can't stat ferc_eg.test.out: 'ferc_eg.test.out' file does not exist
+diff ferc_eg.test.past ferc_eg.test.out
+diff: can't stat ferc_eg.test.past: 'ferc_eg.test.past' file does not exist
+mv: can't stat ferc_sh.test.out: 'ferc_sh.test.out' file does not exist
+diff ferc_sh.test.past ferc_sh.test.out
+diff: can't stat ferc_sh.test.past: 'ferc_sh.test.past' file does not exist
+mv: can't stat ferc_sh_do.test.out: 'ferc_sh_do.test.out' file does not exist
+diff ferc_sh_do.test.past ferc_sh_do.test.out
+diff: can't stat ferc_sh_do.test.past: 'ferc_sh_do.test.past' file does not exist
+eatglass
+ls: stat *.test: '*.test' file does not exist
+gcmake
+ls: stat *.test: '*.test' file does not exist
+go-env
+ls: stat *.test: '*.test' file does not exist
+hello
+ls: stat *.test: '*.test' file does not exist
+lex/obj
+ls: stat *.test: '*.test' file does not exist
+lex/src
+ls: stat *.test: '*.test' file does not exist
+lex
+ls: stat *.test: '*.test' file does not exist
+man1
+ls: stat *.test: '*.test' file does not exist
+psmith
+ls: stat *.test: '*.test' file does not exist
+psmith1
+ls: stat *.test: '*.test' file does not exist
+psmith2
+ls: stat *.test: '*.test' file does not exist
+psmith4/com/arapiki/examples
+ls: stat *.test: '*.test' file does not exist
+psmith4/com/arapiki
+ls: stat *.test: '*.test' file does not exist
+psmith4/com
+ls: stat *.test: '*.test' file does not exist
+psmith4/mymath
+ls: stat *.test: '*.test' file does not exist
+psmith4
+ls: stat *.test: '*.test' file does not exist
+psmith5
+ls: stat *.test: '*.test' file does not exist
+psmith6
+ls: stat *.test: '*.test' file does not exist
+srcobj/obj
+ls: stat *.test: '*.test' file does not exist
+srcobj/src
+ls: stat *.test: '*.test' file does not exist
+srcobj
+ls: stat *.test: '*.test' file does not exist
+.
+ls: stat *.test: '*.test' file does not exist
+/dis/pastout
+abcdep
+cp
+credir/dir
+credir/sub/subsub
+credir/sub
+credir/sub0
+credir/sub2
+credir
+drake
+diff ferc_credo.test.past ferc_credo.test.out
+diff ferc_eg.test.past ferc_eg.test.out
+diff ferc_sh.test.past ferc_sh.test.out
+diff ferc_sh_do.test.past ferc_sh_do.test.out
+eatglass
+gcmake
+go-env
+hello
+lex/obj
+lex/src
+lex
+man1
+psmith
+psmith1
+psmith2
+psmith4/com/arapiki/examples
+psmith4/com/arapiki
+psmith4/com
+psmith4/mymath
+psmith4
+psmith5
+psmith6
+srcobj/obj
+srcobj/src
+srcobj
+.
+/test/1/credo/abcdep
+/test/1/credo/cp
+/test/1/credo/credir/dir
+/test/1/credo/credir/sub/subsub
+/test/1/credo/credir/sub
+/test/1/credo/credir/sub0
+/test/1/credo/credir/sub2
+/test/1/credo/credir
+drake/ferc_credo.test
+drake/ferc_eg.test
+drake/ferc_sh.test
+drake/ferc_sh_do.test
+/test/1/credo/drake
+diff ferc_credo.test.past ferc_credo.test.out
+diff ferc_eg.test.past ferc_eg.test.out
+diff ferc_sh.test.past ferc_sh.test.out
+diff ferc_sh_do.test.past ferc_sh_do.test.out
+/test/1/credo/eatglass
+/test/1/credo/gcmake
+/test/1/credo/go-env
+/test/1/credo/hello
+/test/1/credo/lex/obj
+/test/1/credo/lex/src
+/test/1/credo/lex
+/test/1/credo/man1
+/test/1/credo/psmith
+/test/1/credo/psmith1
+/test/1/credo/psmith2
+/test/1/credo/psmith4/com/arapiki/examples
+/test/1/credo/psmith4/com/arapiki
+/test/1/credo/psmith4/com
+/test/1/credo/psmith4/mymath
+/test/1/credo/psmith4
+/test/1/credo/psmith5
+/test/1/credo/psmith6
+/test/1/credo/srcobj/obj
+/test/1/credo/srcobj/src
+/test/1/credo/srcobj
+/test/1/credo
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+drake
+psmith
+psmith
+drake
+drake
+drake
+drake
+drake
+/test/1/credo/drake
+diff ferc_credo.test.past ferc_credo.test.out
+diff ferc_eg.test.past ferc_eg.test.out
+diff ferc_sh.test.past ferc_sh.test.out
+diff ferc_sh_do.test.past ferc_sh_do.test.out
+F          2           2       13965       14035           5       14035 
+        296          57       14035           0           0 /test/1/credo/multiout/+Errors Del Snarf Undo Put | Look 
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.redont
+b
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+c.test
+c.test.out
+c.test.past
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+generate.test
+generate.test.out
+generate.test.past
+a.dep: dd8c6a395b5dd36c56d23275028f526c	genab.in
+c.dep: 0	a
+c.dep: 0	b
+genab.dep: dd8c6a395b5dd36c56d23275028f526c	genab.in
+a.do: sed 's,b,a,' genab.in > a
+a.do: sed 's,a,b,' genab.in > b
+c.do: grep -n . a b
+genab.do: sed 's,b,a,' genab.in > a
+genab.do: sed 's,a,b,' genab.in > b
+grep: cannot open *.tr: '*.tr' file does not exist
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.redont
+b
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+c.test
+c.test.out
+c.test.past
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+mv generate.test
+generate.test.out
+generate.test.past
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.redont
+b
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+mv c.test genc.test
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+mv generate.test genab.test
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.redont
+b
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genc.test
+mv: can't stat genab.test.out: 'genab.test.out' file does not exist
+diff genab.test.past genab.test.out
+diff: can't stat genab.test.past: 'genab.test.past' file does not exist
+mv: can't stat genc.test.out: 'genc.test.out' file does not exist
+diff genc.test.past genc.test.out
+diff: can't stat genc.test.past: 'genc.test.past' file does not exist
+8018 "Sh":fail:error
+a.dep: dd8c6a395b5dd36c56d23275028f526c	genab.in
+c.dep: 0	a
+c.dep: 0	b
+genab.dep: dd8c6a395b5dd36c56d23275028f526c	genab.in
+a.do: sed 's,b,a,' genab.in > a
+a.do: sed 's,a,b,' genab.in > b
+c.do: grep -n . a b
+genab.do: sed 's,b,a,' genab.in > a
+genab.do: sed 's,a,b,' genab.in > b
+grep: cannot open *.tr: '*.tr' file does not exist
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+0a1
+> a.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+2a4,6
+> genab.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+> a.do:1: sed 's,b,a,' genab.in > a
+> a.do:2: sed 's,a,b,' genab.in > b
+3a8,9
+> genab.do:1: sed 's,b,a,' genab.in > a
+> genab.do:2: sed 's,a,b,' genab.in > b
+8343 "Sh":fail:some
+credo a
+credeper: map crepare genab.in
+cat b
+cat: cannot open a: 'a' file does not exist
+8757 "Sh":fail:bad open
+sh a.do
+sh: a.do: './a.do.dis' file does not exist
+8758 "Sh":fail:'./a.do.dis' file does not exist
+a
+a
+a
+a
+b
+b
+run a.do
+b
+b
+cat: cannot open b: 'b' file does not exist
+8780 "Sh":fail:bad open
+b
+b
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+15a16,24
+> a.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+> c.dep:1: 0	a
+> c.dep:2: 0	b
+> genab.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+> a.do:1: sed 's,b,a,' genab.in > a
+> a.do:2: sed 's,a,b,' genab.in > b
+> c.do:1: grep -n . a b
+> genab.do:1: sed 's,b,a,' genab.in > a
+> genab.do:2: sed 's,a,b,' genab.in > b
+9112 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+9898 "Sh":fail:no matches
+diff genab.test.past genab.test.out
+1a2
+> crepare: genab.in
+diff genc.test.past genc.test.out
+10a11
+> crepare: a
+11a13,14
+> crepare: genab.in
+> crepare: b
+9899 "Sh":fail:some
+diff genab.test.past genab.test.out
+2a3
+> credoer exit: genab.in.redont exists
+diff genc.test.past genc.test.out
+13a14,15
+> credoer exit: genab.in.redont exists
+> credoer exit: a.redont exists
+14a17
+> credoer exit: b.redont exists
+10235 "Sh":fail:some
+Aide
+a.dep
+a.dep.sum
+a.do
+rm a.redont b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+1,3d0
+< credeper: map crepare genab.in
+< crepare: genab.in
+< credoer exit: genab.in.redont exists
+diff genc.test.past genc.test.out
+10,17c10,11
+< credeper: map crepare a b
+< crepare: a
+< credeper: map crepare genab.in
+< crepare: genab.in
+< credoer exit: genab.in.redont exists
+< credoer exit: a.redont exists
+< crepare: b
+< credoer exit: b.redont exists
+---
+> credo   a
+> credo   b
+19,21c13,16
+< grep: cannot open a: 'a' file does not exist
+< grep: cannot open b: 'b' file does not exist
+< credo c error: no matches
+---
+> a:1: a
+> a:2: a
+> b:1: b
+> b:2: b
+23,24c18,19
+< c.dep:1: 0	a
+< c.dep:2: 0	b
+---
+> c.dep:1: 0d227f1abf8c2932d342e9b99cc957eb	a
+> c.dep:2: 06ac26ed8b614fc0b141e4542aa067c2	b
+10573 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+2,3c2,3
+< c.dep:1: 0	a
+< c.dep:2: 0	b
+---
+> c.dep:1: 0d227f1abf8c2932d342e9b99cc957eb	a
+> c.dep:2: 06ac26ed8b614fc0b141e4542aa067c2	b
+5,6c5,7
+< a.do:1: sed 's,b,a,' genab.in > a
+< a.do:2: sed 's,a,b,' genab.in > b
+---
+> a.do:1: echo updating a and b
+> a.do:2: sed 's,b,a,' genab.in > a
+> a.do:3: sed 's,a,b,' genab.in > b
+11c12
+< credo   b
+---
+> updating a and b
+21,22c22,24
+< a.do:1: sed 's,b,a,' genab.in > a
+< a.do:2: sed 's,a,b,' genab.in > b
+---
+> a.do:1: echo updating a and b
+> a.do:2: sed 's,b,a,' genab.in > a
+> a.do:3: sed 's,a,b,' genab.in > b
+25a28,32
+> credo   a
+> credo c
+> a:1: a
+> a:2: a
+> grep: cannot open b: 'b' file does not exist
+11251 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+1,10d0
+< a.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+< c.dep:1: 0d227f1abf8c2932d342e9b99cc957eb	a
+< c.dep:2: 06ac26ed8b614fc0b141e4542aa067c2	b
+< genab.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+< a.do:1: echo updating a and b
+< a.do:2: sed 's,b,a,' genab.in > a
+< a.do:3: sed 's,a,b,' genab.in > b
+< c.do:1: grep -n . a b
+< genab.do:1: sed 's,b,a,' genab.in > a
+< genab.do:2: sed 's,a,b,' genab.in > b
+18,27d7
+< a.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+< c.dep:1: 0d227f1abf8c2932d342e9b99cc957eb	a
+< c.dep:2: 06ac26ed8b614fc0b141e4542aa067c2	b
+< genab.dep:1: dd8c6a395b5dd36c56d23275028f526c	genab.in
+< a.do:1: echo updating a and b
+< a.do:2: sed 's,b,a,' genab.in > a
+< a.do:3: sed 's,a,b,' genab.in > b
+< c.do:1: grep -n . a b
+< genab.do:1: sed 's,b,a,' genab.in > a
+< genab.do:2: sed 's,a,b,' genab.in > b
+11800 "Sh":fail:some
+ls
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+rm b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+2a3
+> credo   b
+12348 "Sh":fail:some
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+0a1
+> credeper: map crepare genab.in
+diff genc.test.past genc.test.out
+0a1,2
+> credeper: map crepare a b
+> credeper: map crepare genab.in
+3d4
+< credo   b
+8a10,11
+> credeper: map crepare a b
+> credeper: map crepare genab.in
+12904 "Sh":fail:some
+diff genab.test.past genab.test.out
+1d0
+< credeper: map crepare genab.in
+diff genc.test.past genc.test.out
+1,2d0
+< credeper: map crepare a b
+< credeper: map crepare genab.in
+10,11d7
+< credeper: map crepare a b
+< credeper: map crepare genab.in
+13461 "Sh":fail:some
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+rm b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+2a3
+> credo   b
+13981 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+3d2
+< credo   b
+14508 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+0a1
+> credoer exit: genab.in.redont exists
+diff genc.test.past genc.test.out
+0a1
+> credoer exit: genab.in.redont exists
+2a4
+> credoer exit: b.redont exists
+7a10
+> credoer exit: genab.in.redont exists
+8a12
+> credoer exit: b.redont exists
+15542 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+1c1,2
+< credoer exit: genab.in.redont exists
+---
+> credo   genab.in
+> credoer exit: no readable genab.in.do or default.in.do
+diff genc.test.past genc.test.out
+4c4,5
+< credoer exit: b.redont exists
+---
+> credo   b
+> credoer exit: no readable b.do or default.b.do
+17109 "Sh":fail:some
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redont
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+Aide
+a
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redont
+cp b.tr.old b.tr
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+1,2c1
+< credo   genab.in
+< credoer exit: no readable genab.in.do or default.in.do
+---
+> credoer exit: genab.in.redont exists
+diff genc.test.past genc.test.out
+4,5c4
+< credo   b
+< credoer exit: no readable b.do or default.b.do
+---
+> credoer exit: b.redont exists
+17660 "Sh":fail:some
+diff genab.test.past genab.test.out
+1c1,2
+< credoer exit: genab.in.redont exists
+---
+> credo   genab.in
+> credoer exit: no readable genab.in.do or default.in.do
+18182 "Sh":killed
+diff genab.test.past genab.test.out
+1,2c1
+< credo   genab.in
+< credoer exit: no readable genab.in.do or default.in.do
+---
+> credoer exit: genab.in.redont exists
+Aide
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redoing
+b.tr
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+c.redoing
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+diff genab.test.past genab.test.out
+Aide
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redoing
+b.tr
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+c.redoing
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+diff genab.test.past genab.test.out
+22087 "Sh":killed
+21693 "Sh":killed
+18995 "Sh":killed
+18786 "Sh":killed
+diff genab.test.past genab.test.out
+0a1,3
+> genab.test
+> rm -f a b
+> credo genab
+2a6
+> grep -n . a b
+35975 "Sh":killed
+flag x +
+diff genab.test.past genab.test.out
+0a1
+> sh genab.test
+36464 "Sh":killed
+diff genab.test.past genab.test.out
+ls *.test
+sh genab.test
+sh genc.test
+genab.test
+rm -f a b
+credo genab
+credoer exit: genab.in.redont exists
+credo genab
+grep -n . a b
+a:1: a
+a:2: a
+b:1: b
+b:2: b
+36671 "Sh":killed
+genc.test
+rm -f a b
+credo c
+ls
+Aide
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.redoing
+b.tr
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+c.redoing
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+37254 "Sh":killed
+40899 "Sh":killed
+rm b.redoing c.redoing
+genab.redoing
+41021 "Sh":killed
+rm genab.redoing
+41082 "Sh":fail:|no matches
+Aide
+a.dep
+a.dep.sum
+a.do
+a.do.sum
+a.sum
+b.tr
+b.tr.old
+c.dep
+c.dep.sum
+c.do
+c.do.sum
+dump
+genab.dep
+genab.dep.sum
+genab.do
+genab.do.sum
+genab.in
+genab.in.redont
+genab.test
+genab.test.out
+genab.test.past
+genc.test
+genc.test.out
+genc.test.past
+41086 "Sh":killed
+genab.redoing
+echo a b | fmt -w 1 | sort | uniq
+a
+a
+b
+plumb 'function(1)'
+41783 "Sh":killed
+rm genab.redoing
+rm: *.redoing: '*.redoing' file does not exist
+41845 "Sh":fail:errors
+mv: can't stat genab.test.out: 'genab.test.out' file does not exist
+diff genab.test.past genab.test.out
+diff: can't stat genab.test.past: 'genab.test.past' file does not exist
+mv: can't stat genc.test.out: 'genc.test.out' file does not exist
+diff genc.test.past genc.test.out
+diff: can't stat genc.test.past: 'genc.test.past' file does not exist
+41848 "Sh":fail:error
+diff genab.test.past genab.test.out
+5,6c5
+< credo   genab.in
+< credoer exit: no readable genab.in.do or default.in.do
+---
+> credoer exit: genab.in.redont exists
+7a7,8
+> sed s,b,a, genab.in
+> sed s,a,b, genab.in
+diff genc.test.past genc.test.out
+7c7,8
+< updating a and b
+---
+> sed s,b,a, genab.in
+> sed s,a,b, genab.in
+9c10,11
+< updating a and b
+---
+> sed s,b,a, genab.in
+> sed s,a,b, genab.in
+20c22,23
+< updating a and b
+---
+> sed s,b,a, genab.in
+> sed s,a,b, genab.in
+42466 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+9,11c9
+< credo   b as a
+< sed s,b,a, genab.in
+< sed s,a,b, genab.in
+---
+> credo   b using a.do
+21c19
+< credo   b as a
+---
+> credo   b using a.do
+43073 "Sh":fail:some
+diff genab.test.past genab.test.out
+5c5
+< credoer exit: genab.in.redont exists
+---
+> genab.in.redont
+diff genc.test.past genc.test.out
+5c5
+< credoer exit: genab.in.redont exists
+---
+> genab.in.redont
+17c17
+< credoer exit: genab.in.redont exists
+---
+> genab.in.redont
+43667 "Sh":fail:some
+diff genab.test.past genab.test.out
+5d4
+< genab.in.redont
+diff genc.test.past genc.test.out
+5d4
+< genab.in.redont
+17d15
+< genab.in.redont
+44261 "Sh":fail:some
+diff genab.test.past genab.test.out
+3d2
+< rm -f a b
+5,8d3
+< credo genab
+< sed s,b,a, genab.in
+< sed s,a,b, genab.in
+< grep -n . a b
+diff genc.test.past genc.test.out
+1d0
+< sh genab.test
+1d0
+< sh genc.test
+45445 "Sh":fail:some
+1d0
+< genab.test
+2a2,3
+> sed s,b,a, genab.in
+> sed s,a,b, genab.in
+1,3d0
+< genc.test
+< rm -f a b
+< credo c
+13,14d9
+< rm b
+< credo c
+46038 "Sh":fail:some
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+diff genab.test.past genab.test.out
+diff genc.test.past genc.test.out
+f          2         315           0           0           6 
+        315          58         214           0           0 /test/1/credo/multiout/genc.test.out Del Snarf | Look Get 

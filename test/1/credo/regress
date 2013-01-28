@@ -1,0 +1,10 @@
+#!/dis/sh
+pwd = `{pwd}
+testdirs = `{du -n | grep '\.test$' | sed 's,/[^/]+$,,' | sort | uniq}
+apply {
+	cd $1
+	pwd
+	pastout
+	cd $pwd
+	echo
+} $testdirs

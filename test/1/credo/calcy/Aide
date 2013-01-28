@@ -1,0 +1,16 @@
+/github/credo/sh-inferno/
+/dis/credoer
+/dis/lssrc
+/dis/pastout
+/lib/do/c
+Dump /github/credo/test/1/credo/calcy/dump
+Edit ,|sort|uniq
+Load /test/1/credo/cylc/dump
+cp objects.test bin.test
+du -n
+log
+lsdo
+lsenv
+lssrc
+rm y.tab.h
+rm -f *.out *.past

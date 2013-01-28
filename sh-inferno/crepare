@@ -1,6 +1,7 @@
 #!/dis/sh
 #echo pare $1$2
 crindent = $1
+#echo crepare: $2
 credo $2
 
 # doesn't print output of redoing dependent targets

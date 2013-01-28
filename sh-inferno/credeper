@@ -3,7 +3,6 @@ field2sed = 's,^.*[ 	],,'
 
 olddepsum = `{cat $cretarget^.dep.sum >[2]/dev/null | sed $field1sed}
 
-noselfvars = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
 crevars = `{sed $field2sed $cretarget^.dep | sed -n 's,^\/env\/,,p'}
 apply {
 	crevar = $1
@@ -24,22 +23,24 @@ apply {
 	}
 } $crevars
 
-if {! no $noselfvars} {
-	map 'crepare ''  '^$crindent^''''  $noselfvars
+credepfiles = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+if {! no $credepfiles} {
+	#echo credeper: map crepare $credepfiles
+	map 'crepare ''  '^$crindent^''''  $credepfiles
 }
 
-deps = `{sed $field2sed $cretarget^.dep}
+credeps = `{sed $field2sed $cretarget^.dep}
 apply {
-	dep = $1
-	relay = $dep^.relay
-	if {ftest -e $relay} {run $relay $dep}
-} $deps
+	credep = $1
+	crelay = $credep^.relay
+	if {ftest -e $crelay} {run $crelay $credep}
+} $credeps
 apply {
 	if {! md5sum $1 >[2]/dev/null} {
 		echo '0	'^$1
 		if {! ~ $1 '/env/*'} {nulltargetforce = 1}
 	}
-} $deps > $cretarget^.dep.new
+} $credeps > $cretarget^.dep.new
 
 mv $cretarget^.dep.new $cretarget^.dep
 (newdepsum newdepfile) = `{cresum $cretarget^.dep}

@@ -1,0 +1,22 @@
+rm *.do *.dep *.csv report.txt
+
+echo 'dos curl -s http://www.ferc.gov/docs-filing/eqr/soft-tools/sample-csv/$1 > $1' > contract.txt.do
+
+echo '0	contract.txt' > Evergreen.csv.dep
+echo 'csv = $1
+pat = `{echo $csv | sed ''s,\.csv$,,''}
+dep = `{cat $csv.dep | sed ''s,.*	,,''}
+grep $pat $dep > $csv' > Evergreen.csv.do
+
+echo '0	Evergreen.csv' > report.txt.dep
+echo 'txt = $1
+dep = `{cat $txt.dep | sed ''s,.*	,,''}
+echo File $dep has `{wc -l $dep | dos awk ''{print $1}''} lines. > $txt' > report.txt.do
+
+grep . *.dep *.do
+
+sh contract.txt.do contract.txt
+sh Evergreen.csv.do Evergreen.csv
+sh report.txt.do report.txt
+
+cat report.txt

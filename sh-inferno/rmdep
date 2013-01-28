@@ -1,9 +1,9 @@
 #!/dis/sh
-(dep files) = $*
-dep = $dep^.dep
-tmp = $dep.${pid}
-apply {
-	file = $1
-	grep -v '	'^$file^'$' $dep > $tmp
-	mv $tmp $dep
-} $files
+(target files) = $*
+pid = ${pid}
+if {ftest -w $target^.dep} {
+	apply {
+		grep -v '	'^$1^'$' $target^.dep > $target^.dep.$pid
+		mv $target^.dep.$pid $target^.dep
+	} $files
+}

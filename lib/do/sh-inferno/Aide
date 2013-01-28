@@ -1,7 +1,9 @@
 Edit ,s,stub,stem,g
+Edit ,|sort|uniq
 catdo
 cp -r * /nb/pub/acmesacs/lib/do
 grep -l stub */*.do
 grep -n '\.env' */*.do
 grep -n env */*.do
-|sort|uniq
+ls -F | mc
+

@@ -1,0 +1,8 @@
+/lib/do/ferc/
+Edit ,|sort|uniq
+du -n
+log
+pastout
+rm contract.txt
+rm *.out *.past
+rm *.sum

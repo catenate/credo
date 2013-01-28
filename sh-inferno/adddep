@@ -1,9 +1,4 @@
 #!/dis/sh
 (target files) = $*
-dep = $target^.dep
-tmp = $dep.${pid}
-apply {
-	echo '0	'^$1 >> $dep
-} $files
-sort $dep | uniq > $tmp
-mv $tmp $dep
+rmdep $target $files
+apply {echo '0	'^$1 >> $target^.dep} $files

@@ -1,0 +1,6 @@
+rm -f *.csv report.txt
+
+dos curl -s http://www.ferc.gov/docs-filing/eqr/soft-tools/sample-csv/contract.txt > contracts.csv
+grep Evergreen contracts.csv > evergreens.csv
+
+ls *.csv report.txt

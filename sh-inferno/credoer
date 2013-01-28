@@ -5,19 +5,16 @@ if {no $crindent} {
 
 field1sed = 's,[ 	].+$,,'
 
-cretarget = $1
 if {no $credir} {credir = ''}
 
-if {ftest -f $cretarget^.redoing} {
-	while {ftest -f $cretarget^.redoing} {
-		sleep 1
-		$cretarget^.redoing >[2]/dev/null
-	}
-}
+cretarget = $1
+cretr = $cretarget
+crelock $cretarget
 
-touch $cretarget^.redoing
-echo '#!/dis/sh' >> $cretarget^.redoing
-echo 'if {! ftest -d /prog/'^${pid}^'} {rm -f '^$cretarget^'.redoing}' >> $cretarget^.redoing
+if {ftest -r $cretarget^.tr} {
+	cretr = `{cat $cretarget^.tr}
+	crelock $cretr
+}
 
 # exit before we update dependencies, so we don't forget we need to rebuild
 oldtargsum = `{cat $cretarget^.sum >[2]/dev/null | sed $field1sed}
@@ -25,8 +22,7 @@ oldtargsum = `{cat $cretarget^.sum >[2]/dev/null | sed $field1sed}
 if {and {! ~ $#oldtargsum 0} {! ~ $#newtargsum 0}} {
 	if {! ~ $oldtargsum $newtargsum} {
 		echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
-		rm -f $cretarget^.redoing
-		exit
+		rm -f $cretarget^.redoing $cretr^.redoing
 	}
 }
 
@@ -51,31 +47,36 @@ if {ftest -r $cretarget^.env} {run $cretarget^.env}
 # delay exit to here, to redo dependencies and set environment of a
 # target with no do script
 if {ftest -e $cretarget^.redont} {
-	rm -f $cretarget^.redoing
+	rm -f $cretarget^.redoing $cretr^.redoing
+	#echo $cretarget^.redont
 	exit
 }
 
-echo credo $crindent^$credir^$cretarget
+#if {! ~ $cretarget $cretr} {
+#	echo credo $crindent^$credir^$cretarget using $cretr
+#} {
+#	echo credo $crindent^$credir^$cretarget
+#}
 
-if {ftest -r $cretarget^.do} {
-	olddosum = `{cat $cretarget^.do.sum >[2]/dev/null | sed $field1sed}
-	(newdosum newdofile) = `{cresum $cretarget^.do}
-	do = ./^$cretarget^.do $cretarget
+if {ftest -r $cretr^.do} {
+	olddosum = `{cat $cretr^.do.sum >[2]/dev/null | sed $field1sed}
+	(newdosum newdofile) = `{cresum $cretr^.do}
+	do = ./^$cretr^.do $cretr
 } {
 	filesed = 's,(.*)\.[^.]+$,\1,'
 	extsed = 's,.*\.([^.]+)$,\1,'
 
-	filext = $cretarget
-	file = `{echo $filext | sed $filesed}
-	ext = `{echo $filext | sed $extsed}
+	file = `{echo $cretr | sed $filesed}
+	ext = `{echo $cretr | sed $extsed}
 
 	if {ftest -r default.^$ext^.do} {
-		olddosum = `{cat $cretarget^.do.sum >[2]/dev/null | sed $field1sed}
+		olddosum = `{cat $cretr^.do.sum >[2]/dev/null | sed $field1sed}
 		(newdosum newdofile) = `{cresum default.^$ext^.do}
-		do = ./default.^$ext^.do $filext
+		do = ./default.^$ext^.do $cretr
 	} {
 		touch $cretarget^.redont
-		rm -f $cretarget^.redoing
+		rm -f $cretarget^.redoing $cretr^.redoing
+		#echo credoer exit: no readable $cretr^.do or default.^$ext^.do
 		exit
 	}
 }
@@ -84,9 +85,14 @@ if {and {! ~ $#newdosum 0} {! ~ $olddosum $newdosum}} {
 	echo $newdosum^'	'^$newdofile > $cretarget^.do.sum
 }
 
-if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretarget} {~ $nulltargetforce 1}} {
+if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretarget} {! ftest -e $cretr} {~ $nulltargetforce 1}} {
 	if {ftest -f $cretarget} {cp $cretarget $cretarget^.reold; reold=1} {reold=0}
 	
+	if {! ~ $cretarget $cretr} {
+		echo credo $crindent^$credir^$cretarget using $cretr
+	} {
+		echo credo $crindent^$credir^$cretarget
+	}
 	run $do
 	dostatus = $status
 
@@ -102,5 +108,5 @@ if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretar
 	}
 }
 
-rm -f $cretarget^.redoing
+rm -f $cretarget^.redoing $cretr^.redoing
 exit

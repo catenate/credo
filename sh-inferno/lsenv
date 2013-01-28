@@ -1,5 +1,10 @@
 #!/dis/sh
-deps = `{ls *.dep >[2]/dev/null}
+targets = $*
+if {no $targets} {
+	deps = `{ls *.dep >[2]/dev/null}
+} {
+	deps = `{apply {ls $1.dep >[2]/dev/null} $targets}
+}
 if {no $deps} {exit 0}
 apply {
 	f = $1

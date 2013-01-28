@@ -1,0 +1,4 @@
+sh /lib/do/credo/rm-f.std..do
+libdo (c lex l c) calcl.c
+credo calcl.c
+sed 10q calcl.c
