@@ -8,5 +8,6 @@ apply {plumb $1} `{ls test_* | grep -v out}
 catdo
 du -n
 lsdo
+nbnow
 rm *.out
 sh /lib/do/credo/rm-f.std..do

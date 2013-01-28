@@ -20,6 +20,7 @@ env library.  See /lib/env.
 env scripts.  See /lib/env.
 ferc.  Emulate trivial drake processing of files from the FERC data source.
 gnumake.  Emulate FSF’s GNU Make.
+helloworld.  Tutorial describes a simple C compilation.
 install.  File guides integrating credo with an Inferno installation.
 libdo.  Credo script to copy a script from the do library into the current directory.
 libenv.  Credo script to copy a script from the env library into the current directory.
