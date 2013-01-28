@@ -1,8 +1,8 @@
 :/\n\n\nNote:/
 :/^[^ ]+$/
 Dump /github/credo/dump
-Edit ,|s ''
 Edit ,s,\n\n\nNote: ,\n\nNote: ,g
+Edit ,|s ''
 Edit ,|sort|uniq
 Load /github/credo/dump
 du -n | grep -v '\.git' | grep Aide
@@ -10,9 +10,9 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-log git | grep -v commit
 git log --decorate --graph --oneline --all | sed 10q
 gn env sh-inferno/*
 log
 log git
+log git | grep -v commit
 ls -F | mc

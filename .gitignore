@@ -1,6 +1,7 @@
 *.out
 *.past
 dos.log
+dump
 git.log
 manos.log
 nsh.log
