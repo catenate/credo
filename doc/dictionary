@@ -1,5 +1,5 @@
 *.dep.  Files list each file on which a target depends, after its checksum (e.g. the output of md5sum).
-/lib/do.  Library of shell scripts or programs to produce file outputs from file inputs on which they depend.  A do script or program in given one parameter, the name of the file to create.  Each smith has its own library.
+*.tr.  Translate one target into another.  Use the target contained in the file to build the target named by the file.  Useful for multiple targets (e.g. y.tab.h.tr contains calcy.c)./lib/do.  Library of shell scripts or programs to produce file outputs from file inputs on which they depend.  A do script or program in given one parameter, the name of the file to create.  Each smith has its own library.
 /lib/env.  Library of shell scripts or programs to set shell-environment variables, usually building up definitions by adding to the current value.
 adddep rmdep.  Credo scripts to maintain file dependencies (including /env/ files) for a target.
 addenv rmenv.  Credo scripts to set and clear environment variables per target, or as a default for all targets in the directory.
@@ -31,4 +31,3 @@ regress.  Script to run all credo *.test cases.  Uses pastout to list difference
 smith.  A tool or document or (sub)system which defines a set of shell variables or file productions.  The level of directories under /lib/do and /lib/env.
 todo.  File lists what needs done to make credo better.
 todont.  File explains what should be left undone, to avoid making credo worse.
-*.tr.  Translate one target into another.  Use the target contained in the file to build the target named by the file.  Useful for multiple targets (e.g. y.tab.h.tr contains calcy.c).
