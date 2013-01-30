@@ -1,0 +1,11 @@
+sh /lib/do/credo/rm-f.std..do
+
+libdo (boilermake CC c o) eatglass.o
+credo eatglass.o
+#cat eatglass.o.dep
+dos file ./eatglass.o
+
+libdo (boilermake CC o '') eatglass
+credo eatglass
+#grep -n . *.dep *.relay /dev/null
+dos ./eatglass

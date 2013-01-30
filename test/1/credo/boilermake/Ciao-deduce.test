@@ -1,0 +1,8 @@
+sh /lib/do/credo/rm-f.std..do
+
+deduce -x Ciao.o
+credo Ciao.o
+
+deduce -x Ciao CXX
+credo Ciao
+dos ./Ciao

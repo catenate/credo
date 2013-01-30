@@ -1,0 +1,13 @@
+/lib/do/boilermake/
+Dump /github/credo/test/1/credo/boilermake/dump
+Edit ,|sort|uniq
+Load /github/credo/test/1/credo/boilermake/dump
+New Ciao-deduce.test
+cp Ciao.test Ciao-deduce.test
+du -n
+log
+pastout
+rm *.d
+rm *.out *.past
+sh /lib/do/credo/rm-f.std..do
+|tr a-z A-Z

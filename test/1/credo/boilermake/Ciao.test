@@ -1,0 +1,10 @@
+sh /lib/do/credo/rm-f.std..do
+
+libdo (boilermake CXX C o) Ciao.o
+credo Ciao.o
+cat Ciao.o.dep
+dos file ./Ciao.o
+
+libdo (boilermake CXX o '') eatglass
+credo eatglass
+dos ./eatglass

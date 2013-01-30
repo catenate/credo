@@ -1,5 +1,6 @@
 *.dep.  Files list each file on which a target depends, after its checksum (e.g. the output of md5sum).
 *.tr.  Translate one target into another.  Use the target contained in the file to build the target named by the file.  Useful for multiple targets (e.g. y.tab.h.tr contains calcy.c).
+.SUFFIXES.  Credo doesn't need the .SUFFIXES target because the user explicitly specifies which production rule to use in the first four parameters to libdo.  To get the advantage of credo figuring out for you which productions to use, try using the deduce script.
 /lib/do.  Library of shell scripts or programs to produce file outputs from file inputs on which they depend.  A do script or program in given one parameter, the name of the file to create.  Each smith has its own library.
 /lib/env.  Library of shell scripts or programs to set shell-environment variables, usually building up definitions by adding to the current value.
 adddep rmdep.  Credo scripts to maintain file dependencies (including /env/ files) for a target.
@@ -12,6 +13,7 @@ credo.  Credo script to queue credo targets.
 credoer.  Credo script to process a target.
 crelock.  Credo script to sleep until credo finishes redoing a file, and mark it redoing.
 crepare.  Credo script to prepare a dependency target for parallel execution.
+deduce.  Credo script finds (and optionally executes with -x) a libdo command for a target.  It prefers productions with an output extension of the target, and an input extension of an available file.  Additional arguments, past the first target argument, filters the list of libdo commands.
 dictionary.  File defines terms used by credo.
 do library.  See /lib/do.
 do scripts.  See /lib/do.

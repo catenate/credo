@@ -6,4 +6,4 @@ apply {
 	(smith cmd in out) = `{echo $dofile | sed 's,\.do$,,;s,[.\/], ,g'}
 	if {no $out} {out = ''''''}
 	echo catdo '('$smith $cmd $in $out')'
-} `{ls */*.do}
+} `{ls */*.do | grep -v '\.dep\.do'}

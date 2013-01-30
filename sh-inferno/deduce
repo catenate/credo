@@ -1,0 +1,50 @@
+#!/dis/sh
+if {~ $1 '-x'} {
+	(opt target res) = $*
+} {
+	(target res) = $*
+}
+
+if {no $target} {
+	apply {echo deduce $1} `{lsdo}
+	exit 0
+}
+
+tmp1 = /tmp/deduce1.${pid}
+tmp2 = /tmp/deduce2.${pid}
+
+if {~ $target '*.*'} {
+	stem = `{echo $target | sed 's,\.[^.]*$,,'}
+	ext = `{echo $target | sed 's,^.*\.,,'}
+} {
+	stem = $target
+	ext = '\.'
+}
+
+ls /lib/do/*/*.do | grep -v '\.dep' | sed 's,.*/([^/]+/),\1,;s,\do$,,' > $tmp1
+grep $ext^'\.$' $tmp1 > $tmp2
+mv $tmp2 $tmp1
+sed 's,^([^ ]*)/([^ ]*)\.([^ ]*)\.([^ ]*)\.$,if {ftest -r '^$stem^'.\3} {echo ''\1'' ''\2'' ''\3'' ''\4''},;s,'''','''''''''''',g' $tmp1 > $tmp2
+sh $tmp2 > $tmp1
+
+apply {
+	re = $1
+	re = `{echo $re | sed 's,\+,\\\+,g'}
+	if {~ $re '-*'} {
+		re = `{echo $re | sed 's,^-,,'}
+		grep -v $"re $tmp1 > $tmp2
+	} {
+		grep $"re $tmp1 > $tmp2
+	}
+	mv $tmp2 $tmp1
+} $res
+
+sed 's,^,/dis/libdo (,;s,$,) '^$target^',' $tmp1 > $tmp2
+
+if {~ $opt '-x'} {
+	sh $tmp2
+} {
+	cat $tmp2
+}
+
+rm -f $tmp1 $tmp2

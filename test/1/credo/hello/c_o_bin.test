@@ -1,6 +1,7 @@
 flag x +
 sh /lib/do/credo/rm-f.std..do
-dodep (c cc c '') hello
+libdo (c cc c o) hello.o
+libdo (c cc o '') hello
 lsdo
 credo hello
 dos ./hello

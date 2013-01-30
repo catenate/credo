@@ -9,5 +9,6 @@ catdo
 du -n
 lsdo
 nbnow
-rm *.out
+pastout
+rm *.out *.past
 sh /lib/do/credo/rm-f.std..do
