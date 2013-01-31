@@ -1,0 +1,5 @@
+*.dep
+*.do
+*.o
+eatglass
+hello
