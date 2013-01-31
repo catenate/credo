@@ -1,1 +1,1 @@
-#define MIDDLEENGLISH "Ich canne glas eten and hit hirti me nou\u021dt."
+#define MIDDLEENGLISH "Ich canne glas eten and hit hirtiþ me nouȝt."

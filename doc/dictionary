@@ -6,6 +6,7 @@
 adddep rmdep.  Credo scripts to maintain file dependencies (including /env/ files) for a target.
 addenv rmenv.  Credo scripts to set and clear environment variables per target, or as a default for all targets in the directory.
 c.  Emulate early Unix (not necessarily Posix).
+cache miss.  Credo redoes a target if the list of dependencies changed, or the content of any dependency changed; if the target’s do script changed; if the target file does not exist; if the translated target, used instead of the given target, does not exist; or if any non-/env/ dependency file does not exist.
 calcy.  Test case of simple calculator to compile and link lex and yacc source.  Verify credo understands yacc generates multiple outputs.
 credeper.  Credo script to process dependencies of a credo target.
 credir.  Shell variable names another directory which contains source code.
@@ -35,3 +36,4 @@ regress.  Script to run all credo *.test cases.  Uses pastout to list difference
 smith.  A tool or document or (sub)system which defines a set of shell variables or file productions.  The level of directories under /lib/do and /lib/env.
 todo.  File lists what needs done to make credo better.
 todont.  File explains what should be left undone, to avoid making credo worse.
+translate target.  See *.tr.

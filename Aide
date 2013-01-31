@@ -14,6 +14,6 @@ git log --decorate --graph --oneline --all | sed 10q
 gn env sh-inferno/*
 log
 log git
-log git commit -a -m 'Add deduce to find (and optionally execute) a libdo command for a target which uses available source files.  Add C/C++ do scripts from boilermaker makefile, using -MM and -MF to generate header-file dependencies.  Test deduce with boilermaker C/C++ examples, and a hello example.  Clean up lscatdo output to ignore dep productions.'
+log git commit -a -m 'Define redoing as a cache miss.  Ignore credo and other intermediate files.  Structure (boilermake CC c o) as an if statement.  Clean up the unicode in middleenglish.h.'
 log git | grep -v commit
 ls -F | mc
