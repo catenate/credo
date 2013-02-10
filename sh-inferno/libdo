@@ -1,18 +1,13 @@
 #!/dis/sh
-if {~ $#* '[0123]'} {
-	lscatdo
-	exit
-}
-
+if {~ $#* '[0123]'} {lscatdo; exit}
 (smith cmd in out targets) = $*
-if {no $targets} {targets = $cmd^.^$in^.^$out}
-
+if {no $targets} {targets = $cmd.$in.$out}
 apply {
 	target = $1
-	if {ftest -r /lib/do/$smith/$cmd.$in.$out.do} {catdo $smith $cmd $in $out > $target^.do}
-	if {ftest -r /lib/do/$smith/$cmd.$in.$out.dep} {catdep $smith $cmd $in $out | sh /dis/target $target > $target^.dep}
-	flag x -
-	if {ftest -r /lib/do/$smith/$cmd.$in.$out.dep.do} {cp /lib/do/$smith/$cmd.$in.$out.dep.do $target^.dep.do}
+	prod = /lib/do/$smith/$cmd.$in.$out
+	if {ftest -r $prod^.do} {catdo $smith $cmd $in $out > $target.do}
+	if {ftest -r $prod^.dep} {catdep $smith $cmd $in $out | sh /dis/target $target > $target.dep}
+	if {ftest -r $prod^.dep.do} {cp $prod.dep.do $target.dep.do}
 	echo credo $target
 } $targets
 

@@ -1,9 +1,5 @@
 #!/dis/sh
-if {no $*} {
-	sh /dis/lscatdo
-	exit
-}
-
+if {no $*} {sh /dis/lscatdo; exit}
 (smith cmd in out) = $*
-depfile = /lib/do/^$smith^/^$cmd^.^$in^.^$out^.dep
+depfile = /lib/do/$smith/$cmd.$in.$out.dep
 if {ftest -r $depfile} {cat $depfile}

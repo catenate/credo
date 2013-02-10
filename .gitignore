@@ -1,9 +1,9 @@
 *.d
-*.out
-*.past
 *.redont
 *.relay
 *.sum
+*.test.out
+*.test.sh
 dos.log
 dump
 git.log

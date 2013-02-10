@@ -1,0 +1,12 @@
+	#include <stdio.h>
+	
+	int main(void) {
+		printf("Hello, world!\n");
+		return(0);
+	}
+credo hello
+credo hello
+os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+Hello, world!
+cat: cannot open hello.c.do: 'hello.c.do' file does not exist

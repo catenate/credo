@@ -4,8 +4,11 @@ This article describes how to build a very simple C hello-world program
 using the build tool credo.  It also picks apart what’s going on behind
 the scenes.
 
+	> sh /lib/do/credo/rm-f.std..do
+
 Here is the trivial C program with which we'll start.
 
+	> cat hello.c | sed 's,^,	,'
 	#include <stdio.h>
 	
 	int main(void) {
@@ -24,31 +27,35 @@ The first step asks credo to customize a production from its library
 for the files you want to produce.  In this case, we’ll compile directly
 from a C source file to an executable using cc.
 
-	libdo (c cc c '') hello
+	> libdo (c cc c '') hello
+	credo hello
 
 This command prints “credo hello”, which is the second step, which
 prints this.
 
-	credo hello
-	pwd
-	os -d/usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
-	os -d/usr/inferno/github/credo/test/1/credo/hello ./hello
+	> credo hello
+	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
 
 At this point the executable is ready, and running it with the last
 line prints “Hello, world!”
+
+	> os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+	Hello, world!
 
 So, what’s going on here?  First, the libdo command copies the shell
 script /lib/do/c/cc.c..do from its library into the current directory,
 and names it hello.do.
 
+	> cat hello.do | sed 's,^,	,'
 	#!/dis/sh
 	bin = $1
 	if {no $cc} {cc = cc}
 	if {
 		flag x  +
-		os -d^$emuroot^`{pwd} $cc $cflags $cppflags -o $bin $bin^.c
+		os -d $osdir $cc $cflags $cppflags -o $bin $bin^.c
 	} {
-		echo os -d^$emuroot^`{pwd} ./$bin
+		echo os -d $osdir ./$bin
 	}
 
 “Credo hello” passes “hello” as the first parameter to hello.do,

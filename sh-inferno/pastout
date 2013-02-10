@@ -1,0 +1,10 @@
+#!/dis/sh
+apply {
+	test = $1
+	sed -n 's,^	> ,,p' $test > $test.sh
+	if {ftest -e $test.out} {mv $test.out $test.past}
+	sh $test.sh > $test.out >[2=1]
+	if {! ftest -e $test.past} {touch $test.past}
+	flag x +
+	diff $test.past $test.out
+} *.test
