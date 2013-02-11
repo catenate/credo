@@ -5,15 +5,17 @@ Edit ,s,\n\n\nNote: ,\n\nNote: ,g
 Edit ,|s ''
 Edit ,|sort|uniq
 Load /github/credo/dump
-dos git commit -a -m 'In do scripts use $osdir for current host directory.  Move hello test document to hello test directory.  Add pastout to parse the literate program and run the test case.  Add map because credo isn''t complete without it.  Add past files so fresh clones can tell if something changed in the output.'
+cat sh-inferno/* | grep -v '^[	 }{]*$' | grep -v '^[	 ]*#' |  wc -l
 dos git add doc lib man sh-inferno test
+dos git commit -a -m 'Update Aide, dictionary, todo.  Add links to rules for gnu make and posix make.'
+dos git diff HEAD
+dos git log --decorate --graph --oneline --all | sed 10q
 dos git status
 du -n | grep -v '\.git' | grep Aide
 du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git log --decorate --graph --oneline --all | sed 10q
 gn env sh-inferno/*
 log
 log git

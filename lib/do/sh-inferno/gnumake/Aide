@@ -1,4 +1,6 @@
 Edit ,|sort|uniq
-du -n
 cp ../c/cc.o..dep.do CXX.o..dep.do
+du -n
+os chrome http://www.gnu.org/software/make/manual/html_node/Catalogue-of-Rules.html
+os chrome http://www.gnu.org/software/make/manual/html_node/Suffix-Rules.html
 rm cc.o..do

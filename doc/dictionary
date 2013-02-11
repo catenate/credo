@@ -27,6 +27,7 @@ helloworld.  Tutorial describes a simple C compilation.
 install.  File guides integrating credo with an Inferno installation.
 libdo.  Credo script to copy a script from the do library into the current directory.
 libenv.  Credo script to copy a script from the env library into the current directory.
+line count.  285 sh source lines that are not comments, empty, or have only open or close braces.
 lsenv.  Credo script to list environment variables on which targets in this directory depend.
 lssrc.  Credo script to list source code files (i.e. dependencies without do files) for this directory's targets.
 multiout.  Test case of multiple outputs in the abstract.

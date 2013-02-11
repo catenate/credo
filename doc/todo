@@ -3,14 +3,27 @@ Fix reported¹ and recognized² bugs.
  ² man 1 credo | sed -n '/^BUGS/,$p'
 man 1 dodep | sed -n '/^BUGS/,$p'
 
-Create ../sh-inferno/deduce as a wrapper around env- and do-dir-
-specific deduce scripts.
+All os calls in env, dep, and do scripts should use $osdir.
+
+Add examples from “Recursive Make Considered Harmful” as tests.
+
+Add unicode substitution productions for various languages.¹
+Start with the unicoper toascii.sed scripts.²
+ ¹ (c sed uc c)
+(go sed ugo go)
+(haskell sed uhs hs)
+(python sed upy py)
+(ruby sed urb rb)
+ ² https://github.com/catenate/unicoper/tree/master/substitute
 
 Add version files in each /lib/do directory, to version these scripts.
 For productions copied from other tools, store the version of the tool.
 
-Add productions from GNU make in /lib/do/gmake, since it is a standard
-build tool for C and C++ build systems.
+Add productions from Posix make in mkdir /github/credo/lib/do/sh-inferno/make, since it is the
+standardized project management tool.
+
+Add productions from GNU make in /lib/do/gnumake, since it is a
+standard project management tool.
 
 Port to bash so it's not limited to Inferno users.  In addition to the
 credo tool scripts, all the library do scripts are also written for
@@ -21,3 +34,13 @@ the user, who is likely to want to add things I don't know about.
 The bash version is likely to be much more popular, and get forks
 and changes, so I could just cherry-pick which changes I really like
 and back-port them to the Inferno files.
+
+Consider GNU parallel for map in bash port.
+
+Consider porting to dash instead of bash, since it’s a newer de facto
+linux shell.
+
+For shell haters, consider a Python port.  Not Perl.
+
+For speed, and to embed concurrency, consider a C or Go port.
+Go would be better for concurrency.  Not C++ or Java.
