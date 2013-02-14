@@ -1,0 +1,24 @@
+credo Ciao.o
+credo   Ciao.o.dep
+credo   Ciao.C will not overwrite non-credo change
+0 =? fb1ac8d9d24df85a65972ac1c27ec7adff47a4a2
+credo Ciao.o
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/boilermake c++ -o Ciao.o -c Ciao.C
+0	/env/CXX
+0	/env/CXXFLAGS
+0	/env/SRC_CXXFLAGS
+0	/env/INCDIRS
+0	/env/SRC_INCDIRS
+0	/env/SRC_DEFS
+0	/env/DEFS
+fb1ac8d9d24df85a65972ac1c27ec7adff47a4a2	Ciao.C
+./Ciao.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
+credo Ciao
+credo   Ciao.dep
+credo     Ciao.C will not overwrite non-credo change
+0 =? fb1ac8d9d24df85a65972ac1c27ec7adff47a4a2
+credo Ciao
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/boilermake c++ -o Ciao Ciao.o
+Ciao!

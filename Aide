@@ -19,5 +19,6 @@ git
 gn env sh-inferno/*
 log
 log git
+log git commit -a -m 'Cache and clean up checksum manipulation.  Add past test results.'
 log git | grep -v commit
 ls -F | mc

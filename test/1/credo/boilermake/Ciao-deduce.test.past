@@ -1,0 +1,15 @@
+credo Ciao.o
+credo   Ciao.o.dep
+credo   Ciao.C will not overwrite non-credo change
+0 =? fb1ac8d9d24df85a65972ac1c27ec7adff47a4a2
+credo Ciao.o
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/boilermake c++ -o Ciao.o -c Ciao.C
+credo Ciao
+credo   Ciao.dep
+credo     Ciao.C will not overwrite non-credo change
+0 =? fb1ac8d9d24df85a65972ac1c27ec7adff47a4a2
+credo Ciao
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/boilermake c++ -o Ciao Ciao.o
+Ciao!

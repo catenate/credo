@@ -5,6 +5,6 @@ credo Ciao.o
 cat Ciao.o.dep
 dos file ./Ciao.o
 
-libdo (boilermake CXX o '') eatglass
-credo eatglass
-dos ./eatglass
+libdo (boilermake CXX o '') Ciao
+credo Ciao
+dos ./Ciao

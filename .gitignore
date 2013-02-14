@@ -1,7 +1,12 @@
 *.d
+*.out
 *.redont
+*.redep
+*.reenv
 *.relay
+*.reold
 *.sum
+*.sums
 *.test.out
 *.test.sh
 dos.log

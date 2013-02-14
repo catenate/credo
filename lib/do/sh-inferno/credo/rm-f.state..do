@@ -1,1 +1,1 @@
-rm -f *.redoing *.redont *.renew *.reold *.sum
+rm -f *.redoing *.redont *.relock *.renew *.reold *.sum

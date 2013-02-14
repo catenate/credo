@@ -1,4 +1,5 @@
 sh /lib/do/credo/rm-f.std..do
+
 target = hello.o
 deduce $target 'c cc' > $0.${pid}
 cat $0.${pid}
@@ -7,3 +8,10 @@ rm $0.${pid}
 credo $target
 dos file $target
 
+target = hello
+deduce $target 'c cc' > $0.${pid}
+cat $0.${pid}
+sh $0.${pid}
+rm $0.${pid}
+credo $target
+dos file $target

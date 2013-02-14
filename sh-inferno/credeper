@@ -1,9 +1,7 @@
 #!/dis/sh
-field2sed = 's,^.*[ 	],,'
+(olddepsum olddepfile) = `{cat $cretarget^.dep.sum >[2]/dev/null}
 
-olddepsum = `{cat $cretarget^.dep.sum >[2]/dev/null | sed $field1sed}
-
-crevars = `{sed $field2sed $cretarget^.dep | sed -n 's,^\/env\/,,p'}
+crevars = `{sed -n 's,(.+)	/env/(.+),\2,p' $cretarget^.dep}
 apply {
 	crevar = $1
 	if {ftest -r $cretarget.$crevar.env} {
@@ -23,25 +21,26 @@ apply {
 	}
 } $crevars
 
-credepfiles = `{sed $field2sed $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+credepfiles = `{sed 's,(.+)	(.+),\2,' $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
 if {! no $credepfiles} {
 	#echo credeper: map crepare $credepfiles
 	map 'crepare ''  '^$crindent^''''  $credepfiles
 }
 
-credeps = `{sed $field2sed $cretarget^.dep}
+credeps = `{sed 's,(.+)	(.+),\2,' $cretarget^.dep}
+apply {if {ftest -e $1^.reenv} {run $1^.reenv $1}} $credeps
+apply {cresum $1} $credeps > $cretarget^.dep.new
 apply {
 	credep = $1
-	crelay = $credep^.relay
-	if {ftest -e $crelay} {run $crelay $credep}
-} $credeps
-apply {
-	if {! md5sum $1 >[2]/dev/null} {
-		echo '0	'^$1
-		if {! ~ $1 '/env/*'} {nulltargetforce = 1}
+	(credepsum credepfile) = `{cresum $credep}
+	if {! ~ $credep '/env/*'} {
+		if {~ $credepsum 0} {nulltargetforce = 1}
+		if {or {! ftest -e $credep.redep} {! grep '^'^$cretarget^'$' $credep.redep >/dev/null}} {
+			if {~ $credep '*/*'} {echo `{pwd}^'/'^$cretarget} {echo $cretarget} >> $credep.redep
+		}
 	}
-} $credeps > $cretarget^.dep.new
+} $credeps
 
 mv $cretarget^.dep.new $cretarget^.dep
 (newdepsum newdepfile) = `{cresum $cretarget^.dep}
-if {! ~ $#newdepsum 0} {echo $newdepsum^'	'^$newdepfile > $cretarget^.dep.sum}
+cresum $cretarget^.dep > $cretarget^.dep.sum

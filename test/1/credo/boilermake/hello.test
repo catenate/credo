@@ -1,5 +1,11 @@
 sh /lib/do/credo/rm-f.std..do
 libdo (boilermake CC c o) hello.o
 credo hello.o
-cat hello.o.dep
 dos file ./hello.o
+
+echo rebuild
+credo hello.o
+
+echo forced rebuild
+adddep hello.o force
+credo hello.o

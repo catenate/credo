@@ -1,9 +1,8 @@
 #!/dis/sh
+
 if {no $crindent} {
 	crindent = ''
 }
-
-field1sed = 's,[ 	].+$,,'
 
 if {no $credir} {credir = ''}
 
@@ -17,13 +16,13 @@ if {ftest -r $cretarget^.tr} {
 }
 
 # exit before we update dependencies, so we don't forget we need to rebuild
-oldtargsum = `{cat $cretarget^.sum >[2]/dev/null | sed $field1sed}
+(oldtargsum oldtargfile) = `{cat $cretarget^.sum >[2]/dev/null}
+if {no $oldtargsum} {oldtargsum = 0}
 (newtargsum newtargfile) = `{cresum $cretarget}
-if {and {! ~ $#oldtargsum 0} {! ~ $#newtargsum 0}} {
-	if {! ~ $oldtargsum $newtargsum} {
-		echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
-		rm -f $cretarget^.redoing $cretr^.redoing
-	}
+
+if {and {! no $oldtargsum} {! ~ $oldtargsum 0} {! no $newtargsum} {! ~ $oldtargsum $newtargsum}} {
+	echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
+	rm -f $cretarget^.redoing $cretr^.redoing
 }
 
 # Don't go full recursive, but it's often useful to generate the
@@ -59,7 +58,8 @@ if {ftest -e $cretarget^.redont} {
 #}
 
 if {ftest -r $cretr^.do} {
-	olddosum = `{cat $cretr^.do.sum >[2]/dev/null | sed $field1sed}
+	(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
+	if {no $olddosum} {olddosum = 0}
 	(newdosum newdofile) = `{cresum $cretr^.do}
 	do = ./^$cretr^.do $cretr
 } {
@@ -70,7 +70,8 @@ if {ftest -r $cretr^.do} {
 	ext = `{echo $cretr | sed $extsed}
 
 	if {ftest -r default.^$ext^.do} {
-		olddosum = `{cat $cretr^.do.sum >[2]/dev/null | sed $field1sed}
+		(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
+		if {no $olddosum} {olddosum = 0}
 		(newdosum newdofile) = `{cresum default.^$ext^.do}
 		do = ./default.^$ext^.do $cretr
 	} {
@@ -81,7 +82,7 @@ if {ftest -r $cretr^.do} {
 	}
 }
 
-if {and {! ~ $#newdosum 0} {! ~ $olddosum $newdosum}} {
+if {and {! no $newdosum} {! ~ $olddosum $newdosum}} {
 	echo $newdosum^'	'^$newdofile > $cretarget^.do.sum
 }
 

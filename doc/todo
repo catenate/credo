@@ -44,3 +44,7 @@ For shell haters, consider a Python port.  Not Perl.
 
 For speed, and to embed concurrency, consider a C or Go port.
 Go would be better for concurrency.  Not C++ or Java.
+
+See where we could use ⁱ instead of manually checking each *.dep line,
+possibly as a quick check before loading and processing the *.dep file.
+ ⁱ sha1sum -c $target.dep.tmp	# first resolve $t, $targ, $target

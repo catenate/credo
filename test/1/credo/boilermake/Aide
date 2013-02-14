@@ -3,11 +3,19 @@ Dump /github/credo/test/1/credo/boilermake/dump
 Edit ,|sort|uniq
 Load /github/credo/test/1/credo/boilermake/dump
 New Ciao-deduce.test
+cat *.sums | sort | uniq | wc -l
+cat *.sums | wc -l
 cp Ciao.test Ciao-deduce.test
-du -n
+credo hello.o.dep
+du -n | grep test
+gn . *.sum
+gn . *.sums
 log
 pastout
 rm *.d
-rm *.out *.past
+rm *.out
+rm *.sums
+sed 's, .*$,,' *.dep
 sh /lib/do/credo/rm-f.std..do
+sh hello.test
 |tr a-z A-Z

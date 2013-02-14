@@ -1,1 +1,1 @@
-rm -f *.do *.dep *.redep
+rm -f *.do *.dep *.redep *.reenv *.relay
