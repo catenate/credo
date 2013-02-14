@@ -4,7 +4,7 @@ This article describes how to build a very simple C hello-world program
 using the build tool credo.  It also picks apart what’s going on behind
 the scenes.
 
-	> sh /lib/do/credo/rm-f.std..do
+	> crean std
 
 Here is the trivial C program with which we'll start.
 

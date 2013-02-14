@@ -1,0 +1,18 @@
+#!/dis/sh
+scriptdir = /lib/do/credo
+if {no $*} {
+	apply {
+		script = $1
+		group = `{echo $script | sed 's,(.*)\.(.*)\.(.*)\.(.*),\2,'}
+		echo crean $group '	#' `{grep '(rm|crean)' $script | sed 's,crean ,,'}
+	} `{ls $scriptdir/rm*}
+	exit 0
+}
+
+apply {
+	group = $1
+	script = $scriptdir/rm-f.$group..do
+	if {ftest -x $script} {sh $script}
+} $*
+
+exit 0
