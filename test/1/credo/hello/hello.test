@@ -1,12 +1,49 @@
 Credo example: Hello, world!
 
-This article describes how to build a very simple C hello-world program
-using the build tool credo.  It also picks apart what’s going on behind
-the scenes.
+This article introduces Credo, and describes how to build a very
+simple C hello-world program.  It also picks apart what’s going on
+behind the scenes of this basic example.
+
+The greater-than sign, after a tab, introduces a command.
 
 	> crean std
 
-Here is the trivial C program with which we'll start.
+Since this document is also a literate-program test case which runs
+repeatedly, we first clean up derived objects from previous runs.
+We’ll come back later to exactly what this command deletes.
+
+
+A view over credo
+
+The Credo tool suite is a scriptable set of shell commands, written in
+the Inferno shell sh.  It both generates and executes a file-based
+build system, whose state is contained in flat files next to the
+source code.  It aims to replace encoding a build description file
+(eg Makefile) with more direct and simple expressions of the
+intent of the build system and the relationship between files.
+
+To ease writing, reduce errors, and promote best practice,
+Credo stores in a library many default shell variable settings,
+dependency relationships, and commands to produce files,
+both new and extracted from a variety of other build tools.
+The library is primarily sorted by either the source or primary
+application of the reused bit of build-system code.  In general,
+the tools copy the small parts you specify, and rename them to
+match your targets.
+
+After the files you direct are put in the current directory to comprise
+your build system, additional commands may further customize shell
+variables and dependencies for the code at hand.  Credo uses shell
+variables to fill in the production commands, and provides a mechanism
+to build up their definitions by combining values fro the library.
+Since Inferno (and Plan 9) publish the values of shell variables in the
+/env filesystem, files built with credo may directly depend on them,
+just like any other file.
+
+
+Generate and run a build system
+
+Here is a trivial C program with which we’ll start.
 
 	> cat hello.c | sed 's,^,	,'
 	#include <stdio.h>
@@ -16,36 +53,40 @@ Here is the trivial C program with which we'll start.
 		return(0);
 	}
 
-Credo handles both the writing and executing of the build system.
-It replaces makefiles with a set of shell commands which write the
-build system for you.  The dependency graph and shell commands are
-mostly provided in a library, so you don’t write build description files.
-The credo tool suite includes commands to add to, and remove from, the
-default dependencies of each target provided by the library.
-
-The first step asks credo to customize a production from its library
-for the files you want to produce.  In this case, we’ll compile directly
-from a C source file to an executable using cc.
+Our first step asks credo to customize a production from its library
+for the files you want to produce.  To select a production and default
+set of dependencies from the library, Credo asks you to tell it which
+set of tools to consider, the actual tool to consider, and the input
+and output file extensions to use with the tool.  In this case, we’ll
+compile directly from a C source file to an executable using cc
+from the classic set of Unix C tools.  The two empty single quotes
+tell credo that there is no output extension, since unixy binary files
+are usually renamed this way from a.out.
 
 	> libdo (c cc c '') hello
 	credo hello
 
-This command prints “credo hello”, which is the second step, which
-prints this.
+The libdo command prints “credo hello”, which is the second step.
+This particular library script prints the compiler command executed,
+and an Inferno os command to run the executable file on the host.
+Credo tools usually print commands to do the most common next action.
+Credo prints credo commands for its target and every rebuilt dependency.
 
 	> credo hello
+	credo hello
 	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
 	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
 
-At this point the executable is ready, and running it with the last
-line prints “Hello, world!”
+At this point the executable is ready, and running it has the expected result.
 
 	> os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
 	Hello, world!
 
-So, what’s going on here?  First, the libdo command copies the shell
-script /lib/do/c/cc.c..do from its library into the current directory,
-and names it hello.do.
+
+So, what’s going on here?
+
+First, the libdo command copies the shell script /lib/do/c/cc.c..do
+from its library into the current directory, and names it hello.do.
 
 	> cat hello.do | sed 's,^,	,'
 	#!/dis/sh
@@ -58,5 +99,44 @@ and names it hello.do.
 		echo os -d $osdir ./$bin
 	}
 
+It also copies /lib/do/c/cc.c..dep as hello.dep, which lists files on
+which hello depends and their sha1sums.
+
+	> cat /lib/do/c/cc.c..dep | sed 's,^,	,'
+	0	$targ.c
+	0	/env/cc
+	0	/env/cflags
+	0	/env/cppflags
+
 “Credo hello” passes “hello” as the first parameter to hello.do,
-which compiles the C source file into an executable.
+which compiles the C source file into an executable.  Credo updates
+the SHA-1 sums of the files on which the executable depends,
+as of the time it is built.  When the sum of the file changes,
+credo finds a mismatch with the file’s sum stored for the target,
+and knows it needs to rebuild the target.
+
+	> cat hello.dep | sed 's,^,	,'
+	3a96274a1694278c87ed33e098319ce5a391a07d	hello.c
+	0	/env/cc
+	0	/env/cflags
+	0	/env/cppflags
+
+
+What are all these other files in my source code directory,
+how can I ignore them, and how do I get rid of them?
+
+Credo is designed to expose the state of the dependency graph,
+as an affordance for other tools.  This means that it litters the
+source code’s directory with many small files.  Since credo’s build
+system files may themselves be generated, or the files usually
+generated may be written by hand, there is no clear line between what
+credo considers part of the build system and not.  This is why the
+files are not stored in another directory.  Many small files also
+reduces file contention, since credo at this time has an unsophisticated
+file locking and mutual exclusion mechanism.
+
+The tool suite contains commands to list targets (lsdo), source
+(lssrc) and environment dependencies (lsenv), so you don’t always have
+to wade through long ls listings.  The crean tool deletes groups of files;
+crean std deletes the stored dependency state, targets created by credo,
+and the do and dep files in the current directory.

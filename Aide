@@ -7,7 +7,7 @@ Edit ,|sort|uniq
 Load /github/credo/dump
 cat sh-inferno/* | grep -v '^[	 }{]*$' | grep -v '^[	 ]*#' |  wc -l
 dos git add doc lib man sh-inferno test
-dos git commit -a -m 'Add crean to make it easy to delete files.'
+dos git commit -a -m 'Finish a presentable draft of the hello test literate program.  Empty other past files in hello test.'
 dos git diff
 dos git log --decorate --graph --oneline --all | sed 10q
 dos git status

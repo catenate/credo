@@ -9,4 +9,20 @@ credo hello
 os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
 os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
 Hello, world!
-cat: cannot open hello.c.do: 'hello.c.do' file does not exist
+	#!/dis/sh
+	bin = $1
+	if {no $cc} {cc = cc}
+	if {
+		flag x  +
+		os -d $osdir $cc $cflags $cppflags -o $bin $bin^.c
+	} {
+		echo os -d $osdir ./$bin
+	}
+	0	$targ.c
+	0	/env/cc
+	0	/env/cflags
+	0	/env/cppflags
+	3a96274a1694278c87ed33e098319ce5a391a07d	hello.c
+	0	/env/cc
+	0	/env/cflags
+	0	/env/cppflags
