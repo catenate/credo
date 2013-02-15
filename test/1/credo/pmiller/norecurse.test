@@ -1,0 +1,23 @@
+	> crean std
+	> libdo (c cc c o) parse.o
+	> adddep parse.o parse.h
+	> libdo (c cc c o) main.o
+	> adddep main.o parse.h
+	> libdo (c cc o '') main
+	> adddep main parse.o
+	> credo main
+	> dos ./main
+
+Change header.
+
+	> sed 's,[0-9]+,'^${pid}^',' parse.h > parse.h.tmp
+	> mv parse.h.tmp parse.h
+	> credo main
+	> dos ./main
+
+Change a source file.
+
+	> sed 's,[0-9]+,'^${pid}^',' parse.c > parse.c.tmp
+	> mv parse.c.tmp parse.c
+	> credo main
+	> dos ./main

@@ -3,3 +3,4 @@ crean test
 crean target
 crean dodep
 crean env
+crean hist

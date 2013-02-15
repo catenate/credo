@@ -1,0 +1,31 @@
+credo parse.o
+credo main.o
+credo main
+credo   main.dep
+credo     parse.o.dep
+credo   parse.o
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -c parse.c
+credo     main.o.dep
+credo   main.o
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -c main.c
+credo main
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -o main parse.o main.o
+os -d/usr/inferno/github/credo/test/1/credo/pmiller ./main
+parse.c 1234 parse.h 1234
+main.c 1234 parse.h 1234
+credo   parse.o
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -c parse.c
+credo   main.o
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -c main.c
+credo main
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -o main parse.o main.o
+os -d/usr/inferno/github/credo/test/1/credo/pmiller ./main
+parse.c 1234 parse.h 39026
+main.c 1234 parse.h 39026
+credo   parse.o
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -c parse.c
+credo main
+os -d /usr/inferno/github/credo/test/1/credo/pmiller cc -o main parse.o main.o
+os -d/usr/inferno/github/credo/test/1/credo/pmiller ./main
+parse.c 39026 parse.h 39026
+main.c 1234 parse.h 39026

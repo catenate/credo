@@ -1,0 +1,31 @@
+sh /lib/do/credo/rm-f.std..do
+libdo c cc c o hello.o
+credo hello.o
+libdo c ar o a hello.a
+credo hello.a
+adddep hello.a hello.o
+libdo c cc o '' hello
+credo hello
+adddep hello hello.a
+lsdo
+credo hello
+credo hello.a
+credo hello.dep
+credo hello.o
+credo hello.o.dep
+credo hello
+credo   hello.dep
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/hello cc -c hello.c
+credo   hello.a
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/hello ar -rs hello.a hello.o
+ar: creating hello.a
+credo     hello.o.dep
+credo   hello.o
+credo hello
+pwd
+os -d/usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.o hello.a
+os -d/usr/inferno/github/credo/test/1/credo/hello ./hello
+dos ./hello
+Hello, world!

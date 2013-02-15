@@ -5,7 +5,7 @@ if {no $cc} {cc = cc}
 
 if {
 	flag x  +
-	os -d^$emuroot^`{pwd} $cc $cflags $cppflags -c $c
+	os -d $osdir $cc $cflags $cppflags -c $c
 } {
-	echo 'objs = $objs '^$o > $o^.relay
+	echo 'objs = $objs '^$o > $o^.reenv
 }

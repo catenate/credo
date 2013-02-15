@@ -1,3 +1,4 @@
+/github/credo/Aide
 /github/credo/sh-inferno/credoer
 /github/credo/sh-inferno/crelay
 /lib/do/c/
@@ -10,11 +11,13 @@ New test_c_o_bin
 apply {plumb $1} `{ls test_* | grep -v out}
 apply {sh $1 > $1.out >[2=1]; plumb $1.out} `{ls test_* | grep -v out}
 catdo
+crean std
 du -n
 du -n | grep test.sh
 du -nt | grep sh
 gn . *.redep
 ls -F | mc
+ls -ltr
 lsdo
 nbnow
 pastout
