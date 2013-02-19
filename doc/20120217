@@ -1,0 +1,41 @@
+nb makefile general language rake maven ant credo combine minimal shell library
+phonebanshee: I can’t believe it’s 2013 and I’m hacking makefiles.
+Hasn’t someone written an AI that will do this for me?
+
+sdether: @phonebanshee Seeing all the per language build system
+attempts, rake, maven, ant, whatever, make starts looking like the
+voice of sanity
+
+catenate: @sdether @phonebanshee Build tool Credo tries to compose
+build system from library parts at command line.  E.g. ⁱ
+ ⁱ https://github.com/catenate/credo/blob/master/test/1/credo/hello/hello.test
+
+phonebanshee: @catenate @sdether You can’t pay me enough money to look
+at another build system.  And adding another one doesn’t solve the problem.
+
+phonebanshee: @catenate @sdether It’s not that they’re hard individually;
+it’s that complicated projects combine many different existing build systems.
+
+phonebanshee: @catenate @sdether And usually you need to make changes
+to build it in your particular environment, since the author didn’t expect that.
+
+phonebanshee: @catenate @sdether I'd gladly and repeatedly press switch
+that said “permanently erase all but three build systems from the universe”
+
+phonebanshee: @catenate @sdether And I couldn’t care less which ones
+survived—I just want there to be fewer of them.
+
+catenate: @phonebanshee Sorry to hear about your stress with build systems/
+tools variety.  By all means, please ignore mine to lessen your burden.
+
+phonebanshee: @catenate Sorry to be so snarky—yours probably solves
+issues for a set of problems I don’t have.
+
+catenate: @phonebanshee Adding a language atop makefiles goes the wrong
+direction.  I want credo to be simpler, more transparent, easier to work with.
+
+catenate: @phonebanshee So credo replaces static makefiles with higher-
+level shell commands, to compose rules from a library into a tmp build system.
+
+catenate: @phonebanshee If that's not of value, then don't worry
+yourself with mine.  I am glad you don't have a button to delete it. ;)
