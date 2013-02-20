@@ -1,5 +1,5 @@
-Set the shell variable crecho to echo to only print key production
-commands in do scripts.
+Set the shell variable crecho to echo, to print instead of execute key
+production commands in do scripts.
 
 Remove hello executable.
 

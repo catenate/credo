@@ -29,6 +29,10 @@ files in my source code directory, how can I ignore them, and how do I
 get rid of them?
 https://github.com/catenate/credo/blob/master/test/1/credo/hello/hello.test
 
+Set the shell variable crecho to echo, to print instead of execute key
+production commands in do scripts.
+https://github.com/catenate/credo/blob/master/test/1/credo/hello/crecho.test
+
 
 ARTICLES
 
