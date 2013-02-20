@@ -7,7 +7,7 @@ Edit ,|sort|uniq
 Load /github/credo/dump
 cat sh-inferno/* | grep -v '^[	 }{]*$' | grep -v '^[	 ]*#' |  wc -l
 dos git add doc lib man sh-inferno test
-dos git commit -a -m 'Note conversation from twitter.'
+dos git commit -a -m 'Add literate-tests section in README.'
 dos git diff
 dos git log --decorate --graph --oneline --all | sed 10q
 dos git status

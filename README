@@ -18,6 +18,17 @@ will need a port to Linux for wider adoption, either as shell scripts
 or a program.
 
 
+LITERATE TESTS
+
+Literate programs to test credo and describe its features.
+Credo’s test suite also serves as its expository documentation.
+
+Hello, world.  A view over credo.  Generate and run a build system.
+So, what’s going on here?  What are all these other files in my source
+code directory, how can I ignore them, and how do I get rid of them?
+https://github.com/catenate/credo/blob/master/test/1/credo/hello/hello.test
+
+
 ARTICLES
 
 A new credo: no more complex makefiles.
@@ -49,7 +60,7 @@ https://github.com/apenwarr/redo
 
 The most significant differences from Avery's redo is that there are
 no redo-* commands in the do scripts; credo has a new set of shell
-commands to create, examine, and maintain the build system
+script commands to create, examine, and maintain the build system
 (for higher-level tools to automatically generate a build system);
 and credo exposes all of its record-keeping in flat files in the
 current directory.
