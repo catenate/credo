@@ -1,0 +1,11 @@
+hello: cannot open `hello' (No such file or directory)
+credo hello
+credo hello
+os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+hello: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
+credo hello
+flag x +
+os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+hello: cannot open `hello' (No such file or directory)

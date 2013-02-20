@@ -1,0 +1,39 @@
+Set the shell variable crecho to echo to only print key production
+commands in do scripts.
+
+Remove hello executable.
+
+	> crean std
+	> dos file hello
+	hello: cannot open `hello' (No such file or directory)
+
+Create the hello executable, to verify that crecho doesn’t block it.
+
+	> libdo (c cc c '') hello
+	credo hello
+
+	> credo hello
+	credo hello
+	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+
+	> dos file hello
+	hello: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
+
+Remove the hello executable, and verify that it’s not made.
+
+	> rm hello
+
+	> crecho = echo
+
+	> credo hello
+	credo hello
+	flag x +
+	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
+	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+
+We also echo the flag command, so the longer production command does
+not get echoed twice.
+
+	> dos file hello
+	hello: cannot open `hello' (No such file or directory)

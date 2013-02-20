@@ -7,10 +7,12 @@
 Dump /github/credo/test/1/credo/hello/dump
 Edit ,|sort|uniq
 Load /github/credo/test/1/credo/hello/dump
-New test_c_o_bin
+New crecho.test
 apply {plumb $1} `{ls test_* | grep -v out}
 apply {sh $1 > $1.out >[2=1]; plumb $1.out} `{ls test_* | grep -v out}
 catdo
+crean
+crean all
 crean std
 du -n
 du -n | grep test.sh
@@ -20,7 +22,7 @@ ls -F | mc
 ls -ltr
 lsdo
 nbnow
-pastout
+pastout crecho
 rm *.out *.past
 sh /lib/do/credo/rm-f.std..do
 sh deduce.test

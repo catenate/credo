@@ -23,9 +23,10 @@ LITERATE TESTS
 Literate programs to test credo and describe its features.
 Credo’s test suite also serves as its expository documentation.
 
-Hello, world.  A view over credo.  Generate and run a build system.
-So, what’s going on here?  What are all these other files in my source
-code directory, how can I ignore them, and how do I get rid of them?
+Credo example: Hello, world!  A view over credo.  Generate and run a
+build system.  So, what’s going on here?  What are all these other
+files in my source code directory, how can I ignore them, and how do I
+get rid of them?
 https://github.com/catenate/credo/blob/master/test/1/credo/hello/hello.test
 
 

@@ -20,7 +20,7 @@ if {ftest -r $cretarget^.tr} {
 if {no $oldtargsum} {oldtargsum = 0}
 (newtargsum newtargfile) = `{cresum $cretarget}
 
-if {and {! no $oldtargsum} {! ~ $oldtargsum 0} {! no $newtargsum} {! ~ $oldtargsum $newtargsum}} {
+if {and {! ~ $oldtargsum 0} {! ~ $newtargsum 0} {! ~ $oldtargsum $newtargsum}} {
 	echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
 	rm -f $cretarget^.redoing $cretr^.redoing
 }
