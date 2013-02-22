@@ -11,7 +11,7 @@ while {! no $uos} {
 		dodep (c cc c o) $uo >/dev/null
 		credo $uo >/dev/null
 	}
-	deps = `{os -T nm $uo | grep U | grep -v __ | sed 's,[ 	]*U[ 	]+_,,'}
+	deps = `{os -d $osdir nm $uo | grep U | grep -v __ | sed 's,[ 	]*U[ 	]+_,,'}
 	apply {
 		dep = $1
 		if {~ $coneed '*d*'} {echo coneed dep: $dep}
@@ -23,7 +23,7 @@ while {! no $uos} {
 				dodep (c cc c o) $to >/dev/null
 				credo $to >/dev/null
 			}
-			if {and {os -T nm $to | grep T | grep $dep >/dev/null} {! ~ $tos '*'^$to^'*'}} {
+			if {and {os -d $osdir nm $to | grep T | grep $dep >/dev/null} {! ~ $tos '*'^$to^'*'}} {
 				uos = $uos $to
 				echo $to
 				if {~ $coneed '*d*'} {echo coneed tos: $tos '('^$to^')'}

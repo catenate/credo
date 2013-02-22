@@ -1,0 +1,3 @@
+grep -n 'os -d' * | grep -v osdir
+cd /; osdir = `{echo $emuroot^`{pwd} | sed 's,'^$emuroot^'/n/local,,'}; os -d $osdir pwd
+/dis/credo

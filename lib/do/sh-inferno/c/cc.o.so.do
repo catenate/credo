@@ -4,7 +4,7 @@ if {no $cc} {cc = cc}
 
 if {
 	flag x  +
-	os -T $cc -shared $ccflags -o $so $objs
+	os -d $osdir $cc -shared $ccflags -o $so $objs
 } {
 	echo 'ldflags = $ldflags '^$credir^$so > $so^.relay
 }

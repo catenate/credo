@@ -5,7 +5,7 @@ if {no $yacc} {yacc = yacc}
 
 if {
 	flag x  +
-	os -d^$emuroot^`{pwd} $yacc -d $yflags $y
+	os -d $osdir $yacc -d $yflags $y
 	mv y.tab.c $c
 } {
 	echo 'src = $src '^$c > $c^.relay

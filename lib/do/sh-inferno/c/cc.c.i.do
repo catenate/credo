@@ -5,7 +5,7 @@ i = $1
 if {no $cc} {cc = cc}
 if {
 	flag x  +
-	os -T $cc $cflags $cppflags -o $i -E $c
+	os -d $osdir $cc $cflags $cppflags -o $i -E $c
 } {
 	echo $i
 }

@@ -16,9 +16,9 @@ apply {
 	/lib/do/credo/rm-f.std..do
 
 	if {and {no $cc} {! ftest -r default.cc.env}} {
-		if {os -T cc -v >[2]/dev/null} {echo cc > default.cc.env}
-		if {os -T gcc -v >[2]/dev/null} {echo gcc > default.cc.env}
-		if {os -T gcc-3 -v >[2]/dev/null} {echo gcc-3 > default.cc.env}
+		if {os -d $osdir cc -v >[2]/dev/null} {echo cc > default.cc.env}
+		if {os -d $osdir gcc -v >[2]/dev/null} {echo gcc > default.cc.env}
+		if {os -d $osdir gcc-3 -v >[2]/dev/null} {echo gcc-3 > default.cc.env}
 	}
 
 	if {~ $target '*.a'} {

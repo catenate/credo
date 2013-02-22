@@ -20,7 +20,7 @@ rm -f binstall.dep
 adddep binstall $program
 echo '#!/dis/sh
 cygbinhome = /n/C/cygwin/home/jcatena/bin
-if {cp' $program '$cygbinhome} {echo os -T $cygbinhome^/'^$program^'}' > binstall.do
+if {cp' $program '$cygbinhome} {echo os -d $osdir $cygbinhome^/'^$program^'}' > binstall.do
 echo credo binstall
 
 os = `{ls *.c | sed 's,\.c$,.o,'}

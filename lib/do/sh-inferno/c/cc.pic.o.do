@@ -5,7 +5,7 @@ o = $1
 if {no $cc} {cc = cc}
 if {
 	flag x  +
-	os -T $cc -fPIC $cflags $cppflags -c $c
+	os -d $osdir $cc -fPIC $cflags $cppflags -c $c
 } {
 	echo 'objs = $objs '^$o > $o^.relay
 }

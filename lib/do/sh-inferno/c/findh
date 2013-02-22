@@ -12,7 +12,7 @@ if {no $cpp} {
 	}
 }
 
-gccstdinlocal = . `{echo $credir | sed 's,/$,,'} `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include "..." search starts here:$/,/^End of search list.$/p' | sed '1d;$d;/^#include <...> search starts here:$/d;s,^ *,,'}
+gccstdinlocal = . `{echo $credir | sed 's,/$,,'} `{os -d $osdir $cpp -v </dev/null >[2=1] | sed -n '/^#include "..." search starts here:$/,/^End of search list.$/p' | sed '1d;$d;/^#include <...> search starts here:$/d;s,^ *,,'}
 apply {
 	local = $1
 	apply {
@@ -21,7 +21,7 @@ apply {
 	} $gccstdinlocal
 } $locals
 
-gccstdincsystem = `{os -T $cpp -v </dev/null >[2=1] | sed -n '/^#include <...> search starts here:$/,/^End of search list.$/p' | sed '1d;$d;s,^ *,,'}
+gccstdincsystem = `{os -d $osdir $cpp -v </dev/null >[2=1] | sed -n '/^#include <...> search starts here:$/,/^End of search list.$/p' | sed '1d;$d;s,^ *,,'}
 apply {
 	system = $1
 	apply {

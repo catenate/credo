@@ -4,7 +4,7 @@ if {no $cc} {cc = cc}
 
 if {
 	flag x  +
-	os -d^$emuroot^`{pwd} $cc $cflags -o $bin $objs $ars $ldflags
+	os -d $osdir $cc $cflags -o $bin $objs $ars $ldflags
 } {
-	echo os -d^$emuroot^`{pwd} ./$bin
+	echo os -d $osdir ./$bin
 }

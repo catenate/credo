@@ -4,7 +4,7 @@ allc = `{ls *.c}
 if {no $cc} {cc = cc}
 if {
 	flag x  +
-	os -T $cc $cflags $cppflags -o $exe $allc
+	os -d $osdir $cc $cflags $cppflags -o $exe $allc
 } {
-	echo os -T ./$exe
+	echo os -d $osdir ./$exe
 }

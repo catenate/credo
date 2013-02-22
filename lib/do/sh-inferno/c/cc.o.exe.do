@@ -3,7 +3,7 @@ exe = $1
 if {no $cc} {cc = cc}
 if {
 	flag x  +
-	os -T $cc $cflags -o $exe $objs $ars $ldflags
+	os -d $osdir $cc $cflags -o $exe $objs $ars $ldflags
 } {
-	echo os -T ./$exe
+	echo os -d $osdir ./$exe
 }

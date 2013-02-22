@@ -6,5 +6,5 @@ if {
 	flag x  +
 	os -d $osdir $cc $cflags -o $bin $objs $ars $ldflags
 } {
-	echo os -d^$emuroot^`{pwd} ./$bin
+	echo os -d $osdir ./$bin
 }

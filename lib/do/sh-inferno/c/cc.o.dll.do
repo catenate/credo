@@ -5,7 +5,7 @@ if {no $cc} {cc = cc}
 
 if {
 	flag x  +
-	os -T $cc -shared $ccflags -o $dll $objs
+	os -d $osdir $cc -shared $ccflags -o $dll $objs
 } {
 	echo 'ldflags = $ldflags -L'^$credir^' -l'^$stem > $dll^.relay
 }
