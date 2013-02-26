@@ -2,3 +2,29 @@ Crelay walks the dependency graph from a file to targets on which it
 depends.  It uses the *.redep files created by credo, which store the
 path and filename of targets which depend on the given file.
 
+	> crean std
+
+	> libdo (c cc c o) hello.o
+	credo hello.o
+
+	> libdo (c cc o '') hello
+	credo hello
+
+	> credo hello >[2=1] | sed 's,^,	,'
+	credo   hello.dep
+	credo     hello.o.dep
+	credo   hello.o
+	os -d /usr/inferno/github/credo/test/1/credo/hello cc -c hello.c
+	credo hello
+	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.o
+	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+
+	> grep -n . *.redep | sed 's,^,	,'
+	hello.c.redep:1: hello.o
+	hello.o.redep:1: hello
+
+We want to know the minimal set of leaf targets we need to build if
+this file changes.  In this case, it’s just the final executable hello.
+
+	> crelay hello.c
+	credo hello

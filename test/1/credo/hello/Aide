@@ -22,7 +22,7 @@ ls -F | mc
 ls -ltr
 lsdo
 nbnow
-pastout
+pastout relay
 rm *.out *.past
 sh /lib/do/credo/rm-f.std..do
 sh deduce.test

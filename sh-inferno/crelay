@@ -1,0 +1,9 @@
+#!/dis/sh
+apply {
+	target = $1
+	if {ftest -r $target.redep} {
+		crelay `{cat $target.redep}
+	} {
+		echo credo $target
+	}
+} $*
