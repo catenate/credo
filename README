@@ -33,6 +33,9 @@ Set the shell variable crecho to echo, to print instead of execute key
 production commands in do scripts.
 https://github.com/catenate/credo/blob/master/test/1/credo/hello/crecho.test
 
+Crelay walks the dependency graph from a file to targets which depend on it.
+https://github.com/catenate/credo/blob/master/test/1/credo/hello/relay.test
+
 
 ARTICLES
 

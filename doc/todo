@@ -7,6 +7,11 @@ All os calls in env, dep, and do scripts should use $osdir.
 
 Add examples from “Recursive Make Considered Harmful” as tests.
 
+Use $echo inshead of $crecho, and $srcdir instead of $credir.
+In general, use credo-specific names for scripts, and non-credo
+specific names for variables used in do scripts, to allow do scripts
+to be compatible with other redo implementations.
+
 Add unicode substitution productions for various languages.¹
 Start with the unicoper toascii.sed scripts.²
  ¹ (c sed uc c)
@@ -19,8 +24,9 @@ Start with the unicoper toascii.sed scripts.²
 Add version files in each /lib/do directory, to version these scripts.
 For productions copied from other tools, store the version of the tool.
 
-Add productions from Posix make in mkdir /github/credo/lib/do/sh-inferno/make, since it is the
+Add productions from Posix make in ¹, since it is the
 standardized project management tool.
+ ⁱ mkdir /github/credo/lib/do/sh-inferno/make
 
 Add productions from GNU make in /lib/do/gnumake, since it is a
 standard project management tool.
@@ -35,16 +41,40 @@ The bash version is likely to be much more popular, and get forks
 and changes, so I could just cherry-pick which changes I really like
 and back-port them to the Inferno files.
 
-Consider GNU parallel for map in bash port.
+Cache a header file’s #include list; update when the file changes.
+Don’t rescan the entire header structure each time we create a C
+file’s dep file.  Like cresum, findh caches for each header file
+version its list of header files, as resolved by active -I directives.
+So the active -I directives (listed in one known variable such as
+/env/includes) should also be hashed and strored and compared.
+So each line in findh’s cache (eg ./hdepcache)² would list ¹.
+ ¹ path_header header_time header_size header_checksum includes_checksum path_include…
+ ² Ideally we’d store this information right next to the header file,
+in something like /path/include/header.h.includes, but ordinary users
+don’t usually have write access to system or 3rd-party include dirs,
+which change least and would most benefit from caching.
 
 Consider porting to dash instead of bash, since it’s a newer de facto
 linux shell.
 
-For shell haters, consider a Python port.  Not Perl.
+For shell haters, and to be cross-platform, consider a Python port.
+Not Perl.
 
 For speed, and to embed concurrency, consider a C or Go port.
 Go would be better for concurrency.  Not C++ or Java.
 
-See where we could use ⁱ instead of manually checking each *.dep line,
+See where we could use ¹ instead of manually checking each *.dep line,
 possibly as a quick check before loading and processing the *.dep file.
- ⁱ sha1sum -c $target.dep.tmp	# first resolve $t, $targ, $target
+ ¹ sha1sum -c $target.dep.tmp	# first resolve $t, $targ, $target
+
+Consider GNU parallel for map in bash port.  Consider lsmake for map
+in lsf environments.  In general, ship several maps,¹ and let user
+update map to refer to the one to use.
+ ¹ bash/map: parallelmap
+bash/mapfor: serial for loop
+bash/maplsf: lsmake in LSF environments
+bash/mapmakej: GNU make -j
+bash/mapparallel: GNU parallel
+sh-inferno/map: asyncmap
+sh-inferno/mapapply: serial apply loop
+sh-inferno/mapasync: <{}

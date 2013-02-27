@@ -16,9 +16,9 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
+git commit -a -m 'Finish copying kindle highlights and notes to psmith11.  Note crelay test.  Expound on map alternatives and findh in todo.'
 gn env sh-inferno/*
 log
-log git
-log git commit -a -m 'Cache and clean up checksum manipulation.  Add past test results.'
+log 1 git | grep diff
 log git | grep -v commit
 ls -F | mc

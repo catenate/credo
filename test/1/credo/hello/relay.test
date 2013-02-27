@@ -1,5 +1,5 @@
-Crelay walks the dependency graph from a file to targets on which it
-depends.  It uses the *.redep files created by credo, which store the
+Crelay walks the dependency graph from a file to targets which depend
+on it.  It uses the *.redep files created by credo, which store the
 path and filename of targets which depend on the given file.
 
 	> crean std
