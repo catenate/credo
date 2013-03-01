@@ -6,18 +6,17 @@ Edit ,|s ''
 Edit ,|sort|uniq
 Load /github/credo/dump
 cat sh-inferno/* | grep -v '^[	 }{]*$' | grep -v '^[	 ]*#' |  wc -l
-dos git add doc lib man sh-inferno test
-dos git commit -a -m 'Add crelay to walk down redep graph and print leaf nodes, to list the minimal set of targets that would need rebuilt if a file changes.'
-dos git diff
-dos git log --decorate --graph --oneline --all | sed 10q
-dos git status
 du -n | grep -v '\.git' | grep Aide
 du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'Finish copying kindle highlights and notes to psmith11.  Note crelay test.  Expound on map alternatives and findh in todo.'
+git commit -a -m 'Add crever to print versions of env and do scripts.  Add openonload env and do, and a test case.'
 gn env sh-inferno/*
+host git add doc lib man sh-inferno test
+host git diff
+host git log --decorate --graph --oneline --all | sed 10q
+host git status
 log
 log 1 git | grep diff
 log git | grep -v commit

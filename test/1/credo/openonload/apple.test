@@ -1,0 +1,7 @@
+	> crean env
+
+	> libenv (default CC) (openonload CC gcc apple)
+	> cat default.CC.env
+
+	> libenv (default CXX) (openonload CXX gcc apple)
+	> cat default.CXX.env

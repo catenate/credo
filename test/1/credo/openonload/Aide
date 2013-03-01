@@ -1,0 +1,9 @@
+Dump /github/credo/test/1/credo/openonload/dump
+Edit ,|sort|uniq
+Load /github/credo/test/1/credo/openonload/dump
+New apple.test
+du -n
+log
+ls -F | mc
+nbnow
+pastout

@@ -1,0 +1,7 @@
+#!/dis/sh
+apply {
+	smith = $1
+	if {ftest -r /lib/env/$smith/version} {echo $smith `{cat /lib/env/$smith/version}}
+	if {ftest -r /lib/do/$smith/version} {echo $smith `{cat /lib/do/$smith/version}}
+} $* | uniq
+exit 0
