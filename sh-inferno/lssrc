@@ -3,6 +3,6 @@ deps = `{ls *.dep >[2]/dev/null}
 if {no $deps} {exit 0}
 apply {
 	f = $1
-	if {and {! ftest -e $f.do} {! ftest -e $f.tr}} {echo $f}
+	if {and {! ftest -e $f.do} {! ftest -e $f.tr} {ftest -e $f}} {echo $f}
 } `{cat $deps | sed 's,^.*[ 	],,' | grep -v '^/env/' | sort | uniq}
 exit 0

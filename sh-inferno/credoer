@@ -82,7 +82,7 @@ if {ftest -r $cretr^.do} {
 	}
 }
 
-if {and {! no $newdosum} {! ~ $olddosum $newdosum}} {
+if {and {! ~ $newdosum 0} {! ~ $olddosum $newdosum}} {
 	echo $newdosum^'	'^$newdofile > $cretarget^.do.sum
 }
 
