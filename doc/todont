@@ -15,3 +15,5 @@ written, only divided into smaller files.
 Don’t capture the standard output of a do script as the content of
 the new file.  This is another difference between credo and redo.
 
+Don’t clean files automatically, in case someone wants to generate and
+deliver or compare variants.

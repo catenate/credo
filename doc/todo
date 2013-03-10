@@ -78,3 +78,28 @@ bash/mapparallel: GNU parallel
 sh-inferno/map: asyncmap
 sh-inferno/mapapply: serial apply loop
 sh-inferno/mapasync: <{}
+
+It'd be useful if the /proc filesystem had, for each process,
+"reads" and "writes" files, which lists which files a process opens.
+The build tool, after it runs a command process, would update the
+command's target's persistent (in credo) DAG: adding read files to
+the target's dependency list; the target to dependency lists of
+written files; and each written file to the target's *.redep file
+(which lists other targets which depend the target).  The tool crelay
+(which traverses *.redep files from a given file to its leaf targets)
+could determine a minimal set of leaf targets which include all
+written files, and possibly execute those targets to bring the system
+up to date.¹
+ ¹ os chrome 'https://groups.google.com/forum/?fromgroups=#!topic/redo-list/Oo53s5ETsU4'
+
+In essence, [deletion of outdated intermediate files produced by an
+old DAG] is a reference-counting, unreachability, garbage-collection
+problem.  One approach would be to maintain reference counts.
+Another would be to write a tool to compare what looks like targets,
+against what is currently discoverable in the DAG.  Credo maintains
+files (eg *.do) which identify files as a credo target.  We could
+delete each such target for which its *.redep file (which lists which
+files built it) either does not exist after a complete clean build,
+contains no targets, or refers only to targets which do not (or no
+longer) depend back on the checked target.¹
+ ¹ os chrome 'https://groups.google.com/forum/?fromgroups=#!topic/redo-list/Oo53s5ETsU4'
