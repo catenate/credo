@@ -1,9 +1,10 @@
 DESCRIPTION
 
 Credo calls scripts to create files, after doing the same for files on
-which they depend.  Dodep copies templates of those scripts, and lists
+which they depend.  Libdo copies templates of those scripts, and lists
 of default dependencies, from a library, and customizes them for a
-given target.
+given target.  Libenv composes shell variable settings from a variety
+of aspects.
 
 Credo is a set of small shell scripts, which stores its data (such as
 a checksum for each file on which a target depends) in flat files in

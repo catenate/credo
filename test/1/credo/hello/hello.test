@@ -35,7 +35,7 @@ After the files you direct are put in the current directory to comprise
 your build system, additional commands may further customize shell
 variables and dependencies for the code at hand.  Credo uses shell
 variables to fill in the production commands, and provides a mechanism
-to build up their definitions by combining values fro the library.
+to build up their definitions by combining values from the library.
 Since Inferno (and Plan 9) publish the values of shell variables in the
 /env filesystem, files built with credo may directly depend on them,
 just like any other file.
@@ -45,7 +45,7 @@ Generate and run a build system
 
 Here is a trivial C program with which we’ll start.
 
-	> cat hello.c | sed 's,^,	,'
+	> cat hello.c
 	#include <stdio.h>
 	
 	int main(void) {
@@ -88,7 +88,7 @@ So, what’s going on here?
 First, the libdo command copies the shell script /lib/do/c/cc.c..do
 from its library into the current directory, and names it hello.do.
 
-	> cat hello.do | sed 's,^,	,'
+	> cat hello.do
 	#!/dis/sh
 	bin = $1
 	if {no $cc} {cc = cc}
@@ -102,7 +102,7 @@ from its library into the current directory, and names it hello.do.
 It also copies /lib/do/c/cc.c..dep as hello.dep, which lists files on
 which hello depends and their sha1sums.
 
-	> cat /lib/do/c/cc.c..dep | sed 's,^,	,'
+	> cat /lib/do/c/cc.c..dep
 	0	$targ.c
 	0	/env/cc
 	0	/env/cflags
@@ -115,7 +115,7 @@ as of the time it is built.  When the sum of the file changes,
 credo finds a mismatch with the file’s sum stored for the target,
 and knows it needs to rebuild the target.
 
-	> cat hello.dep | sed 's,^,	,'
+	> cat hello.dep
 	3a96274a1694278c87ed33e098319ce5a391a07d	hello.c
 	0	/env/cc
 	0	/env/cflags
