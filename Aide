@@ -12,7 +12,7 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'Clean up text.'
+git commit -a -m 'Add a bash version of pastout, and the log command.  Plan to have every interesting credo command log its options to credo.log, for a reviewable list of previously-executed credo commands.'
 gn env sh-inferno/*
 host gedit scratch
 host git add .
@@ -21,7 +21,7 @@ host git diff
 host git log --decorate --graph --oneline --all | sed 10q
 host git status
 log
-log 1 git | grep diff
+log 1 git | grep add
 log git
 log git | grep -v commit
 ls -F | mc

@@ -1,0 +1,28 @@
+#!/dis/sh
+tests=$*
+if test -z $tests; then
+	tests=*.test
+else
+	tests=$(echo $tests | fmt -w 1 | sed 's,$,.test,')
+fi
+
+#nb bash function map
+function map {
+	f=$1
+	shift
+	for x in $@; do
+		$f $x
+	done
+}
+
+function shtest {
+	test=$1
+	sed -n 's,^	> ,,p' $test > $test.sh
+	if test -e $test.out; then mv $test.out $test.past; fi
+	sh $test.sh > $test.out 2>&1
+	if ! test -e $test.past; then touch $test.past; fi
+	set -x
+	diff $test.past $test.out
+}
+
+map shtest $tests
