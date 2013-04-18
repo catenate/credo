@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {no $*} {lsdo; exit}
 
 cretop = `{pwd}

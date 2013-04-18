@@ -5,7 +5,7 @@ if {no $CXX} {CXX = g++}
 
 if {
 	flag x  +
-	os -d^$emuroot^`{pwd} $CXX $CXXFLAGS -c $cpp
+	os -d^$emuroot^`{pwd} $CXX $CXXFLAGS $CPPFLAGS -c $cpp
 } {
-	echo 'OBJECTS = $OBJECTS '^$o > $o^.relay
+	echo 'OBJECTS = $OBJECTS '^$o > $o^.reenv
 }

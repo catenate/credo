@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {~ $#* '[0123]'} {lscatdo; exit}
 (smith cmd in out targets) = $*
 if {no $targets} {targets = $cmd.$in.$out}

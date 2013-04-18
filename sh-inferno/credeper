@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 (olddepsum olddepfile) = `{cat $cretarget^.dep.sum >[2]/dev/null}
 
 crevars = `{sed -n 's,(.+)	/env/(.+),\2,p' $cretarget^.dep}

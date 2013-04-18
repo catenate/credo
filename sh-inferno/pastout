@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 tests = $*
 if {no $tests} {
 	tests = *.test

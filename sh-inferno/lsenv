@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 targets = $*
 if {no $targets} {
 	deps = `{ls *.dep >[2]/dev/null}

@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 dos = `{apply {
 	do = $1
 	target = `{echo $do | sed 's,\.do$,,'}

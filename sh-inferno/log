@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {ftest -e dos.log} {sed 's,^dos ,host ,' dos.log >> host.log; rm dos.log}
 if {~ $1 '[0-9]*'} {
 	(count cmd args) = $*

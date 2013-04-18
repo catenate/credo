@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {~ $#* '[012]'} {
 	lscatenv
 	exit

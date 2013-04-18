@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 (target var) = $*
 rm -f $target^.^$var^.env
 rmdep $target /env/^$var

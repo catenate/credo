@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 scriptdir = /lib/do/credo
 if {no $*} {
 	apply {

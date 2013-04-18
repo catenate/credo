@@ -1,4 +1,5 @@
 #!/dis/sh
+load std
 
 if {no $crindent} {
 	crindent = ''
