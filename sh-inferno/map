@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {~ $#* [01]} {exit}
 (f xs) = $*
 cmd = cat

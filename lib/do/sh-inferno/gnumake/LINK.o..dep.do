@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 dep = $1
 bin = `{echo $dep | sed 's,\.dep$,,'}
 o = $bin^.o

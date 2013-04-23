@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 TARGET = $1
 if {no $LINK} {LINK = g++}
 

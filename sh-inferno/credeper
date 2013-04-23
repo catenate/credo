@@ -37,7 +37,7 @@ apply {
 	(credepsum credepfile) = `{cresum $credep}
 	if {! ~ $credep '/env/*'} {
 		if {~ $credepsum 0} {nulltargetforce = 1}
-		if {or {! ftest -e $credep.redep} {! grep '^'^$cretarget^'$' $credep.redep >/dev/null}} {
+		if {or {! ftest -e $credep.redep} {! grep -s '^'^$cretarget^'$' $credep.redep}} {
 			if {~ $credep '*/*'} {echo `{pwd}^'/'^$cretarget} {echo $cretarget} >> $credep.redep
 		}
 	}

@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 (target files) = $*
 pid = ${pid}
 if {ftest -w $target^.dep} {

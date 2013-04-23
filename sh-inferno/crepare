@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 #echo pare $1$2
 crindent = $1
 #echo crepare: $2

@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 redoing = $1^.redoing
 if {ftest -f $redoing} {
 	while {ftest -f $redoing} {

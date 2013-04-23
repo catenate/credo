@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {~ $1 '-x'} {
 	(opt target res) = $*
 } {

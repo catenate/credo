@@ -1,6 +1,11 @@
 #!/dis/sh
+load std
+load string
+
 o = $1
-(sum ext cpp) = `{crext cpp $o}
+(stem ext) = ${splitr $o .}
+cpp = $credir^$stem^'cpp'
+
 if {no $CXX} {CXX = g++}
 
 if {

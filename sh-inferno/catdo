@@ -1,4 +1,6 @@
 #!/dis/sh
+load std
+
 if {no $*} {sh /dis/lscatdo; exit}
 (smith cmd in out) = $*
 dofile = /lib/do/$smith/$cmd.$in.$out.do
