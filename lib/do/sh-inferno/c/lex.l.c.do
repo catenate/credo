@@ -1,6 +1,6 @@
 #!/dis/sh
 c = $1
-(sum ext l) = `{crext l $c}
+l = `{sfix %.c %.l $c}
 if {no $lex} {lex = lex}
 
 if {

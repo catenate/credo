@@ -29,4 +29,4 @@ factor : number                {$$ = $1;}
 
 int main (void) {return yyparse ( );}
 
-void yyerror (char *s) {fprintf (stderr, "%s\n", s);}
+int yyerror (const char *s) {fprintf (stderr, "%s\n", s);}

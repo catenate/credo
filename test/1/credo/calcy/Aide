@@ -1,7 +1,7 @@
-/github/credo/sh-inferno/
 /dis/credoer
 /dis/lssrc
-/dis/pastout
+/dis/lsdo
+/github/credo/sh-inferno/
 /lib/do/c
 Dump /github/credo/test/1/credo/calcy/dump
 Edit ,|sort|uniq
@@ -12,5 +12,6 @@ log
 lsdo
 lsenv
 lssrc
+pastout bin-allo
+rm -f *.out
 rm y.tab.h
-rm -f *.out *.past

@@ -1,0 +1,13 @@
+#!/dis/sh
+# sfix %.c %.o a.c	# a.o
+# sfix prefix.%.suffix xiferp.%.xiffus prefix.fix.suffix	# xiferp.fix.xiffus
+# sfix y.% calc.% y.tab.h	# calc.tab.h
+load std
+load string
+
+(AB CD var) = $*
+(A B) = ${fields % $AB}
+(C D) = ${fields % $CD}
+apply {
+	echo $1 | sed 's%'^$A^'(.*)'^$B^'%'^$C^'\1'^$D^'%g'
+} $var

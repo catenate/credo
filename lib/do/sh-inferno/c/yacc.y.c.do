@@ -1,6 +1,6 @@
 #!/dis/sh
 c = $1
-(sum ext y) = `{crext y $c}
+y = `{sfix %.c %.y $c}
 if {no $yacc} {yacc = yacc}
 
 if {

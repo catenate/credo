@@ -12,7 +12,7 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'Add `load std` to each script to make them callable from host via emu.  Use ${splitr $s $cl} instead of crext.'
+git commit -a -m 'Sfix implements namelists (see /doc/mk.pdf), to replace prefixes and suffixes around %.  Currently doesn''t allow % as a replaced or replacement character in the patterns.  Update lex and yacc do scripts to use sfix.  Calc test program just segfaults on Ubuntu 12.10.'
 gn env sh-inferno/*
 host gedit scratch
 host git add .
