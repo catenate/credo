@@ -1,0 +1,12 @@
+#!/dis/sh
+load std
+
+while {~ 1 1} {
+	apply {
+		host = $1
+		host ssh $host cat /proc/loadavg | sed 's, .*,,' > $host.load
+	} `{grep -v '^#' hosts}
+
+	grep . *.load | host sort -n -k 2 | sed 1q
+	sleep 60
+}

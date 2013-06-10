@@ -6,4 +6,3 @@ grep -l stub */*.do
 grep -n '\.env' */*.do
 grep -n env */*.do
 ls -F | mc
-

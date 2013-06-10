@@ -1,3 +1,16 @@
+Can we solve the “problem” that all output files are in the current
+directory by laying over another directory with bind?  For example,
+if $credir¹ contains the name of the directory in which we store
+derived objects and credo-state files, then we create the directory
+under the current directory if it doesn’t exist, bind the directory
+(eg with a separate command crebind) and create all new files in that
+directory while compiling.  Separate standalone command to unbind,²
+so users can see the result in the current directory.
+ ¹ Change current credir back to srcdir. 
+ ² bind(1): The effects of bind and mount can be undone by unmount.
+If two arguments are given to unmount, the effect is to undo a bind or
+mount with the same arguments.
+
 Fix reported¹ and recognized² bugs.
  ¹ web https://github.com/catenate/credo/issues
  ² man 1 credo | sed -n '/^BUGS/,$p'
@@ -5,12 +18,19 @@ man 1 dodep | sed -n '/^BUGS/,$p'
 
 All os calls in env, dep, and do scripts should use $osdir.
 
+Consider tree-trimming algorithm to turn dependency graph into
+parallel passes: list targets with no dependencies that get built;
+trim these targets from tree by building them; repeat.
+
+Test credo’s parallelism across machines in a cluster. 
+
 Add examples from “Recursive Make Considered Harmful” as tests.
 
 Use $echo inshead of $crecho, and $srcdir instead of $credir.
-In general, use credo-specific names for scripts, and non-credo
-specific names for variables used in do scripts, to allow do scripts
-to be compatible with other redo implementations.
+In general, use credo-specific names for scripts and wholly internal
+variables, and non-credo specific names for user-defined variables
+used in do scripts, to allow do scripts to be compatible with other
+redo implementations.
 
 Add unicode substitution productions for various languages.¹
 Start with the unicoper toascii.sed scripts.²

@@ -17,6 +17,7 @@ gn env sh-inferno/*
 host gedit scratch
 host git add .
 host git log --decorate --graph --oneline --all | sed 10q
+host git log --decorate --oneline | sed 10q
 log
 log 1 git | grep add
 log git
