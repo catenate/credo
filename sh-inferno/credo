@@ -11,8 +11,8 @@ apply {
 	cretarget = $1
 	if {~ $cretarget '*/*'} {
 		dir = `{echo $cretarget | sed 's,(.*/)([^/]+)$,\1,'}
-		if {no $credir} {credir = ''}
-		if {~ $dir '/*'} {credir = $dir} {credir = $credir^$dir}
+		if {no $srcdir} {srcdir = ''}
+		if {~ $dir '/*'} {srcdir = $dir} {srcdir = $srcdir^$dir}
 		cd $dir
 		
 		if {or {~ `{pwd}^'/' '*/'^$dir} {~ `{pwd}^'/' '*'^$dir}} {

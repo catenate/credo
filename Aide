@@ -12,7 +12,7 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'Update lsdo to also list *.tr targets.'
+git commit -a -m 'Switch credir back to srcdir, to make room for credir to be the layover directory.  The script "target" was apparently missed the first time.'
 gn env sh-inferno/*
 host gedit scratch
 host git add .

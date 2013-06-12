@@ -5,7 +5,7 @@ if {no $crindent} {
 	crindent = ''
 }
 
-if {no $credir} {credir = ''}
+if {no $srcdir} {srcdir = ''}
 
 cretarget = $1
 cretr = $cretarget
@@ -22,7 +22,7 @@ if {no $oldtargsum} {oldtargsum = 0}
 (newtargsum newtargfile) = `{cresum $cretarget}
 
 if {and {! ~ $oldtargsum 0} {! ~ $newtargsum 0} {! ~ $oldtargsum $newtargsum}} {
-	echo credo $crindent^$credir^$cretarget will not overwrite non-credo change
+	echo credo $crindent^$srcdir^$cretarget will not overwrite non-credo change
 	rm -f $cretarget^.redoing $cretr^.redoing
 }
 
@@ -53,9 +53,9 @@ if {ftest -e $cretarget^.redont} {
 }
 
 #if {! ~ $cretarget $cretr} {
-#	echo credo $crindent^$credir^$cretarget using $cretr
+#	echo credo $crindent^$srcdir^$cretarget using $cretr
 #} {
-#	echo credo $crindent^$credir^$cretarget
+#	echo credo $crindent^$srcdir^$cretarget
 #}
 
 if {ftest -r $cretr^.do} {
@@ -91,9 +91,9 @@ if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretar
 	if {ftest -f $cretarget} {cp $cretarget $cretarget^.reold; reold=1} {reold=0}
 	
 	if {! ~ $cretarget $cretr} {
-		echo credo $crindent^$credir^$cretarget using $cretr
+		echo credo $crindent^$srcdir^$cretarget using $cretr
 	} {
-		echo credo $crindent^$credir^$cretarget
+		echo credo $crindent^$srcdir^$cretarget
 	}
 	run $do
 	dostatus = $status
@@ -106,7 +106,7 @@ if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretar
 	if {and {ftest -e $cretarget} {! ~ $cretarget '*.dep'} {! ~ $cretarget '*.do'}} {cresum $cretarget > $cretarget^.sum}
 
 	if {! ~ $dostatus ''} {
-		echo credo $crindent^$credir^$cretarget error: $dostatus
+		echo credo $crindent^$srcdir^$cretarget error: $dostatus
 	}
 }
 
