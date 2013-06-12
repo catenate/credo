@@ -1,17 +1,17 @@
 /dis/credoer
-/dis/lssrc
 /dis/lsdo
+/dis/lssrc
 /github/credo/sh-inferno/
 /lib/do/c
 Dump /github/credo/test/1/credo/calcy/dump
 Edit ,|sort|uniq
-Load /test/1/credo/cylc/dump
+Load /github/credo/test/1/credo/calcy/dump
 cp objects.test bin.test
+crean
+crean all
 du -n
 log
-lsdo
 lsenv
-lssrc
 pastout bin-allo
 rm -f *.out
 rm y.tab.h

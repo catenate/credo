@@ -15,6 +15,9 @@ dos = `{apply {
 
 deps = `{ls *.dep >[2]/dev/null | sed 's,\.dep,,'}
 
-if {or {! no $dos} {! no $deps}} {
-	echo $dos $deps | fmt -w 1 | sort | uniq | sed 's,^,credo ,'
+trs = `{ls *.tr >[2]/dev/null | sed 's,\.tr,,'}
+
+if {or {! no $dos} {! no $deps} {! no $trs}} {
+	echo $dos $deps $trs | fmt -w 1 | sort | uniq | sed 's,^,credo ,'
 }
+exit 0

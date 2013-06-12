@@ -6,8 +6,6 @@ os -d /usr/inferno/github/credo/test/1/credo/calcy yacc -d calcy.y
 mv y.tab.c calcy.c
 credo calcy.o
 os -d /usr/inferno/github/credo/test/1/credo/calcy cc -c calcy.c
-calcy.y:32:6: warning: conflicting types for ‘yyerror’ [enabled by default]
-y.tab.c:1468:7: note: previous implicit declaration of ‘yyerror’ was here
 credo calcl.c
 credo calcl.o
 credo   calcl.o.dep
