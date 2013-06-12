@@ -12,12 +12,12 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'Switch credir back to srcdir, to make room for credir to be the layover directory.  The script "target" was apparently missed the first time.'
+git commit -a -m 'New top-level wrapper "cre" binds $credir and invokes scripts in /dis/cresh.  Fix $osdir since git repos now lie in /usr/coinferno.'
 gn env sh-inferno/*
 host gedit scratch
-host git add .
-host git log --decorate --graph --oneline --all | sed 10q
-host git log --decorate --oneline | sed 10q
+git add .
+git log --decorate --graph --oneline --all | sed 10q
+git log --decorate --oneline | sed 10q
 log
 log 1 git | grep add
 log git

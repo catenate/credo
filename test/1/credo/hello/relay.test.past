@@ -1,12 +1,13 @@
 credo hello.o
 credo hello
-os -d /usr/inferno/github/credo/test/1/credo/hello cc -c hello.c
-os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.o
 	credo   hello.dep
 	credo     hello.o.dep
+	sh: null list in concatenation
+	credo     hello.o.dep error: bad concatenation
 	credo   hello.o
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -c hello.c
 	credo hello
-	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
-	hello.c.redep:1: hello.o
-	hello.o.redep:1: hello
-credo hello
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -o hello hello.o
+	os -d /usr/coinferno/github/credo/test/1/credo/hello ./hello
+	1:hello
+credo hello.c

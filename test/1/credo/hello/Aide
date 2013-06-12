@@ -7,13 +7,14 @@
 Dump /github/credo/test/1/credo/hello/dump
 Edit ,|sort|uniq
 Load /github/credo/test/1/credo/hello/dump
-New crecho.test
+New cre.test
 apply {plumb $1} `{ls test_* | grep -v out}
 apply {sh $1 > $1.out >[2=1]; plumb $1.out} `{ls test_* | grep -v out}
 catdo
 crean
 crean all
 crean std
+credir = relay; cre rm all
 du -n
 du -n | grep test.sh
 du -nt | grep sh
@@ -22,6 +23,7 @@ ls -F | mc
 ls -ltr
 lsdo
 nbnow
+pastout cre
 pastout relay
 rm *.out *.past
 sh /lib/do/credo/rm-f.std..do

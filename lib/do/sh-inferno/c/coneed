@@ -15,7 +15,7 @@ while {! no $uos} {
 	apply {
 		dep = $1
 		if {~ $coneed '*d*'} {echo coneed dep: $dep}
-		tcs = `{grep -l '^[^	 ]+.*'^$dep^'\(' $credir^*.c}
+		tcs = `{grep -l '^[^	 ]+.*'^$dep^'\(' $srcdir^*.c}
 		apply {
 			tc = $1
 			to = `{echo $tc | sed 's,^.*/,,;s,\.c$,.o,'}

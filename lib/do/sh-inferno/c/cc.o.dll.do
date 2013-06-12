@@ -7,5 +7,5 @@ if {
 	flag x  +
 	os -d $osdir $cc -shared $ccflags -o $dll $objs
 } {
-	echo 'ldflags = $ldflags -L'^$credir^' -l'^$stem > $dll^.relay
+	echo 'ldflags = $ldflags -L'^$srcdir^' -l'^$stem > $dll^.relay
 }

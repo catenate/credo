@@ -1,0 +1,5 @@
+#!/dis/sh
+if {ftest -s /env/credir} {
+	if {! ftest -d $credir} {mkdir -p $credir}
+	bind -ac $credir .
+}

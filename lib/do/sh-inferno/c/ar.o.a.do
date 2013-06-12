@@ -5,5 +5,5 @@ if {
 	flag x  +
 	os -d $osdir $ar $arflags -rs $a $objs
 } {
-	echo 'ars = $ars '^$credir^$a > $a^.relay
+	echo 'ars = $ars '^$srcdir^$a > $a^.relay
 }

@@ -1,0 +1,6 @@
+	> echo 'credir =' $credir
+	> cre lsdo
+
+	> credir = relay
+	> echo 'credir =' $credir
+	> cre lsdo

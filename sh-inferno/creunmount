@@ -1,0 +1,2 @@
+#!/dis/sh
+if {ftest -s /env/credir} {unmount $credir .}

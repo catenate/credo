@@ -22,6 +22,6 @@ apply {
 		}
 	}
 	
-	osdir = `{echo $emuroot^`{pwd} | sed 's,'^$emuroot^'/n/local,,'}
+	osdir = `{echo $emuroot^`{pwd} | sed 's,^'^$emuroot^'/github,/usr/coinferno/github,;s,^/usr/(co)?inferno/n/local,,'}
 	credoer $cretarget
 } $*

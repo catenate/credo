@@ -1,0 +1,23 @@
+#!/dis/sh
+load std
+
+dos = `{apply {
+	do = $1
+	target = `{echo $do | sed 's,\.do$,,'}
+
+	if {~ $target 'default.*'} {
+		ext = `{echo $target | sed 's,^default.,,'}
+		apply { echo $1 } `{ls *.$ext >[2]/dev/null}
+	} {
+		echo $target
+	}
+} `{ls *.do >[2]/dev/null}}
+
+deps = `{ls *.dep >[2]/dev/null | sed 's,\.dep,,'}
+
+trs = `{ls *.tr >[2]/dev/null | sed 's,\.tr,,'}
+
+if {or {! no $dos} {! no $deps} {! no $trs}} {
+	echo $dos $deps $trs | fmt -w 1 | sort | uniq | sed 's,^,credo ,'
+}
+exit 0

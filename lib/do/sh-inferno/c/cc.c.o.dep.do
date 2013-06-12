@@ -1,7 +1,7 @@
 #!/dis/sh
 dep = $1
 o = `{echo $dep | sed 's,\.dep,,'}
-(stem ext c) = `{crext c $credir^$o}
+(stem ext c) = `{crext c $srcdir^$o}
 
 adddep $o /env/cc /env/cflags /env/cppflags
 adddep $o $c

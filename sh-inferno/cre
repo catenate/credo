@@ -1,0 +1,6 @@
+#!/dis/sh
+(cmd arg) = $*
+run /dis/cresh/bind
+/dis/cresh/$cmd $arg
+run /dis/cresh/unmount
+exit 0

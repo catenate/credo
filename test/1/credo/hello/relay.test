@@ -2,6 +2,9 @@ Crelay walks the dependency graph from a file to targets which depend
 on it.  It uses the *.redep files created by credo, which store the
 path and filename of targets which depend on the given file.
 
+	> credir = relay
+	> run /dis/crebind
+
 	> crean std
 
 	> libdo (c cc c o) hello.o
@@ -14,10 +17,12 @@ path and filename of targets which depend on the given file.
 	credo   hello.dep
 	credo     hello.o.dep
 	credo   hello.o
-	os -d /usr/inferno/github/credo/test/1/credo/hello cc -c hello.c
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -c hello.c
 	credo hello
-	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.o
-	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -o hello hello.o
+	os -d /usr/coinferno/github/credo/test/1/credo/hello ./hello
+	hello.c.redep:1: hello.o
+	hello.o.redep:1: hello
 
 	> grep -n . *.redep | sed 's,^,	,'
 	hello.c.redep:1: hello.o
@@ -28,3 +33,5 @@ this file changes.  In this case, it’s just the final executable hello.
 
 	> crelay hello.c
 	credo hello
+
+	> run /dis/creunmount
