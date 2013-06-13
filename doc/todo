@@ -11,6 +11,8 @@ so users can see the result in the current directory.
 If two arguments are given to unmount, the effect is to undo a bind or
 mount with the same arguments.
 
+Consider memfs(4) for created layover directory.
+
 Fix reported¹ and recognized² bugs.
  ¹ web https://github.com/catenate/credo/issues
  ² man 1 credo | sed -n '/^BUGS/,$p'

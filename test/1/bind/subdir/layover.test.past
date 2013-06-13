@@ -1,0 +1,49 @@
+mkdir layover
+mkdir: layover already exists
+touch layover/this
+ls
+Aide
+layover
+layover.test
+layover.test.out
+layover.test.past
+layover.test.sh
+ls layover
+layover/that
+layover/this
+bind -ac layover .
+ls
+Aide
+layover
+layover.test
+layover.test.out
+layover.test.past
+layover.test.sh
+that
+this
+mv this that
+touch other
+ls
+Aide
+layover
+layover.test
+layover.test.out
+layover.test.past
+layover.test.sh
+other
+that
+ls layover
+layover/other
+layover/that
+unmount layover .
+ls
+Aide
+layover
+layover.test
+layover.test.out
+layover.test.past
+layover.test.sh
+ls layover
+layover/other
+layover/that
+rm -rf layover

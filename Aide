@@ -12,12 +12,13 @@ du -n | grep -v '\.git' | grep sh-inferno
 du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
-git commit -a -m 'New top-level wrapper "cre" binds $credir and invokes scripts in /dis/cresh.  Fix $osdir since git repos now lie in /usr/coinferno.'
-gn env sh-inferno/*
-host gedit scratch
 git add .
+git commit -a -m 'New top-level wrapper "cre" binds $credir and invokes scripts in /dis/cresh.  Fix $osdir since git repos now lie in /usr/coinferno.'
+git commit -a -m 'Test bind subdir layover.  Add memfs todo.'
 git log --decorate --graph --oneline --all | sed 10q
 git log --decorate --oneline | sed 10q
+gn env sh-inferno/*
+host gedit scratch
 log
 log 1 git | grep add
 log git

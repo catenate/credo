@@ -1,0 +1,19 @@
+	> flag x +
+
+	> mkdir layover
+	> touch layover/this
+	> ls
+	> ls layover
+
+	> bind -ac layover .
+	> ls
+	> mv this that
+	> touch other
+	> ls
+	> ls layover
+
+	> unmount layover .
+	> ls
+	> ls layover
+
+	> rm -rf layover

@@ -1,0 +1,9 @@
+Dump /github/credo/test/1/bind/subdir/dump
+Edit ,|sort|uniq
+Load /github/credo/test/1/bind/subdir/dump
+New layover.test
+du -n
+log
+ls -F | mc
+nbnow
+pastout
