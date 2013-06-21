@@ -1,0 +1,11 @@
+#!/dis/sh
+load std
+
+(target files) = $*
+pid = ${pid}
+if {ftest -w $target^.dep} {
+	apply {
+		grep -v '	'^$1^'$' $target^.dep > $target^.dep.$pid
+		mv $target^.dep.$pid $target^.dep
+	} $files
+}

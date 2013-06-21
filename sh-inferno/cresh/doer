@@ -1,0 +1,114 @@
+#!/dis/sh
+load std
+
+if {no $crindent} {
+	crindent = ''
+}
+
+if {no $srcdir} {srcdir = ''}
+
+cretarget = $1
+cretr = $cretarget
+cresh/lock $cretarget
+
+if {ftest -r $cretarget^.tr} {
+	cretr = `{cat $cretarget^.tr}
+	cresh/lock $cretr
+}
+
+# exit before we update dependencies, so we don't forget we need to rebuild
+(oldtargsum oldtargfile) = `{cat $cretarget^.sum >[2]/dev/null}
+if {no $oldtargsum} {oldtargsum = 0}
+(newtargsum newtargfile) = `{cresh/sum $cretarget}
+
+if {and {! ~ $oldtargsum 0} {! ~ $newtargsum 0} {! ~ $oldtargsum $newtargsum}} {
+	echo cresh/do $crindent^$srcdir^$cretarget will not overwrite non-credo change
+	rm -f $cretarget^.redoing $cretr^.redoing
+}
+
+# Don't go full recursive, but it's often useful to generate the
+# dependency file.
+if {ftest -r $cretarget^.dep.do} {
+	thiscrindent = $crindent
+	crindent = '  '^$crindent
+	cresh/do $cretarget^.dep
+	crindent = $thiscrindent
+}
+
+if {ftest -s $cretarget^.dep} {
+	run /dis/cresh/deper
+} {
+	olddepsum = 0
+	newdepsum = 0
+}
+
+if {ftest -r $cretarget^.env} {run $cretarget^.env}
+
+# delay exit to here, to redo dependencies and set environment of a
+# target with no do script
+if {ftest -e $cretarget^.redont} {
+	rm -f $cretarget^.redoing $cretr^.redoing
+	#echo $cretarget^.redont
+	exit
+}
+
+#if {! ~ $cretarget $cretr} {
+#	echo cresh/do $crindent^$srcdir^$cretarget using $cretr
+#} {
+#	echo cresh/do $crindent^$srcdir^$cretarget
+#}
+
+if {ftest -r $cretr^.do} {
+	(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
+	if {no $olddosum} {olddosum = 0}
+	(newdosum newdofile) = `{cresh/sum $cretr^.do}
+	do = ./^$cretr^.do $cretr
+} {
+	filesed = 's,(.*)\.[^.]+$,\1,'
+	extsed = 's,.*\.([^.]+)$,\1,'
+
+	file = `{echo $cretr | sed $filesed}
+	ext = `{echo $cretr | sed $extsed}
+
+	if {ftest -r default.^$ext^.do} {
+		(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
+		if {no $olddosum} {olddosum = 0}
+		(newdosum newdofile) = `{cresh/sum default.^$ext^.do}
+		do = ./default.^$ext^.do $cretr
+	} {
+		touch $cretarget^.redont
+		rm -f $cretarget^.redoing $cretr^.redoing
+		#echo cresh/doer exit: no readable $cretr^.do or default.^$ext^.do
+		exit
+	}
+}
+
+if {and {! ~ $newdosum 0} {! ~ $olddosum $newdosum}} {
+	echo $newdosum^'	'^$newdofile > $cretarget^.do.sum
+}
+
+if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretarget} {! ftest -e $cretr} {~ $nulltargetforce 1}} {
+	if {ftest -f $cretarget} {cp $cretarget $cretarget^.reold; reold=1} {reold=0}
+	
+	if {! ~ $cretarget $cretr} {
+		echo cresh/do $crindent^$srcdir^$cretarget using $cretr
+	} {
+		echo cresh/do $crindent^$srcdir^$cretarget
+	}
+	run $do
+	dostatus = $status
+
+	if {and {~ $dostatus 'revert'} {~ $reold 1}} {
+		if {ftest -f $cretarget} {cp $cretarget $cretarget^.renew}
+		if {ftest -f $cretarget^.reold} {cp $cretarget^.reold $cretarget}
+	}
+	
+	if {and {ftest -e $cretarget} {! ~ $cretarget '*.dep'} {! ~ $cretarget '*.do'}} {cresh/sum $cretarget > $cretarget^.sum}
+
+	if {! ~ $dostatus ''} {
+		echo cresh/do $crindent^$srcdir^$cretarget error: $dostatus
+	}
+}
+
+rm -f $cretarget^.redoing $cretr^.redoing
+exit

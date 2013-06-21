@@ -1,6 +1,9 @@
 #!/dis/sh
-(cmd arg) = $*
+load std
+(credir cmd arg) = $*
+
 run /dis/cresh/bind
-/dis/cresh/$cmd $arg
+$cmd $arg
 run /dis/cresh/unmount
+
 exit 0

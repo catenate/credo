@@ -1,0 +1,8 @@
+#!/dis/sh
+load std
+
+if {~ $#* [01]} {exit}
+(f xs) = $*
+cmd = cat
+apply {cmd = $cmd '<{'^$f^' '^$1^'}' } $"xs
+echo $cmd | sh

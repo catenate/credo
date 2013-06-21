@@ -1,0 +1,19 @@
+#!/dis/sh
+load std
+
+file = $1
+if {no $file} {exit 0}
+if {! ftest -r $file} {
+	echo '0	'^$file
+	exit 0
+}
+
+(file time size zero) = `{du -nt $file >[2]/dev/null}
+
+base = `{basename $file}
+sum = `{sed -n 's,'^$base^' '^$time^' '^$size^' (.+),\1,p' $file.sums >[2]/dev/null | sed -n 1p}
+if {no $sum} {
+	(sum file) = `{sha1sum $file}
+	echo $base $time $size $sum >> $1.sums
+}
+echo $sum^'	'^$file

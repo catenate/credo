@@ -1,0 +1,48 @@
+#!/dis/sh
+load std
+
+(olddepsum olddepfile) = `{cat $cretarget^.dep.sum >[2]/dev/null}
+
+crevars = `{sed -n 's,(.+)	/env/(.+),\2,p' $cretarget^.dep}
+apply {
+	crevar = $1
+	if {ftest -r $cretarget.$crevar.env} {
+		run $cretarget.$crevar.env
+		echo $cretarget $crevar '=' $$crevar
+		# Use these in ports where no /env,
+		# or if we care why /env/$crevar changed.
+		#cresh/rmdep $cretarget $crevar.env
+		#cresh/adddep $cretarget $cretarget.$crevar.env
+	} {
+		if {ftest -r default.$crevar.env} {
+			run default.$crevar.env
+			echo default $crevar '=' $$crevar
+			#cresh/rmdep $cretarget $crevar.env
+			#cresh/adddep $cretarget default.$crevar.env
+		}
+	}
+} $crevars
+
+credepfiles = `{sed 's,(.+)	(.+),\2,' $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+if {! no $credepfiles} {
+	#echo cresh/deper: cresh/map cresh/pare $credepfiles
+	cresh/map 'cresh/pare ''  '^$crindent^''''  $credepfiles
+}
+
+credeps = `{sed 's,(.+)	(.+),\2,' $cretarget^.dep}
+apply {if {ftest -e $1^.reenv} {run $1^.reenv $1}} $credeps
+apply {cresh/sum $1} $credeps > $cretarget^.dep.new
+apply {
+	credep = $1
+	(credepsum credepfile) = `{cresh/sum $credep}
+	if {! ~ $credep '/env/*'} {
+		if {~ $credepsum 0} {nulltargetforce = 1}
+		if {or {! ftest -e $credep.redep} {! grep -s '^'^$cretarget^'$' $credep.redep}} {
+			if {~ $credep '*/*'} {echo `{pwd}^'/'^$cretarget} {echo $cretarget} >> $credep.redep
+		}
+	}
+} $credeps
+
+mv $cretarget^.dep.new $cretarget^.dep
+(newdepsum newdepfile) = `{cresh/sum $cretarget^.dep}
+cresh/sum $cretarget^.dep > $cretarget^.dep.sum

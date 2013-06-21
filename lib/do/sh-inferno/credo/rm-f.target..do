@@ -1,1 +1,1 @@
-rm -f `{lsdo | sed 's,^c?redo ,,'}
+rm -f `{cresh/lsdo | sed 's,^redo ,,;s,^cresh/do ,,'}

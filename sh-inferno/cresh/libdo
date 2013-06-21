@@ -1,0 +1,15 @@
+#!/dis/sh
+load std
+
+if {~ $#* '[0123]'} {cresh/lscatdo; exit}
+(smith cmd in out targets) = $*
+if {no $targets} {targets = $cmd.$in.$out}
+apply {
+	target = $1
+	prod = /lib/do/$smith/$cmd.$in.$out
+	if {ftest -r $prod^.do} {cresh/catdo $smith $cmd $in $out > $target.do}
+	if {ftest -r $prod^.dep} {cresh/catdep $smith $cmd $in $out | sh /dis/cresh/target $target > $target.dep}
+	if {ftest -r $prod^.dep.do} {cp $prod.dep.do $target.dep.do}
+	echo cresh/do $target
+} $targets
+

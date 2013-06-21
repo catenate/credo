@@ -2,18 +2,17 @@ Crelay walks the dependency graph from a file to targets which depend
 on it.  It uses the *.redep files created by credo, which store the
 path and filename of targets which depend on the given file.
 
-	> credir = relay
-	> run /dis/crebind
+	> load std
+	> flag x +
+	> cre relay cresh/rm std
 
-	> crean std
-
-	> libdo (c cc c o) hello.o
+	> cre relay cresh/libdo (c cc c o) hello.o
 	credo hello.o
 
-	> libdo (c cc o '') hello
+	> cre relay cresh/libdo (c cc o '') hello
 	credo hello
 
-	> credo hello >[2=1] | sed 's,^,	,'
+	> cre relay cresh/do hello >[2=1] | sed 's,^,	,'
 	credo   hello.dep
 	credo     hello.o.dep
 	credo   hello.o
@@ -24,14 +23,12 @@ path and filename of targets which depend on the given file.
 	hello.c.redep:1: hello.o
 	hello.o.redep:1: hello
 
-	> grep -n . *.redep | sed 's,^,	,'
+	> cre relay grep -n . `{cre relay ls | grep '\.redep$'} | sed 's,^,	,'
 	hello.c.redep:1: hello.o
 	hello.o.redep:1: hello
 
 We want to know the minimal set of leaf targets we need to build if
 this file changes.  In this case, it’s just the final executable hello.
 
-	> crelay hello.c
+	> cre relay cresh/relay hello.c
 	credo hello
-
-	> run /dis/creunmount

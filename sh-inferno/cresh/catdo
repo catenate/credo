@@ -1,0 +1,7 @@
+#!/dis/sh
+load std
+
+if {no $*} {sh /dis/cresh/lscatdo; exit}
+(smith cmd in out) = $*
+dofile = /lib/do/$smith/$cmd.$in.$out.do
+if {ftest -r $dofile} {cat $dofile}

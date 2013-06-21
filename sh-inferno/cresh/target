@@ -1,0 +1,8 @@
+#!/dis/sh
+load std
+
+target = $1
+targ = `{echo $target | sed 's,\.[^.]*$,,'}
+ta = `{echo $target | sed 's,\..*,,'}
+if {no $srcdir} {srcdir = ''}
+cat | sed 's,\$target,'^$target^',g;s,\$targ,'^$targ^',g;s,\$ta,'^$ta^',g' | sed 's,\$srcdir,'^$srcdir^',g'

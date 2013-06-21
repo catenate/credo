@@ -1,0 +1,6 @@
+#!/dis/sh
+load std
+
+(target files) = $*
+cresh/rmdep $target $files
+apply {echo '0	'^$1 >> $target^.dep} $files

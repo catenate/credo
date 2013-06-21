@@ -1,0 +1,27 @@
+#!/dis/sh
+load std
+
+if {no $*} {cresh/lsdo; exit}
+
+cretop = `{pwd}
+
+apply {
+	cd $cretop
+
+	cretarget = $1
+	if {~ $cretarget '*/*'} {
+		dir = `{echo $cretarget | sed 's,(.*/)([^/]+)$,\1,'}
+		if {no $srcdir} {srcdir = ''}
+		if {~ $dir '/*'} {srcdir = $dir} {srcdir = $srcdir^$dir}
+		cd $dir
+		
+		if {or {~ `{pwd}^'/' '*/'^$dir} {~ `{pwd}^'/' '*'^$dir}} {
+			cretarget = `{echo $cretarget | sed 's,(.*/)([^/]+)$,\2,'}
+		} {
+			exit
+		}
+	}
+	
+	osdir = `{echo $emuroot^`{pwd} | sed 's,^'^$emuroot^'/github,/usr/coinferno/github,;s,^/usr/(co)?inferno/n/local,,'}
+	cresh/doer $cretarget
+} $*

@@ -1,0 +1,11 @@
+#!/dis/sh
+load std
+
+apply {
+	target = $1
+	if {ftest -r $target.redep} {
+		cresh/relay `{cat $target.redep}
+	} {
+		echo cresh/do $target
+	}
+} $*
