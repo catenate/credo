@@ -26,6 +26,7 @@ nbnow
 pastout cre
 pastout relay
 rm *.out *.past
+rm relay
 sh /lib/do/credo/rm-f.std..do
 sh deduce.test
 $ inferno cre relay cresh/rm all

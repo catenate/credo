@@ -10,6 +10,7 @@
 *.sums
 *.test.out
 *.test.sh
++Errors
 dos.log
 dump
 git.log
