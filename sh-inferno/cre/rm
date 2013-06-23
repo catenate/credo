@@ -6,7 +6,7 @@ if {no $*} {
 	apply {
 		script = $1
 		group = `{echo $script | sed 's,(.*)\.(.*)\.(.*)\.(.*),\2,'}
-		echo cresh/rm $group '	#' `{grep '(rm|cresh/rm)' $script | sed 's,cresh/rm ,,'}
+		echo cre/rm $group '	#' `{grep '(rm|cre/rm)' $script | sed 's,cre/rm ,,'}
 	} `{ls $scriptdir/rm*}
 	exit 0
 }

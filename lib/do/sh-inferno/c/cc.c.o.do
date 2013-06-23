@@ -1,6 +1,6 @@
 #!/dis/sh
 o = $1
-(sum ext c) = `{cresh/ext c $o}
+(sum ext c) = `{cre/ext c $o}
 if {no $cc} {cc = cc}
 
 if {

@@ -1,6 +1,6 @@
-cresh/rm state
-cresh/rm test
-cresh/rm target
-cresh/rm dodep
-cresh/rm env
-cresh/rm hist
+cre/rm state
+cre/rm test
+cre/rm target
+cre/rm dodep
+cre/rm env
+cre/rm hist

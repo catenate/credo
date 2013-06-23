@@ -1,15 +1,12 @@
-cre relay cresh/rm std
-cre relay cresh/libdo c cc c o hello.o
-cresh/do hello.o
-cre relay cresh/libdo c cc o '' hello
-cresh/do hello
-sed 's,^,	,'
-	cre relay cresh/do hello
-cre relay ls
-grep '\.redep$'
-cre relay grep -n . hello.c.redep hello.o.redep
-sed 's,^,	,'
+cre/do hello.o
+cre/do hello
+	cre/do   hello.dep
+	cre/do     hello.o.dep
+	cre/do   hello.o
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -c hello.c
+	cre/do hello
+	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -o hello hello.o
+	os -d /usr/coinferno/github/credo/test/1/credo/hello ./hello
 	hello.c.redep:1: hello.o
 	hello.o.redep:1: hello
-cre relay cresh/relay hello.c
-cresh/do hello
+cre/do hello

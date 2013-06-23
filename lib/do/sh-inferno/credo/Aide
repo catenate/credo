@@ -2,6 +2,6 @@
 /lib/do/credo/rm-f.state..do
 /lib/do/credo/rm-f.std..do
 /lib/do/credo/rm-f.target..do
-cresh/do
-cresh/libdo (smith tool inext outext) target
+cre/do
+cre/libdo (smith tool inext outext) target
 |sort|uniq

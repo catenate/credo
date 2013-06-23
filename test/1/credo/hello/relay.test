@@ -3,32 +3,29 @@ on it.  It uses the *.redep files created by credo, which store the
 path and filename of targets which depend on the given file.
 
 	> load std
-	> flag x +
-	> cre relay cresh/rm std
+	> cre/in relay cre/rm std
 
-	> cre relay cresh/libdo (c cc c o) hello.o
-	credo hello.o
+	> cre/in relay cre/libdo (c cc c o) hello.o
+	cre/do hello.o
 
-	> cre relay cresh/libdo (c cc o '') hello
-	credo hello
+	> cre/in relay cre/libdo (c cc o '') hello
+	cre/do hello.o
 
-	> cre relay cresh/do hello >[2=1] | sed 's,^,	,'
-	credo   hello.dep
-	credo     hello.o.dep
-	credo   hello.o
+	> cre/in relay cre/do hello >[2=1] | sed 's,^,	,'
+	cre/do   hello.dep
+	cre/do     hello.o.dep
+	cre/do   hello.o
 	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -c hello.c
-	credo hello
+	cre/do hello
 	os -d /usr/coinferno/github/credo/test/1/credo/hello cc -o hello hello.o
 	os -d /usr/coinferno/github/credo/test/1/credo/hello ./hello
-	hello.c.redep:1: hello.o
-	hello.o.redep:1: hello
 
-	> cre relay grep -n . `{cre relay ls | grep '\.redep$'} | sed 's,^,	,'
+	> cre/in relay grep -n . `{cre/in relay ls | grep '\.redep$'} | sed 's,^,	,'
 	hello.c.redep:1: hello.o
 	hello.o.redep:1: hello
 
 We want to know the minimal set of leaf targets we need to build if
 this file changes.  In this case, it’s just the final executable hello.
 
-	> cre relay cresh/relay hello.c
-	credo hello
+	> cre/in relay cre/relay hello.c
+	cre/do hello

@@ -1,3 +1,3 @@
-cresh/rm state
-cresh/rm target
-cresh/rm dodep
+cre/rm state
+cre/rm target
+cre/rm dodep

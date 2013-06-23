@@ -2,5 +2,5 @@
 load std
 
 (target files) = $*
-cresh/rmdep $target $files
+cre/rmdep $target $files
 apply {echo '0	'^$1 >> $target^.dep} $files

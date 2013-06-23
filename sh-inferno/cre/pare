@@ -1,13 +1,13 @@
 #!/dis/sh
 load std
 
-#echo cresh/pare $1$2
+#echo cre/pare $1$2
 crindent = $1
-#echo cresh/pare: $2
-cresh/do $2
+#echo cre/pare: $2
+cre/do $2
 
 # doesn't print output of redoing dependent targets
 #log = /tmp/$2.log.${pid}
-#cresh/do $2 >> $log >[2=1]
+#cre/do $2 >> $log >[2=1]
 #cat $log
 #rm -f $log

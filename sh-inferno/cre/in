@@ -2,8 +2,8 @@
 load std
 (credir cmd arg) = $*
 
-run /dis/cresh/bind
+run /dis/cre/bind
 $cmd $arg
-run /dis/cresh/unmount
+run /dis/cre/unmount
 
 exit 0

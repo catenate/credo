@@ -6,5 +6,5 @@ apply {
 	dofile = $1
 	(smith cmd in out) = `{echo $dofile | sed 's,\.do$,,;s,[.\/], ,g'}
 	if {no $out} {out = ''''''}
-	echo cresh/catdo '('$smith $cmd $in $out')'
+	echo cre/catdo '('$smith $cmd $in $out')'
 } `{ls */*.do | grep -v '\.dep\.do'}

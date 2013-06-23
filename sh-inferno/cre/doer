@@ -9,20 +9,20 @@ if {no $srcdir} {srcdir = ''}
 
 cretarget = $1
 cretr = $cretarget
-cresh/lock $cretarget
+cre/lock $cretarget
 
 if {ftest -r $cretarget^.tr} {
 	cretr = `{cat $cretarget^.tr}
-	cresh/lock $cretr
+	cre/lock $cretr
 }
 
 # exit before we update dependencies, so we don't forget we need to rebuild
 (oldtargsum oldtargfile) = `{cat $cretarget^.sum >[2]/dev/null}
 if {no $oldtargsum} {oldtargsum = 0}
-(newtargsum newtargfile) = `{cresh/sum $cretarget}
+(newtargsum newtargfile) = `{cre/sum $cretarget}
 
 if {and {! ~ $oldtargsum 0} {! ~ $newtargsum 0} {! ~ $oldtargsum $newtargsum}} {
-	echo cresh/do $crindent^$srcdir^$cretarget will not overwrite non-credo change
+	echo cre/do $crindent^$srcdir^$cretarget will not overwrite non-credo change
 	rm -f $cretarget^.redoing $cretr^.redoing
 }
 
@@ -31,12 +31,12 @@ if {and {! ~ $oldtargsum 0} {! ~ $newtargsum 0} {! ~ $oldtargsum $newtargsum}} {
 if {ftest -r $cretarget^.dep.do} {
 	thiscrindent = $crindent
 	crindent = '  '^$crindent
-	cresh/do $cretarget^.dep
+	cre/do $cretarget^.dep
 	crindent = $thiscrindent
 }
 
 if {ftest -s $cretarget^.dep} {
-	run /dis/cresh/deper
+	run /dis/cre/deper
 } {
 	olddepsum = 0
 	newdepsum = 0
@@ -53,15 +53,15 @@ if {ftest -e $cretarget^.redont} {
 }
 
 #if {! ~ $cretarget $cretr} {
-#	echo cresh/do $crindent^$srcdir^$cretarget using $cretr
+#	echo cre/do $crindent^$srcdir^$cretarget using $cretr
 #} {
-#	echo cresh/do $crindent^$srcdir^$cretarget
+#	echo cre/do $crindent^$srcdir^$cretarget
 #}
 
 if {ftest -r $cretr^.do} {
 	(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
 	if {no $olddosum} {olddosum = 0}
-	(newdosum newdofile) = `{cresh/sum $cretr^.do}
+	(newdosum newdofile) = `{cre/sum $cretr^.do}
 	do = ./^$cretr^.do $cretr
 } {
 	filesed = 's,(.*)\.[^.]+$,\1,'
@@ -73,12 +73,12 @@ if {ftest -r $cretr^.do} {
 	if {ftest -r default.^$ext^.do} {
 		(olddosum olddofile) = `{cat $cretr^.do.sum >[2]/dev/null}
 		if {no $olddosum} {olddosum = 0}
-		(newdosum newdofile) = `{cresh/sum default.^$ext^.do}
+		(newdosum newdofile) = `{cre/sum default.^$ext^.do}
 		do = ./default.^$ext^.do $cretr
 	} {
 		touch $cretarget^.redont
 		rm -f $cretarget^.redoing $cretr^.redoing
-		#echo cresh/doer exit: no readable $cretr^.do or default.^$ext^.do
+		#echo cre/doer exit: no readable $cretr^.do or default.^$ext^.do
 		exit
 	}
 }
@@ -91,9 +91,9 @@ if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretar
 	if {ftest -f $cretarget} {cp $cretarget $cretarget^.reold; reold=1} {reold=0}
 	
 	if {! ~ $cretarget $cretr} {
-		echo cresh/do $crindent^$srcdir^$cretarget using $cretr
+		echo cre/do $crindent^$srcdir^$cretarget using $cretr
 	} {
-		echo cresh/do $crindent^$srcdir^$cretarget
+		echo cre/do $crindent^$srcdir^$cretarget
 	}
 	run $do
 	dostatus = $status
@@ -103,10 +103,10 @@ if {or {! ~ $olddepsum $newdepsum} {! ~ $olddosum $newdosum} {! ftest -e $cretar
 		if {ftest -f $cretarget^.reold} {cp $cretarget^.reold $cretarget}
 	}
 	
-	if {and {ftest -e $cretarget} {! ~ $cretarget '*.dep'} {! ~ $cretarget '*.do'}} {cresh/sum $cretarget > $cretarget^.sum}
+	if {and {ftest -e $cretarget} {! ~ $cretarget '*.dep'} {! ~ $cretarget '*.do'}} {cre/sum $cretarget > $cretarget^.sum}
 
 	if {! ~ $dostatus ''} {
-		echo cresh/do $crindent^$srcdir^$cretarget error: $dostatus
+		echo cre/do $crindent^$srcdir^$cretarget error: $dostatus
 	}
 }
 

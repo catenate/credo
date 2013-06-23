@@ -1,7 +1,7 @@
 #!/dis/sh
 load std
 
-if {no $*} {cresh/lsdo; exit}
+if {no $*} {cre/lsdo; exit}
 
 cretop = `{pwd}
 
@@ -23,5 +23,5 @@ apply {
 	}
 	
 	osdir = `{echo $emuroot^`{pwd} | sed 's,^'^$emuroot^'/github,/usr/coinferno/github,;s,^/usr/(co)?inferno/n/local,,'}
-	cresh/doer $cretarget
+	cre/doer $cretarget
 } $*
