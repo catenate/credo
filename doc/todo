@@ -1,3 +1,12 @@
+cre should store and retrieve, from a layover directory, files created
+by programs called by os.  Order of relevant operations in cre:
+Create $1 if it does not exist.  Move from $1 to '.' the list of files
+in $1/$1.ls (if it exists).  Store the list of files in '.' in the file
+$1/parent.ls.  Bind/command/unmount.  Compare $1/parent.ls to the
+output of ls '.'.  For any new files, append them to the end of
+$1/$1.ls and uniquely sort that file, and move all files in $1/$1.ls
+to $1.
+
 Can we solve the “problem” that all output files are in the current
 directory by laying over another directory with bind?  For example,
 if $credir¹ contains the name of the directory in which we store
