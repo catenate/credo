@@ -9,7 +9,7 @@ path and filename of targets which depend on the given file.
 	cre/do hello.o
 
 	> cre/in relay cre/libdo (c cc o '') hello
-	cre/do hello.o
+	cre/do hello
 
 	> cre/in relay cre/do hello >[2=1] | sed 's,^,	,'
 	cre/do   hello.dep

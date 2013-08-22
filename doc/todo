@@ -1,11 +1,12 @@
-cre should store and retrieve, from a layover directory, files created
+cre could store and retrieve, from a layover directory, files created
 by programs called by os.  Order of relevant operations in cre:
 Create $1 if it does not exist.  Move from $1 to '.' the list of files
 in $1/$1.ls (if it exists).  Store the list of files in '.' in the file
 $1/parent.ls.  Bind/command/unmount.  Compare $1/parent.ls to the
 output of ls '.'.  For any new files, append them to the end of
 $1/$1.ls and uniquely sort that file, and move all files in $1/$1.ls
-to $1.
+to $1.  This seems complicated, inelegant, and asking for errors
+and incompatibilities with other aspects of build systems.
 
 Can we solve the “problem” that all output files are in the current
 directory by laying over another directory with bind?  For example,
@@ -19,6 +20,10 @@ so users can see the result in the current directory.
  ² bind(1): The effects of bind and mount can be undone by unmount.
 If two arguments are given to unmount, the effect is to undo a bind or
 mount with the same arguments.
+
+Inferno’s bind isn’t recognized by os commands.  In addition, bcu
+doesn’t mean that new files created by os commands end up in the
+overlay directory.  Is it enough to overlay only the files credo creates? 
 
 Consider memfs(4) for created layover directory.
 

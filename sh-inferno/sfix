@@ -9,5 +9,5 @@ load string
 (A B) = ${fields % $AB}
 (C D) = ${fields % $CD}
 apply {
-	echo $1 | sed 's%'^$A^'(.*)'^$B^'%'^$C^'\1'^$D^'%g'
+	echo $1 | sed 's%'^$A^'(.*)'^$B^'%'^$C^'\1'^$D^'%'
 } $var

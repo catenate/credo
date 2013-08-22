@@ -1,18 +1,21 @@
 #!/dis/sh
 load std
 
-tests = $*
-if {no $tests} {
-	tests = *.test
-} {
-	tests = `{echo $tests | fmt -w 1 | sed 's,$,.test,'}
+names = $*
+if {no $names} {
+	names = `{apply {sfix %.test % $1} *.test}
 }
 apply {
-	test = $1
-	sed -n 's,^	> ,,p' $test > $test.sh
-	if {ftest -e $test.out} {mv $test.out $test.past}
-	sh $test.sh > $test.out >[2=1]
-	if {! ftest -e $test.past} {touch $test.past}
+	name = $1
+	if {! ftest -d $name} {mkdir -p $name}
+	out = $name/$name.test.out
+	past = $name/$name.test.past
+	sh = $name/$name.test.sh
+
+	sed -n 's,^	> ,,p' $name.test > $sh
+	if {ftest -e $out} {mv $out $past}
+	cre/in $name sh $sh > $out >[2=1]
+	if {! ftest -e $past} {touch $past}
 	flag x +
-	diff $test.past $test.out
-} $tests
+	diff $past $out
+} $names

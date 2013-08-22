@@ -1,0 +1,8 @@
+	> load std
+	> ls -F | mc
+	> echo 'date > $1' > dates.do
+	> grep -n . dates.do
+	> cre/do dates
+	> grep -n . dates
+	> ls -F | mc
+	> ls -F date | mc
