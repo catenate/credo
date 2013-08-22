@@ -1,3 +1,4 @@
 Edit ,|sort|uniq
 New .gitignore
+ls -ltr
 sh regress
