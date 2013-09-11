@@ -2,7 +2,7 @@
 load std
 
 if {~ $#* '[012]'} {
-	lscatenv
+	cre/lscatenv
 	exit
 }
 
@@ -10,4 +10,4 @@ libenvroot = /lib/env
 (target localvar smith libvar qual) = $*
 if {no $qual} {qual = ''} {qual = `{echo $qual | sed 's, ,.,g;s,^,.,'}}
 libenvpath = $libenvroot/$smith/$libvar$qual.env
-cat $libenvpath >> $target.$localvar.env
+cat $libenvpath | sed 's,([^ ]+=[^ ]+),''\1'',g' >> $target.$localvar.env

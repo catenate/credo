@@ -1,3 +1,11 @@
+Cre/libenvs reduces
+	> cre/libenv (gtab.o CXXFLAGS) (gcmake CXXFLAGS standard)
+	> cre/libenv (gtab.o CXXFLAGS) (gcmake CXXFLAGS warnings)
+	> cre/libenv (gtab.o CXXFLAGS) (gcmake CXXFLAGS defines)
+to
+	> cre/libenvs (gtab.o CXXFLAGS) (gcmake CXXFLAGS standard warnings defines)
+Ensure support for compound qualifiers (eg, 'standard gnu').
+
 cre could store and retrieve, from a layover directory, files created
 by programs called by os.  Order of relevant operations in cre:
 Create $1 if it does not exist.  Move from $1 to '.' the list of files

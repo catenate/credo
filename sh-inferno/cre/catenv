@@ -1,6 +1,6 @@
 #!/dis/sh
 if {no $*} {
-	sh /dis/lscatenv
+	cre/lscatenv
 	exit
 }
 

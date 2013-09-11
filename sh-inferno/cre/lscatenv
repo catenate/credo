@@ -4,6 +4,9 @@ cd /lib/env
 apply {
 	envfile = $1
 	(smith var qual) = `{echo $envfile | sed 's,\.env$,,;s,[.\/], ,g'}
-	if {no $out} {out = ''''''}
-	echo catenv '('$smith $var $qual')'
+	if {no $qual} {
+		echo cre/catenv '('$smith $var')'
+	} {
+		echo cre/catenv '('$smith $var $"qual')'
+	}
 } `{ls */*.env}

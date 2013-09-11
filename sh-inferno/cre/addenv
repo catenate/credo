@@ -1,0 +1,6 @@
+#!/dis/sh
+load std
+
+(target var value) = $*
+echo $var '=' `{echo $value | sed 's,([^ ]+=[^ ]+),''\1'',g'} >> $target^.^$var^.env
+cre/adddep $target /env/^$var

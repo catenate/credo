@@ -1,6 +1,0 @@
-#!/dis/sh
-load std
-
-(target var value) = $*
-echo $var '=' $value >> $target^.^$var^.env
-adddep $target /env/^$var

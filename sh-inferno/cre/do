@@ -1,6 +1,16 @@
 #!/dis/sh
 load std
 
+if {no $srcdir} {
+	srcdir = ''
+	ossrcdir = ''
+} {
+	srcdir = `{echo $srcdir | sed 's,([^/])$,\1/,'}
+	ossrcdir = `{osdir $srcdir}
+}
+echo srcdir $srcdir
+echo ossrcdir $ossrcdir
+
 if {no $*} {cre/lsdo; exit}
 
 cretop = `{pwd}
@@ -11,8 +21,8 @@ apply {
 	cretarget = $1
 	if {~ $cretarget '*/*'} {
 		dir = `{echo $cretarget | sed 's,(.*/)([^/]+)$,\1,'}
-		if {no $srcdir} {srcdir = ''}
-		if {~ $dir '/*'} {srcdir = $dir} {srcdir = $srcdir^$dir}
+		if {~ $dir '/*'} {srcdir = $dir} {srcdir = $srcdir^$dir^'/'}
+		ossrcdir = `{osdir $srcdir}
 		cd $dir
 		
 		if {or {~ `{pwd}^'/' '*/'^$dir} {~ `{pwd}^'/' '*'^$dir}} {
@@ -22,6 +32,6 @@ apply {
 		}
 	}
 	
-	osdir = `{echo $emuroot^`{pwd} | sed 's,^'^$emuroot^'/github,/usr/coinferno/github,;s,^/usr/(co)?inferno/n/local,,'}
+	osdir = `{osdir}
 	cre/doer $cretarget
 } $*
