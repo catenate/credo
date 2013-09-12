@@ -8,8 +8,6 @@ if {no $srcdir} {
 	srcdir = `{echo $srcdir | sed 's,([^/])$,\1/,'}
 	ossrcdir = `{osdir $srcdir}
 }
-echo srcdir $srcdir
-echo ossrcdir $ossrcdir
 
 if {no $*} {cre/lsdo; exit}
 
