@@ -26,7 +26,7 @@ ls -F | mc
 ls -ltr
 lsdo
 nbnow
-pastout cre
+pastout credir
 pastout relay
 rm *.out *.past
 rm relay
