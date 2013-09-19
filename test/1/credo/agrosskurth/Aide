@@ -1,0 +1,12 @@
+Dump /github/credo/test/1/credo/agrosskurth/dump
+Edit ,|sort|uniq
+Load /github/credo/test/1/credo/agrosskurth/dump
+du -n
+log
+ls -F | mc
+nbnow
+a = ; if {no $a} {echo no blank a}
+a = ''; if {no $a} {echo no single quotes a}
+a = ''; if {~ $a ''} {echo single quotes a}
+a = ' '; if {no $a} {echo no space a}
+a = 'a'; if {no $a} {echo no a a}

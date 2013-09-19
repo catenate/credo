@@ -61,14 +61,21 @@ these commands can replace the echo commands in the example:
 
 RELATED WORK
 
-Credo is an adaptation of the build tool redo, by D.J. Bernstein.
+Credo is an adaptation of the unpublished build tool redo,
+proposed and sketched by D.J. Bernstein.
 http://cr.yp.to/redo.html
 
-Another implementation in python is redo, by Avery Pennarun.
+Avery Pennarun implemented redo in python.
 https://github.com/apenwarr/redo
 
-The most significant differences from Avery's redo is that there are
-no redo-* commands in the do scripts; credo has a new set of shell
+In 2006 and 2007 Alan Grosskurth gave a talk¹ and wrote a master’s
+thesis² on purely top-down software rebuilding.  The thesis implements
+redo in sh-bourne and compares it to make.
+ ¹ http://grosskurth.ca/talks/2006.04.10/slides.pdf
+ ² http://grosskurth.ca/papers/mmath-thesis.pdf
+
+Credo’s most significant differences from redo is that there are no
+redo-* commands in the do scripts; credo has a new set of shell
 script commands to create, examine, and maintain the build system
 (for higher-level tools to automatically generate a build system);
 and credo exposes all of its record-keeping in flat files in the
