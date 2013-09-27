@@ -16,6 +16,6 @@ if {no $args} {
 
 #$cmd $args
 
-apply {echo ''''^$1^''''} $args | sed '/^''[-0-9A-Z_a-z\/.:+%]+''$/{;s,^'',,;s,''$,,;}' | fmt -w 1000 | sed 's,^,'^$cmd^' ,' >> $cmd.log
+apply {echo ''''^$1^''''} $args | sed '/^''[-0-9A-Z_a-z\/.:+%]+''$/{;s,^'',,;s,''$,,;}' | fmt -w 10000 | sed 's,^,'^$cmd^' ,' >> $cmd.log
 sed 's,^log ,,' $cmd.log > $cmd.log.tmp
 mv $cmd.log.tmp $cmd.log

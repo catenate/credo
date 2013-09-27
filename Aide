@@ -13,10 +13,12 @@ du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
 git add .
-git commit -a -m 'Update production rule to store derived objects in the overlay directory, if set.'
-git commit -a -m 'Test bind subdir layover.  Add memfs todo.'
+git commit -a -m 'Log should handle bigger commands.'
+git diff
 git log --decorate --graph --oneline --all | sed 10q
+git log --decorate --oneline | sed 10q
 git log --decorate --oneline | sed 5q
+git push origin master
 gn env sh-inferno/*
 host gedit scratch
 log
