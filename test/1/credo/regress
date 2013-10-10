@@ -1,10 +1,14 @@
 #!/dis/sh
-pwd = `{pwd}
-testdirs = `{du -n | grep '\.test$' | sed 's,/[^/]+$,,' | sort | uniq}
+cwd = `{pwd}
+
 apply {
-	cd $1
-	pwd
-	pastout
-	cd $pwd
+	test = $1
+	testdir = `{echo $test | sed 's,[^/]+$,,'}
+	testname = `{echo $test | sed 's,^.*/,,'}
+
+	cd $testdir
+	pastout $testname
+	cd $cwd
+
 	echo
-} $testdirs
+} $*

@@ -6,7 +6,7 @@ behind the scenes of this basic example.
 
 The greater-than sign, after a tab, introduces a command.
 
-	> crean std
+	> cre/rm std
 
 Since this document is also a literate-program test case which runs
 repeatedly, we first clean up derived objects from previous runs.
@@ -63,7 +63,7 @@ from the classic set of Unix C tools.  The two empty single quotes
 tell credo that there is no output extension, since unixy binary files
 are usually renamed this way from a.out.
 
-	> libdo (c cc c '') hello
+	> cre/libdo (c cc c '') hello
 	credo hello
 
 The libdo command prints “credo hello”, which is the second step.
@@ -72,14 +72,14 @@ and an Inferno os command to run the executable file on the host.
 Credo tools usually print commands to do the most common next action.
 Credo prints credo commands for its target and every rebuilt dependency.
 
-	> credo hello
+	> cre/do hello
 	credo hello
 	os -d /usr/inferno/github/credo/test/1/credo/hello cc -o hello hello.c
 	os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
 
 At this point the executable is ready, and running it has the expected result.
 
-	> os -d /usr/inferno/github/credo/test/1/credo/hello ./hello
+	> os -d `{osdir} ./hello
 	Hello, world!
 
 

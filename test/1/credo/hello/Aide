@@ -17,6 +17,7 @@ cre/in relay cre/rm
 cre/in relay cre/rm all
 cre/in relay cre/rm std
 cre/in relay ls
+cre/rm std
 credir = relay; cre rm all
 du -n
 du -n | grep test.sh

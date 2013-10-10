@@ -2,3 +2,4 @@ Edit ,|sort|uniq
 New .gitignore
 ls -ltr
 sh regress
+sh regress hello/hello hello/crecho hello/relay
