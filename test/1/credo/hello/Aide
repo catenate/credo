@@ -18,7 +18,7 @@ cre/in relay cre/rm all
 cre/in relay cre/rm std
 cre/in relay ls
 cre/rm std
-credir = relay; cre rm all
+credir = relay; cre/rm all
 du -n
 du -n | grep test.sh
 du -nt | grep sh
@@ -30,6 +30,6 @@ nbnow
 pastout credir
 pastout relay
 rm *.out *.past
-rm relay
+rm -rf crecho hello relay
 sh /lib/do/credo/rm-f.std..do
 sh deduce.test

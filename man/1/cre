@@ -1,0 +1,29 @@
+.\"nb credo maintain related file
+.TH CREDO 1
+.SH NAME
+credo \- maintain files believed related
+.SH SYNOPSIS
+.TP
+cre/do ($target)*
+.SH DESCRIPTION
+.I Credo
+…
+.SS Build
+…
+.TP
+.I do
+…
+.SH EXAMPLE
+…
+.IP
+.EX
+…
+.EE
+.PP
+.SH ENVIRONMENT
+.SH FILES
+.SH SEE ALSO
+mk(1)
+.SH BUGS
+Please email bugs you find to 
+.BR jason.catena@gmail.com .

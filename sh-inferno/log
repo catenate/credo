@@ -9,6 +9,7 @@ if {~ $1 '[0-9]*'} {
 	(cmd args) = $*
 }
 if {no $cmd} {ls *.log | sed 's,^,log ,;s,\.log,,' >[2]/dev/null; exit 0}
+if {~ $cmd dir} {cmd = /tmp/dir}
 if {no $args} {
 	sort $cmd.log | sed 's,^log ,,' | os uniq -c | sort -n | os awk '$1 >= '^$count^' {print $0}' | sed 's, *[0-9]+ ,,' >[2]/dev/null
 	exit 0
@@ -19,3 +20,5 @@ if {no $args} {
 apply {echo ''''^$1^''''} $args | sed '/^''[-0-9A-Z_a-z\/.:+%]+''$/{;s,^'',,;s,''$,,;}' | fmt -w 10000 | sed 's,^,'^$cmd^' ,' >> $cmd.log
 sed 's,^log ,,' $cmd.log > $cmd.log.tmp
 mv $cmd.log.tmp $cmd.log
+
+pwd >> /tmp/dir.log

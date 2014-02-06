@@ -13,7 +13,7 @@ du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
 git add .
-git commit -a -m 'Update credo commands in hello tests to fix literate tests.'
+git commit -a -m 'Add test directory for make.'
 git diff
 git log --decorate --graph --oneline --all | sed 10q
 git log --decorate --oneline | sed 10q
