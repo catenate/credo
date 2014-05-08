@@ -2,8 +2,11 @@
 load std
 (credir cmd arg) = $*
 
-run /dis/cre/bind
-$cmd $arg
-run /dis/cre/unmount
+if {! ftest -d $credir} {mkdir -p $credir}
 
-exit 0
+bind -ac $credir .
+$cmd $arg
+status_cmd = $status
+unmount $credir .
+
+status $status_cmd

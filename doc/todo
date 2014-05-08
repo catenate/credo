@@ -147,3 +147,9 @@ files built it) either does not exist after a complete clean build,
 contains no targets, or refers only to targets which do not (or no
 longer) depend back on the checked target.¹
  ¹ os chrome 'https://groups.google.com/forum/?fromgroups=#!topic/redo-list/Oo53s5ETsU4'
+
+Keep a rolling average of the build times for a particular target.
+For a given build, add together all the build times for targets that
+need built, and present the sum as an ETA for build completion.
+This would require constructing the complete dependency graph
+at the start of the build, which we don’t yet bother to do.

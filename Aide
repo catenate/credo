@@ -1,4 +1,5 @@
 % git pull --rebase
+.git/info/exclude
 :/\n\n\nNote:/
 :/^[^ ]+$/
 Dump /github/credo/dump
@@ -13,7 +14,7 @@ du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
 git add .
-git commit -a -m 'Add test directory for make.'
+git commit -a -m 'Update pastout to note status of tests.  Directly bind and unmount in cre/in.'
 git diff
 git log --decorate --graph --oneline --all | sed 10q
 git log --decorate --oneline | sed 10q
