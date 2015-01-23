@@ -1,27 +1,27 @@
-credo calcy.c
-credo calcy.o
-credo   calcy.o.dep
-credo   calcy.c
-os -d /usr/inferno/github/credo/test/1/credo/calcy yacc -d calcy.y
+cre/do calcy.c
+cre/do calcy.o
+cre/do   calcy.o.dep
+cre/do   calcy.c
+os -d /usr/coinferno/github/credo/test/1/credo/calcy yacc -d calcy.y
 mv y.tab.c calcy.c
-credo calcy.o
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -c calcy.c
-credo calcl.c
-credo calcl.o
-credo   calcl.o.dep
-credo   calcl.c
-os -d /usr/inferno/github/credo/test/1/credo/calcy lex calcl.l
+cre/do calcy.o
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -c calcy.c -o calcy.o
+cre/do calcl.c
+cre/do calcl.o
+cre/do   calcl.o.dep
+cre/do   calcl.c
+os -d /usr/coinferno/github/credo/test/1/credo/calcy lex calcl.l
 mv lex.yy.c calcl.c
-credo calcl.o
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -c calcl.c
-credo calc
+cre/do calcl.o
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -c calcl.c -o calcl.o
+cre/do calc
 calc.dep.do:1: #!/dis/sh
 calc.dep.do:2: dep = $1
-calc.dep.do:3: bin = `{echo $dep | sed 's,\.dep$,,'}
+calc.dep.do:3: bin = `{echo $dep | sed 's \.dep$  '}
 calc.dep.do:4: o = `{ls *.o >[2]/dev/null}
-calc.dep.do:6: adddep $bin /env/ars /env/cc /env/cflags /env/ldflags /env/objs
-calc.dep.do:7: if {! no $o} {adddep $bin $o}
-calc.dep.do:8: #adddep $bin `{/lib/do/c/coneed $o}
+calc.dep.do:6: cre/adddep $bin /env/ars /env/cc /env/cflags /env/ldflags /env/objs
+calc.dep.do:7: if {! no $o} {cre/adddep $bin $o}
+calc.dep.do:8: #cre/adddep $bin `{/lib/do/c/coneed $o}
 calc.do:1: #!/dis/sh
 calc.do:2: bin = $1
 calc.do:3: if {no $cc} {cc = cc}
@@ -31,15 +31,16 @@ calc.do:7: 	os -d $osdir $cc $cflags -o $bin $objs $ars $ldflags
 calc.do:8: } {
 calc.do:9: 	echo os -d $osdir ./$bin
 calc.do:10: }
-credo   calc.dep
-credo calc
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -o calc calcl.o calcy.o
-os -d /usr/inferno/github/credo/test/1/credo/calcy ./calc
+cre/do   calc.dep
+cre/do calc
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -o calc calcl.o calcy.o
+os -d /usr/coinferno/github/credo/test/1/credo/calcy ./calc
 1:0	/env/ars
 2:0	/env/cc
 3:0	/env/cflags
 4:0	/env/ldflags
 5:9deaf14d7fe6d83b55245c2cadc13b66aec4d101	/env/objs
-6:b29c3f4aa40be25b18fb1d739ea763b79c589782	calcl.o
-7:b75e9ee6c7c0887d584410b893d51173ff4d8eb8	calcy.o
-calc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.24, BuildID[sha1]=0x0f7ca9226e25e3bbe46c0a50887eb1f21728a982, not stripped
+6:5641745dd0a6d036598a812de19d887c31591c11	calcl.o
+7:b24b562447caf71dce42ed582e3f8c926f508f81	calcy.o
+calc: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
+syntax error

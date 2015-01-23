@@ -1,3 +1,17 @@
+Pass flags back through reenv to targets which need them to compile
+with the output of a do script.
+
+During a series of incremental builds, if a file is no longer automatically
+generated, and has not become a version-controlled file that is not
+supposed to be generated, once the file which generates the file
+disappears, the generated file should disappear as well.  Delete all
+files which have the generated extension, if they were not tested for
+regeneration (ie, are active targets of the build system), if they are
+not in version control, and their key dependency file does not exist?
+
+Credo should add any support necessary to compile code for at least
+one unit- or acceptance-test framework (eg, Google Test).
+
 Cre/libenvs reduces
 	> cre/libenv (gtab.o CXXFLAGS) (gcmake CXXFLAGS standard)
 	> cre/libenv (gtab.o CXXFLAGS) (gcmake CXXFLAGS warnings)

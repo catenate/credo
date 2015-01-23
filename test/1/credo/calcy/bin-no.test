@@ -1,29 +1,51 @@
-	> crean std
+	> load std
+	flag x +
+	> cre/rm std
 
-	> libdo (c yacc y c) calcy.c
+Set up dependency chain for yacc file.
+
+	> cre/libdo (c yacc y c) calcy.c
 	> echo calcy.c > y.tab.h.tr
-	> libdo (c cc c o) calcy.o
-	> adddep calcy.o y.tab.h
+	> cre/libdo (c cc c o) calcy.o
+	> cre/adddep calcy.o y.tab.h
 
-	> libdo (c lex l c) calcl.c
-	> libdo (c cc c o) calcl.o
+Set up dependency chain for lex file.
 
-	> libdo (c cc no '') calc
-	> adddep calc calcy.o calcl.o
-	> credo calc
-	> host file calc
-	> echo '2 + 2' | host ./calc
+	> cre/libdo (c lex l c) calcl.c
+	> if {! cat calcl.c.dep} {raise 'no dep file for calcl.c'}
+	> cre/libdo (c cc c o) calcl.o
+
+Set up dependency for final binary, and build it.
+
+	> cre/libdo (c cc no '') calc
+	> cre/adddep calc calcy.o calcl.o
+	> cre/do calc
+
+Test that dependency files exist for the binary and for the lex object.
+
+	> if {! cat calc.dep} {raise 'no generated dep file for calc'}
+	> if {! cat calcl.o.dep} {raise 'no generated dep file for calcl.o'}
+
+Test that the calculator works.
+
+	> if {! ~ `{echo '2+2;' | host ./calc} 4} {raise 'incorrect result from binary (1)'}
 
 	> lsenv
 	> lssrc
-	> lsdo
+	> cre/lsdo
+
+Test that removing a file, on the direct chain of dependencies,
+forces that file to rebuild.
 
 	> rm calcy.c
-	> credo calc
-	> echo '2 + 2' | host ./calc
+	> cre/do calc
+	> if {! ~ `{echo '2 + 2 ;' | host ./calc} 4} {raise 'incorrect result from binary (2)'}
+
+Test that removing a file, added to the graph as a translated output file,
+forces that file to rebuild.
 
 	> rm y.tab.h
-	> credo calc
-	> echo '2 + 2' | host ./calc
+	> cre/do calc
+	> if {! ~ `{echo '2	+	2	;' | host ./calc} 4} {raise 'incorrect result from binary (3)'}
 
 	> grep -n . *.dep

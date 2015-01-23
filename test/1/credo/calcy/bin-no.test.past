@@ -1,25 +1,38 @@
-credo calcy.c
-credo calcy.o
-credo calcl.c
-credo calcl.o
-credo calc
-credo   calc.dep
-credo     calcy.o.dep
-credo     y.tab.h using calcy.c
-os -d /usr/inferno/github/credo/test/1/credo/calcy yacc -d calcy.y
+cre/do calcy.c
+cre/do calcy.o
+cre/do calcl.c
+0	calcl.l
+0	/env/lex
+0	/env/lflags
+cre/do calcl.o
+cre/do calc
+cre/do   calc.dep
+cre/do     calcy.o.dep
+os -d /usr/coinferno/github/credo/test/1/credo/calcy lex calcl.l
+mv lex.yy.c calcl.c
+os -d /usr/coinferno/github/credo/test/1/credo/calcy yacc -d calcy.y
 mv y.tab.c calcy.c
-credo   calcy.o
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -c calcy.c
-calcy.y:32:6: warning: conflicting types for ‘yyerror’ [enabled by default]
-y.tab.c:1468:7: note: previous implicit declaration of ‘yyerror’ was here
-credo calc
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -o calc calcy.o
-calcy.o: In function `yyparse':
-calcy.c:(.text+0x31c): undefined reference to `yylex'
-collect2: error: ld returned 1 exit status
-credo calc error: host: exit: 1
-calc: ERROR: cannot open `calc' (No such file or directory)
-os: cannot exec: exec failed: No such file or directory
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -c calcl.c -o calcl.o
+cre/do     calcy.c
+cre/do   calcy.o
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -c calcy.c -o calcy.o
+cre/do     calcl.o.dep
+cre/do     calcl.c
+cre/do   calcl.o
+cre/do calc
+os -d /usr/coinferno/github/credo/test/1/credo/calcy cc -o calc calcy.o calcl.o
+os -d /usr/coinferno/github/credo/test/1/credo/calcy ./calc
+b24b562447caf71dce42ed582e3f8c926f508f81	calcy.o
+5641745dd0a6d036598a812de19d887c31591c11	calcl.o
+0	/env/ars
+0	/env/cc
+0	/env/cflags
+0	/env/ldflags
+d5d6f6017cee2dad52212c6ce2b95adb6c23ebe2	/env/objs
+0	/env/cc
+0	/env/cflags
+0	/env/cppflags
+9554d0aae20e8828c4b5b954d8096bd876f76662	calcl.c
 ars
 cc
 cflags
@@ -32,49 +45,40 @@ yacc
 yflags
 calcl.l
 calcy.y
-credo calc
-credo calc.dep
-credo calcl.c
-credo calcl.o
-credo calcl.o.dep
-credo calcy.c
-credo calcy.o
-credo calcy.o.dep
-credo     y.tab.h using calcy.c
-os -d /usr/inferno/github/credo/test/1/credo/calcy yacc -d calcy.y
+cre/do calc
+cre/do calc.dep
+cre/do calcl.c
+cre/do calcl.o
+cre/do calcl.o.dep
+cre/do calcy.c
+cre/do calcy.o
+cre/do calcy.o.dep
+cre/do y.tab.h
+os -d /usr/coinferno/github/credo/test/1/credo/calcy yacc -d calcy.y
 mv y.tab.c calcy.c
-credo calc
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -o calc calcy.o
-calcy.o: In function `yyparse':
-calcy.c:(.text+0x31c): undefined reference to `yylex'
-collect2: error: ld returned 1 exit status
-credo calc error: host: exit: 1
-os: cannot exec: exec failed: No such file or directory
-credo     y.tab.h using calcy.c
-os -d /usr/inferno/github/credo/test/1/credo/calcy yacc -d calcy.y
+cre/do     calcy.c
+cre/do     y.tab.h using calcy.c
+os -d /usr/coinferno/github/credo/test/1/credo/calcy yacc -d calcy.y
 mv y.tab.c calcy.c
-credo calc
-os -d /usr/inferno/github/credo/test/1/credo/calcy cc -o calc calcy.o
-calcy.o: In function `yyparse':
-calcy.c:(.text+0x31c): undefined reference to `yylex'
-collect2: error: ld returned 1 exit status
-credo calc error: host: exit: 1
-os: cannot exec: exec failed: No such file or directory
-calc.dep:1: b75e9ee6c7c0887d584410b893d51173ff4d8eb8	calcy.o
-calc.dep:2: 0	calcl.o
+calc.dep:1: b24b562447caf71dce42ed582e3f8c926f508f81	calcy.o
+calc.dep:2: 5641745dd0a6d036598a812de19d887c31591c11	calcl.o
 calc.dep:3: 0	/env/ars
 calc.dep:4: 0	/env/cc
 calc.dep:5: 0	/env/cflags
 calc.dep:6: 0	/env/ldflags
-calc.dep:7: 9781ec135b04c5897ae8e5a24c89ce58ca1c39d5	/env/objs
-calcl.c.dep:1: 0	calcl.l
+calc.dep:7: d5d6f6017cee2dad52212c6ce2b95adb6c23ebe2	/env/objs
+calcl.c.dep:1: e5c0eeacb8679d39843f7af14d7c329fa79df638	calcl.l
 calcl.c.dep:2: 0	/env/lex
 calcl.c.dep:3: 0	/env/lflags
-calcy.c.dep:1: 0	calcy.y
+calcl.o.dep:1: 0	/env/cc
+calcl.o.dep:2: 0	/env/cflags
+calcl.o.dep:3: 0	/env/cppflags
+calcl.o.dep:4: 9554d0aae20e8828c4b5b954d8096bd876f76662	calcl.c
+calcy.c.dep:1: fef9b01a5650c16b2b24df36af412fad6e13603d	calcy.y
 calcy.c.dep:2: 0	/env/yacc
 calcy.c.dep:3: 0	/env/yflags
-calcy.o.dep:1: 5e293a946986692d6e754480f95516e98c4ce497	y.tab.h
+calcy.o.dep:1: dfef8832c0bb45cb5c899f74345485f2e0b4e4e2	y.tab.h
 calcy.o.dep:2: 0	/env/cc
 calcy.o.dep:3: 0	/env/cflags
 calcy.o.dep:4: 0	/env/cppflags
-calcy.o.dep:5: 177030b88ae0482ca74d5cce56269794aa990a57	calcy.c
+calcy.o.dep:5: 04075b23e11b4b020da1b6bfd4abd670c15175ce	calcy.c

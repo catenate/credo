@@ -3,7 +3,6 @@ load std
 
 #echo cre/pare $1$2
 crindent = $1
-#echo cre/pare: $2
 cre/do $2
 
 # doesn't print output of redoing dependent targets

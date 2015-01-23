@@ -1,19 +1,12 @@
 credo hello.o
 credo   hello.o.dep
-credo   hello.c will not overwrite non-credo change
-0 =? 3a96274a1694278c87ed33e098319ce5a391a07d
 credo hello.o
 pwd
 os -d/usr/inferno/github/credo/test/1/credo/boilermake cc -o hello.o -c hello.c
 ./hello.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
 rebuild
-credo   hello.c will not overwrite non-credo change
-0 =? 3a96274a1694278c87ed33e098319ce5a391a07d
 forced rebuild
 credo   hello.o.dep will not overwrite non-credo change
-3695c2f9dfba59debd702337691e7009420677bc =? 0a0ae026ee95a790a2c4ab76062333740e610f82
-credo   hello.c will not overwrite non-credo change
-0 =? 3a96274a1694278c87ed33e098319ce5a391a07d
 credo hello.o
 pwd
 os -d/usr/inferno/github/credo/test/1/credo/boilermake cc -o hello.o -c hello.c

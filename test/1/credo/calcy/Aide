@@ -9,6 +9,7 @@ Load /github/credo/test/1/credo/calcy/dump
 cp objects.test bin.test
 crean
 crean all
+cre/do
 du -n
 log
 lsenv

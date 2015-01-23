@@ -11,7 +11,7 @@
 
 /* descriptions of expected inputs     corresponding actions (in C) */
 
-line   : exp ';'               {printf ("result is %d\n", $1);}
+line   : exp ';'               {printf ("%d\n", $1);}
        ;
 exp    : term                  {$$ = $1;}
        | exp '+' term          {$$ = $1 + $3;}

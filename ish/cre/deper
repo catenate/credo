@@ -24,6 +24,7 @@ apply {
 } $crevars
 
 credepfiles = `{sed 's,(.+)	(.+),\2,' $cretarget^.dep | sed '/^'^$cretarget^'$/d' | sed '/^\/env\//d'}
+#echo 'credepfiles =' $credepfiles
 if {! no $credepfiles} {
 	#echo cre/deper: cre/map cre/pare $credepfiles
 	cre/map 'cre/pare ''  '^$crindent^''''  $credepfiles

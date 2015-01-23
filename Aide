@@ -14,11 +14,12 @@ du | grep -v '\.git'
 fortune doc/dictionary | fmt
 git
 git add .
-git commit -a -m 'Update pastout to note status of tests.  Directly bind and unmount in cre/in.'
+git commit -a -m 'Rename directory sh-inferno to ish.'
 git diff
 git log --decorate --graph --oneline --all | sed 10q
 git log --decorate --oneline | sed 10q
 git log --decorate --oneline | sed 5q
+git mv sh-inferno ish
 git push origin master
 gn env sh-inferno/*
 host gedit scratch
@@ -28,4 +29,5 @@ log git
 log git | grep -v commit
 ls -F | mc
 whatis host
+whatis log
 win

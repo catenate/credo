@@ -16,7 +16,8 @@ if {ftest -r $cretarget^.tr} {
 	cre/lock $cretr
 }
 
-# exit before we update dependencies, so we don't forget we need to rebuild
+# Exit before we update dependencies, so we don't forget we need
+# to rebuild.
 (oldtargsum oldtargfile) = `{cat $cretarget^.sum >[2]/dev/null}
 if {no $oldtargsum} {oldtargsum = 0}
 (newtargsum newtargfile) = `{cre/sum $cretarget}
@@ -44,8 +45,8 @@ if {ftest -s $cretarget^.dep} {
 
 if {ftest -r $cretarget^.env} {run $cretarget^.env}
 
-# delay exit to here, to redo dependencies and set environment of a
-# target with no do script
+# Delay exit to here, to redo dependencies and set environment of a
+# target with no do script.
 if {ftest -e $cretarget^.redont} {
 	rm -f $cretarget^.redoing $cretr^.redoing
 	#echo $cretarget^.redont

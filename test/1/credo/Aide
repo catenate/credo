@@ -3,3 +3,6 @@ New .gitignore
 ls -ltr
 sh regress
 sh regress hello/hello hello/crecho hello/relay
+if {sh alltests} {echo all tests passed} {echo some tests failed}
+du -n  | grep bin-no.test
+/dis/cre/doer

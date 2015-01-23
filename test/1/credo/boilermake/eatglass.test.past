@@ -1,39 +1,11 @@
 credo eatglass.o
 credo   eatglass.o.dep
-credo   eatglass.c will not overwrite non-credo change
-0 =? 79e16f268f014d77504c463a0895a9a978ae9b7d
-credo   english.h will not overwrite non-credo change
-0 =? 14812a8783e351278c946b701447f93fde9d0863
-credo   jamaican.h will not overwrite non-credo change
-0 =? f950b2cf50447f6e0758f3830b27b9870e9c4da4
-credo   lallandscot-doric.h will not overwrite non-credo change
-0 =? 35853a6d935fbf4cdef50e1b85ea7bdc6e929bab
-credo   latin.h will not overwrite non-credo change
-0 =? 45949bc83c53f3b151b33a2d544daa6902ac1720
-credo   middleenglish.h will not overwrite non-credo change
-0 =? 1ff0ee33493473701ed04e23e6d5fb7d4a9e8473
-credo   n.h will not overwrite non-credo change
-0 =? 906e218c2b98a05157e9367dd42b20ccab39c3e2
 credo eatglass.o
 pwd
 os -d/usr/inferno/github/credo/test/1/credo/boilermake cc -o eatglass.o -c eatglass.c
 ./eatglass.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped
 credo eatglass
 credo   eatglass.dep
-credo     eatglass.c will not overwrite non-credo change
-0 =? 79e16f268f014d77504c463a0895a9a978ae9b7d
-credo     english.h will not overwrite non-credo change
-0 =? 14812a8783e351278c946b701447f93fde9d0863
-credo     jamaican.h will not overwrite non-credo change
-0 =? f950b2cf50447f6e0758f3830b27b9870e9c4da4
-credo     lallandscot-doric.h will not overwrite non-credo change
-0 =? 35853a6d935fbf4cdef50e1b85ea7bdc6e929bab
-credo     latin.h will not overwrite non-credo change
-0 =? 45949bc83c53f3b151b33a2d544daa6902ac1720
-credo     middleenglish.h will not overwrite non-credo change
-0 =? 1ff0ee33493473701ed04e23e6d5fb7d4a9e8473
-credo     n.h will not overwrite non-credo change
-0 =? 906e218c2b98a05157e9367dd42b20ccab39c3e2
 credo eatglass
 pwd
 os -d/usr/inferno/github/credo/test/1/credo/boilermake cc -o eatglass eatglass.o

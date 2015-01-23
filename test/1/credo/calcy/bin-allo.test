@@ -1,17 +1,17 @@
-	> crean std
+	> cre/rm std
 
-	> libdo (c yacc y c) calcy.c
-	> libdo (c cc c o) calcy.o
-	> credo calcy.o
+	> cre/libdo (c yacc y c) calcy.c
+	> cre/libdo (c cc c o) calcy.o
+	> cre/do calcy.o
 
-	> libdo (c lex l c) calcl.c
-	> libdo (c cc c o) calcl.o
-	> credo calcl.o
+	> cre/libdo (c lex l c) calcl.c
+	> cre/libdo (c cc c o) calcl.o
+	> cre/do calcl.o
 
-	> libdo (c cc allo '') calc
+	> cre/libdo (c cc allo '') calc
 	> grep -n . calc.* | grep -v '\.sums:'
-	> credo calc
+	> cre/do calc
 	> grep -n . calc.dep
 	> host file calc
 
-	> echo '2 + 2' | host ./calc
+	> if {! ~ `{echo '2+2;' | host ./calc} 4} {raise 'incorrect result from binary (1)'}
