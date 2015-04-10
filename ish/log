@@ -1,4 +1,5 @@
 #!/dis/sh
+exit 0
 load std
 
 if {ftest -e dos.log} {sed 's,^dos ,host ,' dos.log >> host.log; rm dos.log}

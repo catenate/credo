@@ -1,1 +1,7 @@
+calc
+calc.dep
+calcl.c
+calcl.o.dep
+calcy.c
+calcy.o.dep
 y.tab.h

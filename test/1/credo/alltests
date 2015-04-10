@@ -1,0 +1,21 @@
+#!/dis/sh
+
+cwd = `{pwd}
+status_alltests = ''
+
+apply {
+	dir = $1
+	cd $dir
+	apply {
+		test = $1
+		pastout $test
+		status_pastout = $status
+		if {and {! ~ $status_pastout ''} {~ $status_alltests ''}} {
+			status_alltests = 'test error'
+		}
+	} `{pastout}
+	cd $cwd
+} calcy
+#} `{du | sed 's,.* ,,'}
+
+status $status_alltests
