@@ -18,12 +18,13 @@ if {ftest -e $out} {mv $out $past}
 sh $sh $params >$out >[2=1]
 status_sh = $status
 if {! ~ $status_sh ''} {
+	cat $out
 	echo pastout: test $name returned $status_sh
 	status_test = 'test error'
 }
 
 if {! ftest -e $past} {touch $past}
-echo diff $past $out
-diff $past $out
+#echo diff $past $out
+#diff $past $out
 
 status $status_test

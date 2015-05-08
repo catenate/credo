@@ -1,3 +1,7 @@
+Use the combination of inferno bind, sshfs mount, and watch to target
+credo to the configuration task of updating derived or influenced
+files on different machines, as dependencies change on other machines.
+
 Pass flags back through reenv to targets which need them to compile
 with the output of a do script.
 
